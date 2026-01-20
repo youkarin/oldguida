@@ -2,9 +2,6 @@ name: Build & Release APK
 
 on:
   push:
-    # 这里配置了监听的分支
-    # 1. 在 dev 提交 -> 触发构建 -> 走下面的 "Pre-Release" 逻辑
-    # 2. 合并到 main -> 触发构建 -> 走下面的 "Official Release" 逻辑
     branches: [ "main", "dev" ]
 
 permissions:
@@ -12,29 +9,29 @@ permissions:
 
 jobs:
   build_and_release:
-    # 1. 改为自托管 Runner
+    # 1. 使用你的甲骨文 ARM 服务器
     runs-on: self-hosted
 
-    # 2. 指定运行环境 (关键！)
-    # 使用 CirrusLabs 的镜像，它完美支持 Linux ARM64，且预装了 Flutter 和 Android SDK
-    # 这能保证你的服务器干净，且不需要每次下载 Flutter
+    # 2. 锁定稳定版镜像 (修复 gen_snapshot 报错的关键)
     container:
-      image: ghcr.io/cirruslabs/flutter:latest # 建议固定一个版本，或者用 stable
-      options: --user root # 避免权限问题
+      image: ghcr.io/cirruslabs/flutter:3.27.1
+      options: --user root
 
     steps:
-    # 注意：因为使用了 Docker 容器，这里不需要 actions/setup-java 和 subosito/flutter-action
-    # 容器里已经都有了
-
+    # 修复 Git 在容器内的 "dubious ownership" 报错
     - uses: actions/checkout@v4
       with:
-        # 解决 git 在容器内的安全目录报错问题
         set-safe-directory: true 
 
     - name: Check Environment
       run: |
-        flutter --version
         echo "Running on $(uname -m) architecture"
+        flutter --version
+
+    # 3. 关键修复：预下载编译所需的二进制文件
+    # 防止出现 "Failed to find gen_snapshot" 错误
+    - name: Precache Flutter Artifacts
+      run: flutter precache --android --universal
 
     - name: Get Dependencies
       run: flutter pub get
@@ -45,34 +42,36 @@ jobs:
     - name: Read Version Name
       id: get_version
       run: |
-        # 容器内通常默认是 sh，这里为了保险显式处理
+        # 读取 pubspec.yaml 中的 version 字段
         RAW_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //g')
         VERSION_NAME=$(echo $RAW_VERSION | cut -d'+' -f1)
         
         echo "Detected Version Name: $VERSION_NAME"
         echo "Run Number: ${{ github.run_number }}"
         
+        # 保存到环境变量
         echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
     # =========================================================
-    # 步骤 B: 打包
+    # 步骤 B: 打包 APK
     # =========================================================
     - name: Build Release APK
       run: |
-        # 可能需要同意 Android SDK 协议，虽然镜像通常已处理，但为了保险：
+        # 再次确认协议 (防止首次运行卡住)
         yes | flutter doctor --android-licenses || true
         
         flutter build apk --release \
           --build-name=${{ env.VERSION_NAME }} \
           --build-number=${{ github.run_number }}
         
+        # 重命名产物
         mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk
 
     # =========================================================
     # 步骤 C: 自动发布
     # =========================================================
 
-    # 场景 1: Main 分支 (比如合并代码后)
+    # 场景 1: Main 分支 -> 正式版
     - name: Create Official Release
       if: github.ref == 'refs/heads/main'
       uses: ncipollo/release-action@v1
@@ -81,25 +80,31 @@ jobs:
         name: "Release v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
         body: |
           🚀 正式发布
-          版本: v${{ env.VERSION_NAME }}
-          Build: ${{ github.run_number }}
+          显示版本: v${{ env.VERSION_NAME }}
+          内部版本号: ${{ github.run_number }}
+          构建分支: Main
         artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
         allowUpdates: true
+        removeArtifacts: true
+        replacesArtifacts: true
         makeLatest: true
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    # 场景 2: 其他分支 (比如 dev 提交后)
+    # 场景 2: Dev 分支 -> 预览版
     - name: Create Pre-Release
-      if: github.ref != 'refs/heads/main'
+      if: github.ref == 'refs/heads/dev'
       uses: ncipollo/release-action@v1
       with:
         tag: "v${{ env.VERSION_NAME }}-pre.${{ github.run_number }}"
-        name: "Dev Build v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
+        name: "Pre-release v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
         body: |
           ⚠️ 开发预览版
-          分支: ${{ github.ref_name }}
-          Commit: ${{ github.sha }}
+          显示版本: v${{ env.VERSION_NAME }}
+          内部版本号: ${{ github.run_number }}
+          构建分支: Dev
         artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
         allowUpdates: true
+        removeArtifacts: true
+        replacesArtifacts: true
         prerelease: true
         token: ${{ secrets.GITHUB_TOKEN }}
