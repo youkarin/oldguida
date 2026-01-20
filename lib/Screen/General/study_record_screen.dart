@@ -1,0 +1,178 @@
+import 'package:flutter/material.dart';
+import 'package:italian_driving_app/database/database_helper.dart';
+import 'package:italian_driving_app/models/question_model.dart';
+import 'package:italian_driving_app/Services/auth_service.dart';
+import 'exam_general.dart';
+import 'history_detail_screen.dart';
+
+class StudyRecordScreen extends StatefulWidget {
+  const StudyRecordScreen({Key? key}) : super(key: key);
+
+  @override
+  State<StudyRecordScreen> createState() => _StudyRecordScreenState();
+}
+
+class _StudyRecordScreenState extends State<StudyRecordScreen> {
+  List<Map<String, dynamic>> _history = [];
+  int? _userId;
+  bool _hasAccess = false;
+  bool _isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final loggedIn = await AuthService().isLoggedIn();
+    print('[StudyRecordScreen] loggedIn: $loggedIn');
+    if (!loggedIn) {
+      setState(() {
+        _isLoggedIn = false;
+      });
+      return;
+    }
+    final vip = await AuthService().getVipDays();
+    print('[StudyRecordScreen] vip days: $vip');
+    if (vip <= 0) {
+      setState(() {
+        _isLoggedIn = true;
+        _hasAccess = false;
+      });
+      return;
+    }
+    final username = await AuthService().getUsername();
+    print('[StudyRecordScreen] username: $username');
+    _userId = await AuthService().ensureLocalUser();
+    if (_userId == null) {
+      print('[StudyRecordScreen] failed to ensure local user');
+      setState(() {
+        _isLoggedIn = true;
+        _hasAccess = true;
+        _history = [];
+      });
+      return;
+    }
+    print('[StudyRecordScreen] userId: $_userId');
+    final hist = await DatabaseHelper.instance.getQuizHistory(_userId!);
+    setState(() {
+      _isLoggedIn = true;
+      _hasAccess = true;
+      _history = hist;
+    });
+  }
+
+  bool _isPass(Map<String, dynamic> item) {
+    int wrong = (item[columnHistoryTotalQuestions] ?? 0) -
+        (item[columnHistoryScore] ?? 0);
+    return wrong <= 3;
+  }
+
+  void _view(Map<String, dynamic> item) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => HistoryDetailScreen(historyId: item[columnHistoryId]),
+      ),
+    );
+  }
+
+  Future<void> _redo(Map<String, dynamic> item) async {
+    final historyId = item[columnHistoryId];
+    final data =
+        await DatabaseHelper.instance.getHistoryQuestions(historyId);
+    if (data.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('无题目')));
+      return;
+    }
+    final questions = data.map((e) => Question.fromMap(e)).toList();
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ExamGeneral(
+          isRandom: false,
+          questions: questions,
+          showTranslation: true,
+          showExplanation: true,
+          immediateFeedback: false,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isLoggedIn) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('学习记录'),
+          backgroundColor: Colors.deepPurple,
+          foregroundColor: Colors.white,
+        ),
+        body: const Center(child: Text('请先登录')),
+      );
+    }
+
+    if (!_hasAccess) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('学习记录'),
+          backgroundColor: Colors.deepPurple,
+          foregroundColor: Colors.white,
+        ),
+        body: const Center(child: Text('请成为VIP后使用此功能')),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('学习记录'),
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+      ),
+      body: _history.isEmpty
+          ? const Center(child: Text('暂无历史'))
+          : ListView.builder(
+              itemCount: _history.length,
+              itemBuilder: (context, index) {
+                final item = _history[index];
+                int wrong = (item[columnHistoryTotalQuestions] ?? 0) -
+                    (item[columnHistoryScore] ?? 0);
+                DateTime? time = item[columnHistoryCompletedAt] != null
+                    ? DateTime.tryParse(item[columnHistoryCompletedAt])
+                    : null;
+                return Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  child: ListTile(
+                    leading: Icon(
+                      _isPass(item)
+                          ? Icons.sentiment_satisfied
+                          : Icons.sentiment_dissatisfied,
+                      color:
+                          _isPass(item) ? Colors.green : Colors.red,
+                    ),
+                    title: Text(
+                        time != null ? time.toLocal().toString() : '未知时间'),
+                    subtitle: Text('用时 ${item[columnHistoryUsedTime] ?? 0} 秒  错题 $wrong'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextButton(
+                            onPressed: () => _view(item),
+                            child: const Text('查看')),
+                        TextButton(
+                            onPressed: () => _redo(item),
+                            child: const Text('重做')),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}
+
