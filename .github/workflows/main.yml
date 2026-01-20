@@ -19,7 +19,7 @@ jobs:
     # 使用 CirrusLabs 的镜像，它完美支持 Linux ARM64，且预装了 Flutter 和 Android SDK
     # 这能保证你的服务器干净，且不需要每次下载 Flutter
     container:
-      image: ghcr.io/cirruslabs/flutter:3.27.1 # 建议固定一个版本，或者用 stable
+      image: ghcr.io/cirruslabs/flutter:latest # 建议固定一个版本，或者用 stable
       options: --user root # 避免权限问题
 
     steps:
