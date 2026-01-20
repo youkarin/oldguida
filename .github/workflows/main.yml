@@ -9,29 +9,24 @@ permissions:
 
 jobs:
   build_and_release:
-    # 1. 使用你的甲骨文 ARM 服务器
-    runs-on: self-hosted
-
-    # 2. 锁定稳定版镜像 (修复 gen_snapshot 报错的关键)
-    container:
-      image: ghcr.io/cirruslabs/flutter:3.38.7
-      options: --user root
+    # 👇 关键修改：使用 GitHub 官方免费机器
+    runs-on: ubuntu-latest
 
     steps:
-    # 修复 Git 在容器内的 "dubious ownership" 报错
     - uses: actions/checkout@v4
+
+    # 1. 配置 Java 环境 (Android 编译必须)
+    - uses: actions/setup-java@v4
       with:
-        set-safe-directory: true 
+        distribution: 'zulu'
+        java-version: '17'
+        cache: 'gradle' # 开启 Gradle 缓存，加速后续构建
 
-    - name: Check Environment
-      run: |
-        echo "Running on $(uname -m) architecture"
-        flutter --version
-
-    # 3. 关键修复：预下载编译所需的二进制文件
-    # 防止出现 "Failed to find gen_snapshot" 错误
-    - name: Precache Flutter Artifacts
-      run: flutter precache --android --universal
+    # 2. 配置 Flutter 环境
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable' # 强行使用稳定版，不再做小白鼠
+        cache: true       # 开启 Flutter 依赖缓存
 
     - name: Get Dependencies
       run: flutter pub get
@@ -49,7 +44,6 @@ jobs:
         echo "Detected Version Name: $VERSION_NAME"
         echo "Run Number: ${{ github.run_number }}"
         
-        # 保存到环境变量
         echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
     # =========================================================
@@ -57,9 +51,8 @@ jobs:
     # =========================================================
     - name: Build Release APK
       run: |
-        # 再次确认协议 (防止首次运行卡住)
-        yes | flutter doctor --android-licenses || true
-        
+        # 使用 Release 模式打包
+        # 注意：如果你没有配置 keystore，请确保 build.gradle 做了防呆处理
         flutter build apk --release \
           --build-name=${{ env.VERSION_NAME }} \
           --build-number=${{ github.run_number }}
@@ -80,9 +73,8 @@ jobs:
         name: "Release v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
         body: |
           🚀 正式发布
-          显示版本: v${{ env.VERSION_NAME }}
-          内部版本号: ${{ github.run_number }}
-          构建分支: Main
+          版本: v${{ env.VERSION_NAME }}
+          Build: ${{ github.run_number }}
         artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
         allowUpdates: true
         removeArtifacts: true
@@ -96,12 +88,11 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         tag: "v${{ env.VERSION_NAME }}-pre.${{ github.run_number }}"
-        name: "Pre-release v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
+        name: "Dev Build v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
         body: |
           ⚠️ 开发预览版
-          显示版本: v${{ env.VERSION_NAME }}
-          内部版本号: ${{ github.run_number }}
-          构建分支: Dev
+          分支: ${{ github.ref_name }}
+          Commit: ${{ github.sha }}
         artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
         allowUpdates: true
         removeArtifacts: true
