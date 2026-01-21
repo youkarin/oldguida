@@ -88,8 +88,6 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('学习记录'),
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white,
       ),
       body: _history.isEmpty
           ? const Center(child: Text('暂无历史'))

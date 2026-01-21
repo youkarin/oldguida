@@ -77,71 +77,179 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF0F4F4), // Light grey-green background
       appBar: AppBar(
-        title: const Text('错题复习'),
-        backgroundColor: Colors.deepPurple,
+        title: const Text('错题复习', style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.teal[300], // Fresh Teal color
         foregroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+          if (_wrongQuestions.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.delete_sweep),
+              onPressed: _confirmClearAll,
+              tooltip: '清空错题',
+            ),
+        ],
       ),
       body: _wrongQuestions.isEmpty
-          ? const Center(child: Text('暂无错题'))
+          ? _buildEmptyState()
           : ListView.builder(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12),
               itemCount: _wrongQuestions.length,
               itemBuilder: (context, index) {
-                final item = _wrongQuestions[index];
-                return Dismissible(
-                  key: ValueKey('${item['section_id']}-${item['question_number']}'),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (_) async {
-                    if (_userId != null) {
-                      await DatabaseHelper.instance.removeWrongAnswer(
-                          _userId!, item['section_id'], item['question_number']);
-                      // Sync removed
-                    }
-                    setState(() {
-                      _wrongQuestions.removeAt(index);
-                    });
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.only(right: 20),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  ),
-                  child: Card(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: ListTile(
-                      title: Text('${item['question']}'),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (item['image_url'] != null &&
-                              (item['image_url'] as String).isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Image.asset(
-                                item['image_url'],
-                                height: 100,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          Text('翻译: ${item['translation'] ?? ''}'),
-                          Text('解析: ${item['explanation'] ?? ''}'),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+                return _buildWrongQuestionCard(index);
               },
             ),
-      floatingActionButton: widget.historyId == null
+      floatingActionButton: widget.historyId == null && _wrongQuestions.isNotEmpty
           ? FloatingActionButton.extended(
               onPressed: _retakeQuiz,
-              icon: const Icon(Icons.shuffle),
-              label: const Text('随机练习'),
-              backgroundColor: Colors.deepPurple,
+              icon: const Icon(Icons.play_arrow),
+              label: const Text('重新练习'),
+              backgroundColor: Colors.teal[400],
             )
           : null,
     );
+  }
+
+  Widget _buildEmptyState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.check_circle_outline, size: 80, color: Colors.teal[100]),
+          const SizedBox(height: 16),
+          Text('太棒了，目前没有错题！', style: TextStyle(fontSize: 18, color: Colors.teal[700])),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWrongQuestionCard(int index) {
+    final item = _wrongQuestions[index];
+    final wrongCount = item['wrong_count'] ?? 1;
+    final questionText = item['question'];
+    final translation = item['translation'] ?? '';
+    final explanation = item['explanation'] ?? '';
+    final imageUrl = item['image_url'];
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    questionText,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, height: 1.4),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // Wrong count badge
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.red[50],
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.red[100]!),
+                  ),
+                  child: Text(
+                    '错误 $wrongCount 次',
+                    style: TextStyle(color: Colors.red[700], fontSize: 11, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+            if (imageUrl != null && imageUrl.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    imageUrl,
+                    height: 120,
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                  ),
+                ),
+              ),
+            const Divider(height: 24),
+            if (translation.isNotEmpty)
+              _buildInfoRow('翻译', translation, Colors.blueGrey[700]!),
+            if (explanation.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: _buildInfoRow('解析', explanation, Colors.teal[700]!),
+              ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton.icon(
+                  onPressed: () => _deleteItem(index),
+                  icon: const Icon(Icons.delete_outline, size: 18),
+                  label: const Text('移除此题'),
+                  style: TextButton.styleFrom(foregroundColor: Colors.grey[600]),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String content, Color color) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: color.withOpacity(0.7))),
+        const SizedBox(height: 2),
+        Text(content, style: TextStyle(fontSize: 14, color: color, height: 1.4)),
+      ],
+    );
+  }
+
+  Future<void> _deleteItem(int index) async {
+    final item = _wrongQuestions[index];
+    if (_userId != null) {
+      await DatabaseHelper.instance.removeWrongAnswer(
+          _userId!, item['section_id'], item['question_number']);
+    }
+    setState(() {
+      _wrongQuestions.removeAt(index);
+    });
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('已从错题本移除'), duration: Duration(seconds: 1)));
+    }
+  }
+
+  Future<void> _confirmClearAll() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('确认清空'),
+        content: const Text('确定要清空所有错题记录吗？'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('取消')),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('清空', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && _userId != null) {
+      await DatabaseHelper.instance.clearWrongAnswers(_userId!);
+      _loadData();
+    }
   }
 }

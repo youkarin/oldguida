@@ -86,8 +86,6 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('记录详情'),
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white,
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())

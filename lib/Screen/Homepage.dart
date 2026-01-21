@@ -195,9 +195,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('记录与进阶'),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white,
       ),
       body: Container(
         decoration: const BoxDecoration(

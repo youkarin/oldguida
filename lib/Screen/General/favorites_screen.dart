@@ -115,8 +115,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('收藏夹'),
-        backgroundColor: Colors.amber, // Consistent with Home menu color
-        foregroundColor: Colors.white,
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())

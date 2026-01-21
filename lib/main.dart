@@ -38,18 +38,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1A237E),
-          primary: const Color(0xFF1A237E),
-          secondary: const Color(0xFF00796B),
+          seedColor: Colors.teal,
+          primary: Colors.teal[400]!,
+          secondary: Colors.tealAccent[700]!,
           surface: Colors.white,
-          background: const Color(0xFFF8F9FA),
+          background: const Color(0xFFF0F4F4),
         ),
-        fontFamily: 'SF Pro Display',
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF1A237E),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.teal[300],
           foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
+          titleTextStyle: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

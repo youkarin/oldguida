@@ -72,6 +72,7 @@ const String columnWrongChapterId = 'question_chapter';
 const String columnWrongSubsectionId = 'question_subsection';
 const String columnWrongIsDeleted = 'is_deleted';
 const String columnWrongUpdatedAt = 'updated_at';
+const String columnWrongCount = 'wrong_count';
 
 // ---------- 历史题目明细表 ----------
 const String tableHistoryQuestions = 'quiz_history_questions';
@@ -209,6 +210,8 @@ class DatabaseHelper {
         _db!, tableWrongAnswers, columnWrongIsDeleted, 'INTEGER DEFAULT 0');
     await _ensureColumnExists(
         _db!, tableWrongAnswers, columnWrongUpdatedAt, 'TEXT');
+    await _ensureColumnExists(
+        _db!, tableWrongAnswers, columnWrongCount, 'INTEGER DEFAULT 1');
 
     // History detail tables
     await _db!.execute('''
@@ -517,7 +520,32 @@ class DatabaseHelper {
         int? id,
       }) async {
     final db = await database;
+
+    // Check if it exists to increment count
+    final existing = await db.query(
+      tableWrongAnswers,
+      where: '$columnWrongUserId = ? AND $columnWrongSectionId = ? AND $columnWrongQuestionNum = ?',
+      whereArgs: [userId, sectionId, questionNum],
+    );
+
     final chapterId = await _getChapterIdForSection(db, sectionId);
+    
+    if (existing.isNotEmpty && isDeleted == 0) {
+      final currentCount = (existing.first[columnWrongCount] as int?) ?? 1;
+      await db.update(
+        tableWrongAnswers,
+        {
+          columnWrongCount: currentCount + 1,
+          columnWrongUpdatedAt: (updatedAt ?? DateTime.now()).toIso8601String(),
+          columnWrongIsDeleted: 0,
+          columnWrongHistoryId: historyId ?? existing.first[columnWrongHistoryId],
+        },
+        where: '$columnWrongId = ?',
+        whereArgs: [existing.first[columnWrongId]],
+      );
+      return;
+    }
+
     final data = {
       columnWrongUserId: userId,
       columnWrongSectionId: sectionId,
@@ -531,6 +559,7 @@ class DatabaseHelper {
       columnWrongIsDeleted: isDeleted,
       columnWrongUpdatedAt:
           (updatedAt ?? createdAt ?? DateTime.now()).toIso8601String(),
+      columnWrongCount: 1,
     };
     if (id != null) {
       data[columnWrongId] = id;
@@ -573,13 +602,14 @@ class DatabaseHelper {
     final db = await database;
     return db.rawQuery('''
       SELECT q.*, s.image_path as image_url, w.$columnWrongCreatedAt as wrong_time,
-             w.$columnWrongNote as wrong_note, w.$columnWrongHistoryId as history_id
+             w.$columnWrongNote as wrong_note, w.$columnWrongHistoryId as history_id,
+             w.$columnWrongCount as wrong_count
       FROM $tableWrongAnswers w
       INNER JOIN $tableQuiz q ON q.$quizSectionId = w.$columnWrongSectionId
          AND q.$quizQuestionNumber = w.$columnWrongQuestionNum
       LEFT JOIN $tableSection s ON q.$quizSectionId = s.$sectionSectionId
       WHERE w.$columnWrongUserId = ? AND w.$columnWrongIsDeleted = 0
-      ORDER BY w.$columnWrongCreatedAt DESC
+      ORDER BY w.$columnWrongCount DESC, w.$columnWrongCreatedAt DESC
     ''', [userId]);
   }
 
