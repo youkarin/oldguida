@@ -61,23 +61,43 @@ class _ExamScreenState extends State<ExamScreen> {
     required String label,
     required Color color,
   }) {
-    return SizedBox(
-      width: 280, // Fixed width for all buttons
-      height: 60,  // Fixed height for all buttons
-      child: ElevatedButton.icon(
+    return Container(
+      width: double.infinity,
+      height: 70,
+      margin: const EdgeInsets.only(bottom: 20),
+      child: ElevatedButton(
         onPressed: onPressed,
-        icon: Icon(icon, size: 28),
-        label: Text(
-          label,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: Colors.white,
-          elevation: 4,
+          backgroundColor: Colors.white,
+          foregroundColor: color,
+          elevation: 0,
+          side: BorderSide(color: color.withOpacity(0.5), width: 1.5),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(20),
           ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, size: 26, color: color),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.blueGrey[900],
+              ),
+            ),
+            const Spacer(),
+            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey[400]),
+          ],
         ),
       ),
     );
@@ -86,59 +106,63 @@ class _ExamScreenState extends State<ExamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: const Text('测试 - Quiz'),
-        backgroundColor: Colors.orange,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.orange.withOpacity(0.1), Colors.white],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+        title: const Text(
+          '练习与测验',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(
-              Icons.quiz_outlined,
-              size: 80,
-              color: Colors.orange,
+            Text(
+              "准备好开始了吗？",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey[900],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "选择一个模式来提升你的驾驶知识",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+              ),
             ),
             const SizedBox(height: 40),
             _buildMenuButton(
               onPressed: () => _openPractice(isSequential: false),
-              icon: Icons.school,
+              icon: Icons.auto_awesome_motion,
               label: '章节练习 (随机)',
-              color: Colors.blueAccent,
+              color: const Color(0xFF3F51B5),
             ),
-            const SizedBox(height: 20),
             _buildMenuButton(
               onPressed: () => _openPractice(isSequential: true),
-              icon: Icons.format_list_numbered,
+              icon: Icons.format_list_numbered_rounded,
               label: '章节练习 (顺序)',
-              color: Colors.indigo,
+              color: const Color(0xFF673AB7),
             ),
-            const SizedBox(height: 20),
             _buildMenuButton(
               onPressed: _startExam,
-              icon: Icons.shuffle,
+              icon: Icons.assignment_turned_in_rounded,
               label: '全真模拟 (随机)',
-              color: Colors.teal,
+              color: const Color(0xFF009688),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
+            const Divider(),
+            const SizedBox(height: 20),
             _buildMenuButton(
               onPressed: () => Navigator.pop(context),
-              icon: Icons.home,
+              icon: Icons.home_rounded,
               label: '返回首页',
-              color: Colors.orange,
+              color: Colors.blueGrey,
             ),
-            const SizedBox(height: 32),
           ],
         ),
       ),

@@ -35,9 +35,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'SF Pro Display'),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0 medieval.Color(0xFF1A237E)),
+          primary: const Color(0xFF1A237E),
+          secondary: const Color(0xFF00796B),
+          surface: Colors.white,
+          background: const Color(0xFFF8F9FA),
+        ),
+        fontFamily: 'SF Pro Display',
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF1A237E),
+          foregroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      ),
       scaffoldMessengerKey: DebugUtils.messengerKey,
-      // 这里直接进入你的主页（你自己的会员逻辑在 Homepage 里处理）
       home: const HomePage(),
     );
   }
