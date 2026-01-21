@@ -40,9 +40,8 @@ class _ExamGeneralState extends State<ExamGeneral> {
   int? _userId;
   bool _hasVip = false;
   bool _isFavorite = false;
-  bool _isTimerPaused = false; // New state for time stop
+  bool _isTimerPaused = false; 
 
-  // Controls the visibility of translation and explanation content
   late bool _showTranslationContent;
   late bool _showExplanationContent;
 
@@ -55,6 +54,13 @@ class _ExamGeneralState extends State<ExamGeneral> {
     startTime = DateTime.now();
     _startTimer();
     _loadUser();
+  }
+
+  void _resetVisibility() {
+    setState(() {
+      _showTranslationContent = !widget.collapsedMode;
+      _showExplanationContent = !widget.collapsedMode;
+    });
   }
 
   void _startTimer() {
@@ -94,6 +100,26 @@ class _ExamGeneralState extends State<ExamGeneral> {
     }
   }
 
+  Future<void> _loadUser() async {
+    final vip = await AuthService().getVipDays();
+    _hasVip = vip > 0;
+    _userId = await AuthService().ensureLocalUser();
+    _updateFavoriteStatus();
+  }
+
+  Future<void> _updateFavoriteStatus() async {
+    if (_userId == null || !_hasVip) {
+      setState(() => _isFavorite = false);
+      return;
+    }
+    final q = widget.questions[currentIndex];
+    final fav = await DatabaseHelper.instance
+        .isFavorite(_userId!, q.sectionId, q.questionNumber);
+    if (mounted) {
+      setState(() => _isFavorite = fav);
+    }
+  }
+
   void _nextQuestion() {
     if (currentIndex < widget.questions.length - 1) {
       setState(() {
@@ -122,7 +148,75 @@ class _ExamGeneralState extends State<ExamGeneral> {
     _updateFavoriteStatus();
   }
 
-  // ... (keep _toggleFavorite, _finishExam, _loadUser, _updateFavoriteStatus, _resetVisibility as they are or with slight logic adjustments)
+  Future<void> _toggleFavorite() async {
+    if (_userId == null || !_hasVip) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('请先登录并开通VIP才能使用收藏功能')),
+        );
+      }
+      return;
+    }
+    final q = widget.questions[currentIndex];
+    bool ok;
+    if (_isFavorite) {
+      ok = await DatabaseHelper.instance
+          .removeFavorite(_userId!, q.sectionId, q.questionNumber);
+    } else {
+      ok = await DatabaseHelper.instance
+          .addFavorite(_userId!, q.sectionId, q.questionNumber);
+    }
+    if (ok) {
+      if (mounted) {
+        setState(() => _isFavorite = !_isFavorite);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(_isFavorite ? '已收藏' : '已取消收藏')));
+        await SyncService.syncFavoriteChange(
+            _userId!, q.sectionId, q.questionNumber, _isFavorite);
+      }
+    }
+  }
+
+  Future<void> _finishExam() async {
+    _timer?.cancel();
+    final endTime = DateTime.now();
+    final duration = endTime.difference(startTime);
+    final correctCount = answerResults.where((r) => r == true).length;
+    final wrongCount = answerResults.where((r) => r != true).length;
+
+    try {
+      if (_userId != null && _hasVip) {
+        final questionMaps = widget.questions.map((q) => q.toMap()).toList();
+        final historyId = await DatabaseHelper.instance.saveQuizAttempt(
+          _userId!,
+          questionMaps,
+          userAnswers,
+          answerResults,
+          isRandom: widget.isRandom,
+          usedTime: duration.inSeconds,
+        );
+        await DatabaseHelper.instance.trimQuizHistory(_userId!, 100);
+        await SyncService.syncQuizAttempt(historyId);
+        unawaited(SyncService.syncAll());
+      }
+    } catch (e) {
+      debugPrint('Failed to save quiz data: $e');
+    }
+
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => FinalScorePage(
+          duration: duration,
+          correctCount: correctCount,
+          wrongCount: wrongCount,
+          questions: widget.questions,
+          userAnswers: userAnswers,
+        ),
+      ),
+    );
+  }
 
   String _formatTime(int seconds) {
     final minutes = seconds ~/ 60;
@@ -367,7 +461,6 @@ class _ExamGeneralState extends State<ExamGeneral> {
                         ),
                       ),
                     
-                    // Toggleable Translation
                     if (widget.showTranslation && question.translation.isNotEmpty)
                       _buildCollapsibleSection(
                         title: '翻译 (Translation)',
@@ -376,7 +469,6 @@ class _ExamGeneralState extends State<ExamGeneral> {
                         onToggle: () => setState(() => _showTranslationContent = !_showTranslationContent),
                       ),
                     
-                    // Toggleable Explanation
                     if (widget.showExplanation && question.explanation.isNotEmpty)
                       _buildCollapsibleSection(
                         title: '解析 (Explanation)',
@@ -460,7 +552,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
       ),
     );
   }
-}
+
   @override
   void dispose() {
     _timer?.cancel();
