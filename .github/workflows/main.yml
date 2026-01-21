@@ -51,10 +51,18 @@ jobs:
     # =========================================================
     - name: Decode Keystore
       run: |
-        echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+        if [ -z "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" ]; then
+          echo "Error: ANDROID_KEYSTORE_BASE64 is empty"
+          exit 1
+        fi
+        printf "%s" "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
 
     - name: Build Release APK
       run: |
+        if [ -z "$ANDROID_KEY_ALIAS" ]; then
+          echo "Error: ANDROID_KEY_ALIAS is not set. Please check your GitHub Secrets."
+          exit 1
+        fi
         # 使用 Release 模式打包
         flutter build apk --release \
           --build-name=${{ env.VERSION_NAME }} \
