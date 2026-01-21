@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/models/question_model.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
@@ -77,15 +78,22 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
           .showSnackBar(const SnackBar(content: Text('暂无错题')));
       return;
     }
+
+    final prefs = await SharedPreferences.getInstance();
+    final showTranslation = prefs.getBool('showTranslation') ?? true;
+    final showExplanation = prefs.getBool('showExplanation') ?? true;
+    final collapsedMode = prefs.getBool('collapsedMode') ?? false;
+
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => ExamGeneral(
           isRandom: false,
           questions: questions,
-          showTranslation: true,
-          showExplanation: true,
+          showTranslation: showTranslation,
+          showExplanation: showExplanation,
           immediateFeedback: false,
+          collapsedMode: collapsedMode,
         ),
       ),
     );

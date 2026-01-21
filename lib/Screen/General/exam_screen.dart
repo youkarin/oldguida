@@ -29,6 +29,7 @@ class _ExamScreenState extends State<ExamScreen> {
     final showTranslation = prefs.getBool('showTranslation') ?? true;
     final showExplanation = prefs.getBool('showExplanation') ?? true;
     final immediateFeedback = prefs.getBool('immediateFeedback') ?? false;
+    final collapsedMode = prefs.getBool('collapsedMode') ?? false;
 
     if (!mounted) return;
 
@@ -41,6 +42,7 @@ class _ExamScreenState extends State<ExamScreen> {
           showTranslation: showTranslation,
           showExplanation: showExplanation,
           immediateFeedback: immediateFeedback,
+          collapsedMode: collapsedMode,
         ),
       ),
     );

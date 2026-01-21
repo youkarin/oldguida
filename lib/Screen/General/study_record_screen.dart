@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/models/question_model.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
@@ -88,6 +89,12 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
       return;
     }
     final questions = data.map((e) => Question.fromMap(e)).toList();
+    
+    final prefs = await SharedPreferences.getInstance();
+    final showTranslation = prefs.getBool('showTranslation') ?? true;
+    final showExplanation = prefs.getBool('showExplanation') ?? true;
+    final collapsedMode = prefs.getBool('collapsedMode') ?? false;
+
     if (!mounted) return;
     Navigator.push(
       context,
@@ -95,9 +102,10 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
         builder: (_) => ExamGeneral(
           isRandom: false,
           questions: questions,
-          showTranslation: true,
-          showExplanation: true,
+          showTranslation: showTranslation,
+          showExplanation: showExplanation,
           immediateFeedback: false,
+          collapsedMode: collapsedMode,
         ),
       ),
     );

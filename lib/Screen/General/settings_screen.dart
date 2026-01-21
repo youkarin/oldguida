@@ -24,6 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _showExplanation = true;
   bool _immediateFeedback = false;
   bool _debugMode = false;
+  bool _collapsedMode = false;
   bool _experiencePreview = false;
   String _version = '';
   String _buildNumber = '';
@@ -43,6 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _showExplanation = prefs.getBool('showExplanation') ?? true;
       _immediateFeedback = prefs.getBool('immediateFeedback') ?? false;
       _debugMode = prefs.getBool('debugMode') ?? false;
+      _collapsedMode = prefs.getBool('collapsedMode') ?? false;
       _experiencePreview = prefs.getBool('experiencePreview') ?? false;
     });
   }
@@ -88,6 +90,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await prefs.setBool('debugMode', value);
     setState(() {
       _debugMode = value;
+    });
+  }
+
+  /// Updates the "collapsed mode" preference and persists it.
+  Future<void> _updateCollapsedMode(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('collapsedMode', value);
+    setState(() {
+      _collapsedMode = value;
     });
   }
 
@@ -303,6 +314,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: const Text('Debug 模式'),
             value: _debugMode,
             onChanged: _updateDebugMode,
+          ),
+          SwitchListTile(
+            title: const Text('默认折叠翻译与解析'),
+            subtitle: const Text('开启后，翻译和解析默认隐藏，需手动展开'),
+            value: _collapsedMode,
+            onChanged: _updateCollapsedMode,
           ),
           const Divider(),
           SwitchListTile(

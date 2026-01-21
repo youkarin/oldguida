@@ -14,6 +14,7 @@ class ExamGeneral extends StatefulWidget {
   final bool showTranslation;
   final bool showExplanation;
   final bool immediateFeedback;
+  final bool collapsedMode;
 
   const ExamGeneral({
     super.key,
@@ -22,6 +23,7 @@ class ExamGeneral extends StatefulWidget {
     required this.showTranslation,
     required this.showExplanation,
     required this.immediateFeedback,
+    this.collapsedMode = false,
   });
 
   @override
@@ -38,15 +40,27 @@ class _ExamGeneralState extends State<ExamGeneral> {
   int? _userId;
   bool _hasVip = false;
   bool _isFavorite = false;
+  
+  // Controls the visibility of translation and explanation content
+  late bool _showTranslationContent;
+  late bool _showExplanationContent;
 
   @override
   void initState() {
     super.initState();
+    _resetVisibility();
     userAnswers = List.filled(widget.questions.length, null);
     answerResults = List.filled(widget.questions.length, null);
     startTime = DateTime.now();
     _startTimer();
     _loadUser();
+  }
+
+  void _resetVisibility() {
+    setState(() {
+      _showTranslationContent = !widget.collapsedMode;
+      _showExplanationContent = !widget.collapsedMode;
+    });
   }
 
   /// 启动倒计时，每秒刷新一次，时间到自动提交试卷
@@ -120,6 +134,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
     setState(() {
       currentIndex++;
     });
+    _resetVisibility();
     _updateFavoriteStatus();
   }
 
@@ -127,6 +142,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
     setState(() {
       currentIndex = index;
     });
+    _resetVisibility();
     _updateFavoriteStatus();
   }
 
@@ -380,11 +396,68 @@ class _ExamGeneralState extends State<ExamGeneral> {
                     ),
                   const SizedBox(height: 12),
                   if (widget.showTranslation && question.translation.isNotEmpty)
-                    Text('翻译: ${question.translation}'),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () => setState(() => _showTranslationContent = !_showTranslationContent),
+                          child: Row(
+                            children: [
+                              Text(
+                                '翻译: ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blueGrey[700],
+                                ),
+                              ),
+                              Icon(
+                                _showTranslationContent ? Icons.expand_less : Icons.expand_more,
+                                size: 16,
+                                color: Colors.blueGrey,
+                              ),
+                              if (!_showTranslationContent)
+                                const Text(' (点击展开)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                            ],
+                          ),
+                        ),
+                        if (_showTranslationContent)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
+                            child: Text(question.translation),
+                          ),
+                      ],
+                    ),
                   if (widget.showExplanation && question.explanation.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text('解析: ${question.explanation}'),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () => setState(() => _showExplanationContent = !_showExplanationContent),
+                          child: Row(
+                            children: [
+                              Text(
+                                '解析: ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blueGrey[700],
+                                ),
+                              ),
+                              Icon(
+                                _showExplanationContent ? Icons.expand_less : Icons.expand_more,
+                                size: 16,
+                                color: Colors.blueGrey,
+                              ),
+                              if (!_showExplanationContent)
+                                const Text(' (点击展开)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                            ],
+                          ),
+                        ),
+                        if (_showExplanationContent)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
+                            child: Text(question.explanation),
+                          ),
+                      ],
                     ),
                   if (question.imageUrl != null && question.imageUrl!.isNotEmpty)
                     Padding(

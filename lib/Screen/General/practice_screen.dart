@@ -47,6 +47,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
     final showTranslation = prefs.getBool('showTranslation') ?? true;
     final showExplanation = prefs.getBool('showExplanation') ?? true;
     final immediateFeedback = prefs.getBool('immediateFeedback') ?? false;
+    final collapsedMode = prefs.getBool('collapsedMode') ?? false;
 
     if (!mounted) return;
     Navigator.push(
@@ -58,6 +59,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
           showTranslation: showTranslation,
           showExplanation: showExplanation,
           immediateFeedback: immediateFeedback,
+          collapsedMode: collapsedMode,
         ),
       ),
     );
