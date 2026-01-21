@@ -17,11 +17,39 @@ class WrongReviewScreen extends StatefulWidget {
 class _WrongReviewScreenState extends State<WrongReviewScreen> {
   final List<Map<String, dynamic>> _wrongQuestions = [];
   int? _userId;
+  String _sortType = 'time'; // 'time', 'chapter', 'count'
 
   @override
   void initState() {
     super.initState();
     _loadData();
+  }
+
+  void _applySort() {
+    setState(() {
+      if (_sortType == 'time') {
+        _wrongQuestions.sort((a, b) {
+          final timeA = a['wrong_time'] ?? '';
+          final timeB = b['wrong_time'] ?? '';
+          return timeB.compareTo(timeA); // Newest first
+        });
+      } else if (_sortType == 'chapter') {
+        _wrongQuestions.sort((a, b) {
+          final sectionA = a['section_id'] ?? 0;
+          final sectionB = b['section_id'] ?? 0;
+          if (sectionA != sectionB) return sectionA.compareTo(sectionB);
+          final numA = a['question_number'] ?? 0;
+          final numB = b['question_number'] ?? 0;
+          return numA.compareTo(numB);
+        });
+      } else if (_sortType == 'count') {
+        _wrongQuestions.sort((a, b) {
+          final countA = a['wrong_count'] ?? 0;
+          final countB = b['wrong_count'] ?? 0;
+          return countB.compareTo(countA); // Most frequent first
+        });
+      }
+    });
   }
 
   Future<void> _loadData() async {
@@ -37,6 +65,7 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
         _wrongQuestions
           ..clear()
           ..addAll(questions);
+        _applySort();
       });
     } else {
       setState(() {
@@ -84,12 +113,44 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
-          if (_wrongQuestions.isNotEmpty)
+          if (_wrongQuestions.isNotEmpty) ...[
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.sort),
+              tooltip: '排序',
+              onSelected: (String value) {
+                _sortType = value;
+                _applySort();
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                const PopupMenuItem<String>(
+                  value: 'time',
+                  child: ListTile(
+                    leading: Icon(Icons.access_time),
+                    title: Text('按时间 (最新优先)'),
+                  ),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'chapter',
+                  child: ListTile(
+                    leading: Icon(Icons.book),
+                    title: Text('按章节 (顺序)'),
+                  ),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'count',
+                  child: ListTile(
+                    leading: Icon(Icons.format_list_numbered),
+                    title: Text('按错误次数'),
+                  ),
+                ),
+              ],
+            ),
             IconButton(
               icon: const Icon(Icons.delete_sweep),
               onPressed: _confirmClearAll,
               tooltip: '清空错题',
             ),
+          ],
         ],
       ),
       body: _wrongQuestions.isEmpty

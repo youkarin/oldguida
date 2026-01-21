@@ -44,6 +44,9 @@ class _ExamGeneralState extends State<ExamGeneral> {
   late bool _showTranslationContent;
   late bool _showExplanationContent;
 
+  final ScrollController _scrollController = ScrollController();
+  final ScrollController _contentScrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -53,6 +56,34 @@ class _ExamGeneralState extends State<ExamGeneral> {
     startTime = DateTime.now();
     _startTimer();
     _loadUser();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _scrollController.dispose();
+    _contentScrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToCurrentIndex() {
+    if (_scrollController.hasClients) {
+      const double itemWidth = 56.0;
+      final double screenWidth = MediaQuery.of(context).size.width;
+      final double targetOffset = (currentIndex * itemWidth) - (screenWidth / 2) + (itemWidth / 2);
+      
+      final double maxScroll = (widget.questions.length * itemWidth) - screenWidth;
+      
+      double finalOffset = targetOffset;
+      if (finalOffset < 0) finalOffset = 0;
+      if (maxScroll > 0 && finalOffset > maxScroll) finalOffset = maxScroll;
+
+      _scrollController.animateTo(
+        finalOffset,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   void _resetVisibility() {
@@ -118,12 +149,17 @@ class _ExamGeneralState extends State<ExamGeneral> {
   }
 
   void _nextQuestion() {
+    if (!mounted) return;
     if (currentIndex < widget.questions.length - 1) {
       setState(() {
         currentIndex++;
       });
       _resetVisibility();
       _updateFavoriteStatus();
+      _scrollToCurrentIndex();
+      if (_contentScrollController.hasClients) {
+        _contentScrollController.jumpTo(0);
+      }
     }
   }
 
@@ -134,6 +170,10 @@ class _ExamGeneralState extends State<ExamGeneral> {
       });
       _resetVisibility();
       _updateFavoriteStatus();
+      _scrollToCurrentIndex();
+      if (_contentScrollController.hasClients) {
+        _contentScrollController.jumpTo(0);
+      }
     }
   }
 
@@ -143,6 +183,10 @@ class _ExamGeneralState extends State<ExamGeneral> {
     });
     _resetVisibility();
     _updateFavoriteStatus();
+    _scrollToCurrentIndex();
+    if (_contentScrollController.hasClients) {
+      _contentScrollController.jumpTo(0);
+    }
   }
 
   Future<void> _toggleFavorite() async {
@@ -221,6 +265,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
       height: 60,
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ListView.builder(
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: widget.questions.length,
         itemBuilder: (context, index) {
@@ -385,48 +430,9 @@ class _ExamGeneralState extends State<ExamGeneral> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(24),
                 child: ListView(
+                  controller: _contentScrollController,
                   padding: const EdgeInsets.all(20),
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Q${currentIndex + 1}: ${question.question}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF2D3436),
-                              height: 1.4,
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            _isFavorite ? Icons.bookmark : Icons.bookmark_border,
-                            color: const Color(0xFF1A237E),
-                          ),
-                          onPressed: _toggleFavorite,
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    if (question.imageUrl != null && question.imageUrl!.isNotEmpty)
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.grey.shade100),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.asset(
-                            '${question.imageUrl!}',
-                            fit: BoxFit.contain,
-                            errorBuilder: (_, __, ___) => const SizedBox(),
-                          ),
-                        ),
-                      ),
                     if (widget.immediateFeedback && answered)
                       Container(
                         padding: const EdgeInsets.all(12),
@@ -452,7 +458,51 @@ class _ExamGeneralState extends State<ExamGeneral> {
                           ],
                         ),
                       ),
-                    
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Q${currentIndex + 1}: ${question.question}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF2D3436),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            _isFavorite ? Icons.bookmark : Icons.bookmark_border,
+                            color: const Color(0xFF1A237E),
+                          ),
+                          onPressed: _toggleFavorite,
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    if (question.imageUrl != null && question.imageUrl!.isNotEmpty)
+                      Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 600, maxHeight: 400),
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Colors.grey.shade100),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Image.asset(
+                                '${question.imageUrl!}',
+                                fit: BoxFit.contain,
+                                errorBuilder: (_, __, ___) => const SizedBox(),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     if (widget.showTranslation && question.translation.isNotEmpty)
                       _buildCollapsibleSection(
                         title: '翻译 (Translation)',
@@ -543,11 +593,5 @@ class _ExamGeneralState extends State<ExamGeneral> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 }

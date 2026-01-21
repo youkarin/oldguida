@@ -170,22 +170,27 @@ class _QuestionFlashcardState extends State<QuestionFlashcard> {
                 if ((q.sectionImage != null && q.sectionImage!.isNotEmpty) || (q.imageUrl != null && q.imageUrl!.isNotEmpty))
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        (q.sectionImage != null && q.sectionImage!.isNotEmpty) ? q.sectionImage! : q.imageUrl!,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) {
-                          String path = (q.sectionImage != null && q.sectionImage!.isNotEmpty) ? q.sectionImage! : q.imageUrl!;
-                          if (!path.startsWith('assets/')) {
-                            path = 'assets/$path';
-                          }
-                          return Image.asset(
-                            path,
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 600, maxHeight: 400),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.asset(
+                            (q.sectionImage != null && q.sectionImage!.isNotEmpty) ? q.sectionImage! : q.imageUrl!,
                             fit: BoxFit.contain,
-                            errorBuilder: (c, e, s) => const SizedBox.shrink(),
-                          );
-                        },
+                            errorBuilder: (context, error, stackTrace) {
+                              String path = (q.sectionImage != null && q.sectionImage!.isNotEmpty) ? q.sectionImage! : q.imageUrl!;
+                              if (!path.startsWith('assets/')) {
+                                path = 'assets/$path';
+                              }
+                              return Image.asset(
+                                path,
+                                fit: BoxFit.contain,
+                                errorBuilder: (c, e, s) => const SizedBox.shrink(),
+                              );
+                            },
+                          ),
+                        ),
                       ),
                     ),
                   ),
