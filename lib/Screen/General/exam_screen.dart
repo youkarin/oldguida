@@ -48,10 +48,38 @@ class _ExamScreenState extends State<ExamScreen> {
     );
   }
 
-  void _openPractice() {
+  void _openPractice({bool isSequential = false}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const PracticeScreen()),
+      MaterialPageRoute(builder: (_) => PracticeScreen(isSequential: isSequential)),
+    );
+  }
+
+  Widget _buildMenuButton({
+    required VoidCallback onPressed,
+    required IconData icon,
+    required String label,
+    required Color color,
+  }) {
+    return SizedBox(
+      width: 280, // Fixed width for all buttons
+      height: 60,  // Fixed height for all buttons
+      child: ElevatedButton.icon(
+        onPressed: onPressed,
+        icon: Icon(icon, size: 28),
+        label: Text(
+          label,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          foregroundColor: Colors.white,
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+      ),
     );
   }
 
@@ -63,8 +91,10 @@ class _ExamScreenState extends State<ExamScreen> {
         backgroundColor: Colors.orange,
         foregroundColor: Colors.white,
         elevation: 0,
+        centerTitle: true,
       ),
       body: Container(
+        width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.orange.withOpacity(0.1), Colors.white],
@@ -72,56 +102,44 @@ class _ExamScreenState extends State<ExamScreen> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 32),
-              ElevatedButton.icon(
-                onPressed: _openPractice,
-                icon: const Icon(Icons.school),
-                label: const Text('选章节练习'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton.icon(
-                onPressed: _startExam,
-                icon: const Icon(Icons.shuffle),
-                label: const Text('开始测验（随机30题）'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  foregroundColor: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton.icon(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back),
-                label: const Text('返回首页'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.quiz_outlined,
+              size: 80,
+              color: Colors.orange,
+            ),
+            const SizedBox(height: 40),
+            _buildMenuButton(
+              onPressed: () => _openPractice(isSequential: false),
+              icon: Icons.school,
+              label: '章节练习 (随机)',
+              color: Colors.blueAccent,
+            ),
+            const SizedBox(height: 20),
+            _buildMenuButton(
+              onPressed: () => _openPractice(isSequential: true),
+              icon: Icons.format_list_numbered,
+              label: '章节练习 (顺序)',
+              color: Colors.indigo,
+            ),
+            const SizedBox(height: 20),
+            _buildMenuButton(
+              onPressed: _startExam,
+              icon: Icons.shuffle,
+              label: '全真模拟 (随机)',
+              color: Colors.teal,
+            ),
+            const SizedBox(height: 40),
+            _buildMenuButton(
+              onPressed: () => Navigator.pop(context),
+              icon: Icons.home,
+              label: '返回首页',
+              color: Colors.orange,
+            ),
+            const SizedBox(height: 32),
+          ],
         ),
       ),
     );

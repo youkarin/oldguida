@@ -5,7 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'exam_general.dart';
 
 class PracticeScreen extends StatefulWidget {
-  const PracticeScreen({Key? key}) : super(key: key);
+  final bool isSequential;
+  const PracticeScreen({Key? key, this.isSequential = false}) : super(key: key);
 
   @override
   State<PracticeScreen> createState() => _PracticeScreenState();
@@ -38,8 +39,16 @@ class _PracticeScreenState extends State<PracticeScreen> {
           .showSnackBar(const SnackBar(content: Text('请至少选择一个章节')));
       return;
     }
-    final rawQuestions = await _db.getQuestionsByChaptersRandom(
-        _selectedChapters.toList(), 30);
+    
+    final List<Map<String, dynamic>> rawQuestions;
+    if (widget.isSequential) {
+      rawQuestions = await _db.getQuestionsByChaptersSequential(
+          _selectedChapters.toList());
+    } else {
+      rawQuestions = await _db.getQuestionsByChaptersRandom(
+          _selectedChapters.toList(), 30);
+    }
+    
     final questions =
         rawQuestions.map((q) => Question.fromMap(q)).toList();
 
@@ -54,7 +63,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
       context,
       MaterialPageRoute(
         builder: (_) => ExamGeneral(
-          isRandom: true,
+          isRandom: !widget.isSequential,
           questions: questions,
           showTranslation: showTranslation,
           showExplanation: showExplanation,
@@ -69,7 +78,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('选择练习'),
+        title: Text(widget.isSequential ? '顺序练习' : '随机练习'),
         backgroundColor: Colors.blueAccent,
         foregroundColor: Colors.white,
       ),

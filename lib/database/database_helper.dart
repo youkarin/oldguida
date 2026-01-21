@@ -328,6 +328,21 @@ class DatabaseHelper {
     ''', chapterIds);
   }
 
+  /// 根据多个章节顺序获取所有题目，并携带节图片
+  Future<List<Map<String, dynamic>>> getQuestionsByChaptersSequential(
+      List<int> chapterIds) async {
+    if (chapterIds.isEmpty) return [];
+    final db = await database;
+    final placeholders = List.filled(chapterIds.length, '?').join(',');
+    return db.rawQuery('''
+      SELECT q.*, s.image_path as image_url
+      FROM $tableQuiz q
+      INNER JOIN $tableSection s ON q.$quizSectionId = s.$sectionSectionId
+      WHERE s.$sectionChapterId IN ($placeholders)
+      ORDER BY s.$sectionChapterId, q.$quizSectionId, q.$quizQuestionNumber
+    ''', chapterIds);
+  }
+
   /// 随机获取所有题目
   Future<List<Map<String, dynamic>>> getAllQuestionsRandom() async {
     final db = await database;
