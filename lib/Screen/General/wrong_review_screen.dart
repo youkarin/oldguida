@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/models/question_model.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
-import 'package:italian_driving_app/Services/sync_service.dart';
 import 'exam_general.dart';
 
 /// 错题复习页面
@@ -18,8 +17,6 @@ class WrongReviewScreen extends StatefulWidget {
 class _WrongReviewScreenState extends State<WrongReviewScreen> {
   final List<Map<String, dynamic>> _wrongQuestions = [];
   int? _userId;
-  bool _hasAccess = false;
-  bool _isLoggedIn = false;
 
   @override
   void initState() {
@@ -28,31 +25,9 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
   }
 
   Future<void> _loadData() async {
-    final loggedIn = await AuthService().isLoggedIn();
-    print('[WrongReviewScreen] loggedIn: $loggedIn');
-    if (!loggedIn) {
-      setState(() {
-        _isLoggedIn = false;
-      });
-      return;
-    }
-    final vip = await AuthService().getVipDays();
-    print('[WrongReviewScreen] vip days: $vip');
-    if (vip <= 0) {
-      setState(() {
-        _isLoggedIn = true;
-        _hasAccess = false;
-      });
-      return;
-    }
-    final username = await AuthService().getUsername();
-    print('[WrongReviewScreen] username: $username');
     _userId = await AuthService().ensureLocalUser();
     print('[WrongReviewScreen] userId: $_userId');
-    setState(() {
-      _isLoggedIn = true;
-      _hasAccess = true;
-    });
+    
     if (_userId != null) {
       final questions = widget.historyId != null
           ? await DatabaseHelper.instance
@@ -101,28 +76,6 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_isLoggedIn) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('错题复习'),
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(child: Text('请先登录')),
-      );
-    }
-
-    if (!_hasAccess) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('错题复习'),
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(child: Text('请成为VIP后使用此功能')),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('错题复习'),
@@ -140,10 +93,11 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
                   key: ValueKey('${item['section_id']}-${item['question_number']}'),
                   direction: DismissDirection.endToStart,
                   onDismissed: (_) async {
-                    await DatabaseHelper.instance.removeWrongAnswer(
-                        _userId!, item['section_id'], item['question_number']);
-                    await SyncService.syncWrongAnswerRemoval(
-                        _userId!, item['section_id'], item['question_number']);
+                    if (_userId != null) {
+                      await DatabaseHelper.instance.removeWrongAnswer(
+                          _userId!, item['section_id'], item['question_number']);
+                      // Sync removed
+                    }
                     setState(() {
                       _wrongQuestions.removeAt(index);
                     });

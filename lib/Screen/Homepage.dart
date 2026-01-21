@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'General/profile_screen.dart';
 
 // Services
-import 'package:italian_driving_app/Services/auth_service.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 
 // Banner 轮播组件
@@ -13,13 +11,12 @@ import 'General/question_bank_screen.dart';
 import 'General/exam_screen.dart';
 import 'General/wrong_review_screen.dart';
 import 'General/study_record_screen.dart';
-import 'General/vip_upgrade_screen.dart';
 import 'General/settings_screen.dart';
 import 'General/practice_screen.dart';
 import 'General/favorites_screen.dart';
 import 'General/Navigation_Bar/NavigationBar.dart';
 
-// VIP Screens
+// VIP Screens (Now General/Advanced)
 import 'VIP/must_correct_screen.dart';
 import 'VIP/must_wrong_screen.dart';
 import 'VIP/difficult_screen.dart';
@@ -35,29 +32,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  bool _isLoggedIn = false;
-  bool _isVip = false;
-  int _vipDays = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _checkVipStatus();
-  }
-
-  Future<void> _checkVipStatus() async {
-    final loggedIn = await AuthService().isLoggedIn();
-    final vip = loggedIn ? await AuthService().getVipDays() : 0;
-    setState(() {
-      _isLoggedIn = loggedIn;
-      _isVip = vip > 0;
-      _vipDays = vip;
-    });
-  }
 
   // ✅ 通用功能
   final List<MenuItem> generalItems = [
-    // PNG 图标示例（需要在 pubspec.yaml 注册）
     MenuItem(
       icon: Image.asset(
         'assets/images/icons/steering-wheel.png',
@@ -67,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       label: '开始做题',
       color: Colors.orange,
     ),
-     MenuItem(
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/book-open-cover.png',
         width: 32,
@@ -76,8 +53,7 @@ class _HomePageState extends State<HomePage> {
       label: '全题库',
       color: Colors.pink,
     ),
-
-                 MenuItem(
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/to-do-alt.png',
         width: 32,
@@ -86,13 +62,11 @@ class _HomePageState extends State<HomePage> {
       label: '选择练习',
       color: Colors.teal,
     ),
-
   ];
 
-  // 🌟 VIP 功能
-  final List<MenuItem> vipItems = [
-      //学习记录-按钮
-      MenuItem(
+  // 🌟 记录/高级功能 (原 VIP 功能)
+  final List<MenuItem> recordItems = [
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/time-past.png',
         width: 32,
@@ -100,10 +74,8 @@ class _HomePageState extends State<HomePage> {
       ),
       label: '学习记录',
       color: Colors.indigo,
-      ),
-
-      //收藏夹-按钮
-      MenuItem(
+    ),
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/wishlist-star.png',
         width: 32,
@@ -112,9 +84,7 @@ class _HomePageState extends State<HomePage> {
       label: '收藏夹',
       color: Colors.amber,
     ),
-
-      //单词必对题-按钮
-      MenuItem(
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/check-circle.png',
         width: 32,
@@ -122,10 +92,8 @@ class _HomePageState extends State<HomePage> {
       ),
       label: '单词必对题',
       color: Colors.green,
-      ),
-
-      //单词必错题-按钮
-      MenuItem(
+    ),
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/cross-circle.png',
         width: 32,
@@ -133,10 +101,8 @@ class _HomePageState extends State<HomePage> {
       ),
       label: '单词必错题',
       color: Colors.red,
-      ),
-
-      //错题复习-按钮
-         MenuItem(
+    ),
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/guide-book.png',
         width: 32,
@@ -145,9 +111,7 @@ class _HomePageState extends State<HomePage> {
       label: '错题复习',
       color: Colors.redAccent,
     ),
-
-      //单词易错题-按钮
-      MenuItem(
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/not-found-magnifying-glass.png',
         width: 32,
@@ -155,10 +119,8 @@ class _HomePageState extends State<HomePage> {
       ),
       label: '易错题',
       color: Colors.red,
-      ),
-
-      //EXAM-按钮
-      MenuItem(
+    ),
+    MenuItem(
       icon: Image.asset(
         'assets/images/icons/test.png',
         width: 32,
@@ -166,27 +128,16 @@ class _HomePageState extends State<HomePage> {
       ),
       label: 'EXAM',
       color: Colors.blueAccent,
-      ),
-
-    // 个人信息-按钮
-      // MenuItem(
-      // icon: Image.asset(
-      //   'assets/images/icons/user.png',
-      //   width: 32,
-      //   height: 32,
-      // ),
-      // label: '个人信息',
-      // color: Colors.brown,
-      // ),
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     final pages = [
       _buildHomeContent(),
-      _buildVipContent(),
+      _buildRecordContent(),
       _buildNewsContent(),
-      const ProfileScreen(),
+      const SettingsScreen(),
     ];
 
     return Scaffold(
@@ -203,68 +154,6 @@ class _HomePageState extends State<HomePage> {
 
   void _onNavTap(int index) {
     setState(() => _selectedIndex = index);
-    if (index == 1) {
-      _checkVipStatus();
-    }
-  }
-
-  void _handleVipButton() async {
-    await _checkVipStatus();
-    if (!_isLoggedIn) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('请先登录')));
-      return;
-    }
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.workspace_premium,
-                  color: Colors.amber, size: 48),
-              const SizedBox(height: 12),
-              Text(
-                _isVip ? '尊贵的VIP用户' : '升级为VIP',
-                style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                _isVip
-                    ? '剩余天数：$_vipDays'
-                    : '解锁收藏夹、错题复习等专属功能',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('关闭'),
-                  ),
-                  if (!_isVip) ...[
-                    const SizedBox(width: 8),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        _navigateToScreen(context, '转为VIP');
-                      },
-                      child: const Text('去升级'),
-                    ),
-                  ]
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   // 首页内容：Banner + 通用功能
@@ -276,17 +165,6 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         title: const Text('Italian Driving App', style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () => _navigateToScreen(context, '设置'),
-          ),
-          IconButton(
-            icon: const Icon(Icons.workspace_premium, color: Colors.amber),
-            tooltip: 'VIP',
-            onPressed: _handleVipButton,
-          ),
-        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -312,22 +190,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // VIP 页面内容
-  Widget _buildVipContent() {
-    if (!_isLoggedIn) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('VIP 功能'),
-          centerTitle: true,
-        ),
-        body: const Center(child: Text('请先登录')),
-      );
-    }
-
+  // 记录页面内容 (原 VIP)
+  Widget _buildRecordContent() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('VIP 功能'),
+        title: const Text('记录与进阶'),
         centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -340,7 +210,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.only(top: 16),
           children: [
-            _buildGrid(context, vipItems, 3, requireVip: true),
+            _buildGrid(context, recordItems, 3),
           ],
         ),
       ),
@@ -377,8 +247,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // 通用的网格构建
-  Widget _buildGrid(BuildContext context, List<MenuItem> items, int crossAxisCount,
-      {bool requireVip = false}) {
+  Widget _buildGrid(BuildContext context, List<MenuItem> items, int crossAxisCount) {
     return Padding(
       padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 8),
       child: GridView.count(
@@ -398,13 +267,7 @@ class _HomePageState extends State<HomePage> {
             child: InkWell(
               borderRadius: BorderRadius.circular(18),
               onTap: () {
-                if (requireVip && !_isVip) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('请成为VIP后使用此功能')),
-                  );
-                } else {
-                  _navigateToScreen(context, item.label);
-                }
+                _navigateToScreen(context, item.label);
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -420,7 +283,6 @@ class _HomePageState extends State<HomePage> {
                         end: Alignment.bottomRight,
                       ),
                     ),
-                    // IconTheme 只会影响 Icon，不会影响 Image.asset
                     child: IconTheme.merge(
                       data: const IconThemeData(color: Colors.white, size: 32),
                       child: item.icon,
@@ -476,12 +338,10 @@ class _HomePageState extends State<HomePage> {
         return const PracticeScreen();
       case '收藏夹':
         return const FavoritesScreen();
-      case '转为VIP':
-        return VipUpgradeScreen();
       case '设置':
         return const SettingsScreen();
 
-      // VIP功能
+      // 原 VIP 功能 (现已开放)
       case '单词必对题':
         return MustCorrectScreen();
       case '单词必错题':
@@ -490,8 +350,6 @@ class _HomePageState extends State<HomePage> {
         return DifficultScreen();
       case 'EXAM':
         return ExamVIPScreen();
-      case '个人信息':
-        return ProfileScreen();
 
       default:
         return null;

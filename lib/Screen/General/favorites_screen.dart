@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
-import 'package:italian_driving_app/Services/sync_service.dart';
+// import 'package:italian_driving_app/Services/sync_service.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -13,8 +13,6 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   final List<Map<String, dynamic>> _favoriteQuestions = [];
   int? _userId;
-  bool _hasAccess = false;
-  bool _isLoggedIn = false;
 
   @override
   void initState() {
@@ -23,31 +21,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   }
 
   Future<void> _loadData() async {
-    final loggedIn = await AuthService().isLoggedIn();
-    print('[FavoritesScreen] loggedIn: $loggedIn');
-    if (!loggedIn) {
-      setState(() {
-        _isLoggedIn = false;
-      });
-      return;
-    }
-    final vip = await AuthService().getVipDays();
-    print('[FavoritesScreen] vip days: $vip');
-    if (vip <= 0) {
-      setState(() {
-        _isLoggedIn = true;
-        _hasAccess = false;
-      });
-      return;
-    }
-    final username = await AuthService().getUsername();
-    print('[FavoritesScreen] username: $username');
     _userId = await AuthService().ensureLocalUser();
     print('[FavoritesScreen] userId: $_userId');
-    setState(() {
-      _isLoggedIn = true;
-      _hasAccess = true;
-    });
+    
     if (_userId != null) {
       final favs =
           await DatabaseHelper.instance.getFavoriteQuestions(_userId!);
@@ -65,28 +41,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_isLoggedIn) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('收藏夹'),
-          backgroundColor: Colors.orange,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(child: Text('请先登录')),
-      );
-    }
-
-    if (!_hasAccess) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('收藏夹'),
-          backgroundColor: Colors.orange,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(child: Text('请成为VIP后使用此功能')),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('收藏夹'),
@@ -105,10 +59,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       '${item['section_id']}-${item['question_number']}'),
                   direction: DismissDirection.endToStart,
                   onDismissed: (_) async {
-                    await DatabaseHelper.instance.removeFavorite(
-                        _userId!, item['section_id'], item['question_number']);
-                    await SyncService.syncFavoriteChange(
-                        _userId!, item['section_id'], item['question_number'], false);
+                    if (_userId != null) {
+                      await DatabaseHelper.instance.removeFavorite(
+                          _userId!, item['section_id'], item['question_number']);
+                      // await SyncService.syncFavoriteChange(
+                      //     _userId!, item['section_id'], item['question_number'], false);
+                    }
                     setState(() {
                       _favoriteQuestions.removeAt(index);
                     });

@@ -16,8 +16,6 @@ class StudyRecordScreen extends StatefulWidget {
 class _StudyRecordScreenState extends State<StudyRecordScreen> {
   List<Map<String, dynamic>> _history = [];
   int? _userId;
-  bool _hasAccess = false;
-  bool _isLoggedIn = false;
 
   @override
   void initState() {
@@ -26,40 +24,14 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
   }
 
   Future<void> _load() async {
-    final loggedIn = await AuthService().isLoggedIn();
-    print('[StudyRecordScreen] loggedIn: $loggedIn');
-    if (!loggedIn) {
-      setState(() {
-        _isLoggedIn = false;
-      });
-      return;
-    }
-    final vip = await AuthService().getVipDays();
-    print('[StudyRecordScreen] vip days: $vip');
-    if (vip <= 0) {
-      setState(() {
-        _isLoggedIn = true;
-        _hasAccess = false;
-      });
-      return;
-    }
-    final username = await AuthService().getUsername();
-    print('[StudyRecordScreen] username: $username');
     _userId = await AuthService().ensureLocalUser();
     if (_userId == null) {
       print('[StudyRecordScreen] failed to ensure local user');
-      setState(() {
-        _isLoggedIn = true;
-        _hasAccess = true;
-        _history = [];
-      });
       return;
     }
     print('[StudyRecordScreen] userId: $_userId');
     final hist = await DatabaseHelper.instance.getQuizHistory(_userId!);
     setState(() {
-      _isLoggedIn = true;
-      _hasAccess = true;
       _history = hist;
     });
   }
@@ -113,28 +85,6 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_isLoggedIn) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('学习记录'),
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(child: Text('请先登录')),
-      );
-    }
-
-    if (!_hasAccess) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('学习记录'),
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-        ),
-        body: const Center(child: Text('请成为VIP后使用此功能')),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('学习记录'),
@@ -183,4 +133,3 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
     );
   }
 }
-

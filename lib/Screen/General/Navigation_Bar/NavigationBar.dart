@@ -17,11 +17,13 @@ class AppNavigationBar extends StatelessWidget {
       currentIndex: currentIndex,
       type: BottomNavigationBarType.fixed,
       onTap: onTap,
+      selectedItemColor: Colors.deepPurple,
+      unselectedItemColor: Colors.grey,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
-        BottomNavigationBarItem(icon: Icon(Icons.workspace_premium), label: 'VIP'),
+        BottomNavigationBarItem(icon: Icon(Icons.assessment), label: '记录'),
         BottomNavigationBarItem(icon: Icon(Icons.article), label: '新闻'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的'),
+        BottomNavigationBarItem(icon: Icon(Icons.settings), label: '设置'),
       ],
     );
   }
