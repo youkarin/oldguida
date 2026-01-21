@@ -46,7 +46,7 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => HistoryDetailScreen(historyId: item[columnHistoryId]),
+        builder: (_) => HistoryDetailScreen(historyData: item),
       ),
     );
   }

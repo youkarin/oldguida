@@ -187,7 +187,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
           isRandom: widget.isRandom,
           usedTime: duration.inSeconds,
         );
-        await DatabaseHelper.instance.trimQuizHistory(_userId!, 100);
+        await DatabaseHelper.instance.trimQuizHistory(_userId!, 50);
         await SyncService.syncQuizAttempt(historyId);
         unawaited(SyncService.syncAll());
       }
