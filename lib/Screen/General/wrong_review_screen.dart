@@ -70,7 +70,7 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
     }
   }
 
-  void _retakeQuiz() {
+  Future<void> _retakeQuiz() async {
     final questions =
         _wrongQuestions.map((e) => Question.fromMap(e)).toList()..shuffle();
     if (questions.isEmpty) {
