@@ -49,16 +49,24 @@ jobs:
     # =========================================================
     # 步骤 B: 打包 APK
     # =========================================================
+    - name: Decode Keystore
+      run: |
+        echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+
     - name: Build Release APK
       run: |
         # 使用 Release 模式打包
-        # 注意：如果你没有配置 keystore，请确保 build.gradle 做了防呆处理
         flutter build apk --release \
           --build-name=${{ env.VERSION_NAME }} \
           --build-number=${{ github.run_number }}
         
         # 重命名产物
         mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk
+      env:
+        ANDROID_KEYSTORE_PATH: "upload-keystore.jks"
+        ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
 
     # =========================================================
     # 步骤 C: 自动发布
