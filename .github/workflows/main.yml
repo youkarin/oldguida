@@ -109,13 +109,13 @@ jobs:
         cd ..
         rm -rf temp_release_repo
 
-    # 场景 1: Main 分支 -> 正式版
+    # 场景 1: Main 分支 -> 正式版 (同时更新固定标签 'stable')
     - name: Create Official Release
       if: github.ref == 'refs/heads/main'
       uses: ncipollo/release-action@v1
       with:
-        tag: "v${{ env.VERSION_NAME }}+${{ github.run_number }}"
-        name: "Release v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
+        tag: "stable"
+        name: "v${{ env.VERSION_NAME }}+${{ github.run_number }}"
         body: |
           🚀 正式发布
           版本: v${{ env.VERSION_NAME }}
@@ -130,21 +130,55 @@ jobs:
         commit: "main"
         token: ${{ secrets.RELEASE_TOKEN }}
 
-    # 场景 2: Dev 分支 -> 预览版
+    - name: Create Versioned Official Tag
+      if: github.ref == 'refs/heads/main'
+      uses: ncipollo/release-action@v1
+      with:
+        tag: "v${{ env.VERSION_NAME }}+${{ github.run_number }}"
+        name: "Release v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
+        body: |
+          🚀 正式发布历史记录
+        artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
+        allowUpdates: true
+        owner: youkarin
+        repo: Oldguida_release
+        commit: "main"
+        token: ${{ secrets.RELEASE_TOKEN }}
+
+    # 场景 2: Dev 分支 -> 预览版 (同时更新固定标签 'preview')
     - name: Create Pre-Release
+      if: github.ref == 'refs/heads/dev'
+      uses: ncipollo/release-action@v1
+      with:
+        tag: "preview"
+        name: "v${{ env.VERSION_NAME }}+${{ github.run_number }}"
+        body: |
+          ⚠️ 开发预览版
+          版本: v${{ env.VERSION_NAME }}
+          Build: ${{ github.run_number }}
+          分支: ${{ github.ref_name }}
+        artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
+        allowUpdates: true
+        removeArtifacts: true
+        replacesArtifacts: true
+        makeLatest: false
+        prerelease: true
+        owner: youkarin
+        repo: Oldguida_release
+        commit: "main"
+        token: ${{ secrets.RELEASE_TOKEN }}
+
+    - name: Create Versioned Pre-Release Tag
       if: github.ref == 'refs/heads/dev'
       uses: ncipollo/release-action@v1
       with:
         tag: "v${{ env.VERSION_NAME }}-pre.${{ github.run_number }}"
         name: "Dev Build v${{ env.VERSION_NAME }} (Build ${{ github.run_number }})"
         body: |
-          ⚠️ 开发预览版
-          分支: ${{ github.ref_name }}
-          Commit: ${{ github.sha }}
+          ⚠️ 开发预览版历史记录
         artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
         allowUpdates: true
-        removeArtifacts: true
-        replacesArtifacts: true
+        owner: youkarin
         repo: Oldguida_release
         commit: "main"
         token: ${{ secrets.RELEASE_TOKEN }}
