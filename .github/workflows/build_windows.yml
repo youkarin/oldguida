@@ -1,0 +1,76 @@
+name: Build & Release Windows Exe (Manual)
+
+# 👇 关键修改：只保留 workflow_dispatch，实现仅手动触发
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build_windows:
+    # ⚠️ 必须使用 Windows 环境才能编译 .exe
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1. 配置 Flutter 环境
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Get Dependencies
+        run: flutter pub get
+
+      # 2. 启用 Windows 支持
+      - name: Enable Windows Support
+        run: flutter config --enable-windows-desktop
+
+      # 3. 提取版本号 (Windows Git Bash)
+      - name: Read Version Name
+        id: get_version
+        shell: bash
+        run: |
+          RAW_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //g')
+          VERSION_NAME=$(echo $RAW_VERSION | cut -d'+' -f1)
+          
+          echo "Detected Version Name: $VERSION_NAME"
+          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+
+      # 4. 构建 Windows Release
+      - name: Build Windows Release
+        run: flutter build windows --release --build-name=${{ env.VERSION_NAME }} --build-number=${{ github.run_number }}
+
+      # 5. 压缩产物 (.exe + dlls -> .zip)
+      - name: Compress Release Folder
+        run: |
+          cd build/windows/x64/runner/Release
+          Compress-Archive -Path * -DestinationPath ..\..\..\..\..\GuidaGuru_v${{ env.VERSION_NAME }}_exe.zip
+
+      # 6. 发布到 Release 仓库
+      - name: Release to Oldguida_release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: "v${{ env.VERSION_NAME }}-exe"
+          name: "Windows Release v${{ env.VERSION_NAME }}"
+          body: |
+            🖥️ Windows PC 版本 (手动构建)
+            版本: v${{ env.VERSION_NAME }}
+            Build: ${{ github.run_number }}
+            
+            **安装说明：**
+            下载 zip 解压后，运行 `GuidaGuru.exe` 即可。
+          
+          artifacts: "GuidaGuru_v${{ env.VERSION_NAME }}_exe.zip"
+          
+          allowUpdates: true
+          removeArtifacts: true
+          replacesArtifacts: true
+          makeLatest: false 
+          
+          owner: youkarin
+          repo: Oldguida_release
+          commit: "main"
+          token: ${{ secrets.RELEASE_TOKEN }}
