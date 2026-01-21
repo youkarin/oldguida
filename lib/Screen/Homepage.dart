@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Services
 import 'package:italian_driving_app/database/database_helper.dart';
+import 'package:italian_driving_app/Services/update_service.dart';
 
 // Banner 轮播组件
 import '../Banner/Banner.dart';
@@ -32,6 +33,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // 延迟一秒检查更新，避免刚进入页面时弹窗冲突
+    Future.delayed(const Duration(seconds: 1), () {
+      if (mounted) {
+        UpdateService.checkUpdate(context);
+      }
+    });
+  }
 
   // ✅ 通用功能
   final List<MenuItem> generalItems = [
