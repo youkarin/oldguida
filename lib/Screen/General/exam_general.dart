@@ -55,7 +55,31 @@ class _ExamGeneralState extends State<ExamGeneral> {
     _loadUser();
   }
 
-  // ... (keeping methods the same until _loadUser)
+  void _resetVisibility() {
+    setState(() {
+      _showTranslationContent = !widget.collapsedMode;
+      _showExplanationContent = !widget.collapsedMode;
+    });
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!_isTimerPaused && _remainingSeconds > 0) {
+        setState(() {
+          _remainingSeconds--;
+        });
+      } else if (_remainingSeconds <= 0) {
+        timer.cancel();
+        _finishExam();
+      }
+    });
+  }
+
+  void _toggleTimer() {
+    setState(() {
+      _isTimerPaused = !_isTimerPaused;
+    });
+  }
 
   void _submitAnswer(bool answer) {
     if (userAnswers[currentIndex] != null && !widget.immediateFeedback) return;
