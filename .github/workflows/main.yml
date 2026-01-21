@@ -64,6 +64,35 @@ jobs:
     # 步骤 C: 自动发布
     # =========================================================
 
+    - name: Ensure Release Repo Initialized
+      run: |
+        # 创建临时目录操作 Release 仓库
+        mkdir -p temp_release_repo
+        cd temp_release_repo
+        
+        git init
+        git remote add origin https://youkarin:${{ secrets.RELEASE_TOKEN }}@github.com/youkarin/Oldguida_release.git
+        
+        # 尝试拉取 main 分支
+        if git pull origin main; then
+          echo "✅ Release repository already initialized."
+        else
+          echo "⚠️ Release repository is empty or missing main branch. Initializing..."
+          echo "# Oldguida Release Repository" > README.md
+          
+          git checkout -b main
+          git add README.md
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git commit -m "Initial commit: Initialize repository for releases"
+          
+          # 推送到远程 main
+          git push -u origin main
+        fi
+        
+        cd ..
+        rm -rf temp_release_repo
+
     # 场景 1: Main 分支 -> 正式版
     - name: Create Official Release
       if: github.ref == 'refs/heads/main'
