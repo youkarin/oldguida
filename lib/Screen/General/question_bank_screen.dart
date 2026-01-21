@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../database/database_helper.dart';
+import 'question_list_screen.dart';
 
 class QuestionBankScreen extends StatefulWidget {
   const QuestionBankScreen({Key? key}) : super(key: key);
@@ -77,7 +78,15 @@ class _QuestionBankScreenState extends State<QuestionBankScreen> {
                           return ListTile(
                             title: Text('第$sectionId节 $sectionName'),
                             onTap: () {
-                              // TODO: 跳转到题目详情页
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => QuestionListScreen(
+                                    sectionId: sectionId,
+                                    sectionName: sectionName,
+                                  ),
+                                ),
+                              );
                             },
                           );
                         }).toList(),
