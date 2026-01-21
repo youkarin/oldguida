@@ -121,13 +121,15 @@ class _ExamGeneralState extends State<ExamGeneral> {
       answerResults[currentIndex] = isCorrect;
     });
 
-    if (widget.immediateFeedback) {
-      Future.delayed(const Duration(milliseconds: 600), () {
-        if (currentIndex < widget.questions.length - 1) {
-          _nextQuestion();
-        }
-      });
-    }
+    // 记录点击时的索引，防止快速点击导致的跳题
+    final int tappedIndex = currentIndex;
+    final delay = widget.immediateFeedback ? 600 : 300;
+    
+    Future.delayed(Duration(milliseconds: delay), () {
+      if (mounted && currentIndex == tappedIndex && currentIndex < widget.questions.length - 1) {
+        _nextQuestion();
+      }
+    });
   }
 
   Future<void> _loadUser() async {
