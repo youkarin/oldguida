@@ -109,13 +109,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final String apiUrl;
       if (_experiencePreview) {
         // Fetch list of releases (including pre-releases) if preview is enabled
-        apiUrl = 'https://api.github.com/repos/XJSCREAM/Guida_Guru/releases?per_page=1';
+        apiUrl = 'https://api.github.com/repos/youkarin/Oldguida_release/releases?per_page=1';
       } else {
         // Fetch only the latest stable release
-        apiUrl = 'https://api.github.com/repos/XJSCREAM/Guida_Guru/releases/latest';
+        apiUrl = 'https://api.github.com/repos/youkarin/Oldguida_release/releases/latest';
       }
 
       print('Checking updates from: $apiUrl');
+      
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {

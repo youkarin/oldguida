@@ -80,7 +80,9 @@ jobs:
         removeArtifacts: true
         replacesArtifacts: true
         makeLatest: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+        owner: youkarin
+        repo: Oldguida_release
+        token: ${{ secrets.RELEASE_TOKEN }}
 
     # 场景 2: Dev 分支 -> 预览版
     - name: Create Pre-Release
@@ -98,4 +100,6 @@ jobs:
         removeArtifacts: true
         replacesArtifacts: true
         prerelease: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+        owner: youkarin
+        repo: Oldguida_release
+        token: ${{ secrets.RELEASE_TOKEN }}
