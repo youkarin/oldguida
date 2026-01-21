@@ -153,6 +153,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
         final String htmlUrl = releaseData['html_url'];
         final String body = releaseData['body'] ?? '';
 
+        // Try to find the direct APK download URL in assets
+        String downloadUrl = htmlUrl; // Fallback to htmlUrl
+        if (releaseData['assets'] != null && (releaseData['assets'] as List).isNotEmpty) {
+            final assets = releaseData['assets'] as List;
+            final apkAsset = assets.firstWhere(
+                (asset) => asset['name'].toString().endsWith('.apk'),
+                orElse: () => null,
+            );
+            if (apkAsset != null) {
+                downloadUrl = apkAsset['browser_download_url'];
+            }
+        }
+
         // Expected Tag Format: v1.0.0+42 OR v1.0.0
         // Parse the tag to extract version and build number
         String cleanTag = latestVersionTag.replaceAll('v', ''); // 1.0.0+42 or 1.0.0-pre.42
@@ -174,7 +187,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         
         // Check if new version is actually newer
         if (_isNewer(latestVersionPart, latestBuildPart)) {
-           _showUpdateDialog(latestVersionTag, htmlUrl, body);
+           _showUpdateDialog(latestVersionTag, downloadUrl, body);
         } else {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
