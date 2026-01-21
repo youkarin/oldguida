@@ -38,10 +38,10 @@ class AuthService {
 
   /// 确保本地数据库中存在当前用户，返回用户ID
   Future<int?> ensureLocalUser() async {
-    final username = await getUsername();
-    if (username == null) {
-      print('[AuthService] ensureLocalUser: no username');
-      return null;
+    String? username = await getUsername();
+    if (username == null || username.isEmpty) {
+      print('[AuthService] ensureLocalUser: no username, fallback to guest');
+      username = 'guest';
     }
     final existing = await DatabaseHelper.instance.getUser(username);
     if (existing != null) {
