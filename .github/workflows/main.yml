@@ -82,6 +82,7 @@ jobs:
         makeLatest: true
         owner: youkarin
         repo: Oldguida_release
+        commit: "main"
         token: ${{ secrets.RELEASE_TOKEN }}
 
     # 场景 2: Dev 分支 -> 预览版
@@ -99,7 +100,6 @@ jobs:
         allowUpdates: true
         removeArtifacts: true
         replacesArtifacts: true
-        prerelease: true
-        owner: youkarin
         repo: Oldguida_release
+        commit: "main"
         token: ${{ secrets.RELEASE_TOKEN }}
