@@ -30,20 +30,13 @@ class _QuestionBankScreenState extends State<QuestionBankScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F7), // iOS style background
       appBar: AppBar(
+        backgroundColor: Colors.pink,
+        foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
         title: const Text(
           '全题库',
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
         ),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(

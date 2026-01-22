@@ -36,9 +36,9 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
-        title: Text(widget.sectionName),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.pink,
         foregroundColor: Colors.white,
+        title: Text(widget.sectionName),
         elevation: 0,
       ),
       body: FutureBuilder<List<Question>>(

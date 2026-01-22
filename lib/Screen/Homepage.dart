@@ -74,6 +74,15 @@ class _HomePageState extends State<HomePage> {
       label: '选择练习',
       color: Colors.teal,
     ),
+    MenuItem(
+      icon: const Icon(
+        Icons.school,
+        size: 32,
+        color: Colors.white,
+      ),
+      label: '理论学习',
+      color: Colors.purple,
+    ),
   ];
 
   // 🌟 记录/高级功能 (原 VIP 功能)

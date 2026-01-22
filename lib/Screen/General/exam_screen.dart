@@ -108,6 +108,8 @@ class _ExamScreenState extends State<ExamScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
         title: const Text(
           '练习与测验',
           style: TextStyle(fontWeight: FontWeight.bold),

@@ -78,9 +78,9 @@ class _PracticeScreenState extends State<PracticeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isSequential ? '顺序练习' : '随机练习'),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
+        title: Text(widget.isSequential ? '顺序练习' : '选题练习'),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _chaptersFuture,
