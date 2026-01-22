@@ -35,6 +35,8 @@ class UpdateService {
       // 我们在 Action 中会把真实版本号写在 Body 的第一行或者使用其他方式
       // 更好的办法是：Action 发布时，把 Release Name 设置为真实版本号
       final String latestVersion = data['name']?.toString().split(' ').last.replaceAll('v', '') ?? '';
+      final bool isLatestPreview = data['prerelease'] ?? false; // GitHub API provides this field
+      
       final String releaseNotes = data['body'] ?? '暂无更新说明';
       final String downloadUrl = (data['assets'] as List).isNotEmpty 
           ? data['assets'][0]['browser_download_url'] 
@@ -44,9 +46,12 @@ class UpdateService {
       final String currentVersion = packageInfo.version;
       final String currentBuildNumber = packageInfo.buildNumber;
 
-      if (_isNewer(latestVersion, '$currentVersion+$currentBuildNumber')) {
+      // 只有当符合以下条件之一时才提示更新：
+      // 1. 用户开启了预览体验 (isPreview == true)
+      // 2. 当前获取到的不是预览版 (isLatestPreview == false)
+      if ((isPreview || !isLatestPreview) && _isNewer(latestVersion, '$currentVersion+$currentBuildNumber')) {
         if (context.mounted) {
-          _showUpdateDialog(context, latestVersion, '$currentVersion+$currentBuildNumber', releaseNotes, downloadUrl);
+          _showUpdateDialog(context, latestVersion, '$currentVersion+$currentBuildNumber', releaseNotes, downloadUrl, isLatestPreview);
         }
       } else {
         if (showNoUpdate && context.mounted) {
@@ -95,6 +100,7 @@ class UpdateService {
     String current,
     String notes,
     String url,
+    bool isPreview,
   ) {
     showDialog(
       context: context,
@@ -104,7 +110,19 @@ class UpdateService {
           children: [
             const Icon(Icons.system_update_alt, color: Colors.blue),
             const SizedBox(width: 10),
-            Text('发现新版本 v$latest'),
+            Expanded(child: Text('发现新版本 v$latest')),
+            if (isPreview)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Text(
+                  '预览版',
+                  style: TextStyle(color: Colors.orange, fontSize: 10, fontWeight: FontWeight.bold),
+                ),
+              ),
           ],
         ),
         content: SizedBox(
