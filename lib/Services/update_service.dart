@@ -140,8 +140,19 @@ class UpdateService {
             ),
             onPressed: () async {
               final uri = Uri.parse(url);
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri, mode: LaunchMode.externalApplication);
+              debugPrint('Attempting to launch update URL: $url');
+              try {
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                } else {
+                  // Fallback: 尝试直接启动，有些情况下 canLaunchUrl 可能会误报
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                }
+              } catch (e) {
+                debugPrint('Could not launch $url: $e');
+                if (context.mounted) {
+                  _showSnackBar(context, '无法打开下载链接，请手动前往 GitHub 下载');
+                }
               }
             },
             child: const Text('立即更新'),
