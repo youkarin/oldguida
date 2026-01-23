@@ -1,16 +1,62 @@
-# italian_driving_app
+# 意大利驾照理论考试助手 (Italian Driving App)
 
-A new Flutter project.
+这是一个专为在意大利的华人打造的驾照理论考试学习应用。本项目基于 Flutter 开发，旨在通过提供双语对照、丰富的练习模式和智能的错题管理，帮助用户轻松攻克语言难关，高效通过意大利驾照理论考试。
 
-## Getting Started
+## ✨ 主要功能
 
-This project is a starting point for a Flutter application.
+### 🚗 核心练习
+*   **全题库浏览**：覆盖完整的考试题库，支持按章节学习。
+*   **模拟考试**：还原真实考试流程与时间限制，检测备考水平。
+*   **专项练习**：支持自定义选择练习范围。
 
-A few resources to get you started if this is your first Flutter project:
+### 🎯 进阶与提分
+*   **中意对照解析**：每道题均配备中文翻译与详细解析，不仅背题更能懂题。
+*   **关键词特训**：独家的“单词必对题”与“单词必错题”模式，利用技巧快速得分。
+*   **高频错题**：收录大数据统计的“易错题”集合，重点突破难点。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 📊 学习管理
+*   **错题复习**：自动记录做错的题目，随时回顾，巩固记忆。
+*   **收藏夹**：遇到重点或难题一键收藏，方便日后查阅。
+*   **学习记录**：直观展示学习进度和考试历史，见证每一分进步。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ 技术栈
+
+*   **框架**: [Flutter](https://flutter.dev/) (Dart)
+*   **本地数据库**: SQLite (via `sqflite`) - 离线存储海量题库。
+*   **云服务**: Supabase - 用于数据同步与用户验证。
+*   **UI/UX**: 遵循 Material Design 设计规范，适配多尺寸屏幕。
+
+## 🚀 快速开始
+
+### 环境要求
+*   Flutter SDK: >=3.5.0 <4.0.0
+*   Dart SDK
+
+### 安装步骤
+
+1.  **克隆项目**
+    ```bash
+    git clone [repository_url]
+    cd oldguida
+    ```
+
+2.  **安装依赖**
+    ```bash
+    flutter pub get
+    ```
+
+3.  **运行应用**
+    ```bash
+    flutter run
+    ```
+
+## 📂 项目结构概览
+
+*   `lib/Screen/`: 包含所有 UI 页面（通用练习、VIP 进阶功能等）。
+*   `lib/database/`: 数据库操作与管理。
+*   `lib/models/`: 数据模型定义（如 `Question`）。
+*   `assets/db/`: 预置的 SQLite 题库文件。
+*   `assets/images/`: 题目配套图片及应用图标。
+
+---
+*祝您考试顺利，早日拿证！* 🚗💨
