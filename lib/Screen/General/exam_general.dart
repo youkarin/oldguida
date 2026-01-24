@@ -362,6 +362,35 @@ class _ExamGeneralState extends State<ExamGeneral> {
     );
   }
 
+  void _toggleAndScroll(bool isTranslation) {
+    setState(() {
+      if (isTranslation) {
+        _showTranslationContent = !_showTranslationContent;
+      } else {
+        _showExplanationContent = !_showExplanationContent;
+      }
+    });
+
+    if ((isTranslation && _showTranslationContent) ||
+        (!isTranslation && _showExplanationContent)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_contentScrollController.hasClients) {
+          final double current = _contentScrollController.offset;
+          final double max = _contentScrollController.position.maxScrollExtent;
+          // 向下滑动一点点，以便用户能看到展开的内容
+          final double target = (current + 200.0).clamp(0.0, max);
+          if (target > current) {
+            _contentScrollController.animateTo(
+              target,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut,
+            );
+          }
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final question = widget.questions[currentIndex];
@@ -510,7 +539,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
                         title: '翻译 (Translation)',
                         content: question.translation,
                         isExpanded: _showTranslationContent,
-                        onToggle: () => setState(() => _showTranslationContent = !_showTranslationContent),
+                        onToggle: () => _toggleAndScroll(true),
                       ),
                     
                     if (widget.showExplanation && question.explanation.isNotEmpty)
@@ -518,7 +547,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
                         title: '解析 (Explanation)',
                         content: question.explanation,
                         isExpanded: _showExplanationContent,
-                        onToggle: () => setState(() => _showExplanationContent = !_showExplanationContent),
+                        onToggle: () => _toggleAndScroll(false),
                       ),
                   ],
                 ),
