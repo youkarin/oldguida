@@ -1,3 +1,4 @@
+import hashlib
 import json
 import sqlite3
 import subprocess
@@ -25,13 +26,20 @@ class ValidateChapterTests(unittest.TestCase):
             connection.executescript(
                 """
                 CREATE TABLE section (
-                    section_id INTEGER PRIMARY KEY,
-                    chapter_id INTEGER NOT NULL,
+                    id INTEGER,
+                    section_id INTEGER,
+                    chapter_id INTEGER,
+                    name TEXT,
                     image_path TEXT
                 );
                 CREATE TABLE quiz (
-                    id INTEGER PRIMARY KEY,
-                    section_id INTEGER NOT NULL
+                    id INTEGER,
+                    question TEXT,
+                    answer INTEGER,
+                    section_id INTEGER,
+                    translation TEXT,
+                    explanation TEXT,
+                    question_number INTEGER
                 );
                 INSERT INTO section (section_id, chapter_id, image_path) VALUES
                     (1, 1, NULL),
@@ -95,6 +103,26 @@ class ValidateChapterTests(unittest.TestCase):
                 "image_questions": 1,
             },
         )
+
+    def test_validation_does_not_change_database_or_create_files(self):
+        patch_path = self.write_patch()
+        before_hash = hashlib.sha256(self.db_path.read_bytes()).hexdigest()
+        before_files = {
+            path.relative_to(self.root)
+            for path in self.root.rglob("*")
+            if path.is_file()
+        }
+
+        self.validate(patches=[str(patch_path)])
+
+        after_hash = hashlib.sha256(self.db_path.read_bytes()).hexdigest()
+        after_files = {
+            path.relative_to(self.root)
+            for path in self.root.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(after_hash, before_hash)
+        self.assertEqual(after_files, before_files)
 
     def test_rejects_protected_item_field(self):
         patch = {
@@ -196,6 +224,33 @@ class ValidateChapterTests(unittest.TestCase):
                 patches=[str(self.root / "patch-a.json")],
                 expect_reviewed=4,
             )
+
+    def test_rejects_duplicate_quiz_id_within_chapter(self):
+        with closing(sqlite3.connect(self.db_path)) as connection:
+            connection.execute("INSERT INTO quiz (id, section_id) VALUES (?, ?)", (1, 1))
+            connection.commit()
+
+        with self.assertRaisesRegex(ValidationError, "duplicate quiz id 1"):
+            self.validate()
+
+    def test_rejects_duplicate_quiz_id_across_chapters(self):
+        with closing(sqlite3.connect(self.db_path)) as connection:
+            connection.execute("INSERT INTO quiz (id, section_id) VALUES (?, ?)", (1, 9))
+            connection.commit()
+
+        with self.assertRaisesRegex(ValidationError, "duplicate quiz id 1"):
+            self.validate()
+
+    def test_rejects_duplicate_section_id(self):
+        with closing(sqlite3.connect(self.db_path)) as connection:
+            connection.execute(
+                "INSERT INTO section (section_id, chapter_id, image_path) VALUES (?, ?, ?)",
+                (1, 1, None),
+            )
+            connection.commit()
+
+        with self.assertRaisesRegex(ValidationError, "duplicate section id 1"):
+            self.validate()
 
     def test_rejects_unknown_patch_and_severe_fields(self):
         cases = (
@@ -323,6 +378,46 @@ class ValidateChapterTests(unittest.TestCase):
             result.stderr.startswith("validation failed: "),
             result.stderr,
         )
+
+    def test_cli_wraps_json_input_errors_without_traceback(self):
+        cases = (
+            ("invalid-utf8", b'{"reviewed":"\xff"}'),
+            (
+                "oversized-integer",
+                b'{"reviewed":' + (b"9" * 5000) + b',"items":[],"severe":[]}',
+            ),
+            ("excessive-depth", (b"[" * 10000) + b"0" + (b"]" * 10000)),
+        )
+        for name, payload in cases:
+            with self.subTest(name=name):
+                patch_path = self.root / (name + ".json")
+                patch_path.write_bytes(payload)
+                result = subprocess.run(
+                    [
+                        sys.executable,
+                        str(REVIEW_DIR / "validate_chapter.py"),
+                        "--db",
+                        str(self.db_path),
+                        "--chapter",
+                        "1",
+                        "--patches",
+                        str(patch_path),
+                        "--image-manifest",
+                        str(self.manifest_path),
+                        "--expect-reviewed",
+                        "3",
+                    ],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+
+                self.assertNotEqual(result.returncode, 0)
+                self.assertTrue(
+                    result.stderr.startswith("validation failed: "),
+                    result.stderr,
+                )
+                self.assertNotIn("Traceback", result.stderr)
 
 
 if __name__ == "__main__":

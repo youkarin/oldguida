@@ -24,7 +24,7 @@ def _load_json(path, label):
     try:
         with Path(path).open(encoding="utf-8") as stream:
             return json.load(stream)
-    except (OSError, json.JSONDecodeError) as exc:
+    except (OSError, ValueError, RecursionError) as exc:
         raise ValidationError("cannot read %s %s: %s" % (label, path, exc)) from exc
 
 
@@ -78,6 +78,22 @@ def _load_chapter_data(db_path, chapter):
     connection = None
     try:
         connection = sqlite3.connect(path.as_uri() + "?mode=ro", uri=True)
+        duplicate_quiz_id = connection.execute(
+            "SELECT id FROM quiz WHERE id IS NOT NULL "
+            "GROUP BY id HAVING COUNT(*) > 1 ORDER BY id LIMIT 1"
+        ).fetchone()
+        if duplicate_quiz_id is not None:
+            raise ValidationError("database contains duplicate quiz id %s" % duplicate_quiz_id[0])
+
+        duplicate_section_id = connection.execute(
+            "SELECT section_id FROM section WHERE section_id IS NOT NULL "
+            "GROUP BY section_id HAVING COUNT(*) > 1 ORDER BY section_id LIMIT 1"
+        ).fetchone()
+        if duplicate_section_id is not None:
+            raise ValidationError(
+                "database contains duplicate section id %s" % duplicate_section_id[0]
+            )
+
         question_ids = {
             row[0]
             for row in connection.execute(
