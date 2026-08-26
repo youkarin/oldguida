@@ -310,6 +310,20 @@ class ValidateChapterTests(unittest.TestCase):
         self.assertIn("validation failed: ", result.stderr)
         self.assertIn("answer", result.stderr)
 
+    def test_cli_missing_required_arguments_starts_with_validation_failure(self):
+        result = subprocess.run(
+            [sys.executable, str(REVIEW_DIR / "validate_chapter.py")],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertTrue(
+            result.stderr.startswith("validation failed: "),
+            result.stderr,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

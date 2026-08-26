@@ -15,6 +15,11 @@ class ValidationError(Exception):
     pass
 
 
+class ValidationArgumentParser(argparse.ArgumentParser):
+    def error(self, message):
+        raise ValidationError(message)
+
+
 def _load_json(path, label):
     try:
         with Path(path).open(encoding="utf-8") as stream:
@@ -256,7 +261,9 @@ def validate_chapter(db_path, chapter, patch_patterns, image_manifest_path, expe
 
 
 def _build_parser():
-    parser = argparse.ArgumentParser(description="Validate chapter review patches without writing the database.")
+    parser = ValidationArgumentParser(
+        description="Validate chapter review patches without writing the database."
+    )
     parser.add_argument("--db", required=True)
     parser.add_argument("--chapter", required=True, type=int)
     parser.add_argument("--patches", required=True, nargs="+")
@@ -266,8 +273,8 @@ def _build_parser():
 
 
 def main(argv=None):
-    args = _build_parser().parse_args(argv)
     try:
+        args = _build_parser().parse_args(argv)
         summary = validate_chapter(
             db_path=args.db,
             chapter=args.chapter,
