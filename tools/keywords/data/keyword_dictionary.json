@@ -369,15 +369,15 @@
   },
   {
     "term": "assicurato",
-    "partOfSpeech": "形容词",
-    "translation": "已投保的；固定牢靠的；已确认的",
-    "note": "可表示车辆已投保、货物或乘员已固定，也可表示已经确认某项通行条件。",
+    "partOfSpeech": "动词/形容词",
+    "translation": "已投保的；固定牢靠的；得到保障的；由……保证的",
+    "note": "保险语境中表示已投保，固定语境中表示已固定；机械语境中的 assicurata 表示某项性能由相应部件保障或保证。",
     "forms": [
       "assicurato",
       "assicurati",
       "assicurata"
     ],
-    "exampleQuestionId": 5510
+    "exampleQuestionId": 7038
   },
   {
     "term": "assicuratrice",
@@ -914,14 +914,14 @@
   },
   {
     "term": "carico",
-    "partOfSpeech": "名词",
-    "translation": "载荷；装载物；负担或责任",
-    "note": "可指车辆所载货物或装载状态；在责任语境中表示由某人承担的责任。",
+    "partOfSpeech": "名词/形容词",
+    "translation": "载荷；装载物；负担或责任；载有货物的；已装载的",
+    "note": "名词可指车辆所载货物或装载状态；形容词 carico 表示车辆或挂车载有货物、已经装载；在责任搭配中表示由某人承担。",
     "forms": [
       "carico",
       "carichi"
     ],
-    "exampleQuestionId": 4676
+    "exampleQuestionId": 5750
   },
   {
     "term": "carico e scarico",
@@ -1534,16 +1534,16 @@
   },
   {
     "term": "danneggiato",
-    "partOfSpeech": "形容词",
-    "translation": "受损的；损坏的",
-    "note": "描述车辆、部件或道路设施已经受损且可能不能安全使用。",
+    "partOfSpeech": "名词/形容词",
+    "translation": "受损的；损坏的；受害人；受损方",
+    "note": "形容物体时表示已经受损；事故和保险语境中作名词，指遭受人身或财产损害的受害人或受损方。",
     "forms": [
       "danneggiato",
       "danneggiati",
       "danneggiata",
       "danneggiate"
     ],
-    "exampleQuestionId": 5554
+    "exampleQuestionId": 6469
   },
   {
     "term": "danno",
@@ -1960,6 +1960,16 @@
       "esibire"
     ],
     "exampleQuestionId": 2907
+  },
+  {
+    "term": "estintore di bordo",
+    "partOfSpeech": "固定短语",
+    "translation": "车载灭火器",
+    "note": "指车辆随车配备的灭火器；题库语境涉及其存放位置，不能按道路或车辆边缘理解。",
+    "forms": [
+      "estintore di bordo"
+    ],
+    "exampleQuestionId": 5985
   },
   {
     "term": "evitare",
@@ -6044,11 +6054,12 @@
     "term": "transitare",
     "partOfSpeech": "动词",
     "translation": "通过；通行",
-    "note": "表示车辆、行人等经过某一道路或区域。",
+    "note": "表示车辆、行人等经过某一道路或区域；transiti 是第三人称单数虚拟式动词，不是 transito 的名词复数。",
     "forms": [
-      "transitare"
+      "transitare",
+      "transiti"
     ],
-    "exampleQuestionId": 162
+    "exampleQuestionId": 5058
   },
   {
     "term": "transito",
@@ -6056,8 +6067,7 @@
     "translation": "通行；交通流",
     "note": "表示道路使用者在某路段通过，也常用于准行或禁行标志。",
     "forms": [
-      "transito",
-      "transiti"
+      "transito"
     ],
     "exampleQuestionId": 41
   },
@@ -6104,15 +6114,35 @@
     "exampleQuestionId": 6613
   },
   {
+    "term": "triangoli bianchi",
+    "partOfSpeech": "固定短语",
+    "translation": "白色让行三角标线",
+    "note": "指与让行标志配套、由一系列白色三角形组成的横向路面标线；必要停车时应在该线处停下。",
+    "forms": [
+      "triangoli bianchi"
+    ],
+    "exampleQuestionId": 4583
+  },
+  {
     "term": "triangolo",
     "partOfSpeech": "名词",
-    "translation": "三角警告牌",
-    "note": "车辆故障或事故后按规定放置、提醒后方来车的反光警示装置。",
+    "translation": "三角形；三角警告牌",
+    "note": "可泛指三角形的信号或标线；车辆随车警告装置则指故障或事故后放置、提醒后方来车的反光三角警告牌，具体义由长搭配区分。",
     "forms": [
       "triangolo",
       "triangoli"
     ],
     "exampleQuestionId": 6145
+  },
+  {
+    "term": "triangolo giallo",
+    "partOfSpeech": "固定短语",
+    "translation": "黄色三角信号灯",
+    "note": "指公共交通专用信号灯中的黄色三角形灯光，预告停车信号即将亮起；不是车辆故障警告牌。",
+    "forms": [
+      "triangolo giallo"
+    ],
+    "exampleQuestionId": 2765
   },
   {
     "term": "triciclo",

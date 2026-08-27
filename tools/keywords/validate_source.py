@@ -119,6 +119,7 @@ IRREGULAR_FORMS = {
     "indicare": frozenset({"indica", "indicano"}),
     "potere": frozenset({"può", "possono"}),
     "segnalare": frozenset({"segnala"}),
+    "transitare": frozenset({"transiti"}),
     "vietare": frozenset({"vieta"}),
     "non può": frozenset({"non possono"}),
 }

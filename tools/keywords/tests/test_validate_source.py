@@ -203,6 +203,24 @@ class SourceValidationTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValidationError, "unrelated form"):
                     validate_source([entry], {1: question}, enforce_size=False)
 
+    def test_accepts_audited_transitare_subjunctive_without_relaxing_forms(self):
+        entry = {
+            **VALID_ENTRY,
+            "term": "transitare",
+            "partOfSpeech": "动词",
+            "translation": "通过；通行",
+            "note": "包括题库中第三人称单数虚拟式 transiti。",
+            "forms": ["transitare", "transiti"],
+        }
+
+        validated = validate_source(
+            [entry],
+            {1: "Il veicolo passa prima che transiti l'altro veicolo."},
+            enforce_size=False,
+        )
+
+        self.assertEqual(validated[0]["forms"], ["transitare", "transiti"])
+
     def test_requires_nonempty_chinese_translation_and_note(self):
         cases = {
             "translation": "yield",
@@ -448,6 +466,98 @@ class CuratedDictionaryRegressionTest(unittest.TestCase):
         self.assertNotIn("motrici", self.by_term["motrice"]["forms"])
         self.assertIn("ruote motrici", self.by_term["ruote motrici"]["forms"])
 
+    def test_second_review_resolves_remaining_ambiguities(self):
+        expected_exact_entries = {
+            "estintore di bordo": {
+                "partOfSpeech": "固定短语",
+                "translation": "车载灭火器",
+                "forms": ["estintore di bordo"],
+                "exampleQuestionId": 5985,
+            },
+            "triangolo giallo": {
+                "partOfSpeech": "固定短语",
+                "translation": "黄色三角信号灯",
+                "forms": ["triangolo giallo"],
+                "exampleQuestionId": 2765,
+            },
+            "triangoli bianchi": {
+                "partOfSpeech": "固定短语",
+                "translation": "白色让行三角标线",
+                "forms": ["triangoli bianchi"],
+                "exampleQuestionId": 4583,
+            },
+        }
+        for term, expected in expected_exact_entries.items():
+            with self.subTest(term=term):
+                self.assertIn(term, self.by_term)
+                for field, expected_value in expected.items():
+                    self.assertEqual(self.by_term[term][field], expected_value)
+
+        triangolo = self.by_term["triangolo"]
+        self.assertEqual(triangolo["translation"], "三角形；三角警告牌")
+        self.assertEqual(triangolo["forms"], ["triangolo", "triangoli"])
+        self.assertEqual(triangolo["exampleQuestionId"], 6145)
+
+        self.assertEqual(self.by_term["transito"]["forms"], ["transito"])
+        transitare = self.by_term["transitare"]
+        self.assertEqual(transitare["forms"], ["transitare", "transiti"])
+        self.assertEqual(transitare["exampleQuestionId"], 5058)
+
+        expected_contextual_entries = {
+            "assicurato": (
+                "动词/形容词",
+                "已投保的；固定牢靠的；得到保障的；由……保证的",
+                7038,
+            ),
+            "danneggiato": (
+                "名词/形容词",
+                "受损的；损坏的；受害人；受损方",
+                6469,
+            ),
+            "carico": (
+                "名词/形容词",
+                "载荷；装载物；负担或责任；载有货物的；已装载的",
+                5750,
+            ),
+        }
+        for term, (
+            part_of_speech,
+            translation,
+            example_id,
+        ) in expected_contextual_entries.items():
+            with self.subTest(term=term):
+                entry = self.by_term[term]
+                self.assertEqual(entry["partOfSpeech"], part_of_speech)
+                self.assertEqual(entry["translation"], translation)
+                self.assertEqual(entry["exampleQuestionId"], example_id)
+
+        self.assertIn("保险", self.by_term["assicurato"]["note"])
+        self.assertIn("机械", self.by_term["assicurato"]["note"])
+        self.assertIn("物体", self.by_term["danneggiato"]["note"])
+        self.assertIn("事故", self.by_term["danneggiato"]["note"])
+        self.assertIn("形容词", self.by_term["carico"]["note"])
+
+    def test_second_review_phrases_win_a_longest_match_simulation(self):
+        cases = {
+            2765: ("triangolo giallo", "triangolo"),
+            4583: ("triangoli bianchi", "triangoli"),
+            5985: ("estintore di bordo", "bordo"),
+        }
+        for question_id, (expected_form, shorter_form) in cases.items():
+            with self.subTest(question_id=question_id):
+                overlapping_candidates = [expected_form, shorter_form]
+                self.assertTrue(
+                    all(
+                        has_italian_boundaries(self.quiz_rows[question_id], form)
+                        for form in overlapping_candidates
+                    )
+                )
+                selected = max(
+                    overlapping_candidates,
+                    key=lambda form: len(normalize_text(form)),
+                )
+                self.assertEqual(selected, expected_form)
+
     def test_reviewed_canonical_terms_merges_and_superamento(self):
         removed_terms = {
             "farmaci",
@@ -547,7 +657,7 @@ class CuratedDictionaryRegressionTest(unittest.TestCase):
             "strettoia": ["strettoie"],
             "tergicristallo": ["tergicristalli"],
             "titolare": ["titolari"],
-            "transito": ["transiti"],
+            "transitare": ["transiti"],
             "triangolo": ["triangoli"],
             "fine": ["fini"],
             "olio": ["olii"],
