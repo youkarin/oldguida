@@ -107,7 +107,7 @@ class BrandingVerifier:
         try:
             with (self.root / relative_path).open("rb") as source:
                 parsed = plistlib.load(source)
-        except (OSError, UnicodeDecodeError, ValueError, plistlib.InvalidFileException) as error:
+        except (OSError, UnicodeDecodeError, LookupError, ValueError, plistlib.InvalidFileException) as error:
             self.failures.append(f"FAIL {relative_path}: invalid plist ({error})")
             return None
         if not isinstance(parsed, dict):
@@ -212,7 +212,6 @@ class BrandingVerifier:
                 reference
                 for reference in references_at_path
                 if reference.get("BlueprintIdentifier") == RUNNER_BLUEPRINT_ID
-                and reference.get("BlueprintName") == "Runner"
             ]
             actual = [
                 {
@@ -224,7 +223,9 @@ class BrandingVerifier:
             ]
             self.require(
                 f"{relative_path}: {context} Runner BuildableReference",
-                len(runner_references) == 1 and runner_references[0].get("BuildableName") == "OldGuida.app",
+                len(runner_references) == 1
+                and runner_references[0].get("BlueprintName") == "Runner"
+                and runner_references[0].get("BuildableName") == "OldGuida.app",
                 actual,
             )
 
@@ -310,6 +311,35 @@ class BrandingVerifier:
                 objects[object_id] = content[match.end() : index - 1]
         return objects
 
+    def pbx_braced_field(self, object_body: str, field_name: str, location: str) -> str | None:
+        field_match = re.search(rf"(?m)^\s*{re.escape(field_name)}\s*=\s*\{{", object_body)
+        if field_match is None:
+            return None
+        depth = 1
+        in_string = False
+        escaped = False
+        index = field_match.end()
+        while index < len(object_body) and depth:
+            character = object_body[index]
+            if in_string:
+                if escaped:
+                    escaped = False
+                elif character == "\\":
+                    escaped = True
+                elif character == '"':
+                    in_string = False
+            elif character == '"':
+                in_string = True
+            elif character == "{":
+                depth += 1
+            elif character == "}":
+                depth -= 1
+            index += 1
+        if depth:
+            self.failures.append(f"FAIL {location}: unterminated {field_name} block")
+            return None
+        return object_body[field_match.end() : index - 1]
+
     def verify_ios_bundle_identifiers(self) -> None:
         relative_path = "ios/Runner.xcodeproj/project.pbxproj"
         content = self.text(relative_path)
@@ -379,7 +409,12 @@ class BrandingVerifier:
                     [name for _, name, _ in configurations],
                 )
                 configuration = matching_configurations[0] if len(matching_configurations) == 1 else None
-                bundle_match = None if configuration is None else re.search(r"(?m)^\s*PRODUCT_BUNDLE_IDENTIFIER = ([^;]+);$", configuration)
+                build_settings = None if configuration is None else self.pbx_braced_field(
+                    configuration,
+                    "buildSettings",
+                    f"{relative_path}: {target_name} {configuration_name} configuration",
+                )
+                bundle_match = None if build_settings is None else re.search(r"(?m)^\s*PRODUCT_BUNDLE_IDENTIFIER = ([^;]+);$", build_settings)
                 actual = None if bundle_match is None else bundle_match.group(1)
                 self.require(
                     f"{relative_path}: {target_name} {configuration_name} bundle identifier",
@@ -395,8 +430,8 @@ class BrandingVerifier:
         for target_name in ("Runner", "RunnerTests"):
             self.require(f"{relative_path}: {target_name} target", target_name in found_targets, sorted(found_targets))
 
-    def dart_tokens(self, relative_path: str, content: str) -> list[tuple[str, str]] | None:
-        tokens: list[tuple[str, str]] = []
+    def dart_tokens(self, relative_path: str, content: str) -> list[tuple[str, str, bool]] | None:
+        tokens: list[tuple[str, str, bool]] = []
         index = 0
         while index < len(content):
             if content[index].isspace():
@@ -424,10 +459,12 @@ class BrandingVerifier:
                     self.failures.append(f"FAIL {relative_path}: unterminated block comment")
                     return None
                 continue
-            if content[index] in "'\"":
-                quote = content[index]
-                triple = content.startswith(quote * 3, index)
-                index += 3 if triple else 1
+            is_raw = content[index] == "r" and index + 1 < len(content) and content[index + 1] in "'\""
+            quote_index = index + 1 if is_raw else index
+            if content[quote_index] in "'\"":
+                quote = content[quote_index]
+                triple = content.startswith(quote * 3, quote_index)
+                index = quote_index + (3 if triple else 1)
                 value: list[str] = []
                 while index < len(content):
                     if triple and content.startswith(quote * 3, index):
@@ -436,7 +473,7 @@ class BrandingVerifier:
                     if not triple and content[index] == quote:
                         index += 1
                         break
-                    if content[index] == "\\" and index + 1 < len(content):
+                    if not is_raw and content[index] == "\\" and index + 1 < len(content):
                         value.append(content[index + 1])
                         index += 2
                         continue
@@ -445,16 +482,16 @@ class BrandingVerifier:
                 else:
                     self.failures.append(f"FAIL {relative_path}: unterminated string literal")
                     return None
-                tokens.append(("string", "".join(value)))
+                tokens.append(("string", "".join(value), is_raw))
                 continue
             if content[index].isalpha() or content[index] in "_$":
                 end = index + 1
                 while end < len(content) and (content[end].isalnum() or content[end] in "_$"):
                     end += 1
-                tokens.append(("identifier", content[index:end]))
+                tokens.append(("identifier", content[index:end], False))
                 index = end
                 continue
-            tokens.append(("symbol", content[index]))
+            tokens.append(("symbol", content[index], False))
             index += 1
         return tokens
 
@@ -472,24 +509,27 @@ class BrandingVerifier:
             if line and not line[0].isspace():
                 in_dependency_section = False
             if in_dependency_section:
-                package_match = re.match(r"^\s{2}([A-Za-z0-9_-]+):", line)
+                package_match = re.match(
+                    r"^\s{2}(?:\"([A-Za-z0-9_-]+)\"|'([A-Za-z0-9_-]+)'|([A-Za-z0-9_-]+))\s*:",
+                    line,
+                )
                 if package_match:
-                    packages.add(package_match.group(1))
+                    packages.add(next(group for group in package_match.groups() if group is not None))
         return packages
 
-    def dart_import_uris(self, tokens: list[tuple[str, str]]) -> list[str]:
+    def dart_import_uris(self, tokens: list[tuple[str, str, bool]]) -> list[str]:
         uris: list[str] = []
         index = 0
         brace_depth = 0
         while index < len(tokens):
-            kind, value = tokens[index]
+            kind, value, _ = tokens[index]
             if kind == "symbol" and value == "{":
                 brace_depth += 1
             elif kind == "symbol" and value == "}" and brace_depth:
                 brace_depth -= 1
             elif brace_depth == 0 and kind == "identifier" and value == "import":
                 end = index + 1
-                while end < len(tokens) and tokens[end] != ("symbol", ";"):
+                while end < len(tokens) and tokens[end][:2] != ("symbol", ";"):
                     if tokens[end][0] == "string":
                         uris.append(tokens[end][1])
                     end += 1

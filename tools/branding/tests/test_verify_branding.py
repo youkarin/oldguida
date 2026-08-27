@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 from xml.etree import ElementTree
 
-from tools.branding.verify_branding import RUNNER_BLUEPRINT_ID, verify
+from tools.branding.verify_branding import BrandingVerifier, RUNNER_BLUEPRINT_ID, verify
 
 
 SOURCE_ROOT = Path(__file__).resolve().parents[3]
@@ -59,6 +59,39 @@ class BrandingVerifierTest(unittest.TestCase):
         start = project.index("249021D4217E4FDB00AE95B9 /* Profile */ = {")
         name_index = project.index("name = Profile;", start)
         project_path.write_text(project[:name_index] + replacement + project[name_index + len("name = Profile;") :], encoding="utf-8")
+
+    def add_build_action_entry(self, blueprint_identifier, buildable_name, blueprint_name):
+        scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
+        tree = ElementTree.parse(scheme_path)
+        entries = tree.find("./BuildAction/BuildActionEntries")
+        self.assertIsNotNone(entries)
+        entry = ElementTree.SubElement(entries, "BuildActionEntry", {"buildForTesting": "YES"})
+        ElementTree.SubElement(
+            entry,
+            "BuildableReference",
+            {
+                "BuildableIdentifier": "primary",
+                "BlueprintIdentifier": blueprint_identifier,
+                "BuildableName": buildable_name,
+                "BlueprintName": blueprint_name,
+                "ReferencedContainer": "container:Runner.xcodeproj",
+            },
+        )
+        tree.write(scheme_path, encoding="utf-8", xml_declaration=True)
+
+    def move_runner_debug_bundle_outside_build_settings(self):
+        project_path = self.ios_project()
+        project = project_path.read_text(encoding="utf-8")
+        configuration_start = project.index("97C147061CF9000F007C117D /* Debug */ = {")
+        settings_start = project.index("buildSettings = {", configuration_start)
+        bundle_start = project.index("PRODUCT_BUNDLE_IDENTIFIER = com.example.italianDrivingApp;", settings_start)
+        bundle_line_start = project.rfind("\n", settings_start, bundle_start) + 1
+        bundle_line_end = project.index("\n", bundle_start) + 1
+        bundle_line = project[bundle_line_start:bundle_line_end]
+        project = project[:bundle_line_start] + project[bundle_line_end:]
+        settings_end = project.index("};", settings_start) + len("};")
+        project = project[:settings_end] + "\n" + bundle_line + project[settings_end:]
+        project_path.write_text(project, encoding="utf-8")
 
     def test_rejects_runner_scheme_node_compensated_by_testable_reference(self):
         scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
@@ -149,6 +182,17 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertTrue(any("ios/Runner/Info.plist: top-level plist value must be a dictionary" in failure for failure in failures))
         self.assertTrue(any("lib/main.dart: unable to read UTF-8 text" in failure for failure in failures))
 
+    def test_returns_friendly_failure_for_unknown_plist_encoding(self):
+        plist_path = self.root / "ios/Runner/Info.plist"
+        plist = plist_path.read_bytes()
+        self.assertIn(b"UTF-8", plist)
+        plist_path.write_bytes(plist.replace(b"UTF-8", b"unknown-branding-encoding", 1))
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("ios/Runner/Info.plist: invalid plist" in failure for failure in failures))
+
     def test_returns_friendly_failure_for_unknown_xml_encoding(self):
         manifest_path = self.root / "android/app/src/main/AndroidManifest.xml"
         manifest = manifest_path.read_text(encoding="utf-8")
@@ -212,26 +256,24 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertTrue(any("Runner Profile configuration block name" in failure for failure in failures))
 
-    def test_allows_other_target_scheme_reference_at_a_runner_path(self):
-        scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
-        scheme = scheme_path.read_text(encoding="utf-8")
-        marker = '               BlueprintName = "Runner"\n               ReferencedContainer = "container:Runner.xcodeproj">\n            </BuildableReference>'
-        additional = marker + '\n            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="331C80D4294CF70F00263BE5" BuildableName="RunnerTests.xctest" BlueprintName="RunnerTests" ReferencedContainer="container:Runner.xcodeproj">\n            </BuildableReference>'
-        self.assertIn(marker, scheme)
-        scheme_path.write_text(scheme.replace(marker, additional, 1), encoding="utf-8")
+    def test_rejects_bundle_identifier_outside_pbx_build_settings(self):
+        self.move_runner_debug_bundle_outside_build_settings()
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("Runner Debug bundle identifier" in failure for failure in failures))
+
+    def test_allows_other_target_second_build_action_entry(self):
+        self.add_build_action_entry("331C80D4294CF70F00263BE5", "RunnerTests.xctest", "RunnerTests")
 
         code, failures = self.run_verifier()
 
         self.assertEqual(code, 0)
         self.assertFalse(failures)
 
-    def test_rejects_duplicate_old_runner_scheme_reference(self):
-        scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
-        scheme = scheme_path.read_text(encoding="utf-8")
-        marker = '               BlueprintName = "Runner"\n               ReferencedContainer = "container:Runner.xcodeproj">\n            </BuildableReference>'
-        duplicate = marker + '\n            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="33CC10EC2044A3C60003C045" BuildableName="italian_driving_app.app" BlueprintName="Runner" ReferencedContainer="container:Runner.xcodeproj">\n            </BuildableReference>'
-        self.assertIn(marker, scheme)
-        scheme_path.write_text(scheme.replace(marker, duplicate, 1), encoding="utf-8")
+    def test_rejects_runner_identifier_with_legacy_name_and_old_buildable_name(self):
+        self.add_build_action_entry(RUNNER_BLUEPRINT_ID, "italian_driving_app.app", "LegacyRunner")
 
         code, failures = self.run_verifier()
 
@@ -262,7 +304,37 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertFalse(failures)
 
+    def test_ignores_dart_raw_triple_quoted_string_import(self):
+        source_path = self.root / "lib/Services/auth_service.dart"
+        raw_source = 'const ignoredRawImport = r"""\\nimport \'package:oldguida/ignored.dart\';\\n""";\n'
+        source_path.write_text(source_path.read_text(encoding="utf-8") + "\n" + raw_source, encoding="utf-8")
+
+        tokens = BrandingVerifier(self.root).dart_tokens("lib/Services/auth_service.dart", raw_source)
+        self.assertIn(("string", "\\nimport 'package:oldguida/ignored.dart';\\n", True), tokens)
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 0)
+        self.assertFalse(failures)
+
     def test_allows_declared_cupertino_icons_dependency(self):
+        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path.write_text(
+            "import 'package:cupertino_icons/cupertino_icons.dart';\n" + source_path.read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 0)
+        self.assertFalse(failures)
+
+    def test_allows_quoted_pubspec_dependency_key(self):
+        pubspec_path = self.root / "pubspec.yaml"
+        pubspec_path.write_text(
+            pubspec_path.read_text(encoding="utf-8").replace("  cupertino_icons:", '  "cupertino_icons":'),
+            encoding="utf-8",
+        )
         source_path = self.root / "lib/Services/auth_service.dart"
         source_path.write_text(
             "import 'package:cupertino_icons/cupertino_icons.dart';\n" + source_path.read_text(encoding="utf-8"),
@@ -287,12 +359,17 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertTrue(any("oldguida package import" in failure for failure in failures))
 
     def test_repeated_verify_calls_do_not_leak_failures(self):
-        first = verify(self.root)
-        second = verify(self.root)
+        first_success = verify(self.root)
+        manifest_path = self.root / "web/manifest.json"
+        original_manifest = manifest_path.read_text(encoding="utf-8")
+        manifest_path.write_text(original_manifest.replace('"name": "OldGuida"', '"name": "Wrong"'), encoding="utf-8")
+        failure = verify(self.root)
+        manifest_path.write_text(original_manifest, encoding="utf-8")
+        restored_success = verify(self.root)
 
-        self.assertTrue(first.ok)
-        self.assertTrue(second.ok)
-        self.assertEqual(first.failures, second.failures)
+        self.assertTrue(first_success.ok)
+        self.assertFalse(failure.ok)
+        self.assertTrue(restored_success.ok)
 
     def test_cli_reports_success_and_failure_exit_codes(self):
         command = [sys.executable, str(SOURCE_ROOT / "tools/branding/verify_branding.py"), "--root", str(self.root)]
