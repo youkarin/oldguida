@@ -124,7 +124,7 @@ jobs:
         allowUpdates: true
         removeArtifacts: true
         replacesArtifacts: true
-        makeLatest: true
+        makeLatest: false
         owner: youkarin
         repo: Oldguida_release
         commit: "main"
@@ -140,6 +140,7 @@ jobs:
           🚀 正式发布历史记录
         artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
         allowUpdates: true
+        makeLatest: true
         owner: youkarin
         repo: Oldguida_release
         commit: "main"
@@ -178,6 +179,7 @@ jobs:
           ⚠️ 开发预览版历史记录
         artifacts: "build/app/outputs/flutter-apk/GuidaGuru_v${{ env.VERSION_NAME }}.apk"
         allowUpdates: true
+        prerelease: true
         owner: youkarin
         repo: Oldguida_release
         commit: "main"
