@@ -1,9 +1,12 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:italian_driving_app/Services/keyword_translation_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 /// App-wide settings page.
 ///
@@ -13,13 +16,19 @@ import 'dart:convert';
 /// These values are persisted using [SharedPreferences] so that
 /// they can later be synced with a remote user profile or database.
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({
+    super.key,
+    this.keywordTranslationSettings,
+  });
+
+  final KeywordTranslationSettings? keywordTranslationSettings;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  late final KeywordTranslationSettings _keywordTranslationSettings;
   bool _showTranslation = true;
   bool _showExplanation = true;
   bool _immediateFeedback = false;
@@ -33,6 +42,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+    _keywordTranslationSettings = widget.keywordTranslationSettings ??
+        KeywordTranslationSettings.instance;
     _loadSettings();
     _loadVersion();
   }
@@ -130,33 +141,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final String apiUrl;
       if (_experiencePreview) {
         // Fetch list of releases (including pre-releases) if preview is enabled
-        apiUrl = 'https://api.github.com/repos/youkarin/Oldguida_release/releases?per_page=1';
+        apiUrl =
+            'https://api.github.com/repos/youkarin/Oldguida_release/releases?per_page=1';
       } else {
         // Fetch only the latest stable release
-        apiUrl = 'https://api.github.com/repos/youkarin/Oldguida_release/releases/latest';
+        apiUrl =
+            'https://api.github.com/repos/youkarin/Oldguida_release/releases/latest';
       }
 
       print('Checking updates from: $apiUrl');
-      
+
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
         final dynamic releaseData;
         if (_experiencePreview) {
-            // response body is a list
-            final List<dynamic> releases = json.decode(response.body);
-            if (releases.isEmpty) {
-                 if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('未找到任何发布版本')),
-                    );
-                 }
-                 return;
+          // response body is a list
+          final List<dynamic> releases = json.decode(response.body);
+          if (releases.isEmpty) {
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('未找到任何发布版本')),
+              );
             }
-            releaseData = releases[0];
+            return;
+          }
+          releaseData = releases[0];
         } else {
-            // response body is a single object
-            releaseData = json.decode(response.body);
+          // response body is a single object
+          releaseData = json.decode(response.body);
         }
 
         final String latestVersionTag = releaseData['tag_name'];
@@ -165,39 +178,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
         // Try to find the direct APK download URL in assets
         String downloadUrl = htmlUrl; // Fallback to htmlUrl
-        if (releaseData['assets'] != null && (releaseData['assets'] as List).isNotEmpty) {
-            final assets = releaseData['assets'] as List;
-            final apkAsset = assets.firstWhere(
-                (asset) => asset['name'].toString().endsWith('.apk'),
-                orElse: () => null,
-            );
-            if (apkAsset != null) {
-                downloadUrl = apkAsset['browser_download_url'];
-            }
+        if (releaseData['assets'] != null &&
+            (releaseData['assets'] as List).isNotEmpty) {
+          final assets = releaseData['assets'] as List;
+          final apkAsset = assets.firstWhere(
+            (asset) => asset['name'].toString().endsWith('.apk'),
+            orElse: () => null,
+          );
+          if (apkAsset != null) {
+            downloadUrl = apkAsset['browser_download_url'];
+          }
         }
 
         // Expected Tag Format: v1.0.0+42 OR v1.0.0
         // Parse the tag to extract version and build number
-        String cleanTag = latestVersionTag.replaceAll('v', ''); // 1.0.0+42 or 1.0.0-pre.42
+        String cleanTag =
+            latestVersionTag.replaceAll('v', ''); // 1.0.0+42 or 1.0.0-pre.42
         String latestVersionPart = '';
         String latestBuildPart = '0';
 
         if (cleanTag.contains('+')) {
-            final parts = cleanTag.split('+');
-            latestVersionPart = parts[0];
-            latestBuildPart = parts[1];
+          final parts = cleanTag.split('+');
+          latestVersionPart = parts[0];
+          latestBuildPart = parts[1];
         } else if (cleanTag.contains('-pre.')) {
-             // Handle our pre-release format: v1.0.0-pre.42
-             final parts = cleanTag.split('-pre.');
-             latestVersionPart = parts[0];
-             latestBuildPart = parts[1];
+          // Handle our pre-release format: v1.0.0-pre.42
+          final parts = cleanTag.split('-pre.');
+          latestVersionPart = parts[0];
+          latestBuildPart = parts[1];
         } else {
-            latestVersionPart = cleanTag;
+          latestVersionPart = cleanTag;
         }
-        
+
         // Check if new version is actually newer
         if (_isNewer(latestVersionPart, latestBuildPart)) {
-           _showUpdateDialog(latestVersionTag, downloadUrl, body);
+          _showUpdateDialog(latestVersionTag, downloadUrl, body);
         } else {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -214,55 +229,55 @@ class _SettingsScreenState extends State<SettingsScreen> {
             errorMsg += ' (未找到发布版本或仓库不存在)';
           }
           ScaffoldMessenger.of(context).showSnackBar(
-             SnackBar(content: Text(errorMsg)),
+            SnackBar(content: Text(errorMsg)),
           );
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text('检查更新出错: $e')),
+          SnackBar(content: Text('检查更新出错: $e')),
         );
       }
     }
   }
 
   bool _isNewer(String latestVersionPart, String latestBuildPart) {
-      // 1. Compare Version (e.g. 1.0.0 vs 1.0.1)
-      if (_compareVersions(latestVersionPart, _version) > 0) {
-          return true;
-      }
-      
-      // 2. If Version is equal, compare Build Number (e.g. 42 vs 41)
-      if (_compareVersions(latestVersionPart, _version) == 0) {
-          int latestBuild = int.tryParse(latestBuildPart) ?? 0;
-          int currentBuild = int.tryParse(_buildNumber) ?? 0;
-          if (latestBuild > currentBuild) {
-              return true;
-          }
-      }
+    // 1. Compare Version (e.g. 1.0.0 vs 1.0.1)
+    if (_compareVersions(latestVersionPart, _version) > 0) {
+      return true;
+    }
 
-      return false;
+    // 2. If Version is equal, compare Build Number (e.g. 42 vs 41)
+    if (_compareVersions(latestVersionPart, _version) == 0) {
+      int latestBuild = int.tryParse(latestBuildPart) ?? 0;
+      int currentBuild = int.tryParse(_buildNumber) ?? 0;
+      if (latestBuild > currentBuild) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   int _compareVersions(String v1, String v2) {
-      try {
-        List<String> parts1 = v1.split('.');
-        List<String> parts2 = v2.split('.');
+    try {
+      List<String> parts1 = v1.split('.');
+      List<String> parts2 = v2.split('.');
 
-        for (int i = 0; i < parts1.length && i < parts2.length; i++) {
-            int p1 = int.tryParse(parts1[i]) ?? 0;
-            int p2 = int.tryParse(parts2[i]) ?? 0;
-            if (p1 > p2) return 1;
-            if (p1 < p2) return -1;
-        }
-        
-        if (parts1.length > parts2.length) return 1;
-        if (parts1.length < parts2.length) return -1;
-        
-        return 0;
+      for (int i = 0; i < parts1.length && i < parts2.length; i++) {
+        int p1 = int.tryParse(parts1[i]) ?? 0;
+        int p2 = int.tryParse(parts2[i]) ?? 0;
+        if (p1 > p2) return 1;
+        if (p1 < p2) return -1;
+      }
+
+      if (parts1.length > parts2.length) return 1;
+      if (parts1.length < parts2.length) return -1;
+
+      return 0;
     } catch (e) {
-        return v1.compareTo(v2);
+      return v1.compareTo(v2);
     }
   }
 
@@ -302,11 +317,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _launchUrl(String urlString) async {
     final Uri url = Uri.parse(urlString);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-       if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('无法打开更新链接')),
-          );
-       }
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('无法打开更新链接')),
+        );
+      }
     }
   }
 
@@ -327,6 +342,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: const Text('显示解析'),
             value: _showExplanation,
             onChanged: _updateShowExplanation,
+          ),
+          ValueListenableBuilder<bool>(
+            valueListenable: _keywordTranslationSettings.enabled,
+            builder: (context, enabled, child) => SwitchListTile(
+              title: const Text('题目关键词翻译'),
+              subtitle: const Text('在意大利语题目中划线显示可点击词条'),
+              value: enabled,
+              onChanged: (value) {
+                unawaited(_keywordTranslationSettings.setEnabled(value));
+              },
+            ),
           ),
           SwitchListTile(
             title: const Text('立即提示正误'),
