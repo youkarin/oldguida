@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:italian_driving_app/models/question_model.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
+import 'package:italian_driving_app/Services/answer_advance_policy.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
 import 'package:italian_driving_app/Services/sync_service.dart';
 import 'package:italian_driving_app/utils/debug_utils.dart';
@@ -16,6 +17,7 @@ class ExamGeneral extends StatefulWidget {
   final bool immediateFeedback;
   final bool stayOnWrongAnswer;
   final bool collapsedMode;
+  final Future<int?> Function()? loadUser;
 
   const ExamGeneral({
     super.key,
@@ -26,6 +28,7 @@ class ExamGeneral extends StatefulWidget {
     required this.immediateFeedback,
     required this.stayOnWrongAnswer,
     this.collapsedMode = false,
+    this.loadUser,
   });
 
   @override
@@ -117,7 +120,13 @@ class _ExamGeneralState extends State<ExamGeneral> {
   }
 
   void _submitAnswer(bool answer) {
-    if (userAnswers[currentIndex] != null && !widget.immediateFeedback) return;
+    if (shouldLockAnsweredQuestion(
+      immediateFeedback: widget.immediateFeedback,
+      stayOnWrongAnswer: widget.stayOnWrongAnswer,
+      previousResult: answerResults[currentIndex],
+    )) {
+      return;
+    }
 
     final isCorrect = widget.questions[currentIndex].answer == (answer ? 1 : 0);
     setState(() {
@@ -125,8 +134,16 @@ class _ExamGeneralState extends State<ExamGeneral> {
       answerResults[currentIndex] = isCorrect;
     });
 
+    if (!shouldAutoAdvance(
+      immediateFeedback: widget.immediateFeedback,
+      stayOnWrongAnswer: widget.stayOnWrongAnswer,
+      isCorrect: isCorrect,
+    )) {
+      return;
+    }
+
     // 记录点击时的索引，防止快速点击导致的跳题
-    final int tappedIndex = currentIndex;
+    final tappedIndex = currentIndex;
     final delay = widget.immediateFeedback ? 600 : 300;
 
     Future.delayed(Duration(milliseconds: delay), () {
@@ -139,7 +156,8 @@ class _ExamGeneralState extends State<ExamGeneral> {
   }
 
   Future<void> _loadUser() async {
-    _userId = await AuthService().ensureLocalUser();
+    _userId =
+        await (widget.loadUser?.call() ?? AuthService().ensureLocalUser());
     _updateFavoriteStatus();
   }
 
