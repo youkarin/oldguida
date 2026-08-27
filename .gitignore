@@ -34,6 +34,17 @@ migrate_working_dir/
 /build/
 /.superpowers/
 
+# Local quiz review artifacts
+/assets/db/backup/
+/tools/review/out/
+/tools/review/revision_log.jsonl
+/tools/review/work/**/baseline/
+/tools/review/work/**/after/
+/tools/review/work/**/exports/
+/tools/review/work/**/verification.txt
+/tools/review/work/**/ch*_after.json
+/tools/review/work/prescreen_explicit_contradictions.txt
+
 # Symbolication related
 app.*.symbols
 

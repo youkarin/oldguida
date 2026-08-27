@@ -1,0 +1,75 @@
+{
+  "chapter": 10,
+  "slice": "ch10_sec464-474",
+  "section_ids": [
+    464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474
+  ],
+  "question_ids": [
+    3868, 3869, 3870, 3871, 3872, 3873, 3874, 3875, 3876, 3877,
+    3878, 3879, 3880, 3881, 3882, 3883, 3884, 3885, 3886, 3887,
+    3888, 3889, 3890, 3891, 3892, 3893, 3894, 3895, 3896, 3897,
+    3898, 3899, 3900, 3901, 3902, 3903, 3904, 3905, 3906, 3907,
+    3908, 3909, 3910, 3911, 3912, 3913, 3914, 3915, 3916, 3917,
+    3918, 3919, 3920, 3921, 3922, 3923, 3924, 3925, 3926, 3927,
+    3928, 3929, 3930, 3931, 3932, 3933, 3934, 3935, 3936, 3937,
+    3938, 3939, 3940, 3941, 3942, 3943, 3944, 3945, 3946, 3947,
+    3948, 3949, 3950, 3951, 3952, 3953, 3954, 3955
+  ],
+  "images": [
+    {
+      "section_id": 464,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\464.gif",
+      "observed": "白底黑边方形补充牌内画有多排密集排列的小汽车，车辆前后距离很小并形成长队，表示拥堵、排队或缓慢车流。"
+    },
+    {
+      "section_id": 465,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\465.gif",
+      "observed": "白底黑边横向补充牌右上方为大片灰色雨云，云下画有多组黑色斜向雨滴；图中没有车辆、车轮、水花、道路或落石。"
+    },
+    {
+      "section_id": 466,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\466.gif",
+      "observed": "蓝底黑边横向补充牌内并列画有两个大型白色雪花，用于表示低温下道路可能结冰的条件。"
+    },
+    {
+      "section_id": 467,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\467.gif",
+      "observed": "上方为红边白底三角形车辆打滑危险标志，内部画有倾斜汽车和两道弯曲轮迹；下方另配蓝底双白色雪花补充牌，组合表示因结冰而湿滑。"
+    },
+    {
+      "section_id": 468,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\468.gif",
+      "observed": "白底黑边方形补充牌内画有向左上方延伸的坡面，一辆货车在前、小汽车在后，两车之间有接触警示线，提醒上坡时可能遇到低速重型车辆并发生追尾风险。"
+    },
+    {
+      "section_id": 469,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\469.gif",
+      "observed": "上方红边白底三角形牌内为标有“10%”的黑色上坡坡面，下方配有货车在前、小汽车在后的坡道补充牌，组合提示陡坡和慢速货车风险。"
+    },
+    {
+      "section_id": 470,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\470.gif",
+      "observed": "白底黑边横向补充牌内，左侧拖车伸出吊臂并抬起右侧小汽车的前部，表示违规停放车辆可能被强制拖移。"
+    },
+    {
+      "section_id": 471,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\471.gif",
+      "observed": "上方是蓝底红边并带单条红色斜杠的禁止停放圆牌，下方配有拖车吊起小汽车的补充牌，表示禁停并实施强制移车。"
+    },
+    {
+      "section_id": 472,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\472.gif",
+      "observed": "图中有上下两块白底黑边文字附牌：A牌写单数“tornante”，B牌写“3 tornanti”；分别表示发卡弯性质和三个连续发卡弯。"
+    },
+    {
+      "section_id": 473,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\473.gif",
+      "observed": "白底黑边方形补充牌上方写有“Lun-Ven”和“21,00-4,00”，下方画有正在刷扫路面的扫路车，表示星期一至星期五21时至次日4时进行道路清扫。"
+    },
+    {
+      "section_id": 474,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\474.gif",
+      "observed": "图中A、B、C三块白底黑边交叉口附牌均以粗黑线表示优先道路、细黑线表示次要道路；A的优先道路直行，B和C的优先道路在路口向右弯曲，细支路连接位置不同。"
+    }
+  ]
+}

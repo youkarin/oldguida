@@ -1,0 +1,550 @@
+{
+  "slice": "ch14_sec607-625",
+  "reviewed": 139,
+  "items": [
+    {
+      "id": 4735,
+      "explanation": "说法错误。图中T是普通红色小汽车，路口未设优先标志，应遵守右方来车优先规则；正确顺序为R、A、T，T不能先于R。",
+      "note": "原解析把图中普通小汽车T误认为电车。"
+    },
+    {
+      "id": 4736,
+      "explanation": "说法错误。图中T是普通红色小汽车，其右方有A车，而A车又须让R车先行；正确顺序为R、A、T，T最后通过。",
+      "note": "原解析把图中普通小汽车T误认为电车。"
+    },
+    {
+      "id": 4737,
+      "explanation": "说法正确。图中没有主路、次路标志，三车应按右方来车优先规则通行；B车右方无车，因此最先通过。",
+      "note": "原解析虚构图中不存在的主干道和次干道。"
+    },
+    {
+      "id": 4738,
+      "explanation": "说法正确。图中没有优先标志，B车右方无车先行，随后T车右方解除占用，S车最后通过；正确顺序为B、T、S。",
+      "note": "原解析以图中不存在的主次道路论证顺序。"
+    },
+    {
+      "id": 4739,
+      "explanation": "说法正确。图中三车按右方来车优先规则形成B、T、S的通行顺序，因此S必须等待B和T通过后最后通行。",
+      "note": "原解析虚构S从次干道驶入主干道。"
+    },
+    {
+      "id": 4740,
+      "explanation": "说法错误。图中未设主次道路标志，按右方来车优先规则应由B先行、T随后、S最后，不能按S、B、T通行。",
+      "note": "原解析虽给出正确结论，但依据是图中不存在的主次道路。"
+    },
+    {
+      "id": 4741,
+      "explanation": "说法错误。图中B车右方无车，可以先行；T车必须等待B车通过，因此不是B给T让行。",
+      "note": "原解析虚构B和T位于同一主干道并相向行驶。"
+    },
+    {
+      "id": 4742,
+      "explanation": "说法错误。图中是无信号灯和优先标志、B、T、S三车轨迹交汇的路口；所有驾驶员接近路口时都应减速并保持谨慎，即使享有先行权也不能不减速。"
+    },
+    {
+      "id": 4743,
+      "explanation": "说法错误。图中B、T、S按右方来车优先规则依次通行，顺序为B、T、S；B和S不能同时进入路口。",
+      "note": "原解析以图中不存在的主次道路解释B、S关系。"
+    },
+    {
+      "id": 4744,
+      "explanation": "说法正确。图中L是普通蓝色小汽车，路面没有电车轨道；L车右方无车，按右方来车优先规则首先通过。",
+      "note": "原解析把普通小汽车L误认为有轨电车。"
+    },
+    {
+      "id": 4745,
+      "explanation": "说法正确。图中三辆普通汽车按右方来车优先规则依次为L、C、H；H须等待L和C通过，因此最后通行。",
+      "note": "原解析判定H并非最后，与answer=1相反。"
+    },
+    {
+      "id": 4746,
+      "explanation": "说法正确。图中没有电车轨道或优先标志，L车右方无车先行，随后C车通行，H车最后；L、C、H的顺序符合规则。",
+      "note": "原解析否定L、C、H顺序，与answer=1相反。"
+    },
+    {
+      "id": 4747,
+      "explanation": "说法正确。图中正确顺序是L、C、H，所以C确实在L之后、H之前通过。",
+      "note": "原解析称C必须在H之后通过，与answer=1相反。"
+    },
+    {
+      "id": 4748,
+      "explanation": "说法错误。图中L和C都是普通汽车，正确通行顺序为L、C、H；C应等待L通过，不能与L同时通行。",
+      "note": "原解析把普通小汽车L误认为有轨电车。"
+    },
+    {
+      "id": 4749,
+      "explanation": "说法错误。图中按右方来车优先规则应依次由L、C、H通过，不能按H、C、L通行。",
+      "note": "原解析错误地以L是电车作为论据。"
+    },
+    {
+      "id": 4750,
+      "explanation": "说法错误。图中L车右方无车，C车须等L，H车又须等C；正确顺序是L、C、H，而不是H、L、C。",
+      "note": "原解析把普通小汽车L误认为有轨电车。"
+    },
+    {
+      "id": 4751,
+      "explanation": "说法错误。图中正确顺序为L、C、H，C应先于H通过；L、H、C的顺序不符合右方来车优先规则。",
+      "note": "原解析肯定L、H、C顺序，与answer=0相反。"
+    },
+    {
+      "id": 4752,
+      "explanation": "说法错误。图中L、C、H均为普通汽车，按右方来车优先规则应依次为L、C、H，不能按C、H、L通行。",
+      "note": "原解析误认L为电车，并错误称C应让H先行。"
+    },
+    {
+      "id": 4753,
+      "explanation": "说法正确。图中R是普通黄色小汽车、D是红色货车、F是标有FILOBUS的无轨电车；按右方来车优先规则顺序为R、D、F，所以D在F之前通过。",
+      "note": "原解析把普通小汽车R误认为有轨电车。"
+    },
+    {
+      "id": 4754,
+      "explanation": "说法正确。图中没有有轨电车或轨道，三车按右方来车优先规则依次由R、D、F通过。",
+      "note": "原解析把普通小汽车R误认为有轨电车并据此赋予优先权。"
+    },
+    {
+      "id": 4755,
+      "explanation": "说法错误。图中F是受架空线约束的无轨电车，但无轨电车不因架空供电而享有有轨电车式优先权；按右方来车优先规则，F最后通过。",
+      "note": "原解析错误声称R是有轨电车并应先行。"
+    },
+    {
+      "id": 4756,
+      "explanation": "说法错误。图中R是普通小汽车，F才是无轨电车；按右方来车优先规则正确顺序为R、D、F，而不是F、R、D。",
+      "note": "原解析把R误认为有轨电车。"
+    },
+    {
+      "id": 4769,
+      "explanation": "说法正确。图中R、B、D、T都是普通道路车辆，按右方来车优先关系依次为R、B、D、T，因此T最后通过。",
+      "note": "原解析把图中普通蓝色小汽车T误认为电车。"
+    },
+    {
+      "id": 4770,
+      "explanation": "说法正确。图中没有电车或轨道；按各车右方受阻关系解除的先后，正确通行顺序是R、B、D、T。",
+      "note": "原解析错误地把T称为电车。"
+    },
+    {
+      "id": 4772,
+      "explanation": "说法正确。图中S是普通红色小汽车，并非电车；B车右方有S车，因此B必须让S先行。",
+      "note": "原解析把普通小汽车S误认为电车。"
+    },
+    {
+      "id": 4773,
+      "explanation": "说法正确。图中没有电车轨道，四辆普通汽车按右方来车优先规则依次为S、B、L、D。",
+      "note": "原解析把普通小汽车S误认为电车并据此赋予优先权。"
+    },
+    {
+      "id": 4775,
+      "explanation": "说法错误。图中S是普通小汽车，正确顺序为S、B、L、D；S和D不能作为第一组同时通过。",
+      "note": "原解析把普通小汽车S误认为电车。"
+    },
+    {
+      "id": 4777,
+      "explanation": "说法正确。图中E车位于C车右方，按右方来车优先规则，C必须等待E通过。",
+      "note": "原解析把并非相向的E、C描述成左转车与对向直行车。"
+    },
+    {
+      "id": 4783,
+      "explanation": "说法错误。图中E车位于C车右方，C必须让E先行；两车不能同时进入其虚线轨迹相交的区域。",
+      "note": "原解析错误描述E、C为对向车辆。"
+    },
+    {
+      "id": 4784,
+      "explanation": "说法正确。图中L是右侧驶来的普通黑色小汽车，其右方无车，因此按右方来车优先规则首先通过。",
+      "note": "原解析虚构先行权僵局，并称L左转进入中心等待。"
+    },
+    {
+      "id": 4785,
+      "explanation": "说法正确。图中L先行，随后同一入口的A、C可同时通过，D须等待它们，因此D最后通行。",
+      "note": "原解析称L最后完成通行，与answer=1相反。"
+    },
+    {
+      "id": 4786,
+      "explanation": "说法正确。图中L通过后，A和C从同一入口的两条并列路线驶入，轨迹互不冲突，可以同时通过；D最后通行。",
+      "note": "原解析否定A、C同时通过，与answer=1相反。"
+    },
+    {
+      "id": 4787,
+      "explanation": "说法正确。图中L先行后，A与C可以同时通过，而D须等待从其右方驶来的车辆，因此A先于D。",
+      "note": "原解析称A必须让D先行，与answer=1相反。"
+    },
+    {
+      "id": 4788,
+      "explanation": "说法错误。图中L、D、A、C四车的虚线轨迹在路口内交汇，通行先后由先行权规则及轨迹冲突决定，与车辆速度快慢无关。"
+    },
+    {
+      "id": 4789,
+      "explanation": "说法错误。图中L先行，A与C随后同时通过，D最后；A不是最后通过的车辆。",
+      "note": "原解析给出错误顺序并称L最后。"
+    },
+    {
+      "id": 4790,
+      "explanation": "说法错误。图中正确次序是L先行、A与C同时通过、D最后，不能按C、A、D、L依次通行。",
+      "note": "原解析虽否定题干，却给出错误的依次通行路线。"
+    },
+    {
+      "id": 4791,
+      "explanation": "说法错误。图中L应首先完整通过，随后A与C同时通过，D最后；C、L、A、D的顺序不正确。",
+      "note": "原解析错误称L先进入路口中心后等待。"
+    },
+    {
+      "id": 4792,
+      "explanation": "说法错误。图中L先行，A与C可以同时通过，D须最后通行；D不能与L同时且先于A通过。",
+      "note": "原解析使用了错误的C、A、D、L顺序。"
+    },
+    {
+      "id": 4794,
+      "explanation": "说法正确。图中L是普通黑色小汽车并首先通过；此后A与C的并列轨迹互不冲突，可以同时穿过路口。",
+      "note": "原解析虚构D为有轨电车，并否定A、C在L后同时通过。"
+    },
+    {
+      "id": 4795,
+      "explanation": "说法正确。图中L先行后，A与C可以同时通过，D必须等待从其右方驶来的车辆；因此A相对于D有先行权。",
+      "note": "原解析称D是有轨电车且A必须让D，与answer=1相反。"
+    },
+    {
+      "id": 4796,
+      "explanation": "说法错误。A只需先等待L通过，随后可与C同时通行，并不需要给D让行；D才是最后通过的车辆。",
+      "note": "原解析肯定A必须让所有车辆，与answer=0相反。"
+    },
+    {
+      "id": 4797,
+      "explanation": "说法错误。图中L先行，A与C随后同时通过，D最后；A并非最后通过。",
+      "note": "原解析肯定A最后通过，与answer=0相反。"
+    },
+    {
+      "id": 4799,
+      "explanation": "说法正确。图中B车必须等待位于其右方的D车，而D车又须等待从右侧入口驶来的R、L两车；因此B只能在图中其余车辆完成通行后进入路口。",
+      "note": "原解析列举完整顺序时遗漏图中L车。"
+    },
+    {
+      "id": 4801,
+      "explanation": "说法正确。图中B车须让右方的D车，D车又须先让右侧入口的R、L两车通行；因此B必然在R和D之后进入路口。",
+      "note": "原解析把完整顺序写成R、D、B，遗漏图中L车。"
+    },
+    {
+      "id": 4802,
+      "explanation": "说法错误。图中B和R沿相反方向的平行轨迹可以同时通过，但B车右方有D车，必须让D先行，因此B不能在D之前进入路口。",
+      "note": "原解析错误称B、R轨迹相交；题干错误的实际原因是B须让右方D车，不能先于D。"
+    },
+    {
+      "id": 4806,
+      "explanation": "说法正确。图中没有主次道路标志，按右方来车优先规则，A车须等待位于其右方的R车，因此A在R之后通过。",
+      "note": "原解析错误地把A、R描述为左转车与对向直行车。"
+    },
+    {
+      "id": 4807,
+      "explanation": "说法正确。图中没有主路标志，R车右方无车，按右方来车优先规则无需给其他车辆让行。",
+      "note": "原解析虚构R在主路上。"
+    },
+    {
+      "id": 4808,
+      "explanation": "说法正确。图中C车右方有A车，按右方来车优先规则，C必须让A先行。",
+      "note": "原解析虚构C来自次要道路、A位于主路。"
+    },
+    {
+      "id": 4809,
+      "explanation": "说法正确。图中无优先标志，R车右方无车先行，A车随后，C车最后；正确顺序为R、A、C。",
+      "note": "原解析以图中不存在的主次道路论证顺序。"
+    },
+    {
+      "id": 4810,
+      "explanation": "说法错误。图中C车右方有A车，必须让A先行；正确顺序为R、A、C，C并非无需让行。",
+      "note": "原解析虚构C从次要道路进入主路。"
+    },
+    {
+      "id": 4811,
+      "explanation": "说法错误。图中C车右方有A车，须等待A车，而A车又须等待R车；三车按R、A、C依次通过，R与C不能同时通行。",
+      "note": "原解析以图中不存在的主路关系论证。"
+    },
+    {
+      "id": 4812,
+      "explanation": "说法错误。图中C车须让其右方的A车先行，正确顺序为R、A、C，而不是R、C、A。",
+      "note": "原解析虚构A在主路、C来自次路。"
+    },
+    {
+      "id": 4822,
+      "explanation": "说法正确。图中P是普通蓝色小汽车，没有警灯或警车标识；B车右方有P车，按右方来车优先规则必须等待P通过。",
+      "note": "原解析把普通小汽车P误认为开启警灯的警车。"
+    },
+    {
+      "id": 4823,
+      "explanation": "说法正确。图中P是普通小汽车，其右方无车，按右方来车优先规则首先通过。",
+      "note": "原解析虚构P为执行紧急任务的警车。"
+    },
+    {
+      "id": 4824,
+      "explanation": "说法正确。图中三车均为普通车辆，P车右方无车先行，B车随后，C车最后；正确顺序为P、B、C。",
+      "note": "原解析以P是警车作为先行依据。"
+    },
+    {
+      "id": 4825,
+      "explanation": "说法正确。图中C车右方有从上方驶来的B车，因此其右方被占用，必须等待B车。",
+      "note": "原解析误称P为警车并错误描述P占据C的右方。"
+    },
+    {
+      "id": 4826,
+      "explanation": "说法错误。图中正确顺序为P、B、C，B第二个通过，最后通过的是C。",
+      "note": "原解析依赖P是警车的错误图像判断。"
+    },
+    {
+      "id": 4827,
+      "explanation": "说法错误。图中B车位于C车右方，C必须等待B；正确顺序为P、B、C，而不是P、C、B。",
+      "note": "原解析虚构警车P阻挡C。"
+    },
+    {
+      "id": 4828,
+      "explanation": "说法错误。图中按右方来车优先规则应依次为P、B、C，C不能与P同时通过。",
+      "note": "原解析把普通小汽车P误认为享有优先权的警车。"
+    },
+    {
+      "id": 4829,
+      "explanation": "说法错误。图中P车右方无车，可首先进入并连续完成图示路线，没有必须在路口中心停车的理由。",
+      "note": "原解析把P误认为享有绝对优先权的紧急车辆。"
+    },
+    {
+      "id": 4830,
+      "explanation": "说法正确。图中D车右方无车，按右方来车优先规则首先通过；完整顺序为D、E、S、A。",
+      "note": "原解析称D必须让E且不能先行，与answer=1相反。"
+    },
+    {
+      "id": 4831,
+      "explanation": "说法正确。图中D车右方无车，按右方来车优先规则无需给其他车辆让行，并首先通过。",
+      "note": "原解析称D必须给E和A让行，与answer=1相反。"
+    },
+    {
+      "id": 4832,
+      "explanation": "说法正确。图中D车右方无车并先于其他车辆通过，A车不对D构成右方来车，因此D无须给A让行。",
+      "note": "原解析称D左转必须让A，与answer=1相反。"
+    },
+    {
+      "id": 4833,
+      "explanation": "说法错误。图中D车右方无车，应第一个通过；正确顺序为D、E、S、A，D不是第三个。",
+      "note": "原解析错误称E先行且D顺位靠后。"
+    },
+    {
+      "id": 4834,
+      "explanation": "说法错误。图中D车右方无车，不需要给E、S或A让行，而是首先通过；因此它并非必须让所有车辆。",
+      "note": "原解析虚构图中不存在的L车，并错误称D须让E、A。"
+    },
+    {
+      "id": 4835,
+      "explanation": "说法错误。图中E位于D车左方而非右方，D车右方无车并首先通过，所以D没有义务给E让行。",
+      "note": "原解析肯定D必须让E，与answer=0相反。"
+    },
+    {
+      "id": 4836,
+      "explanation": "说法正确。图中D先行，随后E、S依次通过，A须等待从其右方驶来的E和S，因此A最后通过。",
+      "note": "原解析把普通黄色小汽车S误认为电车，并错误描述让行关系。"
+    },
+    {
+      "id": 4837,
+      "explanation": "说法正确。图中E和S均从A车右方驶来，A必须让两车先行；S是普通黄色小汽车，并非电车。",
+      "note": "原解析把S误认为电车，并把E描述成对向直行车。"
+    },
+    {
+      "id": 4838,
+      "explanation": "说法正确。图中完整通行顺序为D、E、S、A，因此A进入路口前必须依次等待D、E、S通过。",
+      "note": "原解析声称实际顺序为S、E、D，却仍肯定题干，与answer=1冲突。"
+    },
+    {
+      "id": 4839,
+      "explanation": "说法错误。图中A车右方有从上方驶来的E、S两车，右方并非空闲；A必须等待它们通过。",
+      "note": "原解析先肯定右方空闲，随后又错误称D位于A右方。"
+    },
+    {
+      "id": 4840,
+      "explanation": "说法错误。图中D车首先通过，A车最后通过，两车不能同时进入路口。",
+      "note": "原解析首句肯定A与D同时通过，与answer=0相反。"
+    },
+    {
+      "id": 4841,
+      "explanation": "说法错误。图中正确顺序为D、E、S、A，A必须在D之后而非之前通过。",
+      "note": "原解析虽判错，但错误地把D描述为A的右方来车。"
+    },
+    {
+      "id": 4842,
+      "explanation": "说法错误。图中A车必须让从其右方驶来的E和S先行，让行义务取决于来车方位和路线冲突，不取决于对方直行还是转弯。",
+      "note": "原解析把普通小汽车S误认为电车，并错误描述E为对向车。"
+    },
+    {
+      "id": 4843,
+      "explanation": "说法正确。图中没有主次道路标志，按右方来车优先规则，A先行、E随后、B最后；所以E在A之后，B在E之后。",
+      "note": "原解析虚构主干道和次要道路。"
+    },
+    {
+      "id": 4844,
+      "explanation": "说法正确。图中A车右方无车，按右方来车优先规则无需给E或B让行，并首先通过。",
+      "note": "原解析虚构A位于主干道。"
+    },
+    {
+      "id": 4845,
+      "explanation": "说法正确。图中B车右方有E车，按右方来车优先规则必须让E先行，因此E相对于B有先行权。",
+      "note": "原解析虚构E在主干道、B来自次要道路。"
+    },
+    {
+      "id": 4846,
+      "explanation": "说法正确。图中A车右方无车先行，E车随后，B车最后；E确实在A之后、B之前通过。",
+      "note": "原解析以图中不存在的主次道路和对向关系论证。"
+    },
+    {
+      "id": 4847,
+      "explanation": "说法正确。图中B车须让其右方的E车，而E又须让A车；正确顺序为A、E、B，所以B最后通过。",
+      "note": "原解析虚构B从次要道路驶入主干道。"
+    },
+    {
+      "id": 4848,
+      "explanation": "说法错误。图中B车右方有E车，必须让E先行；正确顺序为A、E、B，B并非无需让行。",
+      "note": "原解析虚构主次道路关系。"
+    },
+    {
+      "id": 4849,
+      "explanation": "说法错误。图中A车右方无车并首先通过，无须给B车让行。",
+      "note": "原解析虚构A在主干道、B来自次要道路。"
+    },
+    {
+      "id": 4850,
+      "explanation": "说法错误。图中E车位于B车右方，B必须让E先行；不能认为B无须给E让行。",
+      "note": "原解析以图中不存在的主次道路论证。"
+    },
+    {
+      "id": 4856,
+      "explanation": "说法错误。图中S车右方无车，首先通过；S通过后，N车位于C车右方并先于C，正确顺序为S、N、C，不是C、N、S。",
+      "note": "原解析错误地把S、N都描述为C的右方来车。"
+    },
+    {
+      "id": 4858,
+      "explanation": "说法错误。图中C车右方是N车，不是S车；N又须等待右方无车的S先行，因此C最后通过，不能第一个通过。",
+      "note": "原解析把C车右方车辆错认成S。"
+    },
+    {
+      "id": 4859,
+      "explanation": "说法正确。图中A车右方无车，按右方来车优先规则首先通过；正确顺序为A、C、L。",
+      "note": "原解析称A不能第一个通过，与answer=1相反。"
+    },
+    {
+      "id": 4860,
+      "explanation": "说法正确。图中A车位于C车右方，按右方来车优先规则，C必须让A先行。",
+      "note": "原解析颠倒A、C让行关系，与answer=1相反。"
+    },
+    {
+      "id": 4861,
+      "explanation": "说法正确。图中A车先行，随后C车，L车须等待C车并最后通过。",
+      "note": "原解析称L应第一个通过，与answer=1相反。"
+    },
+    {
+      "id": 4862,
+      "explanation": "说法正确。图中A车右方无车先行，C车在A之后，L车须让C车；正确顺序为A、C、L。",
+      "note": "原解析给出L、C、A顺序，与answer=1相反。"
+    },
+    {
+      "id": 4863,
+      "explanation": "说法错误。图中A车右方无车并首先通过，无须等待C或L；正确顺序为A、C、L。",
+      "note": "原解析肯定A必须等待L和C，与answer=0相反。"
+    },
+    {
+      "id": 4864,
+      "explanation": "说法错误。图中L车右方有C车，必须让C先行；L最后通过，不是第一个。",
+      "note": "原解析肯定L第一个通过，与answer=0相反。"
+    },
+    {
+      "id": 4865,
+      "explanation": "说法错误。图中按右方来车优先规则应依次为A、C、L，L、C、A的顺序不正确。",
+      "note": "原解析肯定L、C、A顺序，与answer=0相反。"
+    },
+    {
+      "id": 4866,
+      "explanation": "说法错误。图中A先行后，C车先于L车通过；C不需要等待L，反而是L须让C先行。",
+      "note": "原解析肯定C必须等待L，与answer=0相反。"
+    }
+  ],
+  "severe": [
+    { "id": 4735, "type": "image_contradiction", "detail": "607.gif中的T是普通红色小汽车，原解析却称其为电车。" },
+    { "id": 4736, "type": "image_contradiction", "detail": "607.gif中的T是普通红色小汽车，原解析却按电车解释。" },
+    { "id": 4737, "type": "image_contradiction", "detail": "608.gif没有主次道路标志，原解析虚构B、T在主干道而S在次干道。" },
+    { "id": 4738, "type": "image_contradiction", "detail": "608.gif没有主次道路标志，原解析以虚构的道路等级解释顺序。" },
+    { "id": 4739, "type": "image_contradiction", "detail": "608.gif没有主次道路标志，原解析虚构S从次干道驶入主干道。" },
+    { "id": 4740, "type": "image_contradiction", "detail": "608.gif没有主次道路标志，原解析依据虚构的主次道路关系。" },
+    { "id": 4741, "type": "image_contradiction", "detail": "608.gif没有主干道，B和T也不是原解析所述的同一路线相向车辆。" },
+    { "id": 4743, "type": "image_contradiction", "detail": "608.gif没有主次道路标志，原解析以虚构道路等级解释B、S关系。" },
+    { "id": 4744, "type": "image_contradiction", "detail": "609.gif中的L是普通蓝色小汽车且无轨道，原解析误认其为有轨电车。" },
+    { "id": 4745, "type": "answer_contradiction", "detail": "answer=1，原解析却否定H最后通过并称C最后。" },
+    { "id": 4746, "type": "answer_contradiction", "detail": "answer=1，原解析却否定L、C、H的题干顺序。" },
+    { "id": 4747, "type": "answer_contradiction", "detail": "answer=1，原解析却称C必须在H之后通过。" },
+    { "id": 4748, "type": "image_contradiction", "detail": "609.gif中的L是普通小汽车，原解析却称其为电车。" },
+    { "id": 4749, "type": "image_contradiction", "detail": "609.gif中的L不是电车，原解析以电车优先作为核心依据。" },
+    { "id": 4750, "type": "image_contradiction", "detail": "609.gif中的L不是电车，原解析以电车优先作为核心依据。" },
+    { "id": 4751, "type": "answer_contradiction", "detail": "answer=0，原解析却明确肯定L、H、C的顺序允许。" },
+    { "id": 4752, "type": "image_contradiction", "detail": "609.gif中的L不是电车，且原解析颠倒C与H的先后关系。" },
+    { "id": 4753, "type": "image_contradiction", "detail": "610.gif中的R是普通黄色小汽车，原解析误认其为有轨电车。" },
+    { "id": 4754, "type": "image_contradiction", "detail": "610.gif中的R是普通小汽车且无轨道，原解析误认其为有轨电车。" },
+    { "id": 4755, "type": "image_contradiction", "detail": "610.gif中F是无轨电车、R是普通小汽车，原解析却虚构R为有轨电车。" },
+    { "id": 4756, "type": "image_contradiction", "detail": "610.gif中的R不是电车，原解析按有轨电车优先解释。" },
+    { "id": 4769, "type": "image_contradiction", "detail": "612.gif中的T是普通蓝色小汽车，原解析误称其为电车。" },
+    { "id": 4770, "type": "image_contradiction", "detail": "612.gif中没有电车或轨道，原解析误称T为电车。" },
+    { "id": 4772, "type": "image_contradiction", "detail": "613.gif中的S是普通红色小汽车，原解析误认其为电车。" },
+    { "id": 4773, "type": "image_contradiction", "detail": "613.gif中的S不是电车，原解析按电车优先解释。" },
+    { "id": 4775, "type": "image_contradiction", "detail": "613.gif中的S不是电车，原解析以电车优先作为依据。" },
+    { "id": 4777, "type": "image_contradiction", "detail": "614.gif中的E、C并非对向直行车与左转车，原解析误述图中方位。" },
+    { "id": 4783, "type": "image_contradiction", "detail": "614.gif中的E、C并非原解析所述的相向车辆。" },
+    { "id": 4784, "type": "image_contradiction", "detail": "615.gif中L直行且可先行，原解析虚构L左转进入中心等待。" },
+    { "id": 4785, "type": "answer_contradiction", "detail": "answer=1，原解析却称D不是最后、L才最后。" },
+    { "id": 4786, "type": "answer_contradiction", "detail": "answer=1，原解析却否定A、C在L之后同时通过。" },
+    { "id": 4787, "type": "answer_contradiction", "detail": "answer=1，原解析却称D对A有先行权。" },
+    { "id": 4789, "type": "image_contradiction", "detail": "615.gif正确顺序为L先、A与C同时、D最后，原解析却称L最后。" },
+    { "id": 4790, "type": "image_contradiction", "detail": "615.gif中A与C同时通过，原解析却给出依次通行的错误路线。" },
+    { "id": 4791, "type": "image_contradiction", "detail": "615.gif中L先完整通过，原解析却称L进入中心后等待。" },
+    { "id": 4792, "type": "image_contradiction", "detail": "615.gif正确次序为L先、A与C同时、D最后，原解析采用错误顺序。" },
+    { "id": 4794, "type": "answer_contradiction", "detail": "answer=1，原解析虚构D为电车并否定A、C在L后同时通过。" },
+    { "id": 4795, "type": "answer_contradiction", "detail": "answer=1，原解析称A必须给D让行。" },
+    { "id": 4796, "type": "answer_contradiction", "detail": "answer=0，原解析明确肯定A必须给所有车辆让行。" },
+    { "id": 4797, "type": "answer_contradiction", "detail": "answer=0，原解析明确肯定A最后通过。" },
+    { "id": 4799, "type": "image_contradiction", "detail": "617.gif中明确有L车，原解析列举所谓完整顺序时将其遗漏。" },
+    { "id": 4801, "type": "image_contradiction", "detail": "617.gif中明确有L车，原解析把完整顺序写成R、D、B而遗漏L。" },
+    { "id": 4802, "type": "image_contradiction", "detail": "617.gif中B、R沿相反方向的平行轨迹不冲突，原解析却称两车轨迹相交。" },
+    { "id": 4806, "type": "image_contradiction", "detail": "618.gif没有主次道路，A、R的实际方位也不是原解析所述的对向关系。" },
+    { "id": 4807, "type": "image_contradiction", "detail": "618.gif没有主路标志，原解析虚构R在主路上。" },
+    { "id": 4808, "type": "image_contradiction", "detail": "618.gif没有主次道路，原解析虚构C从次路进入而A在主路。" },
+    { "id": 4809, "type": "image_contradiction", "detail": "618.gif没有主次道路，原解析以虚构道路等级解释顺序。" },
+    { "id": 4810, "type": "image_contradiction", "detail": "618.gif没有主次道路，原解析虚构C从次路进入。" },
+    { "id": 4811, "type": "image_contradiction", "detail": "618.gif没有主路，原解析以虚构的主路关系论证。" },
+    { "id": 4812, "type": "image_contradiction", "detail": "618.gif没有主次道路，原解析虚构A在主路、C来自次路。" },
+    { "id": 4822, "type": "image_contradiction", "detail": "620.gif中的P是无警灯、无警车标识的普通蓝色小汽车。" },
+    { "id": 4823, "type": "image_contradiction", "detail": "620.gif中的P不是执行紧急任务的警车。" },
+    { "id": 4824, "type": "image_contradiction", "detail": "620.gif中的P是普通小汽车，原解析按警车优先解释。" },
+    { "id": 4825, "type": "image_contradiction", "detail": "620.gif中占据C车右方的是B车，原解析却称是警车P。" },
+    { "id": 4826, "type": "image_contradiction", "detail": "620.gif中的P不是警车，原解析依赖错误车辆身份。" },
+    { "id": 4827, "type": "image_contradiction", "detail": "620.gif中的P不是警车，原解析虚构P阻挡C。" },
+    { "id": 4828, "type": "image_contradiction", "detail": "620.gif中的P不是享有优先权的警车。" },
+    { "id": 4829, "type": "image_contradiction", "detail": "620.gif中的P是普通小汽车，原解析误认为绝对优先的紧急车辆。" },
+    { "id": 4830, "type": "answer_contradiction", "detail": "answer=1，原解析却明确否定D第一个通过。" },
+    { "id": 4831, "type": "answer_contradiction", "detail": "answer=1，原解析却称D必须给E和A让行。" },
+    { "id": 4832, "type": "answer_contradiction", "detail": "answer=1，原解析却称D必须给A让行。" },
+    { "id": 4833, "type": "image_contradiction", "detail": "621.gif中D第一个通过，原解析却称E先行且D顺位靠后。" },
+    { "id": 4834, "type": "image_contradiction", "detail": "621.gif没有L车，且D实际无需给其他车辆让行。" },
+    { "id": 4835, "type": "answer_contradiction", "detail": "answer=0，原解析却明确肯定D必须让E。" },
+    { "id": 4836, "type": "image_contradiction", "detail": "622.gif中的S是普通黄色小汽车，原解析误认为电车并错误描述次序。" },
+    { "id": 4837, "type": "image_contradiction", "detail": "622.gif中的S不是电车，E也不是A的对向车。" },
+    { "id": 4838, "type": "answer_contradiction", "detail": "answer=1且题干明确顺序D、E、S，原解析却称实际为S、E、D。" },
+    { "id": 4839, "type": "image_contradiction", "detail": "622.gif中A右方是E、S，原解析先称右方空闲又误指D在右方。" },
+    { "id": 4840, "type": "answer_contradiction", "detail": "answer=0，原解析首句却肯定A与D同时通过。" },
+    { "id": 4841, "type": "image_contradiction", "detail": "622.gif中D不是A的右方来车，且实际顺序为D、E、S、A。" },
+    { "id": 4842, "type": "image_contradiction", "detail": "622.gif中的S不是电车，E也不是A的对向车。" },
+    { "id": 4843, "type": "image_contradiction", "detail": "623.gif没有主次道路标志，原解析虚构道路等级和相向关系。" },
+    { "id": 4844, "type": "image_contradiction", "detail": "623.gif没有主干道，原解析虚构A在主路。" },
+    { "id": 4845, "type": "image_contradiction", "detail": "623.gif没有主次道路，原解析虚构E在主路、B来自次路。" },
+    { "id": 4846, "type": "image_contradiction", "detail": "623.gif没有主次道路，A和E也不是原解析所述的对向车辆。" },
+    { "id": 4847, "type": "image_contradiction", "detail": "623.gif没有次要道路，原解析虚构B从次路进入主路。" },
+    { "id": 4848, "type": "image_contradiction", "detail": "623.gif没有主次道路标志，原解析虚构B来自次要道路。" },
+    { "id": 4849, "type": "image_contradiction", "detail": "623.gif没有主次道路，原解析虚构A、B的道路等级。" },
+    { "id": 4850, "type": "image_contradiction", "detail": "623.gif没有主次道路，原解析以虚构道路等级论证。" },
+    { "id": 4856, "type": "image_contradiction", "detail": "624.gif中C车直接须让的是其右方N车，S不在C车右方；原解析错误描述图中方位。" },
+    { "id": 4858, "type": "image_contradiction", "detail": "624.gif中C车右方是N车，原解析却称是S车。" },
+    { "id": 4859, "type": "answer_contradiction", "detail": "answer=1，原解析却明确称A不能第一个通过。" },
+    { "id": 4860, "type": "answer_contradiction", "detail": "answer=1，原解析却称A必须给C让行。" },
+    { "id": 4861, "type": "answer_contradiction", "detail": "answer=1，原解析却称L应第一个而非最后通过。" },
+    { "id": 4862, "type": "answer_contradiction", "detail": "answer=1，原解析却给出L、C、A的相反顺序。" },
+    { "id": 4863, "type": "answer_contradiction", "detail": "answer=0，原解析却明确肯定A须等待L和C。" },
+    { "id": 4864, "type": "answer_contradiction", "detail": "answer=0，原解析却明确肯定L第一个通过。" },
+    { "id": 4865, "type": "answer_contradiction", "detail": "answer=0，原解析却明确肯定L、C、A顺序。" },
+    { "id": 4866, "type": "answer_contradiction", "detail": "answer=0，原解析却明确肯定C须等待L。" }
+  ]
+}

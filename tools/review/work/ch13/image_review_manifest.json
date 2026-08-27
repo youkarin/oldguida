@@ -1,0 +1,261 @@
+{
+  "chapter": 13,
+  "section_ids": [
+    525,
+    526,
+    527,
+    528,
+    529,
+    530,
+    531,
+    532,
+    533,
+    534,
+    535,
+    536,
+    537,
+    538,
+    542,
+    543,
+    544,
+    545,
+    548,
+    551,
+    555,
+    556,
+    557,
+    558,
+    559,
+    560,
+    563,
+    569,
+    570,
+    587,
+    588,
+    589,
+    593
+  ],
+  "question_ids": [
+    4359,
+    4360,
+    4361,
+    4362,
+    4363,
+    4364,
+    4365,
+    4366,
+    4367,
+    4368,
+    4369,
+    4370,
+    4371,
+    4372,
+    4373,
+    4374,
+    4375,
+    4376,
+    4377,
+    4390,
+    4391,
+    4392,
+    4393,
+    4394,
+    4413,
+    4426,
+    4445,
+    4446,
+    4447,
+    4448,
+    4449,
+    4450,
+    4453,
+    4486,
+    4487,
+    4488,
+    4489,
+    4490,
+    4491,
+    4492,
+    4493,
+    4494,
+    4495,
+    4496,
+    4497,
+    4498,
+    4499,
+    4500,
+    4501,
+    4502,
+    4592,
+    4593,
+    4594,
+    4620
+  ],
+  "images": [
+    {
+      "section_id": 525,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\525.gif",
+      "observed": "灰色双向行车道由一条白色中央虚线分成两个相反方向的车道，上下两侧均以连续白色边缘线封边；没有中央分隔带。"
+    },
+    {
+      "section_id": 526,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\526.gif",
+      "observed": "灰色双向行车道只有两个相反方向的车道，中央为白色虚线、两侧为连续边缘线；中央虚线在图中部留有较长间隔。"
+    },
+    {
+      "section_id": 527,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\527.gif",
+      "observed": "道路由中央狭窄分隔带分为上下两条独立行车道，每条行车道含A、B两条车道；A位于外侧，B靠近中央分隔带。"
+    },
+    {
+      "section_id": 528,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\528.gif",
+      "observed": "竖向道路中央有分隔设施，两侧机动车行车道各含两条车道；最外侧另有画着白色自行车图案、以黄色实线与机动车道分隔的自行车道。"
+    },
+    {
+      "section_id": 529,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\529.gif",
+      "observed": "一条灰色行车道由中央白色虚线分成两个相反方向的车道，上下边缘均为连续白线，表示双向两车道且无中央分隔带。"
+    },
+    {
+      "section_id": 530,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\530.gif",
+      "observed": "一条未设中央分隔带的灰色双向行车道，中央白色虚线分隔两个相反方向的车道，两侧为连续边缘线。"
+    },
+    {
+      "section_id": 531,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\531.gif",
+      "observed": "灰色双向行车道只有两个车道，中央白色虚线分隔相反方向交通，行车道两侧由连续白色边缘线界定。"
+    },
+    {
+      "section_id": 532,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\532.gif",
+      "observed": "一条行车道横向并列三条车道，自下而上标为A、B、C，车道之间均为白色虚线；题组将A、C作为两方向正常车道，B为中央共用超车车道。"
+    },
+    {
+      "section_id": 533,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\533.gif",
+      "observed": "灰色行车道含三条并列车道，自下而上标为A、B、C并由白色虚线分隔；中间B车道位于两个方向正常车道之间。"
+    },
+    {
+      "section_id": 534,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\534.gif",
+      "observed": "道路由中央双实线式分隔区域划成上下两条独立行车道，每条行车道内部以一条白色虚线分成两条同向车道。"
+    },
+    {
+      "section_id": 535,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\535.gif",
+      "observed": "中央分隔区域两侧各有一条独立行车道，每条行车道内有两道白色虚线，形成三条同向车道。"
+    },
+    {
+      "section_id": 536,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\536.gif",
+      "observed": "道路由中央狭窄分隔带分成两条独立行车道，每条行车道含A、B两条车道；A在外侧，B紧邻中央分隔带。"
+    },
+    {
+      "section_id": 537,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\537.gif",
+      "observed": "中央狭窄分隔带把道路分成上下两条独立行车道，每条行车道内有两道白色虚线，形成三条同向车道。"
+    },
+    {
+      "section_id": 538,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\538.gif",
+      "observed": "两条狭窄中央分隔带把道路划成上、中、下三条独立行车道，每条行车道内部均由一条白色虚线分成两条车道。"
+    },
+    {
+      "section_id": 542,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\542.gif",
+      "observed": "灰色双向行车道由中央白色虚线分成两个相反方向的车道，两侧是连续边缘线；不存在同方向的第二条车道。"
+    },
+    {
+      "section_id": 543,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\543.gif",
+      "observed": "道路有上下两条由中央区域分开的独立行车道，每条行车道内部以一条白色虚线分成两条同向车道。"
+    },
+    {
+      "section_id": 544,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\544.gif",
+      "observed": "中央分隔区域两侧各有一条独立行车道，每条行车道内有两道白色虚线，明确形成三条同向车道。"
+    },
+    {
+      "section_id": 545,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\545.gif",
+      "observed": "单条灰色行车道含三条同向车道，自下而上分别标为A、B、C，车道之间为白色虚线。"
+    },
+    {
+      "section_id": 548,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\548.gif",
+      "observed": "三条同向车道从左侧通往十字路口，蓝色车辆位于中间车道；纵向分隔线先为虚线，接近白色横向停止线时变为实线。"
+    },
+    {
+      "section_id": 551,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\551.gif",
+      "observed": "三条同向车道从左侧通往十字路口，黑色车辆位于中间车道；接近路口与横向停止线的车道分隔线已变为连续实线。"
+    },
+    {
+      "section_id": 555,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\555.gif",
+      "observed": "无信号十字路口中心有白色圆点，黑色N车从左、红色A车从右相向驶入；两条虚线左转轨迹均在中心点之前弯转，把中心点留在车辆右侧。"
+    },
+    {
+      "section_id": 556,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\556.gif",
+      "observed": "无信号十字路口中心有白色圆点，黑色A车从左、红色G车从右相向驶入；虚线路径绕到中心点之后再左转，把中心点留在车辆左侧。"
+    },
+    {
+      "section_id": 557,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\557.gif",
+      "observed": "黑色N车与红色A车从十字路口两侧相向驶入，中心以白点标示；两车虚线轨迹均在中心点之前左转，使中心位于各自车辆右侧。"
+    },
+    {
+      "section_id": 558,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\558.gif",
+      "observed": "十字路口中央为白色圆点，黑色N车和红色A车相向驶来；图示虚线路径在中心点前完成左转，中心点位于两车轨迹右侧。"
+    },
+    {
+      "section_id": 559,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\559.gif",
+      "observed": "黑色A车与红色G车从十字路口左右两侧相向驶入，虚线左转轨迹绕到中央白点之后，使中心点留在车辆左侧。"
+    },
+    {
+      "section_id": 560,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\560.gif",
+      "observed": "四岔路口中央有白色圆点，右侧H车与下方S车入口旁均设蓝底白色环形箭头标志；黑色虚线箭头指示车辆绕中央点逆时针通行。"
+    },
+    {
+      "section_id": 563,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\563.gif",
+      "observed": "半幅行车道从左侧通往十字路口并含三条同向车道，黑色车辆位于中间车道；路口前分隔线由虚线过渡为实线。"
+    },
+    {
+      "section_id": 569,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\569.gif",
+      "observed": "上方为灰色双向道路，中央有白色虚线；下方斜线区域内有三辆标字母的车，蓝色B车与道路平行，红色E车和绿色S车均呈左上至右下方向斜停，靠道路一端朝向上方车行道。"
+    },
+    {
+      "section_id": 570,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\570.gif",
+      "observed": "画面与569.gif相同：上方灰色道路由中央白色虚线分隔双向交通，下方斜线区域内的蓝色B车平行停放，红色E车和绿色S车斜向停放并靠近上方车行道。"
+    },
+    {
+      "section_id": 587,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\587.gif",
+      "observed": "红色八角形停车让行标志，中央以大号白色字母写有STOP，外缘有细白色和灰色边框。"
+    },
+    {
+      "section_id": 588,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\588.gif",
+      "observed": "白底红边的正三角形危险标志，中央为黑色X形交叉符号，表示前方交叉路口适用右侧优先规则。"
+    },
+    {
+      "section_id": 589,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\589.gif",
+      "observed": "白底红边的正三角形危险标志，中央黑色竖向道路明显粗于左右横向支路，表示前方与次要道路相交且本车所在道路享有优先权。"
+    },
+    {
+      "section_id": 593,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\593.gif",
+      "observed": "白底图片中央是一枚尖端朝下的等边三角形标志，标志有宽红色边框、白色中心且无其他图案，属于让行标志。"
+    }
+  ]
+}

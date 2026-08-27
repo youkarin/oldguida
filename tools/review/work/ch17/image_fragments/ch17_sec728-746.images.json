@@ -1,0 +1,53 @@
+{
+  "chapter": 17,
+  "slice": "ch17_sec728-746",
+  "section_ids": [735, 736, 737, 738, 739, 740, 741, 742, 743],
+  "question_ids": [5651, 5652, 5653, 5654, 5655, 5656, 5657, 5658, 5659, 5660, 5661, 5662, 5663, 5664, 5665, 5666, 5667, 5668, 5669, 5670, 5671, 5672, 5673, 5674, 5675, 5676, 5677, 5678],
+  "images": [
+    {
+      "section_id": 735,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\735.gif",
+      "observed": "白底图片中央是一块方形反光板，板面为红白相间的45度斜纹，四角各有一个白色圆孔。"
+    },
+    {
+      "section_id": 736,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\736.gif",
+      "observed": "白底图片中央是一块方形反光板，板面为红白相间的45度斜纹，四角各有一个白色圆孔。"
+    },
+    {
+      "section_id": 737,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\737.gif",
+      "observed": "红白斜纹方形背景中央叠加蓝色圆形标志，圆内白色箭头斜向右下，表示须从障碍物右侧通过。"
+    },
+    {
+      "section_id": 738,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\738.gif",
+      "observed": "白底图片中央是一块横向长方形识别板，板面为黄色，四周有红色边框，没有斜纹。"
+    },
+    {
+      "section_id": 739,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\739.gif",
+      "observed": "白底图片中央是一块横向长方形识别板，板面由红色与黄色相间的45度斜纹组成。"
+    },
+    {
+      "section_id": 740,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\740.gif",
+      "observed": "白底图片中央是一块横向长方形识别板，板面由红色与黄色相间的45度斜纹组成。"
+    },
+    {
+      "section_id": 741,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\741.gif",
+      "observed": "图片为黑框橙色危险品识别牌，中间有黑色横线，上格黑色数字33，下格黑色数字1203。"
+    },
+    {
+      "section_id": 742,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\742.gif",
+      "observed": "白底图片中央是一块横向长方形识别板，板面由红色与黄色相间的45度斜纹组成。"
+    },
+    {
+      "section_id": 743,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\743.gif",
+      "observed": "白底图片中央是一块横向长方形识别板，板面为黄色，四周有红色边框，没有斜纹。"
+    }
+  ]
+}

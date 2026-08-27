@@ -1,0 +1,22 @@
+{
+  "chapter": 11,
+  "slice": "ch11_sec498-505",
+  "section_ids": [
+    505
+  ],
+  "question_ids": [
+    4207,
+    4208,
+    4209,
+    4210,
+    4211,
+    4212
+  ],
+  "images": [
+    {
+      "section_id": 505,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\505.gif",
+      "observed": "白色背景上有三枚彼此分开的圆形车辆最高速度标识，均为红色宽边、白底、黑色数字；上方标识写60，左下写80，右下写100，图中没有车辆或道路场景。"
+    }
+  ]
+}

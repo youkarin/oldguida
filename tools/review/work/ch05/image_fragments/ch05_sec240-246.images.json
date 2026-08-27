@@ -1,0 +1,54 @@
+{
+  "chapter": 5,
+  "slice": "ch05_sec240-246",
+  "section_ids": [
+    240, 241, 242, 243, 244, 245, 246
+  ],
+  "question_ids": [
+    2318, 2319, 2320, 2321, 2322, 2323, 2324, 2325, 2326, 2327,
+    2328, 2329, 2330, 2331, 2332, 2333, 2334, 2335, 2336, 2337,
+    2338, 2339, 2340, 2341, 2342, 2343, 2344, 2345, 2346, 2347,
+    2348, 2349, 2350, 2351, 2352, 2353, 2354, 2355, 2356, 2357,
+    2358, 2359, 2360, 2361, 2362, 2363, 2364, 2365, 2366, 2367,
+    2368, 2369, 2370, 2371, 2372, 2373, 2374, 2375, 2376, 2377,
+    2378, 2379, 2380, 2381, 2382, 2383, 2384, 2385, 2386, 2387,
+    2388, 2389, 2390, 2391, 2392, 2393, 2394
+  ],
+  "images": [
+    {
+      "section_id": 240,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\240.gif",
+      "observed": "白底红边三角形危险标志；中央黑色粗主线竖直向上，一条较细黑色支线从右侧斜向汇入，表示右侧汇流。"
+    },
+    {
+      "section_id": 241,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\241.gif",
+      "observed": "白底红边三角形危险标志；中央黑色粗主线竖直向上，一条较细黑色支线从左侧斜向汇入，表示左侧汇流。"
+    },
+    {
+      "section_id": 242,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\242.gif",
+      "observed": "白底粗红边圆形先行权标志；左侧为黑色向下箭头，右侧为红色向上箭头，表示红色箭头所示方向须给对向车辆让行。"
+    },
+    {
+      "section_id": 243,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\243.gif",
+      "observed": "白底粗红边圆形先行权标志；左侧黑色箭头向下、右侧红色箭头向上，规定交替单向通行时红色箭头方向让行。"
+    },
+    {
+      "section_id": 244,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\244.gif",
+      "observed": "白底粗红边圆形先行权标志；左侧黑色箭头向下、右侧红色箭头向上，表示我方给对向车辆让行；图片本身未画信号灯或交警。"
+    },
+    {
+      "section_id": 245,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\245.gif",
+      "observed": "蓝底正方形先行权标志，牌内有白色细边框；左侧红色箭头向下，右侧白色箭头向上，表示白色箭头所示我方方向优先通行。"
+    },
+    {
+      "section_id": 246,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\246.gif",
+      "observed": "蓝底正方形先行权标志，牌内有白色细边框；左侧红色箭头向下、右侧白色箭头向上，表示我方享有优先权；图片本身未画信号灯或交警。"
+    }
+  ]
+}

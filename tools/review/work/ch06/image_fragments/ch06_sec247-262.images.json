@@ -1,0 +1,173 @@
+{
+  "chapter": 6,
+  "slice": "ch06_sec247-262",
+  "section_ids": [
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    262
+  ],
+  "question_ids": [
+    2400,
+    2401,
+    2402,
+    2403,
+    2404,
+    2405,
+    2406,
+    2407,
+    2408,
+    2409,
+    2410,
+    2411,
+    2412,
+    2413,
+    2414,
+    2415,
+    2416,
+    2417,
+    2418,
+    2419,
+    2420,
+    2421,
+    2422,
+    2423,
+    2424,
+    2425,
+    2426,
+    2427,
+    2428,
+    2429,
+    2430,
+    2431,
+    2432,
+    2433,
+    2434,
+    2435,
+    2436,
+    2437,
+    2438,
+    2439,
+    2440,
+    2441,
+    2442,
+    2443,
+    2444,
+    2445,
+    2446,
+    2447,
+    2448,
+    2449,
+    2450,
+    2451,
+    2452,
+    2453,
+    2454,
+    2455,
+    2456,
+    2457,
+    2458,
+    2459,
+    2460,
+    2461,
+    2462,
+    2463,
+    2464,
+    2465,
+    2466,
+    2467,
+    2468,
+    2469,
+    2470,
+    2471,
+    2472,
+    2473,
+    2474,
+    2475,
+    2476,
+    2477,
+    2478
+  ],
+  "images": [
+    {
+      "section_id": 249,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\249.gif",
+      "observed": "灰色长方形车行道，上下边缘各有一条白色实线，中央只有一条白色虚线，将车行道分成两条车道；无车辆或方向箭头。"
+    },
+    {
+      "section_id": 250,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\250.gif",
+      "observed": "灰色长方形车行道，上下边缘各有一条白色实线，中央只有一条白色虚线，将车行道分成两条车道；无车辆或方向箭头。"
+    },
+    {
+      "section_id": 251,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\251.gif",
+      "observed": "灰色长方形车行道，上下边缘各有一条白色实线，中央只有一条白色虚线；图中没有道钉、反光体、车辆或箭头。"
+    },
+    {
+      "section_id": 252,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\252.gif",
+      "observed": "灰色长方形车行道，上下边缘为白色实线，中央为单条白色虚线；图中未画车辆或行驶方向。"
+    },
+    {
+      "section_id": 253,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\253.gif",
+      "observed": "灰色长方形车行道，上下边缘为白色实线，中央清楚显示单条白色虚线，并不是双实线；无车辆或箭头。"
+    },
+    {
+      "section_id": 254,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\254.gif",
+      "observed": "灰色长方形车行道，上下边缘为白色实线，中央为单条白色虚线，将同一车行道分成两条车道；无车辆或方向箭头。"
+    },
+    {
+      "section_id": 255,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\255.gif",
+      "observed": "灰色长方形车行道，上下边缘各有白色实线，中央只有一条白色连续实线，将车行道分成两条车道。"
+    },
+    {
+      "section_id": 256,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\256.gif",
+      "observed": "灰色长方形车行道，上下边缘各有白色实线，中央只有一条白色连续实线；图中不存在中央超车车道或中央虚线。"
+    },
+    {
+      "section_id": 257,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\257.gif",
+      "observed": "灰色长方形车行道，上下边缘各有白色实线，中央为单条白色连续实线；无车辆或方向箭头。"
+    },
+    {
+      "section_id": 258,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\258.gif",
+      "observed": "灰色长方形车行道，上下边缘为白色实线，中央为两条紧邻、平行的白色连续实线；无车辆或箭头。"
+    },
+    {
+      "section_id": 259,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\259.gif",
+      "observed": "灰色长方形车行道，上下边缘为白色实线，中央为两条紧邻、平行的白色连续实线；无车辆或箭头。"
+    },
+    {
+      "section_id": 260,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\260.gif",
+      "observed": "灰色长方形车行道，上下边缘为白色实线，中央为两条紧邻、平行的白色连续实线；无车辆或箭头。"
+    },
+    {
+      "section_id": 261,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\261.gif",
+      "observed": "灰色双向车行道内，黑色车辆在下方车道沿虚线箭头向右行驶；车辆紧邻的中心标线为白色实线，实线另一侧并列一条白色虚线。"
+    },
+    {
+      "section_id": 262,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\262.gif",
+      "observed": "灰色双向车行道内，黑色车辆在下方车道沿虚线箭头向右行驶；车辆紧邻的中心标线为白色虚线，虚线另一侧并列一条白色实线。"
+    }
+  ]
+}

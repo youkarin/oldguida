@@ -1,0 +1,195 @@
+{
+  "chapter": 6,
+  "slice": "ch06_sec263-279",
+  "section_ids": [
+    263,
+    265,
+    266,
+    267,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279
+  ],
+  "question_ids": [
+    2479,
+    2480,
+    2481,
+    2482,
+    2483,
+    2484,
+    2485,
+    2486,
+    2487,
+    2490,
+    2491,
+    2492,
+    2493,
+    2494,
+    2495,
+    2496,
+    2497,
+    2498,
+    2499,
+    2500,
+    2501,
+    2502,
+    2503,
+    2504,
+    2505,
+    2506,
+    2507,
+    2508,
+    2509,
+    2510,
+    2511,
+    2512,
+    2513,
+    2514,
+    2515,
+    2516,
+    2517,
+    2518,
+    2519,
+    2520,
+    2521,
+    2522,
+    2523,
+    2524,
+    2525,
+    2526,
+    2527,
+    2528,
+    2529,
+    2530,
+    2531,
+    2532,
+    2533,
+    2534,
+    2535,
+    2536,
+    2537,
+    2538,
+    2539,
+    2540,
+    2541,
+    2542,
+    2543,
+    2544,
+    2545,
+    2546,
+    2547,
+    2548,
+    2549,
+    2550,
+    2551,
+    2552,
+    2553,
+    2554,
+    2555,
+    2556,
+    2557,
+    2558,
+    2559,
+    2560,
+    2561,
+    2562,
+    2563,
+    2564,
+    2565,
+    2566,
+    2567,
+    2568,
+    2569
+  ],
+  "images": [
+    {
+      "section_id": 263,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\263.gif",
+      "observed": "灰色道路横向分为A、B、C三个带状区域；A在下方，与B之间由连续白色侧线分隔，B与C之间为白色虚线，外侧边缘为连续白线；无车辆或附牌。"
+    },
+    {
+      "section_id": 265,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\265.gif",
+      "observed": "一条横向主路上方连接车辆出入口；主路侧边连续白线在出入口开口处中断，并以短白色虚线横跨开口，主路中央另有断续线；无车辆或附牌。"
+    },
+    {
+      "section_id": 266,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\266.gif",
+      "observed": "横向道路上侧向外扩出一个灰色停车湾，停车湾与主行车道之间由一列短白色虚线分隔；道路中央有断续线，无车辆或附牌。"
+    },
+    {
+      "section_id": 267,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\267.gif",
+      "observed": "下方弯曲车道沿导流斜纹区旁向右汇入横向主路，汇入段与主行车道之间为白色虚线；图中还可见连续边缘线和汇入端横向虚线，无车辆或附牌。"
+    },
+    {
+      "section_id": 268,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\268.gif",
+      "observed": "主路从左下方弯向右侧，次要道路从左侧横向接入；白色侧边虚线沿弯曲主路的边缘设置并分隔二者，右侧主路上可见一对相反方向的黑色箭头；无车辆或附牌。"
+    },
+    {
+      "section_id": 269,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\269.gif",
+      "observed": "四向交叉路口内画有两组弯曲的短白色虚线，连接路口两侧并形成建议转弯轨迹；各接近道路另有中心虚线和连续边缘线，无附牌。"
+    },
+    {
+      "section_id": 270,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\270.gif",
+      "observed": "T形路口入口处画有一条横跨本车行驶方向的宽白色连续线，为停车线；接近道路有白色中心虚线和边缘线，无车辆、文字或附牌。"
+    },
+    {
+      "section_id": 271,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\271.gif",
+      "observed": "T形路口入口处画有一条横跨本车行驶方向的宽白色连续停车线；接近道路有白色中心虚线和边缘线，无车辆、文字或附牌。"
+    },
+    {
+      "section_id": 272,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\272.gif",
+      "observed": "四向路口左侧接近道路画有宽白色横向停车线，一辆黑白车辆停在该线之前；道路中央有白色虚线，无文字或附牌。"
+    },
+    {
+      "section_id": 273,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\273.gif",
+      "observed": "竖向道路通向T形路口，入口处有宽白色横向停车线，线前路面以大号白字写有“STOP”；无车辆或附牌。"
+    },
+    {
+      "section_id": 274,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\274.gif",
+      "observed": "纵向道路路面画有大型白色X形标记，并配有白色纵向实线、虚线及道口附近的横向线；图中没有竖立式圣安德鲁十字、列车、栏杆或附牌。"
+    },
+    {
+      "section_id": 275,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\275.gif",
+      "observed": "路口左侧接近道路被分为三条平行预选车道，远离路口处由虚线分隔、接近路口处转为实线；一辆蓝色车辆位于相对于行驶方向的左侧车道，图中没有任何方向箭头或附牌。"
+    },
+    {
+      "section_id": 276,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\276.gif",
+      "observed": "竖向接近路口的单向道路被分成三条预选车道，车道内重复画有白色方向箭头，包括左转、直行以及直行与右转组合箭头；分隔线先虚后实，无车辆或附牌。"
+    },
+    {
+      "section_id": 277,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\277.gif",
+      "observed": "路口左侧有三条横向预选车道并标为A、B、C：A只有左转箭头，B为左转与直行组合箭头，C为直行与右转组合箭头；箭头在各车道重复出现，无车辆或附牌。"
+    },
+    {
+      "section_id": 278,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\278.gif",
+      "observed": "路口左侧有三条横向预选车道并标为A、B、C：A只有向上弯曲的左转箭头，B有分别向上、向下弯曲的左右转箭头，C只有向下弯曲的右转箭头；没有直行箭头或附牌。"
+    },
+    {
+      "section_id": 279,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\279.gif",
+      "observed": "四向交叉路口四边均有人行横道，路口中央画有白色弯曲虚线导向轨迹，四条轨迹围成菱形状空间；各接近道路另有车道线和边缘线，无车辆或附牌。"
+    }
+  ]
+}

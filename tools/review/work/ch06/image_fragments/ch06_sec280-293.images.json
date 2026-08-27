@@ -1,0 +1,163 @@
+{
+  "chapter": 6,
+  "slice": "ch06_sec280-293",
+  "section_ids": [
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    290,
+    291,
+    292,
+    293
+  ],
+  "question_ids": [
+    2570,
+    2571,
+    2572,
+    2573,
+    2574,
+    2575,
+    2576,
+    2577,
+    2578,
+    2579,
+    2580,
+    2581,
+    2582,
+    2583,
+    2584,
+    2585,
+    2586,
+    2587,
+    2588,
+    2589,
+    2590,
+    2591,
+    2592,
+    2593,
+    2594,
+    2595,
+    2596,
+    2597,
+    2598,
+    2599,
+    2600,
+    2601,
+    2602,
+    2603,
+    2604,
+    2605,
+    2606,
+    2607,
+    2608,
+    2609,
+    2610,
+    2611,
+    2612,
+    2613,
+    2614,
+    2615,
+    2616,
+    2617,
+    2618,
+    2619,
+    2620,
+    2621,
+    2622,
+    2623,
+    2624,
+    2625,
+    2626,
+    2627,
+    2628,
+    2629,
+    2630,
+    2631,
+    2643,
+    2644,
+    2645,
+    2646,
+    2647,
+    2648,
+    2649,
+    2650,
+    2651,
+    2652,
+    2653,
+    2654,
+    2655
+  ],
+  "images": [
+    {
+      "section_id": 280,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\280.gif",
+      "observed": "灰色T形交叉路口内绘有白色虚线引导线，虚线在路口中央分叉并连接不同转向轨迹；A车位于横向道路右侧，C车位于横向道路左侧，B车从下方道路驶近。图中没有地面方向箭头或竖直标志。"
+    },
+    {
+      "section_id": 281,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\281.gif",
+      "observed": "T形交叉路口中央有一块尖端朝下方道路的白色斜线三角形交通导流岛，岛体由白色连续边界围合并填充白色斜纹；A、B、C三车分别位于右侧、下方和左侧。无竖直标志。"
+    },
+    {
+      "section_id": 282,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\282.gif",
+      "observed": "T形交叉路口中央有白色斜线三角形交通导流岛及连续白色边界，A车在横向道路右侧、C车在左侧、B车从下方道路驶近；图片没有环岛、强制方向标志或地面箭头。"
+    },
+    {
+      "section_id": 283,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\283.gif",
+      "observed": "灰色路面上横向排列八条宽白色平行矩形条纹，构成斑马线式人行横道；没有行人、自行车、交通岛或车辆出入口图案。"
+    },
+    {
+      "section_id": 284,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\284.gif",
+      "observed": "灰色路面上横向排列八条宽白色平行矩形条纹，构成普通人行横道；没有安全岛、抬高结构、残疾人专用图案或禁止通行符号。"
+    },
+    {
+      "section_id": 285,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\285.gif",
+      "observed": "纵向道路上方绘有一组横跨行车道的白色人行横道条纹；靠路缘处在横道前后可见黄色锯齿线，右侧锯齿线位于横道前方。图中没有BUS字样或公交站图形。"
+    },
+    {
+      "section_id": 286,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\286.gif",
+      "observed": "灰色道路路缘旁以黄色实线划出公交停靠区，中部框线内有黄色BUS字样，两端均连接黄色锯齿线，为公交车靠边和驶离预留空间。"
+    },
+    {
+      "section_id": 287,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\287.gif",
+      "observed": "人行道路缘石的垂直面沿线交替涂成黑色和黄色矩形段，上方人行道表面没有相同涂色；该路缘标记表示沿该侧禁止车辆停放。"
+    },
+    {
+      "section_id": 288,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\288.gif",
+      "observed": "人行道路缘石垂直面连续交替涂有黑色和黄色矩形段，构成禁止停放路缘标记；没有施工、付费停车、限时停车或先行权图案。"
+    },
+    {
+      "section_id": 290,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\290.gif",
+      "observed": "俯视图显示两个并列停车位，左侧车位由黄色边线划定，其左侧另有黄色斜线净空区用于上下车；右侧为普通白色边线车位。图片没有轮椅或文字图案。"
+    },
+    {
+      "section_id": 291,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\291.gif",
+      "observed": "灰色路面中央仅绘有大号白色数字“50”，表示路面建议速度字样；没有蓝色背景、方形标志牌、红边圆牌或质量单位。"
+    },
+    {
+      "section_id": 292,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\292.gif",
+      "observed": "灰色道路中央设置一段明显凸起的人工减速带，凸面横向交替涂有黑色和黄色条带；没有人行横道、自行车横道或禁止停放标记。"
+    },
+    {
+      "section_id": 293,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\293.gif",
+      "observed": "灰色行车道内横向绘有五条宽白色横条，沿箭头所示行驶方向条纹间距逐渐变化，形成光学减速效果；两端黑色箭头指示车辆行驶方向。"
+    }
+  ]
+}

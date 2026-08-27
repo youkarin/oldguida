@@ -1,0 +1,131 @@
+{
+  "chapter": 8,
+  "slice": "ch08_sec364-384",
+  "section_ids": [
+    364, 365, 366, 367, 368, 370, 371, 372, 373, 374,
+    375, 376, 377, 378, 379, 380, 381, 382, 383, 384
+  ],
+  "question_ids": [
+    3314, 3315, 3316, 3317, 3318, 3319, 3320, 3321, 3322, 3323,
+    3324, 3325, 3326, 3327, 3328, 3329, 3330, 3331, 3332, 3333,
+    3334, 3335, 3336, 3337, 3338, 3339, 3340, 3341, 3342, 3343,
+    3344, 3345, 3346, 3347, 3348, 3349, 3350, 3351, 3352, 3353,
+    3354, 3355, 3356, 3357, 3358, 3359, 3360, 3361, 3362,
+    3373, 3374, 3375, 3376, 3377, 3378, 3379, 3380, 3381, 3382,
+    3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392,
+    3393, 3394, 3395, 3396, 3397, 3398, 3399, 3400, 3401, 3402,
+    3403, 3404, 3405, 3406, 3407, 3408, 3409, 3410, 3411, 3412,
+    3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420, 3421, 3422,
+    3423, 3424, 3425, 3426, 3427, 3428, 3429, 3430, 3431, 3432,
+    3433, 3434, 3435, 3436, 3437, 3438, 3439, 3440, 3441, 3442,
+    3443, 3444, 3445, 3446, 3447, 3448, 3449, 3450, 3451, 3452,
+    3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462,
+    3463, 3464, 3465, 3466, 3467, 3468, 3469, 3470, 3471, 3472,
+    3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480, 3481, 3482,
+    3483, 3484, 3485, 3486, 3487, 3488, 3489, 3490, 3491, 3492,
+    3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500, 3501, 3502,
+    3503, 3504, 3505, 3506, 3507, 3508, 3509, 3510, 3511
+  ],
+  "images": [
+    {
+      "section_id": 364,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\364.gif",
+      "observed": "蓝底方形牌内以白色粗线画出主路和向右分出的支路，右侧支路末端有红色矩形封闭块，表示该支路对车辆无出口。"
+    },
+    {
+      "section_id": 365,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\365.gif",
+      "observed": "蓝底方形牌中央以大号白色数字标出“60”，没有红色圆边或蓝色圆面，表示建议速度而非最高或最低限速。"
+    },
+    {
+      "section_id": 366,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\366.gif",
+      "observed": "蓝底方形牌中央为白色小汽车正面图案，表示仅供机动车通行道路的起点。"
+    },
+    {
+      "section_id": 367,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\367.gif",
+      "observed": "绿色方形牌内画有黑色隧道洞口以及白灰色道路伸入洞内，绿色背景表明这是高速公路上的隧道指示。"
+    },
+    {
+      "section_id": 368,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\368.gif",
+      "observed": "绿色方形牌中央为白色桥面和桥拱图案，表示高速公路上桥梁、高架桥或跨线桥的起点；图中没有侧风符号。"
+    },
+    {
+      "section_id": 370,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\370.gif",
+      "observed": "蓝底竖向矩形牌以白线画出主车行道，主路一侧向外扩成一处停车港湾；港湾旁的主路中心以三段白色虚线表示。"
+    },
+    {
+      "section_id": 371,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\371.gif",
+      "observed": "蓝底横向矩形牌内有两个同向白色直行箭头，左侧箭头上叠有红边白底圆形货车图案，表示该类货车不得使用左侧车道。"
+    },
+    {
+      "section_id": 372,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\372.gif",
+      "observed": "绿色高速公路车道指示牌内有三个同向白色箭头；左侧箭头叠加蓝底“90”最低限速圆牌，中间箭头叠加蓝底“60”圆牌，右侧箭头没有最低限速圆牌。"
+    },
+    {
+      "section_id": 373,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\373.gif",
+      "observed": "白底横向矩形牌内有三个黑色直行箭头，右侧车道与其余车道之间有黄色竖线分隔；右侧箭头叠有蓝底白色公交车圆形图案，牌内没有“TAXI”或“BUS”文字。"
+    },
+    {
+      "section_id": 374,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\374.gif",
+      "observed": "蓝底横向矩形牌内左侧为一条白色直行箭头，右侧另有一条从下方向左弯曲后与其平行向上的箭头，表示同向车道由一条增为两条。"
+    },
+    {
+      "section_id": 375,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\375.gif",
+      "observed": "绿色高速公路指示牌内左侧和中间为两条直行箭头，右侧第三条箭头向左弯入相邻车道，表示车道由三条减少为两条。"
+    },
+    {
+      "section_id": 376,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\376.gif",
+      "observed": "白底竖向矩形牌上方是黑色向右弯曲箭头，下方依次画有汽车列车和铰接式车辆两类黑色侧面图案，表示对所示车辆的建议绕行方向。"
+    },
+    {
+      "section_id": 377,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\377.gif",
+      "observed": "黄色临时指示牌上方为蓝底白色直行强制圆牌，下方画有汽车列车和铰接式车辆两类黑色侧面图案，表示施工等临时情况下针对这些车辆的强制方向。"
+    },
+    {
+      "section_id": 378,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\378.gif",
+      "observed": "蓝底竖向服务指示牌的白色方框内画有一把黑色锤子，表示车辆机械维修服务；图中不是扳手或加油泵。"
+    },
+    {
+      "section_id": 379,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\379.gif",
+      "observed": "蓝底竖向服务指示牌的白色方框内画有黑色电话听筒，表示公共电话服务。"
+    },
+    {
+      "section_id": 380,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\380.gif",
+      "observed": "蓝底竖向服务指示牌的白色方框内画有绿色加油泵和油管，表示燃料补给站。"
+    },
+    {
+      "section_id": 381,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\381.gif",
+      "observed": "蓝底竖向指示牌的白色方框内画有铁路平板车辆，平板上载有一辆小汽车及随行行李，表示旅客随行汽车铁路运输服务。"
+    },
+    {
+      "section_id": 382,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\382.gif",
+      "observed": "白底竖向牌上方为蓝底白色“P”和黑色加号，下方为公交车图案，右侧两个红色圆点内分别写有“8”和“45”，表示停车后可换乘8路或45路公交车。"
+    },
+    {
+      "section_id": 383,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\383.gif",
+      "observed": "橙色横向长方形牌中央以大号黑色字母写有“TAXI”，用于标示营运出租车专用停车和候客区域。"
+    },
+    {
+      "section_id": 384,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\384.gif",
+      "observed": "白底黑边矩形信息牌顶部写有“POLIZIA STRADALE”，下方依次列出“Località”“Indirizzo”“Telefoni”三个字段及灰色信息栏，用于提供最近道路交通警察部门的地点、地址和电话号码。"
+    }
+  ]
+}

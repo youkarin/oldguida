@@ -1,0 +1,18 @@
+{
+  "chapter": 21,
+  "slice": "ch21_sec826-831",
+  "section_ids": [829, 830],
+  "question_ids": [6460, 6461, 6462],
+  "images": [
+    {
+      "section_id": 829,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\829.gif",
+      "observed": "白底黑框内，左侧为黑色行走人形，右侧为红色火焰，人形呈远离火焰的姿态，表示逃生通道。"
+    },
+    {
+      "section_id": 830,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\830.gif",
+      "observed": "白底黑框内，右侧为倾斜的黑色灭火器轮廓，左侧为红色火焰，表示灭火器位置。"
+    }
+  ]
+}

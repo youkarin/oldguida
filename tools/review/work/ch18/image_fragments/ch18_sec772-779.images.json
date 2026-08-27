@@ -1,0 +1,47 @@
+{
+  "chapter": 18,
+  "slice": "ch18_sec772-779",
+  "section_ids": [
+    777,
+    778,
+    779
+  ],
+  "question_ids": [
+    5923,
+    5924,
+    5925,
+    5926,
+    5927,
+    5928,
+    5929,
+    5930,
+    5931,
+    5932,
+    5933,
+    5934,
+    5935,
+    5936,
+    5937,
+    5938,
+    5939,
+    5940,
+    5941
+  ],
+  "images": [
+    {
+      "section_id": 777,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\777.gif",
+      "observed": "白底图片右侧是黑色灯具轮廓，五条黑色光束线向左下方倾斜，构成近光灯符号。"
+    },
+    {
+      "section_id": 778,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\778.gif",
+      "observed": "白底图片右侧是黑色灯具轮廓，五条黑色平行水平光束线向左延伸，构成远光灯符号。"
+    },
+    {
+      "section_id": 779,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\779.gif",
+      "observed": "白底图片中有两个黑色空心箭头，一个指向左方、一个指向右方，构成转向指示灯符号。"
+    }
+  ]
+}

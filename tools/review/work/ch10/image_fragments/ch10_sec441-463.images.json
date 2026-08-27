@@ -1,0 +1,234 @@
+{
+  "chapter": 10,
+  "slice": "ch10_sec441-463",
+  "section_ids": [
+    441,
+    442,
+    443,
+    444,
+    445,
+    446,
+    447,
+    448,
+    449,
+    450,
+    451,
+    452,
+    453,
+    454,
+    455,
+    456,
+    457,
+    458,
+    459,
+    460,
+    461,
+    462,
+    463
+  ],
+  "question_ids": [
+    3782,
+    3783,
+    3784,
+    3785,
+    3786,
+    3787,
+    3788,
+    3789,
+    3790,
+    3791,
+    3792,
+    3793,
+    3794,
+    3795,
+    3796,
+    3797,
+    3798,
+    3799,
+    3800,
+    3801,
+    3802,
+    3803,
+    3804,
+    3805,
+    3806,
+    3807,
+    3808,
+    3809,
+    3810,
+    3811,
+    3812,
+    3813,
+    3814,
+    3815,
+    3816,
+    3817,
+    3818,
+    3819,
+    3820,
+    3821,
+    3822,
+    3823,
+    3824,
+    3825,
+    3826,
+    3827,
+    3828,
+    3829,
+    3830,
+    3831,
+    3832,
+    3833,
+    3834,
+    3835,
+    3836,
+    3837,
+    3838,
+    3839,
+    3840,
+    3841,
+    3842,
+    3843,
+    3844,
+    3845,
+    3846,
+    3847,
+    3848,
+    3849,
+    3850,
+    3851,
+    3852,
+    3853,
+    3854,
+    3855,
+    3856,
+    3857,
+    3858,
+    3859,
+    3860,
+    3861,
+    3862,
+    3863,
+    3864,
+    3865,
+    3866,
+    3867
+  ],
+  "images": [
+    {
+      "section_id": 441,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\441.gif",
+      "observed": "上方为白底红边三角形湿滑路面危险标志，内有汽车和两道弯曲轮迹；下方白色横向附牌内有分别指向左、右的黑色双箭头。"
+    },
+    {
+      "section_id": 442,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\442.gif",
+      "observed": "上方为白底红边圆形禁止超车标志，内有一红一黑两辆汽车；下方白色竖向附牌内有分别向上、向下的黑色双箭头。"
+    },
+    {
+      "section_id": 443,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\443.gif",
+      "observed": "上方为白底红边圆形最高限速80公里/小时标志；下方白色竖向附牌内有分别向上、向下的黑色双箭头，没有FINE或CONTINUA文字。"
+    },
+    {
+      "section_id": 444,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\444.gif",
+      "observed": "上方为蓝底红边并带红色交叉的圆形禁止临时停车标志；下方白色竖向附牌内有分别向上、向下的黑色双箭头。"
+    },
+    {
+      "section_id": 445,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\445.gif",
+      "observed": "上方为蓝底红边并带一条红色斜杠的圆形禁止停放标志；下方白色竖向附牌内有分别向上、向下的黑色双箭头。"
+    },
+    {
+      "section_id": 446,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\446.gif",
+      "observed": "上方为蓝底白色P的方形停车标志；下方白色横向附牌内有分别指向左、右的黑色双箭头。"
+    },
+    {
+      "section_id": 447,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\447.gif",
+      "observed": "画面展示两种白底黑边结束附牌：A为竖向长方形，内有一支向下黑箭头；B为横向长方形，内有一支向右黑箭头。"
+    },
+    {
+      "section_id": 448,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\448.gif",
+      "observed": "上方为白底红边三角形不平路面危险标志，内有黑色起伏图案；下方白色竖向附牌内只有一支向下黑箭头。"
+    },
+    {
+      "section_id": 449,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\449.gif",
+      "observed": "上方为白底红边三角形湿滑路面危险标志；下方白色横向附牌内只有一支向右黑箭头。"
+    },
+    {
+      "section_id": 450,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\450.gif",
+      "observed": "白色圆形标志内有两辆灰色汽车，牌面由一条粗黑色斜杠覆盖，表示禁止超车结束；没有另设附牌。"
+    },
+    {
+      "section_id": 451,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\451.gif",
+      "observed": "上方为蓝底红边并带红色交叉的圆形禁止临时停车标志；下方白色横向附牌内只有一支向右黑箭头。"
+    },
+    {
+      "section_id": 452,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\452.gif",
+      "observed": "上方为蓝底红边并带一条红色斜杠的圆形禁止停放标志；下方白色竖向附牌内只有一支向下黑箭头。"
+    },
+    {
+      "section_id": 453,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\453.gif",
+      "observed": "上方为蓝底白色P的方形停车标志；下方白色横向附牌内只有一支向右黑箭头，主标志上没有红色斜杠。"
+    },
+    {
+      "section_id": 454,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\454.gif",
+      "observed": "上方为黄底红边三角形临时道路施工危险标志，内有黑色施工人员铲土图案；下方白色竖向附牌内只有一支向下黑箭头。"
+    },
+    {
+      "section_id": 455,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\455.gif",
+      "observed": "白底黑边横向长方形车道附牌，中央只有一支粗黑色向下箭头，用于指向其下方的特定车道；没有文字或车辆图案。"
+    },
+    {
+      "section_id": 456,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\456.gif",
+      "observed": "灰底方形附牌内有白色作业车辆，车辆后方绘有一条展开的白色带状区域和一排黑色短线，表示路面标线正在重划或暂时缺失。"
+    },
+    {
+      "section_id": 457,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\457.gif",
+      "observed": "红底方形附牌内有两辆白色汽车以夹角相撞，碰撞处绘有放射状白线，表示道路事故及事故车辆占用行车道。"
+    },
+    {
+      "section_id": 458,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\458.gif",
+      "observed": "白底黑边横向附牌内并列两台相向的黑色蒸汽机车图案，表示调车轨道或铁路连接线穿越道路。"
+    },
+    {
+      "section_id": 459,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\459.gif",
+      "observed": "上方为白底红边三角形、内有黑色感叹号的其他危险标志；下方白底黑边附牌内并列两台相向的黑色蒸汽机车。"
+    },
+    {
+      "section_id": 460,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\460.gif",
+      "observed": "白底黑边横向附牌左侧是黑色雪花，右侧是一辆前部装有推雪铲的黑色作业车辆；图中没有20 m、100 m或其他距离文字。"
+    },
+    {
+      "section_id": 461,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\461.gif",
+      "observed": "白底黑边横向附牌内是一辆黑色工程机械，前方伸出机械臂并连接大型铲斗，驾驶位置可见一个人员头部图案。"
+    },
+    {
+      "section_id": 462,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\462.gif",
+      "observed": "白底黑边横向附牌中央只有三条平行起伏的蓝色波纹，表示路段可能积水；没有汽车、游泳者、雪花或文字。"
+    },
+    {
+      "section_id": 463,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\463.gif",
+      "observed": "上方为白底红边三角形凹形路面危险标志，内有黑色下凹曲线；下方白底黑边附牌内有三条蓝色波纹，表示该凹形路段可能积水。"
+    }
+  ]
+}

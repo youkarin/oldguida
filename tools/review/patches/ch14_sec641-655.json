@@ -1,0 +1,597 @@
+{
+  "slice": "ch14_sec641-655",
+  "reviewed": 139,
+  "items": [
+    {
+      "id": 5010,
+      "explanation": "说法正确。图中A、R入口均设有让行标志和白色三角让行标线，两车必须先让无让行控制的N通过；随后直行的A先于左转的R，因此顺序为N、A、R。",
+      "note": "原解析错误称图中没有特定先行权标志。"
+    },
+    {
+      "id": 5027,
+      "explanation": "说法正确。图中A入口前设有让行标志和白色三角让行标线，A必须让优先通行的C、R先通过，因此应等待这两辆车。"
+    },
+    {
+      "id": 5028,
+      "explanation": "说法正确。图中A、H入口均设有让行标志和白色三角让行标线，C先行、R随后；在其余两车中，H还须让位于其右侧的A，因此顺序为C、R、A、H。"
+    },
+    {
+      "id": 5029,
+      "explanation": "说法正确。图中H入口设有让行标志和白色三角让行标线；C、R先行后，H还须让其右侧的A，所以H要等待C、R、A通过。"
+    },
+    {
+      "id": 5030,
+      "explanation": "说法正确。图中H入口设有让行标志和白色三角让行标线，且A位于H的右侧；通行顺序为C、R、A、H，因此H最后通过。"
+    },
+    {
+      "id": 5031,
+      "explanation": "说法正确。图中C从R的右侧驶来，二者入口均无让行标线；按右侧先行原则，R必须等待C通过。"
+    },
+    {
+      "id": 5033,
+      "explanation": "说法错误。图中A位于H的右侧，H必须让A先行；正确顺序是C、R、A、H，而不是C、R、H、A。"
+    },
+    {
+      "id": 5035,
+      "explanation": "说法错误。图中A位于H的右侧，应由H给A让行；A在H之前通过，无须等待H。"
+    },
+    {
+      "id": 5052,
+      "explanation": "说法正确。图中N的虚线路径为左转，R从N的左侧驶来；R须先让N驶入路口中心，所以N相对于R有先行权。N随后在中心等待A，并不改变R对N的让行义务。"
+    },
+    {
+      "id": 5053,
+      "explanation": "说法正确。图中N左转并在路口中心等待，R由右侧横向直行、A由下方直行；R和A依次通过后，N即可完成左转。"
+    },
+    {
+      "id": 5061,
+      "explanation": "说法正确。图中R从A的右侧横向驶来，A必须遵守右侧先行原则，因此R相对于A有先行权。"
+    },
+    {
+      "id": 5062,
+      "explanation": "说法正确。图中N左转，可先驶到路口中心等待直行的A；N停在中心后，横向直行的R通过路口。"
+    },
+    {
+      "id": 5063,
+      "explanation": "说法正确。图中R位于A的右侧且沿横向虚线路径直行，A须让R先行，因此R在A之前通过。"
+    },
+    {
+      "id": 5064,
+      "explanation": "说法正确。图中N虽先取得进入路口的权利，但左转时要在中心等待A；R沿横向虚线路径先完成穿越，因此R最先驶离路口。"
+    },
+    {
+      "id": 5065,
+      "explanation": "说法错误。图中R位于A的右侧，应由A给R让行；R无须给A让行。"
+    },
+    {
+      "id": 5066,
+      "explanation": "说法错误。图中R沿横向虚线路径先于A通过，并在N完成左转前驶离路口；R是第一个完成穿越的车辆，并非最后一个。"
+    },
+    {
+      "id": 5067,
+      "explanation": "说法错误。图中R位于A的右侧，A必须让R先行，所以R在A之前而不是之后通过。"
+    },
+    {
+      "id": 5068,
+      "explanation": "说法错误。图中R沿横向虚线路径直行，无须在路口中心停车；需要驶入中心等待A的是左转车辆N。"
+    },
+    {
+      "id": 5069,
+      "explanation": "说法正确。图中R先沿其虚线路径完成穿越，N随后与D同时通过，因此N在R之后通过。"
+    },
+    {
+      "id": 5071,
+      "explanation": "说法正确。图中R先完成穿越，之后D与N沿互不冲突的虚线路径同时通过，所以D在R之后通过。"
+    },
+    {
+      "id": 5072,
+      "explanation": "说法正确。图中B左转时先驶到路口中心等待；B到达中心后，R才沿其虚线路径完成穿越。"
+    },
+    {
+      "id": 5073,
+      "explanation": "说法正确。图中R先通过；随后D与N的虚线路径互不冲突，二者可以同时通行。"
+    },
+    {
+      "id": 5075,
+      "explanation": "说法错误。图中R沿其虚线路径直接通过路口，并不驶入中心停车；驶到中心等待的是左转车辆B。"
+    },
+    {
+      "id": 5076,
+      "explanation": "说法错误。图中R先完成穿越，N是在R之后与D同时通过，因此N不是第一个通过的车辆。"
+    },
+    {
+      "id": 5077,
+      "explanation": "说法错误。图中R先完成穿越，随后D与N沿互不冲突的虚线路径同时通过；D不是第一个，但也不是因为必须给N让行。",
+      "note": "原解析错误称D必须给N让行；图中D、N在R之后同时通过。"
+    },
+    {
+      "id": 5078,
+      "explanation": "说法错误。图中D与B的虚线路径不构成D必须向B让行的关系；D可在R之后与N同时通过，无须等待B。"
+    },
+    {
+      "id": 5079,
+      "explanation": "说法错误。图中B与D之间不存在B必须向D让行的关系；B驶入中心等待的是N，D可同时与N通过。"
+    },
+    {
+      "id": 5080,
+      "explanation": "说法错误。图中R最先完成穿越，之后D与N同时通过，B最后完成转弯；R并非最后通过。"
+    },
+    {
+      "id": 5087,
+      "explanation": "说法错误。图中B从R的右侧驶来，应由R给B让行；B不必因为转弯而给直行的R让行。"
+    },
+    {
+      "id": 5089,
+      "explanation": "说法正确。图中有轨电车T、自行车M及汽车O、A的轨迹在路口内相互关联；无论是否享有先行权，所有驾驶员和骑行者都必须谨慎观察并避免冲突。"
+    },
+    {
+      "id": 5099,
+      "explanation": "说法正确。图中R从左下方驶入三岔路口，按图示虚线路径先于特殊车辆D和车辆A通过，因此R第一个通过。"
+    },
+    {
+      "id": 5100,
+      "explanation": "说法正确。图中三车的虚线路径相互交会，R先行，随后是标有“VEICOLO ECCEZIONALE”的D，A最后通过；顺序为R、D、A。"
+    },
+    {
+      "id": 5101,
+      "explanation": "说法错误。图中R先于特殊车辆D通过，D不能排在R之前；正确顺序是R、D、A。",
+      "translation": "在图中所示的交叉路口，车辆D在车辆R之前通过。"
+    },
+    {
+      "id": 5102,
+      "explanation": "说法错误。图中三车应依次按R、D、A的顺序通过，而不是D、A、R。",
+      "translation": "在图中所示的交叉路口，车辆按以下顺序通过：D, A, R。"
+    },
+    {
+      "id": 5103,
+      "translation": "在图中所示的交叉路口，车辆A和R同时通过。"
+    },
+    {
+      "id": 5104,
+      "explanation": "说法正确。图中是无优先标志的T形路口，B的行驶方向右侧没有来车，因此B无须给C、H让行。"
+    },
+    {
+      "id": 5105,
+      "explanation": "说法正确。图中B右侧无车而先行；H让其右侧的B通过后即可通行，C还须让右侧的H，因此H第二个通过。"
+    },
+    {
+      "id": 5106,
+      "explanation": "说法正确。图中C的右侧有H，H的右侧有B；按右侧先行原则，顺序为B、H、C，所以C最后驶离路口。",
+      "translation": "在图中所示的情况下，车辆C必须最后一个驶离交叉路口。"
+    },
+    {
+      "id": 5107,
+      "explanation": "说法正确。图中B位于横向道路右侧并向左行驶，其右侧没有来车，因此按右侧先行原则第一个通过。"
+    },
+    {
+      "id": 5108,
+      "explanation": "说法正确。图中H从C的右侧道路驶来，C必须遵守右侧先行原则给H让行。"
+    },
+    {
+      "id": 5109,
+      "explanation": "说法错误。图中H的右侧有B，必须先让B通过；正确顺序是B、H、C，所以H不是第一个。"
+    },
+    {
+      "id": 5110,
+      "explanation": "说法错误。图中C的右侧有H，不能与B同时优先通过；车辆依次按B、H、C通行。"
+    },
+    {
+      "id": 5111,
+      "explanation": "说法错误。图中H只须先让其右侧的B，随后便在C之前通过；顺序是B、H、C，并非等B和C都通过后才进入。",
+      "translation": "在图中所示的情况下，车辆H必须在车辆B和C通过之后才能进入交叉路口。"
+    },
+    {
+      "id": 5112,
+      "explanation": "说法错误。图中H确实先于C通过，但依据是H位于C的右侧，而不是因为H是公交车；公交车在这种无专门标志的路口不因车型自动取得先行权。"
+    },
+    {
+      "id": 5113,
+      "explanation": "说法错误。图中C的右侧有H，H的右侧又有B；正确顺序是B、H、C，C最后而不是最先通过。"
+    },
+    {
+      "id": 5114,
+      "explanation": "说法正确。图中C右侧无车而先行；C通过后A取得先行权，P最后通过，因此顺序为C、A、P。",
+      "translation": "在图中所示的交叉路口，车辆按以下顺序通过：C, A, P。"
+    },
+    {
+      "id": 5115,
+      "explanation": "说法正确。图中C右侧无车并最先通过，A随后通行，所以A在C之后通过。",
+      "translation": "在图中所示的交叉路口，车辆A在车辆C之后通过。"
+    },
+    {
+      "id": 5116,
+      "explanation": "说法正确。图中车辆按C、A、P的顺序通过，因此P最后通过。",
+      "translation": "在图中所示的交叉路口，车辆P最后一个通过。"
+    },
+    {
+      "id": 5117,
+      "translation": "在图中所示的交叉路口，车辆按以下顺序通过：P, C, A。"
+    },
+    {
+      "id": 5118,
+      "translation": "在图中所示的交叉路口，车辆P在车辆C之前通过。"
+    },
+    {
+      "id": 5119,
+      "translation": "在图中所示的交叉路口，车辆P第一个通过，因为它的右侧没有车。"
+    },
+    {
+      "id": 5120,
+      "explanation": "说法正确。图中五辆车的虚线路径和相对位置表明应按右侧先行原则依次通行，顺序为A、E、V、H、C。",
+      "translation": "在图中所示的交叉路口，车辆按以下顺序驶离：A, E, V, H, C。"
+    },
+    {
+      "id": 5121,
+      "translation": "在图中所示的交叉路口，车辆V有相对于车辆H的先行权。"
+    },
+    {
+      "id": 5122,
+      "translation": "在图中所示的交叉路口，车辆C必须给车辆H让行。"
+    },
+    {
+      "id": 5123,
+      "translation": "在图中所示的交叉路口，车辆E在车辆H之前通过。"
+    },
+    {
+      "id": 5124,
+      "translation": "在图中所示的交叉路口，车辆H在车辆A, E, V之后通过。"
+    },
+    {
+      "id": 5125,
+      "explanation": "说法正确。图中A的行驶方向右侧没有来车，按右侧先行原则，A第一个通过路口。",
+      "translation": "在图中所示的交叉路口，车辆A第一个通过。"
+    },
+    {
+      "id": 5126,
+      "translation": "在图中所示的交叉路口，车辆按以下顺序驶离：A, H, C, E, V。"
+    },
+    {
+      "id": 5127,
+      "translation": "在图中所示的交叉路口，车辆按以下顺序驶离：A, E, C, V, H。"
+    },
+    {
+      "id": 5128,
+      "translation": "在图中所示的交叉路口，车辆V必须等待车辆A, E, H通过。"
+    },
+    {
+      "id": 5129,
+      "translation": "在图中所示的交叉路口，车辆A, V和C同时通过。"
+    },
+    {
+      "id": 5130,
+      "translation": "在图中所示的交叉路口，车辆V在车辆C和H之后通过。"
+    },
+    {
+      "id": 5131,
+      "explanation": "说法正确。图中五辆车沿虚线路径通行，按右侧先行关系依次为C、A、L、R、E。",
+      "translation": "在需要穿过图中所示的交叉路口时，车辆必须按以下顺序通过：C, A, L, R, E。"
+    },
+    {
+      "id": 5132,
+      "explanation": "说法正确。图中C的行驶方向右侧没有来车，按右侧先行原则，C第一个通过。",
+      "translation": "在需要穿过图中所示的交叉路口时，车辆C第一个通过。"
+    },
+    {
+      "id": 5133,
+      "translation": "在需要穿过图中所示的交叉路口时，车辆A在车辆C之后立即通过。",
+      "explanation": "在图示交叉路口，车辆A在车辆C之后立即通过。当车辆C通过后，车辆A的右侧就没有其他车辆了，根据“右侧先行”原则，A可以通行。"
+    },
+    {
+      "id": 5134,
+      "translation": "在需要穿过图中所示的交叉路口时，车辆E必须给车辆R和L让行。",
+      "explanation": "在图示交叉路口，车辆E必须为车辆R和L让行。根据通行顺序（C, A, L, R, E），车辆R和L都在E之前通过，因此E必须等待它们通过。"
+    },
+    {
+      "id": 5135,
+      "translation": "在需要穿过图中所示的交叉路口时，车辆A在车辆L之前通过。",
+      "explanation": "在图示交叉路口，车辆A在车辆L之前通过。根据正确的通行顺序（C, A, L, R, E），A是第二个通过，L是第三个，所以A先于L通过。"
+    },
+    {
+      "id": 5136,
+      "translation": "在需要穿过图中所示的交叉路口时，车辆L在车辆R之前通过。",
+      "explanation": "在图示交叉路口，车辆L在车辆R之前通过。根据正确的通行顺序（C, A, L, R, E），L是第三个通过，R是第四个，所以L先于R通过。"
+    },
+    {
+      "id": 5137,
+      "translation": "在需要穿过图中所示的交叉路口时，车辆L在车辆A之后通过。",
+      "explanation": "在图示交叉路口，车辆L在车辆A之后通过。根据正确的通行顺序（C, A, L, R, E），A是第二个通过，L是第三个，所以L在A之后通过。"
+    },
+    {
+      "id": 5138,
+      "explanation": "说法错误。图中E虽然最后通过，但它直接需要让行的是R和L，并不存在必须给A让行的关系；车辆A较早通过不等于E对A负有让行义务。",
+      "translation": "在需要穿过图中所示的交叉路口时，车辆E必须给车辆A让行。"
+    },
+    {
+      "id": 5139,
+      "explanation": "说法错误。图中E的右侧有R，不能最先通过；正确通行顺序是C、A、L、R、E。",
+      "translation": "在需要穿过图中所示的交叉路口时，车辆必须按以下顺序通过：E, C, A, L, R。"
+    },
+    {
+      "id": 5140,
+      "explanation": "说法错误。图中正确顺序是C、A、L、R、E，A在E之前通过，无须等待E。",
+      "translation": "在需要穿过图中所示的交叉路口时，车辆A必须等待车辆E通过。"
+    },
+    {
+      "id": 5141,
+      "explanation": "说法错误。图中车辆应按先行关系依次穿越；并非任何车辆都可以驶入路口中心停车，只有为完成特定转弯且不妨碍先行车辆时才可进入等待。",
+      "translation": "在需要穿过图中所示的交叉路口时，任何车辆都可以进入交叉路口并在其中心停下。"
+    },
+    {
+      "id": 5142,
+      "explanation": "说法错误。图中C最先通过，A随后通过，R则在L之后通行；C和R既不在A之后同时通过，也不属于同一通行阶段。",
+      "translation": "在需要穿过图中所示的交叉路口时，车辆C和R在车辆A通过之后同时通行。"
+    }
+  ],
+  "severe": [
+    {
+      "id": 5010,
+      "type": "image_contradiction",
+      "detail": "642.gif中A、R入口均设有让行标志和白色三角让行标线，原解析却称路口没有特定先行权标志。"
+    },
+    {
+      "id": 5027,
+      "type": "image_contradiction",
+      "detail": "原解析称路口没有特定标志并仅按右侧先行；图中A入口清楚设有让行标志和白色三角让行标线。"
+    },
+    {
+      "id": 5028,
+      "type": "answer_contradiction",
+      "detail": "原解析认定C、R、A、H的正确命题不成立，并给出C、R、H、A，与answer=1相反。"
+    },
+    {
+      "id": 5029,
+      "type": "answer_contradiction",
+      "detail": "原解析称H不需要等待A且命题不成立，与answer=1相反。"
+    },
+    {
+      "id": 5030,
+      "type": "answer_contradiction",
+      "detail": "原解析称H不是最后通过，与answer=1相反。"
+    },
+    {
+      "id": 5031,
+      "type": "image_contradiction",
+      "detail": "原解析称路口没有特定标志；图中A、H入口均清楚可见让行标志和白色三角让行标线。"
+    },
+    {
+      "id": 5033,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定题中C、R、H、A顺序符合规则，与answer=0相反。"
+    },
+    {
+      "id": 5035,
+      "type": "answer_contradiction",
+      "detail": "原解析称A必须等待H，与answer=0相反；图示正确关系是H让A。"
+    },
+    {
+      "id": 5052,
+      "type": "answer_contradiction",
+      "detail": "原解析称N相对于R没有先行权，与answer=1相反。"
+    },
+    {
+      "id": 5053,
+      "type": "image_contradiction",
+      "detail": "原解析把图中沿横向虚线路径直行的R说成右转车辆。"
+    },
+    {
+      "id": 5061,
+      "type": "answer_contradiction",
+      "detail": "原解析称R相对于A没有先行权，与answer=1相反。"
+    },
+    {
+      "id": 5062,
+      "type": "answer_contradiction",
+      "detail": "原解析否定R在N停于路口中心后穿越的命题，并把N误说成直行，与answer=1及图示轨迹相反。"
+    },
+    {
+      "id": 5063,
+      "type": "answer_contradiction",
+      "detail": "原解析称R不能在A之前通过，与answer=1相反。"
+    },
+    {
+      "id": 5064,
+      "type": "answer_contradiction",
+      "detail": "原解析称R不是第一个完成穿越，与answer=1相反。"
+    },
+    {
+      "id": 5065,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定R必须给A让行，与answer=0相反。"
+    },
+    {
+      "id": 5066,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定R最后通过，与answer=0相反。"
+    },
+    {
+      "id": 5067,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定R在A之后通过，与answer=0相反。"
+    },
+    {
+      "id": 5068,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定R可进入路口中心停车等待，与answer=0相反。"
+    },
+    {
+      "id": 5071,
+      "type": "image_contradiction",
+      "detail": "原解析称D在N通过之后才通行；图中及固定结论为D与N在R之后同时通过。"
+    },
+    {
+      "id": 5072,
+      "type": "image_contradiction",
+      "detail": "原解析把R说成最后通行；图示关系是B先到中心，随后R先完成穿越。"
+    },
+    {
+      "id": 5073,
+      "type": "answer_contradiction",
+      "detail": "原解析明确称D与N不是同时而是相继通过，与answer=1相反。"
+    },
+    {
+      "id": 5075,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定R进入路口中心并停车，与answer=0相反。"
+    },
+    {
+      "id": 5076,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定N第一个完成穿越，与answer=0相反。"
+    },
+    {
+      "id": 5077,
+      "type": "image_contradiction",
+      "detail": "648.gif中D、N沿互不冲突的虚线路径同时通过，原解析却称D必须给N让行。"
+    },
+    {
+      "id": 5078,
+      "type": "image_contradiction",
+      "detail": "原解析把D说成直行、B说成对向左转并据此判定D优先，图中虚线路径不支持这种车辆关系。"
+    },
+    {
+      "id": 5079,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定B必须给D让行，与answer=0相反。"
+    },
+    {
+      "id": 5080,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定R最后通过，与answer=0相反。"
+    },
+    {
+      "id": 5087,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定B必须给R让行，与answer=0相反。"
+    },
+    {
+      "id": 5099,
+      "type": "image_contradiction",
+      "detail": "原解析称R与D轨迹互不交叉并可同时通行；图中两车虚线路径交会，固定顺序为R先于D。"
+    },
+    {
+      "id": 5100,
+      "type": "image_contradiction",
+      "detail": "原解析称R与D可以同时通行；图中虚线路径交会，固定通行顺序为R、D、A。"
+    },
+    {
+      "id": 5101,
+      "type": "image_contradiction",
+      "detail": "原解析以R与D同时通行为由否定D先于R；图中两车应按R、D先后通行。"
+    },
+    {
+      "id": 5102,
+      "type": "image_contradiction",
+      "detail": "原解析仍称R与D同时先行；图中三车正确先后顺序为R、D、A。"
+    },
+    {
+      "id": 5104,
+      "type": "image_contradiction",
+      "detail": "原解析把B所在横向道路称为主路、把同在横向道路的C称为次要道路；图中没有优先标志，应适用右侧先行。"
+    },
+    {
+      "id": 5105,
+      "type": "image_contradiction",
+      "detail": "原解析以不存在的主路/次路关系论证顺序；图中无优先标志，B、H、C顺序来自右侧先行。"
+    },
+    {
+      "id": 5106,
+      "type": "image_contradiction",
+      "detail": "原解析虚构B在主路、C与H在次路；图中无优先标志且B、C同在横向道路。"
+    },
+    {
+      "id": 5107,
+      "type": "image_contradiction",
+      "detail": "原解析称B因在主路上而先行；图中没有主路优先标志，B先行是因为其右侧无车。"
+    },
+    {
+      "id": 5108,
+      "type": "image_contradiction",
+      "detail": "原解析以主路/次路及错误转弯关系论证C让H；图中应按H位于C右侧判断。"
+    },
+    {
+      "id": 5109,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定H第一个通过，与answer=0相反；后文还虚构B在主路。"
+    },
+    {
+      "id": 5110,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定B与C最先同时通过，与answer=0相反；图中C须让其右侧的H。"
+    },
+    {
+      "id": 5111,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定H在B、C通过后才进入，与answer=0相反。"
+    },
+    {
+      "id": 5112,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定H因公交车身份取得先行权，与answer=0相反。"
+    },
+    {
+      "id": 5113,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定C第一个通过，与answer=0相反；后文还虚构B在主路。"
+    },
+    {
+      "id": 5114,
+      "type": "answer_contradiction",
+      "detail": "原解析称题中C、A、P顺序不符合规则并给出C、P、A，与answer=1相反。"
+    },
+    {
+      "id": 5115,
+      "type": "image_contradiction",
+      "detail": "原解析称A必须给P让行；固定图示顺序为C、A、P，A应先于P。"
+    },
+    {
+      "id": 5116,
+      "type": "answer_contradiction",
+      "detail": "原解析称最后通过的是A而非P，与answer=1相反。"
+    },
+    {
+      "id": 5120,
+      "type": "image_contradiction",
+      "detail": "原解析把图中A的虚线路径说成右转；图中A并非右转，正确顺序依据车辆相对位置为A、E、V、H、C。"
+    },
+    {
+      "id": 5125,
+      "type": "image_contradiction",
+      "detail": "原解析把图中A的行驶轨迹说成右转；图片虚线路径不支持该描述。"
+    },
+    {
+      "id": 5131,
+      "type": "image_contradiction",
+      "detail": "原解析称C右转且不与其他轨迹冲突；图中C的虚线路径并非右转。"
+    },
+    {
+      "id": 5132,
+      "type": "image_contradiction",
+      "detail": "原解析把最先通过的C说成正在右转；图中C的虚线路径并非右转。"
+    },
+    {
+      "id": 5138,
+      "type": "answer_contradiction",
+      "detail": "原解析肯定E必须给A让行，与answer=0相反；E最后通过不等于对A负有直接让行义务。"
+    },
+    {
+      "id": 5139,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定E、C、A、L、R的错误顺序，与answer=0相反。"
+    },
+    {
+      "id": 5140,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定A必须等待E，与answer=0相反。"
+    },
+    {
+      "id": 5141,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定任何车辆都可进入路口中心停车，与answer=0相反。"
+    },
+    {
+      "id": 5142,
+      "type": "answer_contradiction",
+      "detail": "原解析首句肯定C与R在A之后同时通过，与answer=0相反。"
+    }
+  ]
+}

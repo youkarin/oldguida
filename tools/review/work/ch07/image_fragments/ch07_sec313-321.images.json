@@ -1,0 +1,42 @@
+{
+  "chapter": 7,
+  "slice": "ch07_sec313-321",
+  "section_ids": [
+    313, 315, 316, 317, 318
+  ],
+  "question_ids": [
+    2829, 2830, 2831, 2832, 2833, 2834, 2835, 2836, 2837, 2838,
+    2839, 2840, 2841, 2842,
+    2851, 2852, 2853, 2854, 2855, 2856, 2857, 2858, 2859, 2860,
+    2861, 2862, 2863, 2864, 2865, 2866, 2867, 2868, 2869, 2870,
+    2871, 2872, 2873, 2874, 2875, 2876, 2877, 2878, 2879, 2880,
+    2881, 2882, 2883, 2884, 2885, 2886, 2887
+  ],
+  "images": [
+    {
+      "section_id": 313,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\313.gif",
+      "observed": "两个黑色圆形灯壳并排设置，中间有竖直白色分隔板；两灯中央均为红色灯面，左灯呈鲜红亮起状态、右灯较暗，表现两盏红灯交替闪烁。"
+    },
+    {
+      "section_id": 315,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\315.gif",
+      "observed": "交警站在路口中央，身体和面部正对观察者，双臂向左右水平伸直；该方向面对交警的正面，对应停车方向。"
+    },
+    {
+      "section_id": 316,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\316.gif",
+      "observed": "交警以侧身姿态站在路口，头部和躯干呈侧面，双臂沿同一轴线向身体两侧张开；与其手臂方向平行的车流可通行。"
+    },
+    {
+      "section_id": 317,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\317.gif",
+      "observed": "交警正面站立，一只手臂垂直向上举起，另一只手臂自然垂在身体一侧；该手势相当于固定黄灯。"
+    },
+    {
+      "section_id": 318,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\318.gif",
+      "observed": "交警斜向站在路口，一只手臂向侧方伸展，另一只手臂朝另一侧斜向下伸展，两臂构成不对称直角；这不是双臂水平张开的姿势。"
+    }
+  ]
+}

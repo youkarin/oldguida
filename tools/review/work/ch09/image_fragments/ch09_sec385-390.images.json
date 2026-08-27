@@ -1,0 +1,104 @@
+{
+  "chapter": 9,
+  "slice": "ch09_sec385-390",
+  "section_ids": [
+    385,
+    386,
+    387,
+    388,
+    389,
+    390
+  ],
+  "question_ids": [
+    3512,
+    3513,
+    3514,
+    3515,
+    3516,
+    3517,
+    3518,
+    3519,
+    3520,
+    3521,
+    3522,
+    3523,
+    3524,
+    3525,
+    3526,
+    3527,
+    3528,
+    3529,
+    3530,
+    3531,
+    3532,
+    3533,
+    3534,
+    3535,
+    3536,
+    3537,
+    3538,
+    3539,
+    3540,
+    3541,
+    3542,
+    3543,
+    3544,
+    3545,
+    3546,
+    3547,
+    3548,
+    3549,
+    3550,
+    3551,
+    3552,
+    3553,
+    3554,
+    3555,
+    3556,
+    3557,
+    3558,
+    3559,
+    3560,
+    3561,
+    3562,
+    3563,
+    3564,
+    3565,
+    3566,
+    3567,
+    3568,
+    3569
+  ],
+  "images": [
+    {
+      "section_id": 385,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\385.gif",
+      "observed": "黄底红边三角形危险标志，中央黑色图案为一名施工人员持工具铲土，旁边有土堆；没有车辆、方向箭头或附牌。"
+    },
+    {
+      "section_id": 386,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\386.gif",
+      "observed": "黄底红边三角形临时危险标志，内部自上而下排列红、黄、绿三个圆形灯面；静态图片显示中央为黄色灯面，但无法直接呈现其闪烁状态。"
+    },
+    {
+      "section_id": 387,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\387.gif",
+      "observed": "黄色横向矩形临时指示牌内画有通往LUCCA的直行路线及从右侧绕行后重新汇入的路线，中央叠加红边圆形货车“7 t”限制图案；牌面还列有LA LIMA、LE PIASTRE、S. MARCO PISTOIESE和PONTEPETRI等地点，没有施工人员或工地图案。"
+    },
+    {
+      "section_id": 388,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\388.gif",
+      "observed": "黄色方形临时指示牌，上方为粗黑色向右箭头，下方为黑色货车侧面图案；没有禁令圆边、重量数字或停车符号。"
+    },
+    {
+      "section_id": 389,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\389.gif",
+      "observed": "黄色方形临时车道使用牌内有两支黑色直行箭头；左侧箭头下只有小汽车图案，右侧箭头下依次有小汽车和货车图案，表示按车辆类别分配可用车道。"
+    },
+    {
+      "section_id": 390,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\390.gif",
+      "observed": "黄色方形临时指示牌内左侧为黑色直行箭头，中间黑色箭头向左弯入直行车道，右侧有向左收窄的红色封闭带，表示右侧车道关闭并向左并道。"
+    }
+  ]
+}

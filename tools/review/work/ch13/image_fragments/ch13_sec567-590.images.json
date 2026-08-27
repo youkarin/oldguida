@@ -1,0 +1,60 @@
+{
+  "chapter": 13,
+  "slice": "ch13_sec567-590",
+  "section_ids": [
+    569,
+    570,
+    587,
+    588,
+    589
+  ],
+  "question_ids": [
+    4486,
+    4487,
+    4488,
+    4489,
+    4490,
+    4491,
+    4492,
+    4493,
+    4494,
+    4495,
+    4496,
+    4497,
+    4498,
+    4499,
+    4500,
+    4501,
+    4502,
+    4592,
+    4593,
+    4594
+  ],
+  "images": [
+    {
+      "section_id": 569,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\569.gif",
+      "observed": "上方为灰色双向道路，中央有白色虚线；下方斜线区域内有三辆标字母的车，蓝色B车与道路平行，红色E车和绿色S车均呈左上至右下方向斜停，靠道路一端朝向上方车行道。"
+    },
+    {
+      "section_id": 570,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\570.gif",
+      "observed": "画面与569.gif相同：上方灰色道路由中央白色虚线分隔双向交通，下方斜线区域内的蓝色B车平行停放，红色E车和绿色S车斜向停放并靠近上方车行道。"
+    },
+    {
+      "section_id": 587,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\587.gif",
+      "observed": "红色八角形停车让行标志，中央以大号白色字母写有STOP，外缘有细白色和灰色边框。"
+    },
+    {
+      "section_id": 588,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\588.gif",
+      "observed": "白底红边的正三角形危险标志，中央为黑色X形交叉符号，表示前方交叉路口适用右侧优先规则。"
+    },
+    {
+      "section_id": 589,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\589.gif",
+      "observed": "白底红边的正三角形危险标志，中央黑色竖向道路明显粗于左右横向支路，表示前方与次要道路相交且本车所在道路享有优先权。"
+    }
+  ]
+}

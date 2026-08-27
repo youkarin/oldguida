@@ -1,0 +1,38 @@
+{
+  "chapter": 18,
+  "slice": "ch18_sec780-786",
+  "section_ids": [780, 781, 782, 783, 784, 785],
+  "question_ids": [5942, 5943, 5944, 5945, 5946, 5947, 5948, 5949, 5950, 5951, 5952, 5953, 5954, 5955, 5956, 5957, 5958, 5959, 5960, 5961, 5962, 5963, 5964, 5965, 5966, 5967, 5968, 5969, 5970, 5971, 5972, 5973, 5974, 5975, 5976, 5977, 5978, 5979, 5980, 5981, 5982, 5983, 5984, 5985, 5986, 5987, 5988, 5989, 5990, 5991, 5992, 5993],
+  "images": [
+    {
+      "section_id": 780,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\780.gif",
+      "observed": "白底中央是黑色双层空心三角形，为危险警示灯开关及其工作指示符号。"
+    },
+    {
+      "section_id": 781,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\781.gif",
+      "observed": "白底中央是黑色温度计，温度计下方有两层波浪液体线，表示发动机冷却液温度。"
+    },
+    {
+      "section_id": 782,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\782.gif",
+      "observed": "白底中央是黑色长方形蓄电池轮廓，内部左侧负号、右侧正号，表示蓄电池充电系统。"
+    },
+    {
+      "section_id": 783,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\783.gif",
+      "observed": "白底中央是黑色机油壶，壶嘴下方有一滴油滴，表示发动机润滑油压力。"
+    },
+    {
+      "section_id": 784,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\784.gif",
+      "observed": "白底中央是圆圈内黑色感叹号，圆圈两侧各有一条弧线，表示制动系统警告。"
+    },
+    {
+      "section_id": 785,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\785.gif",
+      "observed": "白底中央是黑色坐姿人形，斜带从肩部跨过躯干并在腰部横向连接，表示安全带警告。"
+    }
+  ]
+}

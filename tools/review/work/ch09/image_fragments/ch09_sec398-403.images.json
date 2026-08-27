@@ -1,0 +1,105 @@
+{
+  "chapter": 9,
+  "slice": "ch09_sec398-403",
+  "section_ids": [
+    398,
+    399,
+    400,
+    401,
+    402,
+    403
+  ],
+  "question_ids": [
+    3634,
+    3635,
+    3636,
+    3637,
+    3638,
+    3639,
+    3640,
+    3641,
+    3642,
+    3643,
+    3644,
+    3645,
+    3646,
+    3647,
+    3648,
+    3649,
+    3650,
+    3651,
+    3652,
+    3653,
+    3654,
+    3655,
+    3656,
+    3657,
+    3658,
+    3659,
+    3660,
+    3661,
+    3662,
+    3663,
+    3664,
+    3665,
+    3666,
+    3667,
+    3668,
+    3669,
+    3670,
+    3671,
+    3672,
+    3673,
+    3674,
+    3675,
+    3676,
+    3677,
+    3678,
+    3679,
+    3680,
+    3681,
+    3682,
+    3683,
+    3684,
+    3685,
+    3686,
+    3687,
+    3688,
+    3689,
+    3690,
+    3691,
+    3692
+  ],
+  "images": [
+    {
+      "section_id": 398,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\398.gif",
+      "observed": "白色背景上是一块竖向黄色长方形反光板，安装在细杆或隧道侧缘支架顶部；下方灰线示意安装基面，图中没有箭头、文字或自发光灯具。"
+    },
+    {
+      "section_id": 399,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\399.gif",
+      "observed": "一根细长的山区积雪道路轮廓标，杆身由黑色与黄色区段交替组成，顶部和中部共有三段醒目的黄色区域，竖直安装在灰色地面线上。"
+    },
+    {
+      "section_id": 400,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\400.gif",
+      "observed": "横向长方形急弯轮廓板由多个黑白相间的左向箭头连续组成，箭头尖端全部朝左；板体由两根支柱支撑，表示左向急弯或发卡弯的走向。"
+    },
+    {
+      "section_id": 401,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\401.gif",
+      "observed": "单个方形模块化弯道轮廓标为黑底白色右向箭头，箭头尖端朝右，板面安装在一根细支柱上；实际可由多个同类模块沿右向危险弯道连续设置。"
+    },
+    {
+      "section_id": 402,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\402.gif",
+      "observed": "横向长方形T形路口轮廓板为黑白相间图案，以中央白色菱形为界，左半部箭头朝左、右半部箭头朝右；板体由两根支柱支撑，表示正前方不能直行。"
+    },
+    {
+      "section_id": 403,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\403.gif",
+      "observed": "专用障碍物轮廓标安装在灰色交通岛或障碍物基座前端：顶部是蓝底圆形白色右下绕行箭头，下方为黄色反光面和一条白色竖向反光条，规定车辆从障碍物右侧通过。"
+    }
+  ]
+}

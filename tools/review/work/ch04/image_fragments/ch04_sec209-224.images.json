@@ -1,0 +1,107 @@
+{
+  "chapter": 4,
+  "slice": "ch04_sec209-224",
+  "section_ids": [
+    209, 210, 211, 212, 213, 214, 215, 216,
+    217, 218, 219, 220, 221, 222, 223, 224
+  ],
+  "question_ids": [
+    2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012,
+    2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,
+    2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032,
+    2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040, 2041, 2042,
+    2043, 2044, 2045, 2046, 2047, 2048, 2049, 2050, 2051, 2052,
+    2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062,
+    2063, 2064, 2065, 2066, 2067, 2068, 2069, 2070, 2071, 2072,
+    2073, 2074, 2075, 2076, 2077, 2078, 2079, 2080, 2081, 2082,
+    2083, 2084, 2085, 2086, 2087, 2088, 2089, 2090, 2091, 2092,
+    2093, 2094, 2095, 2096, 2097, 2098, 2099, 2100, 2101, 2102,
+    2103, 2104, 2105, 2106, 2107, 2108, 2109, 2110, 2111, 2112,
+    2113, 2114, 2115, 2116, 2117, 2118, 2119, 2120, 2121, 2122,
+    2123, 2124, 2125, 2126, 2127, 2128, 2129, 2130, 2131, 2132,
+    2133, 2134, 2135, 2136, 2137, 2138, 2139, 2140, 2141, 2142,
+    2143, 2144, 2145, 2146, 2147, 2148, 2149, 2150, 2151
+  ],
+  "images": [
+    {
+      "section_id": 209,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\209.gif",
+      "observed": "蓝底圆形强制标志，中央为白色数字“30”，没有红边、斜杠或附牌。"
+    },
+    {
+      "section_id": 210,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\210.gif",
+      "observed": "蓝底圆形标志，中央为白色数字“30”，其上覆盖一条从左下向右上的粗红色斜杠，表示最低限速结束。"
+    },
+    {
+      "section_id": 211,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\211.gif",
+      "observed": "蓝底圆形强制标志，中央为一只装有防滑链的白色轮胎图案，没有文字、斜杠或附牌。"
+    },
+    {
+      "section_id": 212,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\212.gif",
+      "observed": "蓝底圆形强制标志，中央只有一个白色行人图案，表示人行专用道。"
+    },
+    {
+      "section_id": 213,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\213.gif",
+      "observed": "蓝底圆形标志，中央为白色行人图案，其上覆盖一条从左下向右上的粗红色斜杠，表示人行专用道结束。"
+    },
+    {
+      "section_id": 214,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\214.gif",
+      "observed": "蓝底圆形强制标志，中央只有一辆白色自行车图案，表示自行车专用道。"
+    },
+    {
+      "section_id": 215,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\215.gif",
+      "observed": "蓝底圆形标志，中央为白色自行车图案，其上覆盖一条从左下向右上的粗红色斜杠，表示自行车专用道结束。"
+    },
+    {
+      "section_id": 216,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\216.gif",
+      "observed": "蓝底圆形强制标志，白色竖线将牌面分为左右两侧；左侧为白色行人，右侧为白色自行车，表示相邻而分隔的人行与自行车专用道。"
+    },
+    {
+      "section_id": 217,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\217.gif",
+      "observed": "蓝底圆形标志，白色竖线分隔左侧行人与右侧自行车图案，整组图案上覆盖从左下向右上的粗红色斜杠，表示相邻专用道结束。"
+    },
+    {
+      "section_id": 218,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\218.gif",
+      "observed": "蓝底圆形强制标志，白色行人图案在上、白色自行车图案在下，二者之间没有分隔线，表示行人与自行车共用同一路径。"
+    },
+    {
+      "section_id": 219,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\219.gif",
+      "observed": "蓝底圆形标志，白色行人在上、自行车在下且无分隔线，图案上覆盖一条从左下向右上的粗红色斜杠，表示共用路径结束。"
+    },
+    {
+      "section_id": 220,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\220.gif",
+      "observed": "蓝底圆形强制标志，中央为白色骑手骑马的侧面图案，表示驮畜和骑乘牲畜专用道。"
+    },
+    {
+      "section_id": 221,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\221.gif",
+      "observed": "蓝底圆形标志，中央为白色骑手骑马图案，其上覆盖一条从左下向右上的粗红色斜杠，表示驮畜和骑乘牲畜专用道结束。"
+    },
+    {
+      "section_id": 222,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\222.gif",
+      "observed": "红边白底圆形标志，中央有一条水平黑色粗横条，上方写“DOGANA”、下方写“DOUANE”；图中没有另一个停车让行标志或附牌。"
+    },
+    {
+      "section_id": 223,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\223.gif",
+      "observed": "红边白底圆形标志，中央有一条水平黑色粗横条，上方写“ALT”、下方写“POLIZIA”，表示警察道路检查站停车。"
+    },
+    {
+      "section_id": 224,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\224.gif",
+      "observed": "红边白底圆形标志，中央有一条水平黑色粗横条，上方写“ALT”、下方写“STAZIONE”，表示高速公路收费站停车。"
+    }
+  ]
+}

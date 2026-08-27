@@ -1,0 +1,121 @@
+{
+  "chapter": 14,
+  "slice": "ch14_sec607-625",
+  "section_ids": [
+    607, 608, 609, 610, 611, 612, 613, 614, 615, 616,
+    617, 618, 619, 620, 621, 622, 623, 624, 625
+  ],
+  "question_ids": [
+    4728, 4729, 4730, 4731, 4732, 4733, 4734, 4735, 4736, 4737,
+    4738, 4739, 4740, 4741, 4742, 4743, 4744, 4745, 4746, 4747,
+    4748, 4749, 4750, 4751, 4752, 4753, 4754, 4755, 4756, 4757,
+    4758, 4759, 4760, 4761, 4762, 4763, 4764, 4765, 4766, 4767,
+    4768, 4769, 4770, 4771, 4772, 4773, 4774, 4775, 4776, 4777,
+    4778, 4779, 4780, 4781, 4782, 4783, 4784, 4785, 4786, 4787,
+    4788, 4789, 4790, 4791, 4792, 4793, 4794, 4795, 4796, 4797,
+    4798, 4799, 4800, 4801, 4802, 4803, 4804, 4805, 4806, 4807,
+    4808, 4809, 4810, 4811, 4812, 4813, 4814, 4815, 4816, 4817,
+    4818, 4819, 4820, 4821, 4822, 4823, 4824, 4825, 4826, 4827,
+    4828, 4829, 4830, 4831, 4832, 4833, 4834, 4835, 4836, 4837,
+    4838, 4839, 4840, 4841, 4842, 4843, 4844, 4845, 4846, 4847,
+    4848, 4849, 4850, 4851, 4852, 4853, 4854, 4855, 4856, 4857,
+    4858, 4859, 4860, 4861, 4862, 4863, 4864, 4865, 4866
+  ],
+  "images": [
+    {
+      "section_id": 607,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\607.gif",
+      "observed": "无优先标志的三向交叉路口，蓝色R车从左侧、红色T车从右侧、黄色A车从左上方驶入，均为普通汽车且路面无电车轨道；虚线轨迹对应正确顺序R、A、T。"
+    },
+    {
+      "section_id": 608,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\608.gif",
+      "observed": "无优先标志、无主次道路区分的交叉路口，蓝色B车从左、红色S车从右、黄色T车从左上方驶入；按右方来车优先关系顺序为B、T、S。"
+    },
+    {
+      "section_id": 609,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\609.gif",
+      "observed": "无优先标志的交叉路口，蓝色L车从左、黄色C车从上、红色H车从右驶入；L为普通小汽车，图中没有轨道，正确顺序为L、C、H。"
+    },
+    {
+      "section_id": 610,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\610.gif",
+      "observed": "十字路口中，黄色R车从左驶入且为普通小汽车，红色D车从上方驶入并标有AUTOCARRO，蓝色F车从右侧驶入并标有FILOBUS；路面无轨道，顺序为R、D、F。"
+    },
+    {
+      "section_id": 611,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\611.gif",
+      "observed": "无优先标志的三向交叉路口，红色R车从上方、黄色A车从右侧、蓝色C车从左下方驶入，虚线轨迹交汇；按右方来车优先关系顺序为R、A、C。"
+    },
+    {
+      "section_id": 612,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\612.gif",
+      "observed": "无优先标志的多向交叉路口，红色R车在上方、黄色B车在右侧、黑色D车在右下、蓝色T车在左下；四车均为普通道路车辆且无轨道，顺序为R、B、D、T。"
+    },
+    {
+      "section_id": 613,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\613.gif",
+      "observed": "无优先标志的多向交叉路口，红色S车在上方、黄色B车在右侧、蓝色L车在右下、绿色D车在左下；S是普通小汽车，图中无轨道，顺序为S、B、L、D。"
+    },
+    {
+      "section_id": 614,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\614.gif",
+      "observed": "无优先标志的三向交叉路口，红色E车从上方、黄色C车从右侧、蓝色L车从右下方驶入；按右方来车优先关系顺序为E、C、L。"
+    },
+    {
+      "section_id": 615,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\615.gif",
+      "observed": "十字路口中，黑色L车从右、蓝色D车从左驶入，绿色A车和红色C车从下方两条并列路线驶入；D是普通汽车且无轨道，L先行，A与C随后同时通过，D最后。"
+    },
+    {
+      "section_id": 616,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\616.gif",
+      "observed": "画面与615.gif相同：黑色L车在右、蓝色D车在左，绿色A车与红色C车从下方并列驶入；L先行，A和C可以同时通过，D最后，图中没有电车或轨道。"
+    },
+    {
+      "section_id": 617,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\617.gif",
+      "observed": "无优先标志的十字路口，红色货车B从左侧、蓝色D车从下方驶入，绿色R车和黑色L车位于右侧入口；就题组比较的B、D、R而言，R先于D，D先于B。"
+    },
+    {
+      "section_id": 618,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\618.gif",
+      "observed": "无优先标志、无主次道路区分的三向交叉路口，黄色R车从右侧、蓝色A车从右下、红色C车从左下驶入；按右方来车优先关系顺序为R、A、C。"
+    },
+    {
+      "section_id": 619,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\619.gif",
+      "observed": "画面与618.gif相同：黄色R车在右侧、蓝色A车在右下、红色C车在左下，路口无优先标志；正确顺序为R、A、C。"
+    },
+    {
+      "section_id": 620,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\620.gif",
+      "observed": "带南北向中央分隔设施的十字路口，蓝色P车从左、红色B车从上、黄色C车从右驶入；P是无警灯和警车标识的普通小汽车，正确顺序为P、B、C。"
+    },
+    {
+      "section_id": 621,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\621.gif",
+      "observed": "带南北向中央分隔设施的十字路口，红色D车从左、蓝色A车从右驶入，绿色E车与黄色S车从上方并列驶入；S为普通小汽车且无轨道，顺序为D、E、S、A。"
+    },
+    {
+      "section_id": 622,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\622.gif",
+      "observed": "画面与621.gif相同：红色D车在左、蓝色A车在右，绿色E车和黄色S车从上方并列驶入；S不是电车，正确顺序为D、E、S、A。"
+    },
+    {
+      "section_id": 623,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\623.gif",
+      "observed": "无优先标志、无主次道路区分的交叉路口，蓝色A车从左、黄色B车从右、红色E车从上方驶入；按右方来车优先关系顺序为A、E、B。"
+    },
+    {
+      "section_id": 624,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\624.gif",
+      "observed": "无优先标志的不规则多向交叉路口，白色C货车从上方、红色N车从左侧、蓝色S车从左下方驶入，虚线轨迹在中心交汇；正确顺序为S、N、C。"
+    },
+    {
+      "section_id": 625,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\625.gif",
+      "observed": "无优先标志的不规则三向交叉路口，红色C货车从左上、黄色A车从左下、蓝色L车从右侧驶入；按右方来车优先关系顺序为A、C、L。"
+    }
+  ]
+}

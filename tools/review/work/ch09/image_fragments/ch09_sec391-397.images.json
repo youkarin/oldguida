@@ -1,0 +1,116 @@
+{
+  "chapter": 9,
+  "slice": "ch09_sec391-397",
+  "section_ids": [
+    391,
+    392,
+    393,
+    394,
+    395,
+    396,
+    397
+  ],
+  "question_ids": [
+    3570,
+    3571,
+    3572,
+    3573,
+    3574,
+    3575,
+    3576,
+    3577,
+    3578,
+    3579,
+    3580,
+    3581,
+    3582,
+    3583,
+    3584,
+    3585,
+    3586,
+    3587,
+    3588,
+    3589,
+    3590,
+    3591,
+    3592,
+    3593,
+    3594,
+    3595,
+    3596,
+    3597,
+    3598,
+    3599,
+    3600,
+    3601,
+    3602,
+    3603,
+    3604,
+    3605,
+    3606,
+    3607,
+    3608,
+    3609,
+    3610,
+    3611,
+    3612,
+    3613,
+    3614,
+    3615,
+    3616,
+    3617,
+    3618,
+    3619,
+    3620,
+    3621,
+    3622,
+    3623,
+    3624,
+    3625,
+    3626,
+    3627,
+    3628,
+    3629,
+    3630,
+    3631,
+    3632,
+    3633
+  ],
+  "images": [
+    {
+      "section_id": 391,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\391.gif",
+      "observed": "组合式移动施工预告装置：左侧黄色车道图中左边红色边界向内收窄，黑色箭头显示左侧车流调整并由三条车道减为两条；右侧上方为施工危险三角牌，下方写有“500 m”，顶部有两盏黄色圆灯。"
+    },
+    {
+      "section_id": 392,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\392.gif",
+      "observed": "方形板面铺有醒目的红白斜纹，中央叠加蓝底白色向右下方箭头的强制绕行圆牌，表示应从安装该板的施工车辆右侧通过。"
+    },
+    {
+      "section_id": 393,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\393.gif",
+      "observed": "普通临时施工隔离栏由一条横向红白斜纹板和两根竖直支脚组成，设置在灰色地面线上；图中没有灯具、文字或方向箭头。"
+    },
+    {
+      "section_id": 394,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\394.gif",
+      "observed": "一只上窄下宽的交通锥，锥体为红白相间的横向条纹，底部为宽大的黑色底座；没有文字、灯具或方向箭头。"
+    },
+    {
+      "section_id": 395,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\395.gif",
+      "observed": "白底黑边方形附牌中央以大号黑字写有“1°”，下方写有“tornante”，表示连续发卡弯中的第一个弯。"
+    },
+    {
+      "section_id": 396,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\396.gif",
+      "observed": "两根用于双向道路的白色轮廓标均带黑色斜向区域；道路左侧标内为白色长方形反光片，右侧标内为红色长方形反光片。"
+    },
+    {
+      "section_id": 397,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\397.gif",
+      "observed": "两根用于单向道路的白色轮廓标均带黑色斜向区域；道路左侧标内为上下两个黄色圆形反光片，右侧标内为一个黄色长方形反光片。"
+    }
+  ]
+}

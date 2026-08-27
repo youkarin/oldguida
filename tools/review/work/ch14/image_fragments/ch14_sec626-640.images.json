@@ -1,0 +1,115 @@
+{
+  "chapter": 14,
+  "slice": "ch14_sec626-640",
+  "section_ids": [
+    626,
+    627,
+    628,
+    629,
+    630,
+    631,
+    632,
+    633,
+    634,
+    635,
+    636,
+    637,
+    638,
+    639,
+    640
+  ],
+  "question_ids": [
+    4867, 4868, 4869, 4870, 4871, 4872, 4873, 4874, 4875, 4876, 4877,
+    4878, 4879, 4880, 4881, 4882, 4883, 4884, 4885, 4886, 4887,
+    4888, 4889, 4890, 4891, 4892, 4893, 4894, 4895,
+    4896, 4897, 4898, 4899, 4900, 4901, 4902, 4903, 4904,
+    4905, 4906, 4907, 4908, 4909, 4910, 4911, 4912, 4913, 4914, 4915, 4916, 4917,
+    4918, 4919, 4920, 4921, 4922, 4923, 4924, 4925, 4926, 4927, 4928,
+    4929, 4930, 4931, 4932, 4933, 4934,
+    4935, 4936, 4937, 4938, 4939, 4940, 4941, 4942,
+    4943, 4944, 4945, 4946, 4947, 4948, 4949, 4950, 4951, 4952, 4953, 4954, 4955,
+    4956, 4957,
+    4958, 4959, 4960, 4961, 4962, 4963, 4964, 4965, 4966, 4967,
+    4968, 4969, 4970, 4971, 4972, 4973, 4974, 4975, 4976, 4977,
+    4978, 4979, 4980, 4981, 4982, 4983,
+    4984, 4985, 4986, 4987, 4988, 4989, 4990, 4991,
+    4992, 4993, 4994, 4995, 4996, 4997, 4998, 4999, 5000, 5001, 5002, 5003
+  ],
+  "images": [
+    {
+      "section_id": 626,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\626.gif",
+      "observed": "四条斜向道路形成不规则交叉口，红色货车A在左上、蓝色公共汽车F在右上、黄色H在左下、蓝色L在右下；黑色虚线标出四车相互交织的行驶轨迹。"
+    },
+    {
+      "section_id": 627,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\627.gif",
+      "observed": "四岔路口中，红色货车N位于上方，白色E位于左侧，蓝色无轨电车R位于右侧，黄色L位于下方；虚线轨迹显示L先进入中心以解除循环让行。"
+    },
+    {
+      "section_id": 628,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\628.gif",
+      "observed": "画面与627.gif相同：上方是红色货车N，左侧是白色E，右侧蓝色车辆清楚标有FILOBUS并标记R，下方是黄色L，四车轨迹在路口中央交会。"
+    },
+    {
+      "section_id": 629,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\629.gif",
+      "observed": "无标志四岔路口中，绿色B在上方、黄色D在左侧、蓝色L在右侧、红色P在下方；虚线路径使四车形成循环让行关系。"
+    },
+    {
+      "section_id": 630,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\630.gif",
+      "observed": "不规则四岔路口中，黑色B在左上、黄色P在左侧、蓝色D在左下、红色N在右侧；虚线箭头分别标出各车穿越或转弯的方向。"
+    },
+    {
+      "section_id": 631,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\631.gif",
+      "observed": "四岔路口的上下道路中央有狭长安全岛，红色C在上方、蓝色D在左侧、黄色A在右侧、白色H在下方；A、C、H直行，D的虚线路径向右转入下方道路。"
+    },
+    {
+      "section_id": 632,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\632.gif",
+      "observed": "T形交叉口中，黄色E位于左侧、红色C位于右侧、蓝色M位于下方支路；虚线显示C沿横向道路直行，E和M的转弯轨迹在路口交会。"
+    },
+    {
+      "section_id": 633,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\633.gif",
+      "observed": "多岔路口中，蓝色B在左侧、黄色D在右侧、红色H在上方；虚线显示B转向上方，D横向通过，三车轨迹存在先后冲突。"
+    },
+    {
+      "section_id": 634,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\634.gif",
+      "observed": "无标志四岔路口中，红色H在上方、蓝色D在右侧、黄色L在左侧、绿色B在下方；B的虚线路径左转，其他轨迹在中心形成循环冲突。"
+    },
+    {
+      "section_id": 635,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\635.gif",
+      "observed": "横向道路中央铺有双轨，绿色有轨电车T从右侧沿轨道驶入；蓝色L在左侧，黄色A和红色C在上方支路，虚线路径穿越或转入轨道道路。"
+    },
+    {
+      "section_id": 636,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\636.gif",
+      "observed": "横向道路中央有双轨，绿色有轨电车T从右侧沿轨道驶入；黑色O从上方沿虚线直行向下，红色A从右侧沿虚线直行向左，两车直行轨迹在路口交叉。"
+    },
+    {
+      "section_id": 637,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\637.gif",
+      "observed": "带横向双轨的四岔路口中，绿色有轨电车T和红色C在右侧，黄色B在左侧、黑色A在上方；B的虚线轨迹由左向右直行，与T沿轨道向左的路线不相交。"
+    },
+    {
+      "section_id": 638,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\638.gif",
+      "observed": "T形路口的横向道路中央有轨道，绿色有轨电车T位于左侧、红色P位于右侧，蓝色无轨电车M在下方支路；虚线标出P、M的转弯路线。"
+    },
+    {
+      "section_id": 639,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\639.gif",
+      "observed": "四岔路口的纵向道路中央铺有轨道，绿色有轨电车T在上方，黄色A在左侧、红色货车S在右侧；A横向直行，S的虚线路径转入纵向道路并与A、T的路线冲突。"
+    },
+    {
+      "section_id": 640,
+      "image_path": "C:\\Users\\Evovision\\Desktop\\BlackTech\\oldguida_new\\assets\\images\\quiz\\640.gif",
+      "observed": "弯曲轨道穿过路口，绿色有轨电车T在右侧，红色G在左侧，蓝色B在上方、黑色P在下方；B、P支路旁均画有红边白底三角形让行标志，虚线轨迹汇入弯曲道路。"
+    }
+  ]
+}
