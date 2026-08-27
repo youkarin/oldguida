@@ -147,11 +147,23 @@ class _ExamGeneralState extends State<ExamGeneral> {
     final delay = widget.immediateFeedback ? 600 : 300;
 
     Future.delayed(Duration(milliseconds: delay), () {
-      if (mounted &&
-          currentIndex == tappedIndex &&
-          currentIndex < widget.questions.length - 1) {
-        _nextQuestion();
+      if (!mounted) return;
+      if (currentIndex != tappedIndex ||
+          currentIndex >= widget.questions.length - 1) {
+        return;
       }
+
+      final currentResult = answerResults[tappedIndex];
+      if (currentResult == null ||
+          !shouldAutoAdvance(
+            immediateFeedback: widget.immediateFeedback,
+            stayOnWrongAnswer: widget.stayOnWrongAnswer,
+            isCorrect: currentResult,
+          )) {
+        return;
+      }
+
+      _nextQuestion();
     });
   }
 

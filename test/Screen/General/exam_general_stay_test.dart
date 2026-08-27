@@ -118,6 +118,25 @@ void main() {
     expect(find.textContaining('Q2:'), findsOneWidget);
   });
 
+  testWidgets('changing a correct answer to wrong cancels the pending advance',
+      (tester) async {
+    await pumpExam(
+      tester,
+      immediateFeedback: true,
+      stayOnWrongAnswer: true,
+    );
+
+    await tester.tap(find.text('Vero'));
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text('Falso'));
+    await tester.pump();
+    expect(find.text('回答错误'), findsOneWidget);
+
+    await tester.pump(const Duration(milliseconds: 301));
+    expect(find.textContaining('Q1:'), findsOneWidget);
+    expect(find.text('回答错误'), findsOneWidget);
+  });
+
   for (final answerLabel in ['Vero', 'Falso']) {
     testWidgets(
         'non-immediate $answerLabel answer keeps the existing 300 ms advance',
