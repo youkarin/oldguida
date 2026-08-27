@@ -1,0 +1,6323 @@
+[
+  {
+    "term": "a destra",
+    "partOfSpeech": "固定短语",
+    "translation": "向右；在右侧",
+    "note": "说明转向方向或车辆、道路设施位于右方。",
+    "forms": [
+      "a destra"
+    ],
+    "exampleQuestionId": 5180
+  },
+  {
+    "term": "a pieno carico",
+    "partOfSpeech": "固定短语",
+    "translation": "在满载状态下",
+    "note": "表示车辆达到最大允许总质量时的运行或限制条件。",
+    "forms": [
+      "a pieno carico"
+    ],
+    "exampleQuestionId": 317
+  },
+  {
+    "term": "a sinistra",
+    "partOfSpeech": "固定短语",
+    "translation": "向左；在左侧",
+    "note": "说明转向方向或车辆、道路设施位于左方。",
+    "forms": [
+      "a sinistra"
+    ],
+    "exampleQuestionId": 5157
+  },
+  {
+    "term": "abbagliamento",
+    "partOfSpeech": "名词",
+    "translation": "眩目；强光干扰",
+    "note": "过强灯光或阳光使驾驶人短暂难以看清道路的现象。",
+    "forms": [
+      "abbagliamento"
+    ],
+    "exampleQuestionId": 4017
+  },
+  {
+    "term": "accelerare",
+    "partOfSpeech": "动词",
+    "translation": "加速",
+    "note": "提高车辆行驶速度；在危险或低附着条件下可能加剧风险。",
+    "forms": [
+      "accelerare"
+    ],
+    "exampleQuestionId": 5170
+  },
+  {
+    "term": "accelerazione",
+    "partOfSpeech": "名词",
+    "translation": "加速；加速度",
+    "note": "车辆速度增加的过程，也会影响燃料消耗和稳定性。",
+    "forms": [
+      "accelerazione"
+    ],
+    "exampleQuestionId": 31
+  },
+  {
+    "term": "accendere",
+    "partOfSpeech": "动词",
+    "translation": "开启；点亮",
+    "note": "启动车灯、发动机或其他电气设备。",
+    "forms": [
+      "accendere"
+    ],
+    "exampleQuestionId": 5906
+  },
+  {
+    "term": "accertarsi",
+    "partOfSpeech": "动词",
+    "translation": "确认；查明",
+    "note": "实施操作前通过观察等方式确认不会造成危险或妨碍。",
+    "forms": [
+      "accertarsi"
+    ],
+    "exampleQuestionId": 5252
+  },
+  {
+    "term": "accostare",
+    "partOfSpeech": "动词",
+    "translation": "靠边；驶近",
+    "note": "让车辆接近道路边缘或另一道路使用者，同时保持安全间距。",
+    "forms": [
+      "accostare"
+    ],
+    "exampleQuestionId": 4666
+  },
+  {
+    "term": "aderenza",
+    "partOfSpeech": "名词",
+    "translation": "附着力；抓地力",
+    "note": "轮胎与路面之间抵抗滑动的能力，决定制动和转向效果。",
+    "forms": [
+      "aderenza"
+    ],
+    "exampleQuestionId": 7155
+  },
+  {
+    "term": "agente",
+    "partOfSpeech": "名词",
+    "translation": "执法人员；警员",
+    "note": "有权指挥交通、检查证件和处理道路违法的人员。",
+    "forms": [
+      "agente",
+      "agenti"
+    ],
+    "exampleQuestionId": 2907
+  },
+  {
+    "term": "agganciare",
+    "partOfSpeech": "动词",
+    "translation": "挂接；连接牵引装置",
+    "note": "用牵引钩等装置把挂车或被拖车辆与牵引车连接。",
+    "forms": [
+      "agganciare"
+    ],
+    "exampleQuestionId": 5757
+  },
+  {
+    "term": "airbag",
+    "partOfSpeech": "名词",
+    "translation": "安全气囊",
+    "note": "碰撞时迅速充气、降低乘员与车内部件撞击伤害的被动安全装置。",
+    "forms": [
+      "airbag"
+    ],
+    "exampleQuestionId": 6041
+  },
+  {
+    "term": "al massimo",
+    "partOfSpeech": "固定短语",
+    "translation": "至多；最多",
+    "note": "表示数值不得超过所给上限。",
+    "forms": [
+      "al massimo"
+    ],
+    "exampleQuestionId": 299
+  },
+  {
+    "term": "alcool",
+    "partOfSpeech": "名词",
+    "translation": "酒精",
+    "note": "饮用后会降低判断、反应和协调能力的精神活性物质。",
+    "forms": [
+      "alcool"
+    ],
+    "exampleQuestionId": 6540
+  },
+  {
+    "term": "alta visibilità",
+    "partOfSpeech": "固定短语",
+    "translation": "高可见度；醒目可见",
+    "note": "形容反光防护服容易被其他驾驶人发现的特性。",
+    "forms": [
+      "alta visibilità"
+    ],
+    "exampleQuestionId": 5596
+  },
+  {
+    "term": "altezza",
+    "partOfSpeech": "名词",
+    "translation": "高度",
+    "note": "车辆或载荷从地面到最高点的垂直尺寸。",
+    "forms": [
+      "altezza"
+    ],
+    "exampleQuestionId": 7076
+  },
+  {
+    "term": "ambiente",
+    "partOfSpeech": "名词",
+    "translation": "环境",
+    "note": "道路交通产生的尾气、噪声和废物所影响的自然与生活空间。",
+    "forms": [
+      "ambiente"
+    ],
+    "exampleQuestionId": 6800
+  },
+  {
+    "term": "ambulanza",
+    "partOfSpeech": "名词",
+    "translation": "救护车",
+    "note": "配备医疗救护人员和设备、用于运送急症伤员的车辆。",
+    "forms": [
+      "ambulanza",
+      "ambulanze"
+    ],
+    "exampleQuestionId": 5267
+  },
+  {
+    "term": "animale",
+    "partOfSpeech": "名词",
+    "translation": "动物",
+    "note": "可能进入道路、受惊或行动不可预测的道路风险对象。",
+    "forms": [
+      "animale",
+      "animali"
+    ],
+    "exampleQuestionId": 5
+  },
+  {
+    "term": "anteriore",
+    "partOfSpeech": "形容词",
+    "translation": "前部的；前方的",
+    "note": "指车辆前部或位于车辆前方的位置。",
+    "forms": [
+      "anteriore",
+      "anteriori"
+    ],
+    "exampleQuestionId": 5826
+  },
+  {
+    "term": "appendice",
+    "partOfSpeech": "名词",
+    "translation": "附属部分；附属小挂车",
+    "note": "在车辆语境中常指与特定汽车配套使用的附属装置或小挂车。",
+    "forms": [
+      "appendice"
+    ],
+    "exampleQuestionId": 294
+  },
+  {
+    "term": "aquaplaning",
+    "partOfSpeech": "名词",
+    "translation": "水滑现象",
+    "note": "轮胎被水膜托起而失去与路面有效接触的现象。",
+    "forms": [
+      "aquaplaning"
+    ],
+    "exampleQuestionId": 6414
+  },
+  {
+    "term": "area",
+    "partOfSpeech": "名词",
+    "translation": "区域；场地",
+    "note": "表示具有特定交通用途或限制的道路空间。",
+    "forms": [
+      "area",
+      "aree"
+    ],
+    "exampleQuestionId": 142
+  },
+  {
+    "term": "area pedonale",
+    "partOfSpeech": "固定短语",
+    "translation": "步行区",
+    "note": "原则上供行人使用、机动车仅在法定例外下进入的区域。",
+    "forms": [
+      "area pedonale",
+      "aree pedonali"
+    ],
+    "exampleQuestionId": 142
+  },
+  {
+    "term": "aria",
+    "partOfSpeech": "名词",
+    "translation": "空气",
+    "note": "车辆排放题中指可能被尾气污染的环境空气。",
+    "forms": [
+      "aria"
+    ],
+    "exampleQuestionId": 6940
+  },
+  {
+    "term": "arrestarsi",
+    "partOfSpeech": "动词",
+    "translation": "停住；停车",
+    "note": "使车辆完全停止，常用于停车让行或红灯要求。",
+    "forms": [
+      "arrestarsi"
+    ],
+    "exampleQuestionId": 2665
+  },
+  {
+    "term": "arresto",
+    "partOfSpeech": "名词",
+    "translation": "停车；完全停止",
+    "note": "车辆因交通信号、规则或紧急需要而完全停止。",
+    "forms": [
+      "arresto"
+    ],
+    "exampleQuestionId": 4239
+  },
+  {
+    "term": "asse",
+    "partOfSpeech": "名词",
+    "translation": "车轴；轴",
+    "note": "连接或支承同一横向车轮的车辆结构部件。",
+    "forms": [
+      "asse"
+    ],
+    "exampleQuestionId": 6945
+  },
+  {
+    "term": "assicurarsi",
+    "partOfSpeech": "动词",
+    "translation": "确保；确认",
+    "note": "在起步、开门或变向前确认周围条件安全。",
+    "forms": [
+      "assicurarsi"
+    ],
+    "exampleQuestionId": 5359
+  },
+  {
+    "term": "assicurato",
+    "partOfSpeech": "形容词",
+    "translation": "已投保的；固定牢靠的；已确认的",
+    "note": "可表示车辆已投保、货物或乘员已固定，也可表示已经确认某项通行条件。",
+    "forms": [
+      "assicurato",
+      "assicurati"
+    ],
+    "exampleQuestionId": 5510
+  },
+  {
+    "term": "assicuratrice",
+    "partOfSpeech": "形容词",
+    "translation": "保险公司的；承保方的",
+    "note": "用于指承担合同赔偿责任的保险企业。",
+    "forms": [
+      "assicuratrice"
+    ],
+    "exampleQuestionId": 6730
+  },
+  {
+    "term": "assicurazione",
+    "partOfSpeech": "名词",
+    "translation": "保险",
+    "note": "车辆上路所需的责任保障，用于赔偿交通事故造成的法定损失。",
+    "forms": [
+      "assicurazione"
+    ],
+    "exampleQuestionId": 6710
+  },
+  {
+    "term": "assistenza",
+    "partOfSpeech": "名词",
+    "translation": "援助；救援服务",
+    "note": "向故障车辆或事故人员提供技术或医疗帮助。",
+    "forms": [
+      "assistenza"
+    ],
+    "exampleQuestionId": 3299
+  },
+  {
+    "term": "assunzione",
+    "partOfSpeech": "名词",
+    "translation": "摄入；服用",
+    "note": "指饮酒、服药或使用其他会影响驾驶能力物质的行为。",
+    "forms": [
+      "assunzione"
+    ],
+    "exampleQuestionId": 6529
+  },
+  {
+    "term": "atmosferico",
+    "partOfSpeech": "形容词",
+    "translation": "大气的；天气的",
+    "note": "用于描述空气污染或影响驾驶的天气条件。",
+    "forms": [
+      "atmosferico",
+      "atmosferiche"
+    ],
+    "exampleQuestionId": 4063
+  },
+  {
+    "term": "attenzione",
+    "partOfSpeech": "名词",
+    "translation": "注意；警觉",
+    "note": "持续观察道路、信号和他人行为所需的专注状态。",
+    "forms": [
+      "attenzione"
+    ],
+    "exampleQuestionId": 6772
+  },
+  {
+    "term": "attraversamento",
+    "partOfSpeech": "名词",
+    "translation": "横穿处；交叉通行",
+    "note": "表示道路使用者横穿道路、铁路或其他交通流的地点或行为。",
+    "forms": [
+      "attraversamento",
+      "attraversamenti"
+    ],
+    "exampleQuestionId": 151
+  },
+  {
+    "term": "attraversamento pedonale",
+    "partOfSpeech": "固定短语",
+    "translation": "人行横道",
+    "note": "供行人横过行车道的标线区域，车辆须按规定让行。",
+    "forms": [
+      "attraversamento pedonale",
+      "attraversamenti pedonali"
+    ],
+    "exampleQuestionId": 151
+  },
+  {
+    "term": "attraversare",
+    "partOfSpeech": "动词",
+    "translation": "横穿；通过",
+    "note": "穿过道路、路口、铁路道口或其他冲突区域。",
+    "forms": [
+      "attraversare"
+    ],
+    "exampleQuestionId": 461
+  },
+  {
+    "term": "aumentare",
+    "partOfSpeech": "动词",
+    "translation": "增加；提高",
+    "note": "表示车速、距离、风险或作用力变大。",
+    "forms": [
+      "aumentare"
+    ],
+    "exampleQuestionId": 6402
+  },
+  {
+    "term": "autoarticolato",
+    "partOfSpeech": "名词",
+    "translation": "铰接式车辆；半挂汽车列车",
+    "note": "牵引车与半挂车连接组成的车辆组合。",
+    "forms": [
+      "autoarticolato",
+      "autoarticolati"
+    ],
+    "exampleQuestionId": 5801
+  },
+  {
+    "term": "autobus",
+    "partOfSpeech": "名词",
+    "translation": "公共汽车；大客车",
+    "note": "用于载客且座位数超过小客车范围的汽车。",
+    "forms": [
+      "autobus"
+    ],
+    "exampleQuestionId": 290
+  },
+  {
+    "term": "autocaravan",
+    "partOfSpeech": "名词",
+    "translation": "自行式房车",
+    "note": "车内固定设有住宿生活设施、能够自行行驶的机动车，不是拖挂式旅居挂车。",
+    "forms": [
+      "autocaravan"
+    ],
+    "exampleQuestionId": 1462
+  },
+  {
+    "term": "autocarro",
+    "partOfSpeech": "名词",
+    "translation": "货车；载货汽车",
+    "note": "主要用于运输货物及相关人员的机动车。",
+    "forms": [
+      "autocarro",
+      "autocarri"
+    ],
+    "exampleQuestionId": 279
+  },
+  {
+    "term": "automobilista",
+    "partOfSpeech": "名词",
+    "translation": "汽车驾驶人",
+    "note": "驾驶汽车参与道路交通的人。",
+    "forms": [
+      "automobilista",
+      "automobilisti"
+    ],
+    "exampleQuestionId": 5600
+  },
+  {
+    "term": "autorizzato",
+    "partOfSpeech": "形容词",
+    "translation": "经许可的；获授权的",
+    "note": "表示人员、车辆或行为已得到主管机关或规则许可。",
+    "forms": [
+      "autorizzato",
+      "autorizzata",
+      "autorizzati",
+      "autorizzate"
+    ],
+    "exampleQuestionId": 174
+  },
+  {
+    "term": "autosnodato",
+    "partOfSpeech": "名词",
+    "translation": "铰接式客车",
+    "note": "由永久铰接的多个刚性车厢组成、车厢间可供乘客通行的客车。",
+    "forms": [
+      "autosnodato",
+      "autosnodati"
+    ],
+    "exampleQuestionId": 318
+  },
+  {
+    "term": "autostrada",
+    "partOfSpeech": "名词",
+    "translation": "高速公路",
+    "note": "专供机动车高速通行、出入口受控且设中央分隔的道路。",
+    "forms": [
+      "autostrada",
+      "autostrade"
+    ],
+    "exampleQuestionId": 103
+  },
+  {
+    "term": "autotreno",
+    "partOfSpeech": "名词",
+    "translation": "汽车列车",
+    "note": "一辆机动车与一辆或多辆挂车组成的车辆组合。",
+    "forms": [
+      "autotreno",
+      "autotreni"
+    ],
+    "exampleQuestionId": 4120
+  },
+  {
+    "term": "autoveicolo",
+    "partOfSpeech": "名词",
+    "translation": "汽车；机动车",
+    "note": "至少有四个车轮、由自身发动机驱动的道路机动车类别。",
+    "forms": [
+      "autoveicolo",
+      "autoveicoli"
+    ],
+    "exampleQuestionId": 279
+  },
+  {
+    "term": "autovettura",
+    "partOfSpeech": "名词",
+    "translation": "小客车；乘用车",
+    "note": "主要用于载人且座位数符合法定小客车范围的汽车。",
+    "forms": [
+      "autovettura",
+      "autovetture"
+    ],
+    "exampleQuestionId": 298
+  },
+  {
+    "term": "avaria",
+    "partOfSpeech": "名词",
+    "translation": "车辆故障；抛锚",
+    "note": "车辆在道路上因技术问题不能正常行驶的情况。",
+    "forms": [
+      "avaria"
+    ],
+    "exampleQuestionId": 5543
+  },
+  {
+    "term": "avvisare",
+    "partOfSpeech": "动词",
+    "translation": "通知；警告",
+    "note": "把事故、危险或行动意图及时告知救援机构或其他道路使用者。",
+    "forms": [
+      "avvisare"
+    ],
+    "exampleQuestionId": 367
+  },
+  {
+    "term": "avvisatore acustico",
+    "partOfSpeech": "固定短语",
+    "translation": "声响警示器；喇叭",
+    "note": "用于发出必要警告声的车辆装置。",
+    "forms": [
+      "avvisatore acustico",
+      "avvisatori acustici"
+    ],
+    "exampleQuestionId": 6904
+  },
+  {
+    "term": "azionare",
+    "partOfSpeech": "动词",
+    "translation": "操作；启动装置",
+    "note": "对制动器、灯光或其他车辆控制装置进行操作。",
+    "forms": [
+      "azionare"
+    ],
+    "exampleQuestionId": 5156
+  },
+  {
+    "term": "bambino",
+    "partOfSpeech": "名词",
+    "translation": "儿童",
+    "note": "行为可能突然且难以预测的弱势道路使用者，驾驶人须格外谨慎。",
+    "forms": [
+      "bambino",
+      "bambini"
+    ],
+    "exampleQuestionId": 4025
+  },
+  {
+    "term": "banchina",
+    "partOfSpeech": "名词",
+    "translation": "路肩",
+    "note": "位于行车道边缘之外的道路部分，通常不供车辆正常行驶。",
+    "forms": [
+      "banchina",
+      "banchine"
+    ],
+    "exampleQuestionId": 6
+  },
+  {
+    "term": "bastone bianco",
+    "partOfSpeech": "固定短语",
+    "translation": "白手杖",
+    "note": "用于识别盲人行人的白色手杖，驾驶人必须给予特别保护。",
+    "forms": [
+      "bastone bianco"
+    ],
+    "exampleQuestionId": 448
+  },
+  {
+    "term": "batteria",
+    "partOfSpeech": "名词",
+    "translation": "蓄电池；电瓶",
+    "note": "储存电能并为启动、照明等电气设备供电的部件。",
+    "forms": [
+      "batteria"
+    ],
+    "exampleQuestionId": 5966
+  },
+  {
+    "term": "battistrada",
+    "partOfSpeech": "名词",
+    "translation": "轮胎胎面；花纹层",
+    "note": "轮胎与路面接触并带有排水花纹的外层部分。",
+    "forms": [
+      "battistrada"
+    ],
+    "exampleQuestionId": 6935
+  },
+  {
+    "term": "benzina",
+    "partOfSpeech": "名词",
+    "translation": "汽油",
+    "note": "火花点火发动机常用的液体燃料，具有易燃性。",
+    "forms": [
+      "benzina"
+    ],
+    "exampleQuestionId": 6094
+  },
+  {
+    "term": "bere",
+    "partOfSpeech": "动词",
+    "translation": "饮用；喝酒",
+    "note": "在驾驶安全题中通常涉及饮酒对判断和反应的影响。",
+    "forms": [
+      "bere"
+    ],
+    "exampleQuestionId": 6632
+  },
+  {
+    "term": "bevande alcoliche",
+    "partOfSpeech": "固定短语",
+    "translation": "含酒精饮料",
+    "note": "饮用后可能导致血液酒精浓度升高并损害驾驶能力的饮品。",
+    "forms": [
+      "bevande alcoliche"
+    ],
+    "exampleQuestionId": 6517
+  },
+  {
+    "term": "bicicletta",
+    "partOfSpeech": "名词",
+    "translation": "自行车",
+    "note": "主要依靠骑行者肌力驱动的两轮车辆。",
+    "forms": [
+      "bicicletta",
+      "biciclette"
+    ],
+    "exampleQuestionId": 163
+  },
+  {
+    "term": "binario",
+    "partOfSpeech": "名词",
+    "translation": "轨道；铁轨线路",
+    "note": "有轨电车或铁路车辆行驶的轨道，横越时须特别谨慎。",
+    "forms": [
+      "binario",
+      "binari"
+    ],
+    "exampleQuestionId": 788
+  },
+  {
+    "term": "bisogna",
+    "partOfSpeech": "动词",
+    "translation": "必须；需要",
+    "note": "无人称表达，说明为安全或守法应采取某项行动。",
+    "forms": [
+      "bisogna"
+    ],
+    "exampleQuestionId": 5170
+  },
+  {
+    "term": "bordo",
+    "partOfSpeech": "名词",
+    "translation": "边缘；路边",
+    "note": "表示道路、行车道或车辆外廓的边缘位置。",
+    "forms": [
+      "bordo",
+      "bordi"
+    ],
+    "exampleQuestionId": 6917
+  },
+  {
+    "term": "braccia aperte",
+    "partOfSpeech": "固定短语",
+    "translation": "双臂平伸手势",
+    "note": "交警面向或背向来车双臂平伸时，相应方向车辆必须停车。",
+    "forms": [
+      "braccia aperte"
+    ],
+    "exampleQuestionId": 2851
+  },
+  {
+    "term": "caduta",
+    "partOfSpeech": "名词",
+    "translation": "跌倒；摔落",
+    "note": "两轮车辆骑手、乘员或物体失去支撑而倒下。",
+    "forms": [
+      "caduta"
+    ],
+    "exampleQuestionId": 6099
+  },
+  {
+    "term": "cambiare corsia",
+    "partOfSpeech": "固定短语",
+    "translation": "变更车道",
+    "note": "从当前车道横向驶入相邻车道，须观察并提前示意。",
+    "forms": [
+      "cambiare corsia"
+    ],
+    "exampleQuestionId": 4412
+  },
+  {
+    "term": "cambio",
+    "partOfSpeech": "名词",
+    "translation": "变速器；换挡机构",
+    "note": "通过不同传动比调节车速、牵引力和行驶方向的系统。",
+    "forms": [
+      "cambio"
+    ],
+    "exampleQuestionId": 244
+  },
+  {
+    "term": "cambio di corsia",
+    "partOfSpeech": "固定短语",
+    "translation": "车道变更",
+    "note": "车辆横向从一条车道转入另一条车道的过程。",
+    "forms": [
+      "cambio di corsia"
+    ],
+    "exampleQuestionId": 5893
+  },
+  {
+    "term": "cambio in folle",
+    "partOfSpeech": "固定短语",
+    "translation": "变速器挂空挡",
+    "note": "发动机与驱动轮动力传递断开的挡位状态，下坡滑行并不安全。",
+    "forms": [
+      "cambio in folle"
+    ],
+    "exampleQuestionId": 6438
+  },
+  {
+    "term": "canalizzazione",
+    "partOfSpeech": "名词",
+    "translation": "导流；渠化交通",
+    "note": "利用标线或交通岛把不同方向的车流引入指定路线。",
+    "forms": [
+      "canalizzazione"
+    ],
+    "exampleQuestionId": 5421
+  },
+  {
+    "term": "cane guida",
+    "partOfSpeech": "固定短语",
+    "translation": "导盲犬",
+    "note": "协助盲人安全行走和横过道路的受训犬。",
+    "forms": [
+      "cane guida"
+    ],
+    "exampleQuestionId": 455
+  },
+  {
+    "term": "cantiere stradale",
+    "partOfSpeech": "固定短语",
+    "translation": "道路施工区",
+    "note": "因道路工程形成的临时交通环境，须依临时标志和施工人员指示通行。",
+    "forms": [
+      "cantiere stradale",
+      "cantieri stradali"
+    ],
+    "exampleQuestionId": 3799
+  },
+  {
+    "term": "capacità",
+    "partOfSpeech": "名词",
+    "translation": "能力；驾驶能力",
+    "note": "完成观察、判断和车辆控制所需的身心能力。",
+    "forms": [
+      "capacità"
+    ],
+    "exampleQuestionId": 6542
+  },
+  {
+    "term": "caravan",
+    "partOfSpeech": "名词",
+    "translation": "拖挂式旅居挂车",
+    "note": "装有住宿设施但自身无动力、须由其他车辆牵引的挂车。",
+    "forms": [
+      "caravan"
+    ],
+    "exampleQuestionId": 320
+  },
+  {
+    "term": "carburante",
+    "partOfSpeech": "名词",
+    "translation": "燃料；机动车燃油",
+    "note": "供发动机产生动力的汽油、柴油或其他能源介质。",
+    "forms": [
+      "carburante"
+    ],
+    "exampleQuestionId": 4203
+  },
+  {
+    "term": "carico",
+    "partOfSpeech": "名词",
+    "translation": "载荷；装载物",
+    "note": "车辆所载货物、物品或其他增加车辆总质量的负载。",
+    "forms": [
+      "carico",
+      "carichi"
+    ],
+    "exampleQuestionId": 4676
+  },
+  {
+    "term": "carico sporgente",
+    "partOfSpeech": "固定短语",
+    "translation": "伸出车外的载荷",
+    "note": "超出车辆外廓的装载物，必须遵守尺寸、标示和固定要求。",
+    "forms": [
+      "carico sporgente",
+      "carichi sporgenti"
+    ],
+    "exampleQuestionId": 4317
+  },
+  {
+    "term": "carreggiata",
+    "partOfSpeech": "名词",
+    "translation": "行车道；车行道",
+    "note": "道路中供车辆行驶的部分，可由一条或多条车道组成。",
+    "forms": [
+      "carreggiata",
+      "carreggiate"
+    ],
+    "exampleQuestionId": 45
+  },
+  {
+    "term": "carreggiate separate",
+    "partOfSpeech": "固定短语",
+    "translation": "分隔式行车道",
+    "note": "相反方向的交通流分别使用由分隔设施隔开的行车道。",
+    "forms": [
+      "carreggiate separate"
+    ],
+    "exampleQuestionId": 107
+  },
+  {
+    "term": "carrello appendice",
+    "partOfSpeech": "固定短语",
+    "translation": "附属小挂车",
+    "note": "与特定机动车配套、在法规上作为该车附属部分使用的小型挂车。",
+    "forms": [
+      "carrello appendice"
+    ],
+    "exampleQuestionId": 4127
+  },
+  {
+    "term": "carrozzeria",
+    "partOfSpeech": "名词",
+    "translation": "车身",
+    "note": "构成车辆外部结构并容纳乘员或货物的部分。",
+    "forms": [
+      "carrozzeria"
+    ],
+    "exampleQuestionId": 272
+  },
+  {
+    "term": "carrozzina",
+    "partOfSpeech": "名词",
+    "translation": "轮椅；婴儿车",
+    "note": "由行人推动或供行动不便者使用的带轮辅助设备。",
+    "forms": [
+      "carrozzina"
+    ],
+    "exampleQuestionId": 463
+  },
+  {
+    "term": "carta di circolazione",
+    "partOfSpeech": "固定短语",
+    "translation": "车辆登记证；行驶证",
+    "note": "载明车辆技术和登记信息、上路时应按规定携带的文件。",
+    "forms": [
+      "carta di circolazione"
+    ],
+    "exampleQuestionId": 5603
+  },
+  {
+    "term": "casco",
+    "partOfSpeech": "名词",
+    "translation": "安全头盔",
+    "note": "骑乘摩托车或轻便摩托车时保护头部的法定防护装备。",
+    "forms": [
+      "casco",
+      "caschi"
+    ],
+    "exampleQuestionId": 6095
+  },
+  {
+    "term": "casello",
+    "partOfSpeech": "名词",
+    "translation": "收费站；收费口",
+    "note": "高速公路入口或出口处办理缴费和通行的设施。",
+    "forms": [
+      "casello"
+    ],
+    "exampleQuestionId": 5547
+  },
+  {
+    "term": "categoria",
+    "partOfSpeech": "名词",
+    "translation": "类别；准驾车型",
+    "note": "按车辆特性或驾驶证准驾范围划分的法定类别。",
+    "forms": [
+      "categoria",
+      "categorie"
+    ],
+    "exampleQuestionId": 243
+  },
+  {
+    "term": "catena",
+    "partOfSpeech": "名词",
+    "translation": "防滑链；链条",
+    "note": "冰雪路面时装在驱动轮上提高附着力的链式装置。",
+    "forms": [
+      "catena",
+      "catene"
+    ],
+    "exampleQuestionId": 6944
+  },
+  {
+    "term": "catene da neve",
+    "partOfSpeech": "固定短语",
+    "translation": "雪地防滑链",
+    "note": "积雪或结冰道路上按标志和条件安装在车轮的防滑装置。",
+    "forms": [
+      "catene da neve"
+    ],
+    "exampleQuestionId": 3183
+  },
+  {
+    "term": "cavalcavia",
+    "partOfSpeech": "名词",
+    "translation": "高架桥；上跨桥",
+    "note": "一条道路从另一交通线路上方跨越的立体交叉构造。",
+    "forms": [
+      "cavalcavia"
+    ],
+    "exampleQuestionId": 198
+  },
+  {
+    "term": "cavallo",
+    "partOfSpeech": "名词",
+    "translation": "马",
+    "note": "可能由骑手或牵引者带领上路的大型动物，接近时应减速。",
+    "forms": [
+      "cavallo",
+      "cavalli"
+    ],
+    "exampleQuestionId": 5734
+  },
+  {
+    "term": "cellulare",
+    "partOfSpeech": "名词",
+    "translation": "手机；移动电话",
+    "note": "驾驶中使用会显著分散注意力，须遵守免提等限制。",
+    "forms": [
+      "cellulare"
+    ],
+    "exampleQuestionId": 7141
+  },
+  {
+    "term": "centro abitato",
+    "partOfSpeech": "固定短语",
+    "translation": "建成区；城镇居民区",
+    "note": "由专用标志界定的连续建筑区域，适用城镇道路速度等规则。",
+    "forms": [
+      "centro abitato",
+      "centri abitati"
+    ],
+    "exampleQuestionId": 3107
+  },
+  {
+    "term": "certificato di assicurazione",
+    "partOfSpeech": "固定短语",
+    "translation": "保险证明",
+    "note": "证明车辆已投保法定责任保险的文件。",
+    "forms": [
+      "certificato di assicurazione"
+    ],
+    "exampleQuestionId": 5303
+  },
+  {
+    "term": "chiamare",
+    "partOfSpeech": "动词",
+    "translation": "呼叫；联系",
+    "note": "事故或紧急情况下联系救援、警方或医疗机构。",
+    "forms": [
+      "chiamare"
+    ],
+    "exampleQuestionId": 6587
+  },
+  {
+    "term": "ciclabile",
+    "partOfSpeech": "形容词",
+    "translation": "自行车通行的；自行车专用的",
+    "note": "描述专供或适合自行车通行的道路设施。",
+    "forms": [
+      "ciclabile",
+      "ciclabili"
+    ],
+    "exampleQuestionId": 14
+  },
+  {
+    "term": "ciclista",
+    "partOfSpeech": "名词",
+    "translation": "自行车骑行者",
+    "note": "骑自行车的道路使用者，超越时须留足横向距离。",
+    "forms": [
+      "ciclista",
+      "ciclisti"
+    ],
+    "exampleQuestionId": 501
+  },
+  {
+    "term": "ciclomotore",
+    "partOfSpeech": "名词",
+    "translation": "轻便摩托车",
+    "note": "排量、功率和设计速度受法定上限约束的轻型机动车。",
+    "forms": [
+      "ciclomotore",
+      "ciclomotori"
+    ],
+    "exampleQuestionId": 235
+  },
+  {
+    "term": "cilindrata",
+    "partOfSpeech": "名词",
+    "translation": "发动机排量",
+    "note": "活塞发动机各气缸工作容积总和，用于部分车辆分类。",
+    "forms": [
+      "cilindrata"
+    ],
+    "exampleQuestionId": 242
+  },
+  {
+    "term": "cintura di sicurezza",
+    "partOfSpeech": "固定短语",
+    "translation": "安全带",
+    "note": "约束乘员身体、在碰撞或急减速时降低伤害的装置。",
+    "forms": [
+      "cintura di sicurezza",
+      "cinture di sicurezza"
+    ],
+    "exampleQuestionId": 5997
+  },
+  {
+    "term": "circolare",
+    "partOfSpeech": "动词",
+    "translation": "行驶；通行",
+    "note": "表示车辆或其他道路使用者在道路上运行。",
+    "forms": [
+      "circolare"
+    ],
+    "exampleQuestionId": 101
+  },
+  {
+    "term": "circolazione",
+    "partOfSpeech": "名词",
+    "translation": "道路交通；通行",
+    "note": "车辆、行人等道路使用者在公共道路上的运行活动。",
+    "forms": [
+      "circolazione"
+    ],
+    "exampleQuestionId": 4
+  },
+  {
+    "term": "civile",
+    "partOfSpeech": "形容词",
+    "translation": "民事的",
+    "note": "涉及损害赔偿等私人法律责任，而非刑事处罚。",
+    "forms": [
+      "civile"
+    ],
+    "exampleQuestionId": 6710
+  },
+  {
+    "term": "civilmente",
+    "partOfSpeech": "副词",
+    "translation": "在民事责任上",
+    "note": "表示某人对造成的损害承担赔偿等民事责任。",
+    "forms": [
+      "civilmente"
+    ],
+    "exampleQuestionId": 6688
+  },
+  {
+    "term": "clacson",
+    "partOfSpeech": "名词",
+    "translation": "汽车喇叭",
+    "note": "在允许条件下发出声音警告的车辆装置。",
+    "forms": [
+      "clacson"
+    ],
+    "exampleQuestionId": 6870
+  },
+  {
+    "term": "codice",
+    "partOfSpeech": "名词",
+    "translation": "法典；法规",
+    "note": "题库中通常指意大利《道路交通法典》。",
+    "forms": [
+      "codice"
+    ],
+    "exampleQuestionId": 6677
+  },
+  {
+    "term": "codice della strada",
+    "partOfSpeech": "固定短语",
+    "translation": "道路交通法典",
+    "note": "规定车辆、驾驶人、道路和交通行为的主要法律规范。",
+    "forms": [
+      "codice della strada"
+    ],
+    "exampleQuestionId": 6325
+  },
+  {
+    "term": "coefficiente di aderenza",
+    "partOfSpeech": "固定短语",
+    "translation": "附着系数",
+    "note": "衡量轮胎与路面抓地条件的数值，越低越容易打滑。",
+    "forms": [
+      "coefficiente di aderenza"
+    ],
+    "exampleQuestionId": 7155
+  },
+  {
+    "term": "collisione",
+    "partOfSpeech": "名词",
+    "translation": "碰撞",
+    "note": "车辆彼此或与行人、障碍物发生冲撞的事故。",
+    "forms": [
+      "collisione",
+      "collisioni"
+    ],
+    "exampleQuestionId": 4288
+  },
+  {
+    "term": "colonna",
+    "partOfSpeech": "名词",
+    "translation": "车队；队列",
+    "note": "按顺序行驶或停候的一列车辆。",
+    "forms": [
+      "colonna"
+    ],
+    "exampleQuestionId": 4545
+  },
+  {
+    "term": "comportamento",
+    "partOfSpeech": "名词",
+    "translation": "行为；处置方式",
+    "note": "驾驶人面对道路情况、事故或他人时采取的行动方式。",
+    "forms": [
+      "comportamento",
+      "comportamenti"
+    ],
+    "exampleQuestionId": 6774
+  },
+  {
+    "term": "concentrazione",
+    "partOfSpeech": "名词",
+    "translation": "专注力；浓度",
+    "note": "驾驶语境中可指注意力集中，也可指血液中的酒精含量。",
+    "forms": [
+      "concentrazione"
+    ],
+    "exampleQuestionId": 6767
+  },
+  {
+    "term": "condizioni atmosferiche",
+    "partOfSpeech": "固定短语",
+    "translation": "天气条件",
+    "note": "雨、雪、雾、风等会改变能见度和路面附着的环境因素。",
+    "forms": [
+      "condizioni atmosferiche"
+    ],
+    "exampleQuestionId": 5828
+  },
+  {
+    "term": "condizioni di sicurezza",
+    "partOfSpeech": "固定短语",
+    "translation": "安全条件",
+    "note": "表示视距、空间和交通状态足以安全实施某项操作。",
+    "forms": [
+      "condizioni di sicurezza"
+    ],
+    "exampleQuestionId": 4050
+  },
+  {
+    "term": "conducente",
+    "partOfSpeech": "名词",
+    "translation": "驾驶人；司机",
+    "note": "实际操纵车辆或依法负责车辆行驶的人。",
+    "forms": [
+      "conducente",
+      "conducenti"
+    ],
+    "exampleQuestionId": 446
+  },
+  {
+    "term": "condurre",
+    "partOfSpeech": "动词",
+    "translation": "驾驶；操纵车辆",
+    "note": "法规用语，表示驾驶某类车辆或带领车辆通行。",
+    "forms": [
+      "condurre"
+    ],
+    "exampleQuestionId": 6161
+  },
+  {
+    "term": "confluenza",
+    "partOfSpeech": "名词",
+    "translation": "车流汇合；汇入口",
+    "note": "两股同向交通流合并的地点，驾驶人须协调速度和间距。",
+    "forms": [
+      "confluenza"
+    ],
+    "exampleQuestionId": 1828
+  },
+  {
+    "term": "conseguire",
+    "partOfSpeech": "动词",
+    "translation": "取得；考取",
+    "note": "通过规定程序和考试获得驾驶证。",
+    "forms": [
+      "conseguire"
+    ],
+    "exampleQuestionId": 6164
+  },
+  {
+    "term": "consentire",
+    "partOfSpeech": "动词",
+    "translation": "允许；准许",
+    "note": "表示规则、标志或条件允许某种通行或操作。",
+    "forms": [
+      "consentire",
+      "consente",
+      "consentono"
+    ],
+    "exampleQuestionId": 62
+  },
+  {
+    "term": "consentito",
+    "partOfSpeech": "形容词",
+    "translation": "允许的；获准的",
+    "note": "表示在规定条件下可以通行或实施某项行为。",
+    "forms": [
+      "consentito",
+      "consentita",
+      "consentiti",
+      "consentite"
+    ],
+    "exampleQuestionId": 5475
+  },
+  {
+    "term": "consumo",
+    "partOfSpeech": "名词",
+    "translation": "消耗；油耗",
+    "note": "车辆行驶所使用的燃料或能源数量。",
+    "forms": [
+      "consumo",
+      "consumi"
+    ],
+    "exampleQuestionId": 6813
+  },
+  {
+    "term": "contratto",
+    "partOfSpeech": "名词",
+    "translation": "合同",
+    "note": "保险语境中指投保人与保险公司约定权利义务的协议。",
+    "forms": [
+      "contratto"
+    ],
+    "exampleQuestionId": 6729
+  },
+  {
+    "term": "controllare",
+    "partOfSpeech": "动词",
+    "translation": "检查；控制",
+    "note": "驾驶前或行驶中核查车辆状态、周围交通和安全条件。",
+    "forms": [
+      "controllare"
+    ],
+    "exampleQuestionId": 7069
+  },
+  {
+    "term": "controllo",
+    "partOfSpeech": "名词",
+    "translation": "检查；控制",
+    "note": "对车辆技术状态、证件或道路行为进行核查。",
+    "forms": [
+      "controllo"
+    ],
+    "exampleQuestionId": 4048
+  },
+  {
+    "term": "corretto",
+    "partOfSpeech": "形容词",
+    "translation": "正确的；合规的",
+    "note": "表示行为、操作或车辆状态符合安全和法规要求。",
+    "forms": [
+      "corretto",
+      "corretta"
+    ],
+    "exampleQuestionId": 6095
+  },
+  {
+    "term": "corsia",
+    "partOfSpeech": "名词",
+    "translation": "车道",
+    "note": "行车道纵向划分出的通行带，通常只容一列车辆行驶。",
+    "forms": [
+      "corsia",
+      "corsie"
+    ],
+    "exampleQuestionId": 31
+  },
+  {
+    "term": "corsia di emergenza",
+    "partOfSpeech": "固定短语",
+    "translation": "应急车道",
+    "note": "高速道路旁专供故障、救援等紧急情况使用的车道。",
+    "forms": [
+      "corsia di emergenza",
+      "corsie di emergenza"
+    ],
+    "exampleQuestionId": 26
+  },
+  {
+    "term": "corsia di marcia",
+    "partOfSpeech": "固定短语",
+    "translation": "行驶车道",
+    "note": "供车辆正常行驶的纵向车道，与应急车道等用途不同。",
+    "forms": [
+      "corsia di marcia",
+      "corsie di marcia"
+    ],
+    "exampleQuestionId": 22
+  },
+  {
+    "term": "corsia di preselezione",
+    "partOfSpeech": "固定短语",
+    "translation": "导向车道；预选车道",
+    "note": "驶近路口时按行驶方向预先选择并保持的车道。",
+    "forms": [
+      "corsia di preselezione"
+    ],
+    "exampleQuestionId": 4543
+  },
+  {
+    "term": "corsia riservata",
+    "partOfSpeech": "固定短语",
+    "translation": "专用车道",
+    "note": "仅供标志指定的车辆或道路使用者通行的车道。",
+    "forms": [
+      "corsia riservata",
+      "corsie riservate"
+    ],
+    "exampleQuestionId": 5291
+  },
+  {
+    "term": "corteo",
+    "partOfSpeech": "名词",
+    "translation": "队列；游行队伍",
+    "note": "在道路上集体行进、不得随意穿插打断的人员队伍。",
+    "forms": [
+      "corteo"
+    ],
+    "exampleQuestionId": 4648
+  },
+  {
+    "term": "costituire pericolo",
+    "partOfSpeech": "固定短语",
+    "translation": "构成危险",
+    "note": "某种行为、物体或车辆状态足以威胁道路交通安全。",
+    "forms": [
+      "costituire pericolo"
+    ],
+    "exampleQuestionId": 4059
+  },
+  {
+    "term": "creare intralcio",
+    "partOfSpeech": "固定短语",
+    "translation": "妨碍交通",
+    "note": "停车、操作或障碍物使其他道路使用者难以正常通行。",
+    "forms": [
+      "creare intralcio"
+    ],
+    "exampleQuestionId": 4619
+  },
+  {
+    "term": "cunetta",
+    "partOfSpeech": "名词",
+    "translation": "路边排水沟",
+    "note": "道路边缘用于排水的凹槽，不属于正常行驶区域。",
+    "forms": [
+      "cunetta"
+    ],
+    "exampleQuestionId": 960
+  },
+  {
+    "term": "curva",
+    "partOfSpeech": "名词",
+    "translation": "弯道",
+    "note": "道路方向发生弯曲的路段，视距和横向稳定性可能降低。",
+    "forms": [
+      "curva",
+      "curve"
+    ],
+    "exampleQuestionId": 4022
+  },
+  {
+    "term": "danneggiato",
+    "partOfSpeech": "形容词",
+    "translation": "受损的；损坏的",
+    "note": "描述车辆、部件或道路设施已经受损且可能不能安全使用。",
+    "forms": [
+      "danneggiato",
+      "danneggiati"
+    ],
+    "exampleQuestionId": 5554
+  },
+  {
+    "term": "danno",
+    "partOfSpeech": "名词",
+    "translation": "损害；损失",
+    "note": "事故对人员、车辆或其他财产造成的不利后果。",
+    "forms": [
+      "danno",
+      "danni"
+    ],
+    "exampleQuestionId": 6703
+  },
+  {
+    "term": "dare la precedenza",
+    "partOfSpeech": "固定短语",
+    "translation": "让行；把先行权让给对方",
+    "note": "表示在路口或横穿处减速、必要时停车，让对方先行。",
+    "forms": [
+      "dare la precedenza"
+    ],
+    "exampleQuestionId": 4587
+  },
+  {
+    "term": "dare precedenza",
+    "partOfSpeech": "固定短语",
+    "translation": "让行；给予先行权",
+    "note": "要求驾驶人让有优先权的道路使用者先通过。",
+    "forms": [
+      "dare precedenza"
+    ],
+    "exampleQuestionId": 2637
+  },
+  {
+    "term": "davanti",
+    "partOfSpeech": "副词",
+    "translation": "在前面；前方",
+    "note": "表示车辆、障碍物或道路设施位于行驶方向前方。",
+    "forms": [
+      "davanti"
+    ],
+    "exampleQuestionId": 425
+  },
+  {
+    "term": "decelerazione",
+    "partOfSpeech": "名词",
+    "translation": "减速度；减速过程",
+    "note": "车辆速度降低的变化，可能由松油门或制动产生。",
+    "forms": [
+      "decelerazione"
+    ],
+    "exampleQuestionId": 32
+  },
+  {
+    "term": "deformato",
+    "partOfSpeech": "形容词",
+    "translation": "变形的",
+    "note": "描述轮胎、轮辋或其他部件形状异常并可能影响安全。",
+    "forms": [
+      "deformato",
+      "deformata"
+    ],
+    "exampleQuestionId": 700
+  },
+  {
+    "term": "delineatore",
+    "partOfSpeech": "名词",
+    "translation": "轮廓标；导向标",
+    "note": "沿道路设置、用于显示边界、弯道或障碍物轮廓的反光设施。",
+    "forms": [
+      "delineatore",
+      "delineatori"
+    ],
+    "exampleQuestionId": 3639
+  },
+  {
+    "term": "destra",
+    "partOfSpeech": "名词",
+    "translation": "右侧；右方",
+    "note": "以行驶方向为参照的右边，涉及靠右、转弯和路口让行。",
+    "forms": [
+      "destra"
+    ],
+    "exampleQuestionId": 5177
+  },
+  {
+    "term": "deve essere",
+    "partOfSpeech": "固定短语",
+    "translation": "必须是；必须处于",
+    "note": "对车辆、设备或行为应满足的状态提出强制要求。",
+    "forms": [
+      "deve essere"
+    ],
+    "exampleQuestionId": 6095
+  },
+  {
+    "term": "di norma",
+    "partOfSpeech": "固定短语",
+    "translation": "通常；按一般规则",
+    "note": "说明一般适用但可能存在明文例外的规则。",
+    "forms": [
+      "di norma"
+    ],
+    "exampleQuestionId": 5157
+  },
+  {
+    "term": "dietro",
+    "partOfSpeech": "副词",
+    "translation": "在后面；后方",
+    "note": "表示相对于车辆或道路使用者位于后侧。",
+    "forms": [
+      "dietro"
+    ],
+    "exampleQuestionId": 4396
+  },
+  {
+    "term": "diminuire",
+    "partOfSpeech": "动词",
+    "translation": "减少；降低",
+    "note": "表示速度、附着力、污染或其他量下降。",
+    "forms": [
+      "diminuire"
+    ],
+    "exampleQuestionId": 6540
+  },
+  {
+    "term": "direzione",
+    "partOfSpeech": "名词",
+    "translation": "方向；行驶方向",
+    "note": "指车辆应当或可以前往的方向，也用于转向信号。",
+    "forms": [
+      "direzione",
+      "direzioni"
+    ],
+    "exampleQuestionId": 158
+  },
+  {
+    "term": "diritto di precedenza",
+    "partOfSpeech": "固定短语",
+    "translation": "先行权",
+    "note": "依法或依信号享有先通过路口或冲突点的权利，但仍须谨慎。",
+    "forms": [
+      "diritto di precedenza"
+    ],
+    "exampleQuestionId": 4097
+  },
+  {
+    "term": "discesa",
+    "partOfSpeech": "名词",
+    "translation": "下坡路段",
+    "note": "向下倾斜的道路，制动距离和制动器负担通常增加。",
+    "forms": [
+      "discesa",
+      "discese"
+    ],
+    "exampleQuestionId": 4026
+  },
+  {
+    "term": "dispositivo",
+    "partOfSpeech": "名词",
+    "translation": "装置；设备",
+    "note": "为安全、控制、信号或约束等特定功能设置的车辆部件。",
+    "forms": [
+      "dispositivo",
+      "dispositivi"
+    ],
+    "exampleQuestionId": 5908
+  },
+  {
+    "term": "distanza",
+    "partOfSpeech": "名词",
+    "translation": "距离；间距",
+    "note": "车辆与其他道路使用者、障碍或地点之间的空间间隔。",
+    "forms": [
+      "distanza",
+      "distanze"
+    ],
+    "exampleQuestionId": 4266
+  },
+  {
+    "term": "distanza di sicurezza",
+    "partOfSpeech": "固定短语",
+    "translation": "安全跟车距离",
+    "note": "与前车保持、足以在前车突然减速时避免碰撞的距离。",
+    "forms": [
+      "distanza di sicurezza"
+    ],
+    "exampleQuestionId": 4266
+  },
+  {
+    "term": "distanza laterale",
+    "partOfSpeech": "固定短语",
+    "translation": "横向安全间距",
+    "note": "与被超车辆、行人、自行车或障碍物侧面保持的距离。",
+    "forms": [
+      "distanza laterale"
+    ],
+    "exampleQuestionId": 5158
+  },
+  {
+    "term": "distanza minima",
+    "partOfSpeech": "固定短语",
+    "translation": "最小距离",
+    "note": "规则或安全条件要求不得小于的间隔。",
+    "forms": [
+      "distanza minima"
+    ],
+    "exampleQuestionId": 1322
+  },
+  {
+    "term": "distrazione",
+    "partOfSpeech": "名词",
+    "translation": "分心",
+    "note": "注意力离开道路和驾驶任务，是常见事故诱因。",
+    "forms": [
+      "distrazione"
+    ],
+    "exampleQuestionId": 4342
+  },
+  {
+    "term": "diversamente abili",
+    "partOfSpeech": "固定短语",
+    "translation": "残障人士",
+    "note": "题库中对行动、感官等能力受限道路使用者的表述。",
+    "forms": [
+      "diversamente abili"
+    ],
+    "exampleQuestionId": 164
+  },
+  {
+    "term": "divieto",
+    "partOfSpeech": "名词",
+    "translation": "禁止；禁令",
+    "note": "交通规则或标志明确不允许实施某种行为或通行。",
+    "forms": [
+      "divieto",
+      "divieti"
+    ],
+    "exampleQuestionId": 5436
+  },
+  {
+    "term": "divieto di",
+    "partOfSpeech": "固定短语",
+    "translation": "禁止……",
+    "note": "引出被交通规则或标志禁止的行为。",
+    "forms": [
+      "divieto di"
+    ],
+    "exampleQuestionId": 5436
+  },
+  {
+    "term": "divieto di sorpasso",
+    "partOfSpeech": "固定短语",
+    "translation": "禁止超车",
+    "note": "禁止车辆实施超越同向前车的操作。",
+    "forms": [
+      "divieto di sorpasso"
+    ],
+    "exampleQuestionId": 5155
+  },
+  {
+    "term": "divieto di sosta",
+    "partOfSpeech": "固定短语",
+    "translation": "禁止停车",
+    "note": "禁止车辆停放，但短暂临时停车是否允许须看具体标志和条件。",
+    "forms": [
+      "divieto di sosta"
+    ],
+    "exampleQuestionId": 5436
+  },
+  {
+    "term": "documento",
+    "partOfSpeech": "名词",
+    "translation": "证件；文件",
+    "note": "驾驶时依法需要持有或出示的驾驶证、登记证等文件。",
+    "forms": [
+      "documento",
+      "documenti"
+    ],
+    "exampleQuestionId": 6312
+  },
+  {
+    "term": "dopo aver",
+    "partOfSpeech": "固定短语",
+    "translation": "在已经……之后",
+    "note": "说明完成前一动作后才能实施后续驾驶行为。",
+    "forms": [
+      "dopo aver"
+    ],
+    "exampleQuestionId": 360
+  },
+  {
+    "term": "doppio senso",
+    "partOfSpeech": "固定短语",
+    "translation": "双向通行",
+    "note": "同一道路承载两个相反方向交通流的通行方式。",
+    "forms": [
+      "doppio senso"
+    ],
+    "exampleQuestionId": 42
+  },
+  {
+    "term": "dosso",
+    "partOfSpeech": "名词",
+    "translation": "凸形变坡；坡顶",
+    "note": "会遮挡前方视野的凸起路段，接近时须减速并避免危险操作。",
+    "forms": [
+      "dosso",
+      "dossi"
+    ],
+    "exampleQuestionId": 5441
+  },
+  {
+    "term": "dovere",
+    "partOfSpeech": "动词",
+    "translation": "必须；应当",
+    "note": "表达驾驶人依规则负有的义务。",
+    "forms": [
+      "dovere",
+      "deve",
+      "devono"
+    ],
+    "exampleQuestionId": 5703
+  },
+  {
+    "term": "dovere morale",
+    "partOfSpeech": "固定短语",
+    "translation": "道德义务；道德责任",
+    "note": "指救助伤者等行为在伦理层面的责任；法定救助义务不能仅视为道德选择。",
+    "forms": [
+      "dovere morale"
+    ],
+    "exampleQuestionId": 6560
+  },
+  {
+    "term": "ebbrezza",
+    "partOfSpeech": "名词",
+    "translation": "醉酒；酒后失常状态",
+    "note": "酒精影响达到法规认定程度、驾驶能力受损的状态。",
+    "forms": [
+      "ebbrezza"
+    ],
+    "exampleQuestionId": 6532
+  },
+  {
+    "term": "effettuare",
+    "partOfSpeech": "动词",
+    "translation": "实施；进行",
+    "note": "表示执行超车、转弯、停车等具体驾驶操作。",
+    "forms": [
+      "effettuare"
+    ],
+    "exampleQuestionId": 35
+  },
+  {
+    "term": "efficiente",
+    "partOfSpeech": "形容词",
+    "translation": "有效的；工作良好的",
+    "note": "描述车辆装置能够正常完成其安全功能。",
+    "forms": [
+      "efficiente",
+      "efficienti"
+    ],
+    "exampleQuestionId": 7002
+  },
+  {
+    "term": "efficienza",
+    "partOfSpeech": "名词",
+    "translation": "效能；良好工作状态",
+    "note": "车辆系统按设计能力正常发挥作用的程度。",
+    "forms": [
+      "efficienza"
+    ],
+    "exampleQuestionId": 5712
+  },
+  {
+    "term": "emergenza",
+    "partOfSpeech": "名词",
+    "translation": "紧急情况",
+    "note": "要求立即保护人员、警示交通并采取适当措施的危险状态。",
+    "forms": [
+      "emergenza"
+    ],
+    "exampleQuestionId": 18
+  },
+  {
+    "term": "emissione",
+    "partOfSpeech": "名词",
+    "translation": "排放；排放物",
+    "note": "车辆运行时向环境释放气体、颗粒物或噪声的行为。",
+    "forms": [
+      "emissione"
+    ],
+    "exampleQuestionId": 6829
+  },
+  {
+    "term": "emorragia",
+    "partOfSpeech": "名词",
+    "translation": "大出血；出血",
+    "note": "血液大量流失的紧急状况，应采取适当止血并呼叫救援。",
+    "forms": [
+      "emorragia"
+    ],
+    "exampleQuestionId": 6591
+  },
+  {
+    "term": "entrare",
+    "partOfSpeech": "动词",
+    "translation": "进入；驶入",
+    "note": "车辆驶入道路、路口、隧道或受管制区域。",
+    "forms": [
+      "entrare"
+    ],
+    "exampleQuestionId": 61
+  },
+  {
+    "term": "esibire",
+    "partOfSpeech": "动词",
+    "translation": "出示",
+    "note": "应执法人员要求展示驾驶证、车辆文件等。",
+    "forms": [
+      "esibire"
+    ],
+    "exampleQuestionId": 2907
+  },
+  {
+    "term": "essere",
+    "partOfSpeech": "动词",
+    "translation": "是；处于",
+    "note": "用于说明标志性质、车辆状态或某项行为是否允许。",
+    "forms": [
+      "essere",
+      "è",
+      "sono"
+    ],
+    "exampleQuestionId": 2691
+  },
+  {
+    "term": "evitare",
+    "partOfSpeech": "动词",
+    "translation": "避免；防止",
+    "note": "采取适当驾驶措施防止事故、危险或交通妨碍。",
+    "forms": [
+      "evitare"
+    ],
+    "exampleQuestionId": 6422
+  },
+  {
+    "term": "evitare incidenti",
+    "partOfSpeech": "固定短语",
+    "translation": "避免事故",
+    "note": "通过控制速度、距离和注意力预防碰撞及伤害。",
+    "forms": [
+      "evitare incidenti"
+    ],
+    "exampleQuestionId": 5339
+  },
+  {
+    "term": "facoltà",
+    "partOfSpeech": "名词",
+    "translation": "能力；选择权",
+    "note": "在驾考语境中可指驾驶能力，也可指规则给予的选择余地。",
+    "forms": [
+      "facoltà"
+    ],
+    "exampleQuestionId": 6526
+  },
+  {
+    "term": "fare attenzione",
+    "partOfSpeech": "固定短语",
+    "translation": "小心；注意",
+    "note": "面对潜在危险时提高警觉并准备采取行动。",
+    "forms": [
+      "fare attenzione"
+    ],
+    "exampleQuestionId": 80
+  },
+  {
+    "term": "farmaci",
+    "partOfSpeech": "名词",
+    "translation": "药物",
+    "note": "某些药物会引起嗜睡、注意力下降或反应迟缓，服用前应查阅说明。",
+    "forms": [
+      "farmaci"
+    ],
+    "exampleQuestionId": 6515
+  },
+  {
+    "term": "ferita",
+    "partOfSpeech": "名词",
+    "translation": "伤口；创伤",
+    "note": "事故造成的皮肤或组织损伤，可能伴随出血。",
+    "forms": [
+      "ferita",
+      "ferite"
+    ],
+    "exampleQuestionId": 6591
+  },
+  {
+    "term": "ferito",
+    "partOfSpeech": "名词",
+    "translation": "伤者；受伤人员",
+    "note": "因碰撞或其他事故受伤的人，搬动前须判断风险。",
+    "forms": [
+      "ferito",
+      "feriti"
+    ],
+    "exampleQuestionId": 6630
+  },
+  {
+    "term": "fermarsi",
+    "partOfSpeech": "动词",
+    "translation": "停车；停下",
+    "note": "使车辆停止运动，是否属于临时停车或停车停放取决于语境。",
+    "forms": [
+      "fermarsi"
+    ],
+    "exampleQuestionId": 6444
+  },
+  {
+    "term": "fermata",
+    "partOfSpeech": "名词",
+    "translation": "临时停车",
+    "note": "为乘客上下车或短时需要而暂停行驶，驾驶人通常仍可立即移动车辆。",
+    "forms": [
+      "fermata"
+    ],
+    "exampleQuestionId": 5411
+  },
+  {
+    "term": "figura",
+    "partOfSpeech": "名词",
+    "translation": "图示；图片",
+    "note": "题干中指所展示的交通标志、路口图或车辆示意图。",
+    "forms": [
+      "figura"
+    ],
+    "exampleQuestionId": 2762
+  },
+  {
+    "term": "file parallele",
+    "partOfSpeech": "固定短语",
+    "translation": "并排行驶的车列",
+    "note": "拥堵等条件下，多列车辆在相邻车道按各自队列前进。",
+    "forms": [
+      "file parallele"
+    ],
+    "exampleQuestionId": 406
+  },
+  {
+    "term": "filobus",
+    "partOfSpeech": "名词",
+    "translation": "无轨电车",
+    "note": "由架空电线供电、使用轮胎在道路上行驶的公共车辆。",
+    "forms": [
+      "filobus"
+    ],
+    "exampleQuestionId": 155
+  },
+  {
+    "term": "fine",
+    "partOfSpeech": "名词",
+    "translation": "目的；终止；结束",
+    "note": "可指急救等行为的目的；在标志语境中也表示禁止、义务或道路范围结束。",
+    "forms": [
+      "fine"
+    ],
+    "exampleQuestionId": 110
+  },
+  {
+    "term": "fondo stradale",
+    "partOfSpeech": "固定短语",
+    "translation": "路面状况；道路表面",
+    "note": "指轮胎接触的道路表面，其湿滑或不平会影响附着力。",
+    "forms": [
+      "fondo stradale"
+    ],
+    "exampleQuestionId": 4105
+  },
+  {
+    "term": "fondo stradale bagnato",
+    "partOfSpeech": "固定短语",
+    "translation": "湿滑路面；湿路面",
+    "note": "被水覆盖的道路表面，会降低轮胎附着并延长制动距离。",
+    "forms": [
+      "fondo stradale bagnato"
+    ],
+    "exampleQuestionId": 6504
+  },
+  {
+    "term": "foratura",
+    "partOfSpeech": "名词",
+    "translation": "轮胎穿孔；爆胎漏气",
+    "note": "轮胎被刺穿并失去气压的故障。",
+    "forms": [
+      "foratura"
+    ],
+    "exampleQuestionId": 6938
+  },
+  {
+    "term": "forza aderente",
+    "partOfSpeech": "固定短语",
+    "translation": "附着力",
+    "note": "轮胎与路面接触产生、使车辆能够驱动、制动和转向的力。",
+    "forms": [
+      "forza aderente"
+    ],
+    "exampleQuestionId": 7167
+  },
+  {
+    "term": "freccia",
+    "partOfSpeech": "名词",
+    "translation": "箭头；方向指示",
+    "note": "标线、信号灯或车辆转向灯上的箭头，用于表示允许或预定方向。",
+    "forms": [
+      "freccia",
+      "frecce"
+    ],
+    "exampleQuestionId": 2636
+  },
+  {
+    "term": "freccia direzionale",
+    "partOfSpeech": "固定短语",
+    "translation": "转向箭头；转向灯",
+    "note": "表示预定转向方向的箭头标记或车辆方向信号。",
+    "forms": [
+      "freccia direzionale",
+      "frecce direzionali"
+    ],
+    "exampleQuestionId": 2636
+  },
+  {
+    "term": "frenante",
+    "partOfSpeech": "形容词",
+    "translation": "制动的；制动力的",
+    "note": "描述使车辆减速的作用力或制动系统能力。",
+    "forms": [
+      "frenante"
+    ],
+    "exampleQuestionId": 6984
+  },
+  {
+    "term": "frenare",
+    "partOfSpeech": "动词",
+    "translation": "制动；刹车",
+    "note": "操作制动系统以降低车速或停车。",
+    "forms": [
+      "frenare"
+    ],
+    "exampleQuestionId": 6407
+  },
+  {
+    "term": "frenata",
+    "partOfSpeech": "名词",
+    "translation": "一次制动；刹车动作",
+    "note": "驾驶人实施制动的动作，急刹车可能导致失稳或追尾。",
+    "forms": [
+      "frenata",
+      "frenate"
+    ],
+    "exampleQuestionId": 6973
+  },
+  {
+    "term": "frenatura",
+    "partOfSpeech": "名词",
+    "translation": "制动过程；制动作用",
+    "note": "从开始制动到车辆减速或停住的过程，常用于制动距离。",
+    "forms": [
+      "frenatura"
+    ],
+    "exampleQuestionId": 4226
+  },
+  {
+    "term": "freno",
+    "partOfSpeech": "名词",
+    "translation": "制动器；刹车",
+    "note": "用于降低车速、停车或保持车辆静止的装置。",
+    "forms": [
+      "freno",
+      "freni"
+    ],
+    "exampleQuestionId": 7178
+  },
+  {
+    "term": "freno di servizio",
+    "partOfSpeech": "固定短语",
+    "translation": "行车制动器",
+    "note": "正常行驶时由驾驶人操作、用于减速和停车的主要制动系统。",
+    "forms": [
+      "freno di servizio"
+    ],
+    "exampleQuestionId": 4326
+  },
+  {
+    "term": "freno di stazionamento",
+    "partOfSpeech": "固定短语",
+    "translation": "驻车制动器；手刹",
+    "note": "车辆停放后使其保持静止的制动装置。",
+    "forms": [
+      "freno di stazionamento"
+    ],
+    "exampleQuestionId": 4272
+  },
+  {
+    "term": "frizione",
+    "partOfSpeech": "名词",
+    "translation": "离合器",
+    "note": "连接或分离发动机与传动系统动力的装置。",
+    "forms": [
+      "frizione"
+    ],
+    "exampleQuestionId": 6409
+  },
+  {
+    "term": "fumo",
+    "partOfSpeech": "名词",
+    "translation": "烟；烟气",
+    "note": "燃烧或车辆故障产生、可能妨碍视线和污染空气的烟雾。",
+    "forms": [
+      "fumo"
+    ],
+    "exampleQuestionId": 6829
+  },
+  {
+    "term": "funzionamento",
+    "partOfSpeech": "名词",
+    "translation": "运转；工作状态",
+    "note": "发动机、制动器、灯光等设备实际工作的情况。",
+    "forms": [
+      "funzionamento"
+    ],
+    "exampleQuestionId": 6835
+  },
+  {
+    "term": "fuori dei centri abitati",
+    "partOfSpeech": "固定短语",
+    "translation": "在城镇建成区以外",
+    "note": "限定某项速度、灯光或通行规则适用于城外道路。",
+    "forms": [
+      "fuori dei centri abitati"
+    ],
+    "exampleQuestionId": 7089
+  },
+  {
+    "term": "fuoristrada",
+    "partOfSpeech": "名词",
+    "translation": "越野车",
+    "note": "具有适合非铺装地面行驶结构和性能的机动车。",
+    "forms": [
+      "fuoristrada"
+    ],
+    "exampleQuestionId": 5813
+  },
+  {
+    "term": "galleria",
+    "partOfSpeech": "名词",
+    "translation": "隧道",
+    "note": "穿越山体或地下的封闭道路，照明、停车和紧急行为有专门规则。",
+    "forms": [
+      "galleria",
+      "gallerie"
+    ],
+    "exampleQuestionId": 5445
+  },
+  {
+    "term": "gancio",
+    "partOfSpeech": "名词",
+    "translation": "牵引钩；连接钩",
+    "note": "连接牵引车和挂车或故障车辆的机械部件。",
+    "forms": [
+      "gancio"
+    ],
+    "exampleQuestionId": 5763
+  },
+  {
+    "term": "gas",
+    "partOfSpeech": "名词",
+    "translation": "气体；燃气",
+    "note": "题目中可指车辆燃气燃料或发动机排出的气体。",
+    "forms": [
+      "gas"
+    ],
+    "exampleQuestionId": 7086
+  },
+  {
+    "term": "gas di scarico",
+    "partOfSpeech": "固定短语",
+    "translation": "尾气；废气",
+    "note": "发动机燃烧后从排气系统排出的污染气体。",
+    "forms": [
+      "gas di scarico"
+    ],
+    "exampleQuestionId": 7086
+  },
+  {
+    "term": "ghiaccio",
+    "partOfSpeech": "名词",
+    "translation": "冰；结冰",
+    "note": "使路面附着系数极低、容易发生打滑的状态。",
+    "forms": [
+      "ghiaccio"
+    ],
+    "exampleQuestionId": 4046
+  },
+  {
+    "term": "giorno",
+    "partOfSpeech": "名词",
+    "translation": "白天；日",
+    "note": "按语境表示日间时段或法规计算中的一天。",
+    "forms": [
+      "giorno",
+      "giorni"
+    ],
+    "exampleQuestionId": 169
+  },
+  {
+    "term": "giubbotto",
+    "partOfSpeech": "名词",
+    "translation": "背心；夹克",
+    "note": "题目中常指故障停车时穿着的高可见度反光背心。",
+    "forms": [
+      "giubbotto"
+    ],
+    "exampleQuestionId": 5596
+  },
+  {
+    "term": "giubbotto ad alta visibilità",
+    "partOfSpeech": "固定短语",
+    "translation": "高可见度反光背心",
+    "note": "在道路上离车处理故障时穿着，使驾驶人更容易被发现。",
+    "forms": [
+      "giubbotto ad alta visibilità"
+    ],
+    "exampleQuestionId": 5594
+  },
+  {
+    "term": "gonfiaggio",
+    "partOfSpeech": "名词",
+    "translation": "充气；充气压力",
+    "note": "给轮胎充入空气并调整到规定压力的操作。",
+    "forms": [
+      "gonfiaggio"
+    ],
+    "exampleQuestionId": 6926
+  },
+  {
+    "term": "guasto",
+    "partOfSpeech": "名词",
+    "translation": "故障",
+    "note": "车辆或部件失去正常功能、可能需要停车和警示的状态。",
+    "forms": [
+      "guasto",
+      "guasti"
+    ],
+    "exampleQuestionId": 38
+  },
+  {
+    "term": "guida",
+    "partOfSpeech": "名词",
+    "translation": "驾驶；驾驶行为",
+    "note": "指操纵车辆在道路上行驶，也用于驾驶资格和安全状态。",
+    "forms": [
+      "guida"
+    ],
+    "exampleQuestionId": 6772
+  },
+  {
+    "term": "guidare",
+    "partOfSpeech": "动词",
+    "translation": "驾驶",
+    "note": "表示操纵车辆在道路上行驶。",
+    "forms": [
+      "guidare"
+    ],
+    "exampleQuestionId": 6533
+  },
+  {
+    "term": "ha l'obbligo",
+    "partOfSpeech": "固定短语",
+    "translation": "负有义务；必须",
+    "note": "明确指出某一主体依法必须采取后续行动。",
+    "forms": [
+      "ha l'obbligo"
+    ],
+    "exampleQuestionId": 5162
+  },
+  {
+    "term": "idoneità",
+    "partOfSpeech": "名词",
+    "translation": "适合性；驾驶资格条件",
+    "note": "身体、精神或技术条件满足安全驾驶要求的状态。",
+    "forms": [
+      "idoneità"
+    ],
+    "exampleQuestionId": 6518
+  },
+  {
+    "term": "illuminazione",
+    "partOfSpeech": "名词",
+    "translation": "照明",
+    "note": "道路或车辆灯光提供的可视条件。",
+    "forms": [
+      "illuminazione"
+    ],
+    "exampleQuestionId": 5272
+  },
+  {
+    "term": "immatricolazione",
+    "partOfSpeech": "名词",
+    "translation": "车辆登记注册",
+    "note": "车辆首次纳入法定登记并取得号牌和登记文件的程序。",
+    "forms": [
+      "immatricolazione"
+    ],
+    "exampleQuestionId": 245
+  },
+  {
+    "term": "immettersi",
+    "partOfSpeech": "动词",
+    "translation": "汇入；驶入车流",
+    "note": "从支路、匝道或停车位置进入道路交通流。",
+    "forms": [
+      "immettersi"
+    ],
+    "exampleQuestionId": 4476
+  },
+  {
+    "term": "immissione",
+    "partOfSpeech": "名词",
+    "translation": "汇入；驶入",
+    "note": "车辆进入另一条道路或既有交通流的动作和位置。",
+    "forms": [
+      "immissione"
+    ],
+    "exampleQuestionId": 2303
+  },
+  {
+    "term": "impegnare",
+    "partOfSpeech": "动词",
+    "translation": "进入并占用；驶入",
+    "note": "在路口或车道语境中表示车辆开始进入并占用该区域。",
+    "forms": [
+      "impegnare"
+    ],
+    "exampleQuestionId": 2694
+  },
+  {
+    "term": "impianto",
+    "partOfSpeech": "名词",
+    "translation": "系统；装置总成",
+    "note": "由多个部件组成并完成制动、照明等特定车辆功能的系统。",
+    "forms": [
+      "impianto",
+      "impianti"
+    ],
+    "exampleQuestionId": 322
+  },
+  {
+    "term": "impianto elettrico",
+    "partOfSpeech": "固定短语",
+    "translation": "电气系统",
+    "note": "为车辆启动、照明、信号及电子设备供电和控制的系统。",
+    "forms": [
+      "impianto elettrico"
+    ],
+    "exampleQuestionId": 5986
+  },
+  {
+    "term": "impianto frenante",
+    "partOfSpeech": "固定短语",
+    "translation": "制动系统",
+    "note": "由制动控制、传动和车轮制动部件组成的整套系统。",
+    "forms": [
+      "impianto frenante"
+    ],
+    "exampleQuestionId": 322
+  },
+  {
+    "term": "imporre",
+    "partOfSpeech": "动词",
+    "translation": "强制要求；施加",
+    "note": "表示标志或规则要求道路使用者必须遵守某项行为。",
+    "forms": [
+      "imporre",
+      "impone"
+    ],
+    "exampleQuestionId": 2699
+  },
+  {
+    "term": "in caso di",
+    "partOfSpeech": "固定短语",
+    "translation": "在……情况下；如果发生",
+    "note": "引出事故、故障、危险或特定条件下适用的规则。",
+    "forms": [
+      "in caso di"
+    ],
+    "exampleQuestionId": 4094
+  },
+  {
+    "term": "in corrispondenza",
+    "partOfSpeech": "固定短语",
+    "translation": "在正对位置；在……处",
+    "note": "表示与路口、标志、出入口或道路设施处于同一位置。",
+    "forms": [
+      "in corrispondenza"
+    ],
+    "exampleQuestionId": 191
+  },
+  {
+    "term": "in curva",
+    "partOfSpeech": "固定短语",
+    "translation": "在弯道中",
+    "note": "表示车辆处于方向变化路段，须控制速度并保持车道。",
+    "forms": [
+      "in curva"
+    ],
+    "exampleQuestionId": 7157
+  },
+  {
+    "term": "in discesa",
+    "partOfSpeech": "固定短语",
+    "translation": "在下坡路段",
+    "note": "描述车辆沿下坡方向行驶，需控制车速并避免制动过热。",
+    "forms": [
+      "in discesa"
+    ],
+    "exampleQuestionId": 4231
+  },
+  {
+    "term": "in galleria",
+    "partOfSpeech": "固定短语",
+    "translation": "在隧道内",
+    "note": "表示车辆处于隧道环境，适用灯光、停车和应急规则。",
+    "forms": [
+      "in galleria"
+    ],
+    "exampleQuestionId": 6825
+  },
+  {
+    "term": "in ogni caso",
+    "partOfSpeech": "固定短语",
+    "translation": "在任何情况下；无论如何",
+    "note": "说明规则不因其他条件变化而例外。",
+    "forms": [
+      "in ogni caso"
+    ],
+    "exampleQuestionId": 5435
+  },
+  {
+    "term": "in prossimità",
+    "partOfSpeech": "固定短语",
+    "translation": "在附近；接近时",
+    "note": "表示尚未到达某地点但已经足够接近，须提前采取相应驾驶措施。",
+    "forms": [
+      "in prossimità"
+    ],
+    "exampleQuestionId": 5265
+  },
+  {
+    "term": "in salita",
+    "partOfSpeech": "固定短语",
+    "translation": "在上坡路段",
+    "note": "描述车辆位于或沿上坡方向行驶的状态。",
+    "forms": [
+      "in salita"
+    ],
+    "exampleQuestionId": 4236
+  },
+  {
+    "term": "incidente",
+    "partOfSpeech": "名词",
+    "translation": "事故；交通事故",
+    "note": "造成或可能造成人员伤害、车辆或财物损坏的道路事件。",
+    "forms": [
+      "incidente",
+      "incidenti"
+    ],
+    "exampleQuestionId": 4342
+  },
+  {
+    "term": "incidente stradale",
+    "partOfSpeech": "固定短语",
+    "translation": "道路交通事故",
+    "note": "道路交通中发生并涉及车辆、人员或财产损害的事故。",
+    "forms": [
+      "incidente stradale",
+      "incidenti stradali"
+    ],
+    "exampleQuestionId": 6035
+  },
+  {
+    "term": "incoscienza",
+    "partOfSpeech": "名词",
+    "translation": "失去意识；昏迷",
+    "note": "伤员对呼叫和刺激无反应的状态，须检查呼吸并呼叫急救。",
+    "forms": [
+      "incoscienza"
+    ],
+    "exampleQuestionId": 6607
+  },
+  {
+    "term": "incrociare",
+    "partOfSpeech": "动词",
+    "translation": "交会；相向会车",
+    "note": "与来自相反方向的车辆相遇，或在交叉点横向相交。",
+    "forms": [
+      "incrociare"
+    ],
+    "exampleQuestionId": 5874
+  },
+  {
+    "term": "incrocio",
+    "partOfSpeech": "名词",
+    "translation": "交叉路口",
+    "note": "两条或多条道路相交的区域，驶近时必须判断信号和优先权。",
+    "forms": [
+      "incrocio",
+      "incroci"
+    ],
+    "exampleQuestionId": 84
+  },
+  {
+    "term": "indicare",
+    "partOfSpeech": "动词",
+    "translation": "指示；表示",
+    "note": "说明标志、信号或仪表所传达的信息。",
+    "forms": [
+      "indicare",
+      "indica",
+      "indicano"
+    ],
+    "exampleQuestionId": 3829
+  },
+  {
+    "term": "indicatore di direzione",
+    "partOfSpeech": "固定短语",
+    "translation": "转向指示灯",
+    "note": "车辆转弯或变更车道前用于表明方向意图的闪光灯。",
+    "forms": [
+      "indicatore di direzione",
+      "indicatori di direzione"
+    ],
+    "exampleQuestionId": 5943
+  },
+  {
+    "term": "indicazione",
+    "partOfSpeech": "名词",
+    "translation": "指示；信息",
+    "note": "交通标志向驾驶人提供方向、地点、服务或通行方式的信息。",
+    "forms": [
+      "indicazione",
+      "indicazioni"
+    ],
+    "exampleQuestionId": 4021
+  },
+  {
+    "term": "inefficienti",
+    "partOfSpeech": "形容词",
+    "translation": "失效的；效率低的",
+    "note": "描述车辆装置不能正常发挥功能并可能危及安全。",
+    "forms": [
+      "inefficienti"
+    ],
+    "exampleQuestionId": 7029
+  },
+  {
+    "term": "inerzia",
+    "partOfSpeech": "名词",
+    "translation": "惯性",
+    "note": "车辆保持原运动状态的性质，会随质量和速度影响停车难度。",
+    "forms": [
+      "inerzia"
+    ],
+    "exampleQuestionId": 5702
+  },
+  {
+    "term": "inferiore a",
+    "partOfSpeech": "固定短语",
+    "translation": "低于；小于",
+    "note": "表示数值严格小于后接的界限。",
+    "forms": [
+      "inferiore a"
+    ],
+    "exampleQuestionId": 261
+  },
+  {
+    "term": "infortunato",
+    "partOfSpeech": "名词",
+    "translation": "事故伤员",
+    "note": "在交通事故中受伤、需要评估和救助的人。",
+    "forms": [
+      "infortunato",
+      "infortunati"
+    ],
+    "exampleQuestionId": 6591
+  },
+  {
+    "term": "infrazione",
+    "partOfSpeech": "名词",
+    "translation": "违法行为；违章",
+    "note": "违反道路交通规则并可能受到行政或刑事后果的行为。",
+    "forms": [
+      "infrazione",
+      "infrazioni"
+    ],
+    "exampleQuestionId": 6284
+  },
+  {
+    "term": "ingombro",
+    "partOfSpeech": "名词",
+    "translation": "占用空间；外廓范围",
+    "note": "车辆或载荷在道路上实际占据的宽度、长度和高度范围。",
+    "forms": [
+      "ingombro"
+    ],
+    "exampleQuestionId": 5748
+  },
+  {
+    "term": "ingresso",
+    "partOfSpeech": "名词",
+    "translation": "入口；驶入口",
+    "note": "表示进入道路、设施或受管制区域的位置。",
+    "forms": [
+      "ingresso"
+    ],
+    "exampleQuestionId": 3224
+  },
+  {
+    "term": "inizio",
+    "partOfSpeech": "名词",
+    "translation": "开始；起点",
+    "note": "标志中表示某项规定、区域或道路设施从此处开始生效。",
+    "forms": [
+      "inizio"
+    ],
+    "exampleQuestionId": 2489
+  },
+  {
+    "term": "inquinamento",
+    "partOfSpeech": "名词",
+    "translation": "污染",
+    "note": "车辆尾气、噪声或废弃物对空气和环境造成的不良影响。",
+    "forms": [
+      "inquinamento"
+    ],
+    "exampleQuestionId": 6828
+  },
+  {
+    "term": "inquinamento atmosferico",
+    "partOfSpeech": "固定短语",
+    "translation": "大气污染",
+    "note": "机动车排放进入空气并降低环境质量的污染。",
+    "forms": [
+      "inquinamento atmosferico"
+    ],
+    "exampleQuestionId": 6841
+  },
+  {
+    "term": "inquinanti",
+    "partOfSpeech": "形容词",
+    "translation": "有污染性的；污染物",
+    "note": "描述尾气等会对空气和环境造成污染的物质。",
+    "forms": [
+      "inquinanti"
+    ],
+    "exampleQuestionId": 6866
+  },
+  {
+    "term": "inserire",
+    "partOfSpeech": "动词",
+    "translation": "接合；挂入；插入",
+    "note": "车辆语境中常指挂入挡位、启用装置或插入钥匙。",
+    "forms": [
+      "inserire"
+    ],
+    "exampleQuestionId": 6992
+  },
+  {
+    "term": "integrativo",
+    "partOfSpeech": "形容词",
+    "translation": "补充的；辅助的",
+    "note": "用于说明附加牌对主标志的适用范围或含义作补充。",
+    "forms": [
+      "integrativo",
+      "integrativi",
+      "integrative"
+    ],
+    "exampleQuestionId": 3714
+  },
+  {
+    "term": "intersezione",
+    "partOfSpeech": "名词",
+    "translation": "道路交叉口",
+    "note": "法规用语，指道路平面相交、汇合或分叉形成的公共区域。",
+    "forms": [
+      "intersezione",
+      "intersezioni"
+    ],
+    "exampleQuestionId": 78
+  },
+  {
+    "term": "intralcio",
+    "partOfSpeech": "名词",
+    "translation": "妨碍；交通阻碍",
+    "note": "对其他道路使用者正常、安全通行造成的阻碍。",
+    "forms": [
+      "intralcio"
+    ],
+    "exampleQuestionId": 5322
+  },
+  {
+    "term": "inversione",
+    "partOfSpeech": "名词",
+    "translation": "掉头；方向反转",
+    "note": "使车辆转向相反行驶方向的操作。",
+    "forms": [
+      "inversione"
+    ],
+    "exampleQuestionId": 137
+  },
+  {
+    "term": "inversione di marcia",
+    "partOfSpeech": "固定短语",
+    "translation": "掉头",
+    "note": "通过转向使车辆改为沿原来相反方向行驶的操作。",
+    "forms": [
+      "inversione di marcia"
+    ],
+    "exampleQuestionId": 137
+  },
+  {
+    "term": "invertire",
+    "partOfSpeech": "动词",
+    "translation": "倒转；改变方向",
+    "note": "在道路语境中表示改变原有行驶方向，常见搭配是掉头。",
+    "forms": [
+      "invertire"
+    ],
+    "exampleQuestionId": 3196
+  },
+  {
+    "term": "isola",
+    "partOfSpeech": "名词",
+    "translation": "交通岛",
+    "note": "设置在路面上的隔离区域，用于分流、保护行人或引导车辆。",
+    "forms": [
+      "isola"
+    ],
+    "exampleQuestionId": 142
+  },
+  {
+    "term": "kw",
+    "partOfSpeech": "名词",
+    "translation": "千瓦",
+    "note": "表示发动机功率的法定计量单位符号。",
+    "forms": [
+      "kw"
+    ],
+    "exampleQuestionId": 265
+  },
+  {
+    "term": "larghezza",
+    "partOfSpeech": "名词",
+    "translation": "宽度",
+    "note": "车辆或载荷横向占用的尺寸，受法定外廓限制。",
+    "forms": [
+      "larghezza"
+    ],
+    "exampleQuestionId": 5741
+  },
+  {
+    "term": "laterale",
+    "partOfSpeech": "形容词",
+    "translation": "侧面的；横向的",
+    "note": "涉及车辆侧面、横向距离或侧风方向。",
+    "forms": [
+      "laterale",
+      "laterali"
+    ],
+    "exampleQuestionId": 5824
+  },
+  {
+    "term": "legge",
+    "partOfSpeech": "名词",
+    "translation": "法律",
+    "note": "由国家制定并对道路使用者具有约束力的规则。",
+    "forms": [
+      "legge"
+    ],
+    "exampleQuestionId": 6557
+  },
+  {
+    "term": "lesione",
+    "partOfSpeech": "名词",
+    "translation": "损伤；人身伤害",
+    "note": "事故对人体组织或功能造成的伤害。",
+    "forms": [
+      "lesione",
+      "lesioni"
+    ],
+    "exampleQuestionId": 6674
+  },
+  {
+    "term": "liberare",
+    "partOfSpeech": "动词",
+    "translation": "腾空；尽快驶离",
+    "note": "从路口、铁路道口或受阻位置移开，恢复通行空间。",
+    "forms": [
+      "liberare"
+    ],
+    "exampleQuestionId": 2846
+  },
+  {
+    "term": "limite di velocità",
+    "partOfSpeech": "固定短语",
+    "translation": "速度限制；限速",
+    "note": "法规或标志规定的最高或特定车速界限。",
+    "forms": [
+      "limite di velocità",
+      "limiti di velocità"
+    ],
+    "exampleQuestionId": 5168
+  },
+  {
+    "term": "linea continua",
+    "partOfSpeech": "固定短语",
+    "translation": "实线",
+    "note": "一般不得跨越的连续路面标线，用于分隔车流或界定边缘。",
+    "forms": [
+      "linea continua"
+    ],
+    "exampleQuestionId": 4436
+  },
+  {
+    "term": "liquido",
+    "partOfSpeech": "名词",
+    "translation": "工作液；液体",
+    "note": "题目中常指冷却液、制动液或其他车辆系统用液体。",
+    "forms": [
+      "liquido"
+    ],
+    "exampleQuestionId": 6910
+  },
+  {
+    "term": "liquido di raffreddamento",
+    "partOfSpeech": "固定短语",
+    "translation": "发动机冷却液",
+    "note": "在冷却系统中循环并带走发动机热量的液体。",
+    "forms": [
+      "liquido di raffreddamento"
+    ],
+    "exampleQuestionId": 5694
+  },
+  {
+    "term": "località",
+    "partOfSpeech": "名词",
+    "translation": "地点；地名",
+    "note": "标志中用于指示城镇、目的地或道路所在地点。",
+    "forms": [
+      "località"
+    ],
+    "exampleQuestionId": 2636
+  },
+  {
+    "term": "lubrificazione",
+    "partOfSpeech": "名词",
+    "translation": "润滑；润滑系统",
+    "note": "用润滑油降低发动机等运动部件摩擦和磨损的过程。",
+    "forms": [
+      "lubrificazione"
+    ],
+    "exampleQuestionId": 7078
+  },
+  {
+    "term": "luce",
+    "partOfSpeech": "名词",
+    "translation": "灯光；指示灯",
+    "note": "车辆或交通信号用于照明、示意和警告的光。",
+    "forms": [
+      "luce",
+      "luci"
+    ],
+    "exampleQuestionId": 6002
+  },
+  {
+    "term": "luce circolare",
+    "partOfSpeech": "固定短语",
+    "translation": "圆形灯",
+    "note": "表示灯面为圆形，用于区分形容词“圆形的”和动词“通行”。",
+    "forms": [
+      "luce circolare"
+    ],
+    "exampleQuestionId": 2814
+  },
+  {
+    "term": "luce gialla",
+    "partOfSpeech": "固定短语",
+    "translation": "黄灯",
+    "note": "提示信号即将变为红灯；能安全停车时应当停车。",
+    "forms": [
+      "luce gialla",
+      "luci gialle"
+    ],
+    "exampleQuestionId": 2696
+  },
+  {
+    "term": "luce lampeggiante",
+    "partOfSpeech": "固定短语",
+    "translation": "闪烁灯光",
+    "note": "以闪烁方式警示危险或提示驾驶人谨慎通行。",
+    "forms": [
+      "luce lampeggiante",
+      "luci lampeggianti"
+    ],
+    "exampleQuestionId": 165
+  },
+  {
+    "term": "luce rossa",
+    "partOfSpeech": "固定短语",
+    "translation": "红灯",
+    "note": "交通信号中的红色灯光，通常要求在规定位置停车。",
+    "forms": [
+      "luce rossa",
+      "luci rosse"
+    ],
+    "exampleQuestionId": 194
+  },
+  {
+    "term": "luce verde",
+    "partOfSpeech": "固定短语",
+    "translation": "绿灯",
+    "note": "允许在确保路口畅通并遵守让行义务的前提下通过。",
+    "forms": [
+      "luce verde"
+    ],
+    "exampleQuestionId": 4423
+  },
+  {
+    "term": "lunghezza",
+    "partOfSpeech": "名词",
+    "translation": "长度",
+    "note": "车辆、组合车辆或载荷从前至后的尺寸。",
+    "forms": [
+      "lunghezza"
+    ],
+    "exampleQuestionId": 5211
+  },
+  {
+    "term": "macchina agricola",
+    "partOfSpeech": "固定短语",
+    "translation": "农业机械",
+    "note": "用于农业或林业作业、可按规定在道路上行驶的机械车辆。",
+    "forms": [
+      "macchina agricola",
+      "macchine agricole"
+    ],
+    "exampleQuestionId": 337
+  },
+  {
+    "term": "macchina operatrice",
+    "partOfSpeech": "固定短语",
+    "translation": "工程作业机械",
+    "note": "用于道路施工、装卸或其他作业而非普通运输的机械车辆。",
+    "forms": [
+      "macchina operatrice",
+      "macchine operatrici"
+    ],
+    "exampleQuestionId": 330
+  },
+  {
+    "term": "malessere",
+    "partOfSpeech": "名词",
+    "translation": "身体不适",
+    "note": "驾驶人或伤员出现晕眩、疼痛等异常身体状态。",
+    "forms": [
+      "malessere"
+    ],
+    "exampleQuestionId": 38
+  },
+  {
+    "term": "manovra",
+    "partOfSpeech": "名词",
+    "translation": "驾驶操作；机动动作",
+    "note": "转弯、变道、倒车、超车等改变车辆位置或方向的操作。",
+    "forms": [
+      "manovra",
+      "manovre"
+    ],
+    "exampleQuestionId": 4485
+  },
+  {
+    "term": "manovrare",
+    "partOfSpeech": "动词",
+    "translation": "操纵；进行驾驶操作",
+    "note": "控制车辆完成转向、停放或其他位置变化。",
+    "forms": [
+      "manovrare"
+    ],
+    "exampleQuestionId": 6404
+  },
+  {
+    "term": "mantenere",
+    "partOfSpeech": "动词",
+    "translation": "保持",
+    "note": "持续维持规定速度、距离、位置或车辆状态。",
+    "forms": [
+      "mantenere"
+    ],
+    "exampleQuestionId": 4048
+  },
+  {
+    "term": "mantenere la distanza",
+    "partOfSpeech": "固定短语",
+    "translation": "保持距离",
+    "note": "与前车或其他道路使用者持续留出足够安全间隔。",
+    "forms": [
+      "mantenere la distanza"
+    ],
+    "exampleQuestionId": 1289
+  },
+  {
+    "term": "manutenzione",
+    "partOfSpeech": "名词",
+    "translation": "维护；保养",
+    "note": "通过检查、调整和更换部件保持车辆安全高效运行。",
+    "forms": [
+      "manutenzione"
+    ],
+    "exampleQuestionId": 4015
+  },
+  {
+    "term": "marcia",
+    "partOfSpeech": "名词",
+    "translation": "行驶；行进",
+    "note": "表示车辆的运行状态、方向或所使用的挡位。",
+    "forms": [
+      "marcia"
+    ],
+    "exampleQuestionId": 22
+  },
+  {
+    "term": "marciapiede",
+    "partOfSpeech": "名词",
+    "translation": "人行道",
+    "note": "道路中专供行人通行、通常高于或隔离于行车道的部分。",
+    "forms": [
+      "marciapiede",
+      "marciapiedi"
+    ],
+    "exampleQuestionId": 9
+  },
+  {
+    "term": "margine",
+    "partOfSpeech": "名词",
+    "translation": "道路边缘；边界",
+    "note": "指行车道或道路的侧边，停车和行车位置常以此为参照。",
+    "forms": [
+      "margine"
+    ],
+    "exampleQuestionId": 5202
+  },
+  {
+    "term": "margine destro",
+    "partOfSpeech": "固定短语",
+    "translation": "右侧道路边缘",
+    "note": "以行驶方向为准的道路右边界，通常是车辆靠右行驶的参照。",
+    "forms": [
+      "margine destro"
+    ],
+    "exampleQuestionId": 5414
+  },
+  {
+    "term": "margine sinistro",
+    "partOfSpeech": "固定短语",
+    "translation": "左侧道路边缘",
+    "note": "以行驶方向为准的道路左边界，在单向或分隔道路题目中常作位置参照。",
+    "forms": [
+      "margine sinistro"
+    ],
+    "exampleQuestionId": 4452
+  },
+  {
+    "term": "marmitta",
+    "partOfSpeech": "名词",
+    "translation": "排气管；消声器总成",
+    "note": "发动机排气系统中导流并降低噪声的部件。",
+    "forms": [
+      "marmitta"
+    ],
+    "exampleQuestionId": 6868
+  },
+  {
+    "term": "massa",
+    "partOfSpeech": "名词",
+    "translation": "质量；车辆重量",
+    "note": "法规中用于车辆分类、载荷和驾驶资格限制的质量数值。",
+    "forms": [
+      "massa",
+      "masse"
+    ],
+    "exampleQuestionId": 317
+  },
+  {
+    "term": "massa complessiva",
+    "partOfSpeech": "固定短语",
+    "translation": "总质量",
+    "note": "车辆自身、人员和载荷合计形成的质量。",
+    "forms": [
+      "massa complessiva"
+    ],
+    "exampleQuestionId": 4186
+  },
+  {
+    "term": "massa massima",
+    "partOfSpeech": "固定短语",
+    "translation": "最大允许总质量",
+    "note": "车辆登记或法规规定不得超过的总质量上限。",
+    "forms": [
+      "massa massima"
+    ],
+    "exampleQuestionId": 317
+  },
+  {
+    "term": "massima prudenza",
+    "partOfSpeech": "固定短语",
+    "translation": "最大限度谨慎",
+    "note": "要求驾驶人保持最高警觉，不能仅因拥有先行权而放松注意。",
+    "forms": [
+      "massima prudenza"
+    ],
+    "exampleQuestionId": 6449
+  },
+  {
+    "term": "massimali",
+    "partOfSpeech": "名词",
+    "translation": "保险赔偿限额",
+    "note": "保险合同对人身或财产损失承担赔偿的最高金额。",
+    "forms": [
+      "massimali"
+    ],
+    "exampleQuestionId": 6662
+  },
+  {
+    "term": "merce",
+    "partOfSpeech": "名词",
+    "translation": "货物",
+    "note": "车辆为运输目的承载的商品或物品。",
+    "forms": [
+      "merce",
+      "merci"
+    ],
+    "exampleQuestionId": 286
+  },
+  {
+    "term": "merci pericolose",
+    "partOfSpeech": "固定短语",
+    "translation": "危险货物",
+    "note": "因易燃、腐蚀、有毒等性质而受专门运输规则约束的货物。",
+    "forms": [
+      "merci pericolose"
+    ],
+    "exampleQuestionId": 340
+  },
+  {
+    "term": "moderare",
+    "partOfSpeech": "动词",
+    "translation": "降低并控制；放慢",
+    "note": "把车速控制到适合危险或复杂环境的程度。",
+    "forms": [
+      "moderare"
+    ],
+    "exampleQuestionId": 578
+  },
+  {
+    "term": "moderare la velocità",
+    "partOfSpeech": "固定短语",
+    "translation": "控制并降低车速",
+    "note": "把速度调低至可以安全应对道路状况和他人行为的程度。",
+    "forms": [
+      "moderare la velocità"
+    ],
+    "exampleQuestionId": 6420
+  },
+  {
+    "term": "montare",
+    "partOfSpeech": "动词",
+    "translation": "安装；装配",
+    "note": "把轮胎、防滑链或其他部件正确装到车辆上。",
+    "forms": [
+      "montare"
+    ],
+    "exampleQuestionId": 6419
+  },
+  {
+    "term": "motociclista",
+    "partOfSpeech": "名词",
+    "translation": "摩托车骑手",
+    "note": "驾驶或骑乘摩托车的道路使用者，身体防护较少。",
+    "forms": [
+      "motociclista",
+      "motociclisti"
+    ],
+    "exampleQuestionId": 6497
+  },
+  {
+    "term": "motociclo",
+    "partOfSpeech": "名词",
+    "translation": "摩托车",
+    "note": "排量或设计速度超过轻便摩托车范围的两轮或特定三轮机动车。",
+    "forms": [
+      "motociclo",
+      "motocicli"
+    ],
+    "exampleQuestionId": 241
+  },
+  {
+    "term": "motore",
+    "partOfSpeech": "名词",
+    "translation": "发动机",
+    "note": "把燃料或电能转化为车辆驱动力的动力装置。",
+    "forms": [
+      "motore",
+      "motori"
+    ],
+    "exampleQuestionId": 7066
+  },
+  {
+    "term": "motore spento",
+    "partOfSpeech": "固定短语",
+    "translation": "发动机熄火",
+    "note": "发动机未运转的状态，可能使制动或转向助力失效。",
+    "forms": [
+      "motore spento"
+    ],
+    "exampleQuestionId": 3986
+  },
+  {
+    "term": "motrice",
+    "partOfSpeech": "名词",
+    "translation": "牵引车；动力车",
+    "note": "车辆组合中提供动力并牵引挂车或半挂车的车辆。",
+    "forms": [
+      "motrice"
+    ],
+    "exampleQuestionId": 5720
+  },
+  {
+    "term": "nebbia",
+    "partOfSpeech": "名词",
+    "translation": "雾",
+    "note": "显著降低能见度并使路面潮湿的天气现象。",
+    "forms": [
+      "nebbia"
+    ],
+    "exampleQuestionId": 4044
+  },
+  {
+    "term": "nei centri abitati",
+    "partOfSpeech": "固定短语",
+    "translation": "在城镇建成区内",
+    "note": "限定某项速度、鸣笛、停车或通行规则适用于居民区道路。",
+    "forms": [
+      "nei centri abitati"
+    ],
+    "exampleQuestionId": 4701
+  },
+  {
+    "term": "neve",
+    "partOfSpeech": "名词",
+    "translation": "雪；积雪",
+    "note": "会覆盖标线并显著降低路面附着力的天气或路况。",
+    "forms": [
+      "neve"
+    ],
+    "exampleQuestionId": 6420
+  },
+  {
+    "term": "non possono",
+    "partOfSpeech": "固定短语",
+    "translation": "不能；不得",
+    "note": "表示多个主体没有资格、条件或法律许可实施某项行为。",
+    "forms": [
+      "non possono"
+    ],
+    "exampleQuestionId": 97
+  },
+  {
+    "term": "non può",
+    "partOfSpeech": "固定短语",
+    "translation": "不能；不得",
+    "note": "表示能力受限或法规不允许某主体实施某项行为。",
+    "forms": [
+      "non può"
+    ],
+    "exampleQuestionId": 7076
+  },
+  {
+    "term": "non superiore",
+    "partOfSpeech": "固定短语",
+    "translation": "不高于；不超过",
+    "note": "表示质量、速度、功率等数值必须小于或等于上限。",
+    "forms": [
+      "non superiore"
+    ],
+    "exampleQuestionId": 6165
+  },
+  {
+    "term": "non vedente",
+    "partOfSpeech": "固定短语",
+    "translation": "盲人；视障者",
+    "note": "无法依靠视觉判断交通、常以白手杖或导盲犬识别的行人。",
+    "forms": [
+      "non vedente"
+    ],
+    "exampleQuestionId": 458
+  },
+  {
+    "term": "norma",
+    "partOfSpeech": "名词",
+    "translation": "规范；规则",
+    "note": "道路交通法规中规定道路使用者应遵守的行为标准。",
+    "forms": [
+      "norma",
+      "norme"
+    ],
+    "exampleQuestionId": 6755
+  },
+  {
+    "term": "norme di circolazione",
+    "partOfSpeech": "固定短语",
+    "translation": "道路通行规则",
+    "note": "规范车辆和其他道路使用者在公共道路上行为的规则。",
+    "forms": [
+      "norme di circolazione"
+    ],
+    "exampleQuestionId": 6762
+  },
+  {
+    "term": "notte",
+    "partOfSpeech": "名词",
+    "translation": "夜间",
+    "note": "自然光不足的时段，必须正确使用灯光并适当降低车速。",
+    "forms": [
+      "notte"
+    ],
+    "exampleQuestionId": 5906
+  },
+  {
+    "term": "obbligatoriamente",
+    "partOfSpeech": "副词",
+    "translation": "强制地；必须",
+    "note": "表示某项行为没有选择余地，依法必须实施。",
+    "forms": [
+      "obbligatoriamente"
+    ],
+    "exampleQuestionId": 6700
+  },
+  {
+    "term": "obbligatorio",
+    "partOfSpeech": "形容词",
+    "translation": "强制的；必须的",
+    "note": "表示某项设备、文件或行为由法规要求必须具备或实施。",
+    "forms": [
+      "obbligatorio",
+      "obbligatoria",
+      "obbligatorie"
+    ],
+    "exampleQuestionId": 4022
+  },
+  {
+    "term": "obbligo",
+    "partOfSpeech": "名词",
+    "translation": "义务；强制要求",
+    "note": "法律或标志要求道路使用者必须采取某一行为。",
+    "forms": [
+      "obbligo",
+      "obblighi"
+    ],
+    "exampleQuestionId": 4008
+  },
+  {
+    "term": "obbligo di",
+    "partOfSpeech": "固定短语",
+    "translation": "有……义务；必须",
+    "note": "引出法律要求必须实施的具体行为。",
+    "forms": [
+      "obbligo di"
+    ],
+    "exampleQuestionId": 4097
+  },
+  {
+    "term": "obbligo di fermarsi",
+    "partOfSpeech": "固定短语",
+    "translation": "必须停车",
+    "note": "要求车辆完全停止后才能依规则继续通行。",
+    "forms": [
+      "obbligo di fermarsi"
+    ],
+    "exampleQuestionId": 6468
+  },
+  {
+    "term": "occhiali",
+    "partOfSpeech": "名词",
+    "translation": "眼镜",
+    "note": "驾驶证注明时必须佩戴的视力矫正用品。",
+    "forms": [
+      "occhiali"
+    ],
+    "exampleQuestionId": 6552
+  },
+  {
+    "term": "occhio",
+    "partOfSpeech": "名词",
+    "translation": "眼睛",
+    "note": "驾驶视觉器官，疾病、疲劳或强光会影响其功能。",
+    "forms": [
+      "occhio",
+      "occhi"
+    ],
+    "exampleQuestionId": 6079
+  },
+  {
+    "term": "occorre",
+    "partOfSpeech": "动词",
+    "translation": "需要；必须",
+    "note": "说明某项安全措施或条件是必要的。",
+    "forms": [
+      "occorre"
+    ],
+    "exampleQuestionId": 6400
+  },
+  {
+    "term": "occupare",
+    "partOfSpeech": "动词",
+    "translation": "占用",
+    "note": "车辆进入并占据车道、路面或停车空间。",
+    "forms": [
+      "occupare"
+    ],
+    "exampleQuestionId": 4396
+  },
+  {
+    "term": "officina",
+    "partOfSpeech": "名词",
+    "translation": "维修厂；修理车间",
+    "note": "由专业人员检查和维修车辆的场所。",
+    "forms": [
+      "officina"
+    ],
+    "exampleQuestionId": 7091
+  },
+  {
+    "term": "olio",
+    "partOfSpeech": "名词",
+    "translation": "润滑油；机油",
+    "note": "用于发动机和机械部件润滑、冷却及减少磨损的液体。",
+    "forms": [
+      "olio"
+    ],
+    "exampleQuestionId": 5996
+  },
+  {
+    "term": "orizzontale",
+    "partOfSpeech": "形容词",
+    "translation": "水平的；路面上的",
+    "note": "交通标志语境中多指施划在道路表面的标线。",
+    "forms": [
+      "orizzontale",
+      "orizzontali"
+    ],
+    "exampleQuestionId": 6442
+  },
+  {
+    "term": "ospedale",
+    "partOfSpeech": "名词",
+    "translation": "医院",
+    "note": "需要专业诊断和治疗的伤员应送往的医疗机构。",
+    "forms": [
+      "ospedale"
+    ],
+    "exampleQuestionId": 3224
+  },
+  {
+    "term": "osservare",
+    "partOfSpeech": "动词",
+    "translation": "观察；遵守",
+    "note": "按语境表示查看交通情况或遵守规则、标志。",
+    "forms": [
+      "osservare"
+    ],
+    "exampleQuestionId": 4526
+  },
+  {
+    "term": "ostacolo",
+    "partOfSpeech": "名词",
+    "translation": "障碍物",
+    "note": "阻挡正常行驶路线、迫使车辆减速或改变方向的物体。",
+    "forms": [
+      "ostacolo",
+      "ostacoli"
+    ],
+    "exampleQuestionId": 5574
+  },
+  {
+    "term": "pannello",
+    "partOfSpeech": "名词",
+    "translation": "附加牌；面板",
+    "note": "与主标志组合或独立设置，用文字或图形补充交通信息。",
+    "forms": [
+      "pannello",
+      "pannelli"
+    ],
+    "exampleQuestionId": 3698
+  },
+  {
+    "term": "pannello integrativo",
+    "partOfSpeech": "固定短语",
+    "translation": "辅助标志牌；附加牌",
+    "note": "安装在主标志下方，用于限定距离、时段、对象或危险性质。",
+    "forms": [
+      "pannello integrativo",
+      "pannelli integrativi"
+    ],
+    "exampleQuestionId": 3698
+  },
+  {
+    "term": "parabrezza",
+    "partOfSpeech": "名词",
+    "translation": "挡风玻璃",
+    "note": "位于驾驶室前方、保护乘员并保证驾驶视野的玻璃。",
+    "forms": [
+      "parabrezza"
+    ],
+    "exampleQuestionId": 6003
+  },
+  {
+    "term": "parcheggiare",
+    "partOfSpeech": "动词",
+    "translation": "停放；泊车",
+    "note": "把车辆驶入允许的位置并保持停放。",
+    "forms": [
+      "parcheggiare"
+    ],
+    "exampleQuestionId": 409
+  },
+  {
+    "term": "parcheggio",
+    "partOfSpeech": "名词",
+    "translation": "停车场；停车",
+    "note": "供车辆停放的区域或将车辆停放的行为。",
+    "forms": [
+      "parcheggio"
+    ],
+    "exampleQuestionId": 186
+  },
+  {
+    "term": "pari a",
+    "partOfSpeech": "固定短语",
+    "translation": "等于；相当于",
+    "note": "表示质量、距离、速度等数值与后项相等。",
+    "forms": [
+      "pari a"
+    ],
+    "exampleQuestionId": 4299
+  },
+  {
+    "term": "partenza",
+    "partOfSpeech": "名词",
+    "translation": "起步；出发",
+    "note": "车辆由静止开始行驶的阶段，须先观察并发出信号。",
+    "forms": [
+      "partenza"
+    ],
+    "exampleQuestionId": 6425
+  },
+  {
+    "term": "particolare prudenza",
+    "partOfSpeech": "固定短语",
+    "translation": "格外谨慎",
+    "note": "面对行人、危险路段或异常情况时采取高于一般水平的谨慎。",
+    "forms": [
+      "particolare prudenza"
+    ],
+    "exampleQuestionId": 4490
+  },
+  {
+    "term": "passaggio",
+    "partOfSpeech": "名词",
+    "translation": "通行处；通道",
+    "note": "按语境表示车辆或行人的通过，也用于铁路道口等复合名称。",
+    "forms": [
+      "passaggio",
+      "passaggi"
+    ],
+    "exampleQuestionId": 203
+  },
+  {
+    "term": "passaggio a livello",
+    "partOfSpeech": "固定短语",
+    "translation": "铁路平交道口",
+    "note": "道路与铁路在同一平面交叉的地点，可能设栏杆、灯光和声响信号。",
+    "forms": [
+      "passaggio a livello",
+      "passaggi a livello"
+    ],
+    "exampleQuestionId": 83
+  },
+  {
+    "term": "passare",
+    "partOfSpeech": "动词",
+    "translation": "通过；先行",
+    "note": "表示经过某地点或在通行顺序中先后通过。",
+    "forms": [
+      "passare"
+    ],
+    "exampleQuestionId": 6757
+  },
+  {
+    "term": "passeggero",
+    "partOfSpeech": "名词",
+    "translation": "乘客",
+    "note": "除驾驶人之外乘坐车辆的人。",
+    "forms": [
+      "passeggero",
+      "passeggeri"
+    ],
+    "exampleQuestionId": 335
+  },
+  {
+    "term": "passo carrabile",
+    "partOfSpeech": "固定短语",
+    "translation": "车辆出入口",
+    "note": "连接道路与私人场所、供车辆进出的通道，前方通常禁止停车。",
+    "forms": [
+      "passo carrabile"
+    ],
+    "exampleQuestionId": 202
+  },
+  {
+    "term": "patente",
+    "partOfSpeech": "名词",
+    "translation": "驾驶证",
+    "note": "证明持有人获准驾驶相应类别车辆的法定证件。",
+    "forms": [
+      "patente",
+      "patenti"
+    ],
+    "exampleQuestionId": 267
+  },
+  {
+    "term": "patente di guida",
+    "partOfSpeech": "固定短语",
+    "translation": "机动车驾驶证",
+    "note": "由主管机关签发、载明准驾资格的驾驶许可文件。",
+    "forms": [
+      "patente di guida"
+    ],
+    "exampleQuestionId": 6324
+  },
+  {
+    "term": "pavimentazione",
+    "partOfSpeech": "名词",
+    "translation": "路面铺装",
+    "note": "车辆直接接触的铺装表面，标线通常施划其上。",
+    "forms": [
+      "pavimentazione"
+    ],
+    "exampleQuestionId": 2642
+  },
+  {
+    "term": "pedonale",
+    "partOfSpeech": "形容词",
+    "translation": "行人的；步行专用的",
+    "note": "描述供行人使用或与行人横穿有关的道路设施和区域。",
+    "forms": [
+      "pedonale",
+      "pedonali"
+    ],
+    "exampleQuestionId": 5471
+  },
+  {
+    "term": "pedone",
+    "partOfSpeech": "名词",
+    "translation": "行人",
+    "note": "步行使用道路的人，在人行横道等地点享有专门保护。",
+    "forms": [
+      "pedone",
+      "pedoni"
+    ],
+    "exampleQuestionId": 162
+  },
+  {
+    "term": "penale",
+    "partOfSpeech": "形容词",
+    "translation": "刑事的",
+    "note": "涉及犯罪行为及由刑法规定的处罚责任。",
+    "forms": [
+      "penale"
+    ],
+    "exampleQuestionId": 6675
+  },
+  {
+    "term": "penalmente",
+    "partOfSpeech": "副词",
+    "translation": "在刑事责任上",
+    "note": "表示某人可能依刑法承担责任。",
+    "forms": [
+      "penalmente"
+    ],
+    "exampleQuestionId": 6688
+  },
+  {
+    "term": "pendenza",
+    "partOfSpeech": "名词",
+    "translation": "坡度；坡道",
+    "note": "表示道路纵向倾斜程度，影响制动、起步和车辆控制。",
+    "forms": [
+      "pendenza"
+    ],
+    "exampleQuestionId": 6415
+  },
+  {
+    "term": "per primo",
+    "partOfSpeech": "固定短语",
+    "translation": "首先；第一个通过",
+    "note": "路口通行顺序题中表示某一车辆应先行。",
+    "forms": [
+      "per primo"
+    ],
+    "exampleQuestionId": 6757
+  },
+  {
+    "term": "per ultimo",
+    "partOfSpeech": "固定短语",
+    "translation": "最后通过",
+    "note": "路口通行顺序题中表示某一车辆应在其他车辆之后通行。",
+    "forms": [
+      "per ultimo"
+    ],
+    "exampleQuestionId": 4769
+  },
+  {
+    "term": "percorrere",
+    "partOfSpeech": "动词",
+    "translation": "沿着行驶；驶过",
+    "note": "驾驶车辆通过某条道路或一段距离。",
+    "forms": [
+      "percorrere"
+    ],
+    "exampleQuestionId": 7175
+  },
+  {
+    "term": "perdita",
+    "partOfSpeech": "名词",
+    "translation": "泄漏；损失",
+    "note": "车辆油液、气压或载荷从正常系统逸出的情况。",
+    "forms": [
+      "perdita",
+      "perdite"
+    ],
+    "exampleQuestionId": 367
+  },
+  {
+    "term": "perdita di punti",
+    "partOfSpeech": "固定短语",
+    "translation": "驾驶证扣分",
+    "note": "因违法而从驾驶证记分余额中扣除分数。",
+    "forms": [
+      "perdita di punti"
+    ],
+    "exampleQuestionId": 6352
+  },
+  {
+    "term": "pericolo",
+    "partOfSpeech": "名词",
+    "translation": "危险",
+    "note": "可能导致事故或要求驾驶人提高警觉、调整行为的道路风险。",
+    "forms": [
+      "pericolo",
+      "pericoli"
+    ],
+    "exampleQuestionId": 6617
+  },
+  {
+    "term": "pericolosità",
+    "partOfSpeech": "名词",
+    "translation": "危险程度",
+    "note": "某种道路、天气、车辆状态或行为导致事故的程度。",
+    "forms": [
+      "pericolosità"
+    ],
+    "exampleQuestionId": 5201
+  },
+  {
+    "term": "pericoloso",
+    "partOfSpeech": "形容词",
+    "translation": "危险的",
+    "note": "描述可能引发事故或要求采取额外谨慎措施的情况。",
+    "forms": [
+      "pericoloso",
+      "pericolosa",
+      "pericolosi",
+      "pericolose"
+    ],
+    "exampleQuestionId": 6784
+  },
+  {
+    "term": "periodicamente",
+    "partOfSpeech": "副词",
+    "translation": "定期地",
+    "note": "表示按规定时间间隔反复检查或维护车辆。",
+    "forms": [
+      "periodicamente"
+    ],
+    "exampleQuestionId": 6043
+  },
+  {
+    "term": "permesso",
+    "partOfSpeech": "名词",
+    "translation": "许可；准许",
+    "note": "依法获得实施某种通行或行为的许可。",
+    "forms": [
+      "permesso"
+    ],
+    "exampleQuestionId": 6290
+  },
+  {
+    "term": "persona",
+    "partOfSpeech": "名词",
+    "translation": "人员；人",
+    "note": "法规中用于泛指驾驶人、乘员、行人或事故相关人员。",
+    "forms": [
+      "persona",
+      "persone"
+    ],
+    "exampleQuestionId": 159
+  },
+  {
+    "term": "persone anziane",
+    "partOfSpeech": "固定短语",
+    "translation": "老年人",
+    "note": "反应或行动可能较慢、过街时需要更多时间的弱势道路使用者。",
+    "forms": [
+      "persone anziane"
+    ],
+    "exampleQuestionId": 439
+  },
+  {
+    "term": "persone invalide",
+    "partOfSpeech": "固定短语",
+    "translation": "行动不便者；残障人士",
+    "note": "身体行动受限、在道路上需要特别保护和耐心等候的人。",
+    "forms": [
+      "persone invalide"
+    ],
+    "exampleQuestionId": 5465
+  },
+  {
+    "term": "piazzola",
+    "partOfSpeech": "名词",
+    "translation": "停车带；紧急停车区",
+    "note": "道路旁供车辆短暂停靠的专用空间，高速公路上常用于紧急情况。",
+    "forms": [
+      "piazzola"
+    ],
+    "exampleQuestionId": 54
+  },
+  {
+    "term": "pieno carico",
+    "partOfSpeech": "固定短语",
+    "translation": "满载",
+    "note": "车辆达到其最大允许总质量的装载状态。",
+    "forms": [
+      "pieno carico"
+    ],
+    "exampleQuestionId": 317
+  },
+  {
+    "term": "pioggia",
+    "partOfSpeech": "名词",
+    "translation": "降雨；雨天",
+    "note": "会降低能见度和轮胎附着力、增加制动距离的天气条件。",
+    "forms": [
+      "pioggia"
+    ],
+    "exampleQuestionId": 6400
+  },
+  {
+    "term": "pista ciclabile",
+    "partOfSpeech": "固定短语",
+    "translation": "自行车道",
+    "note": "专供自行车等获准车辆通行、与其他交通流分隔的道路部分。",
+    "forms": [
+      "pista ciclabile",
+      "piste ciclabili"
+    ],
+    "exampleQuestionId": 2
+  },
+  {
+    "term": "pneumatico",
+    "partOfSpeech": "名词",
+    "translation": "轮胎",
+    "note": "安装在车轮上并与路面接触，直接影响附着和制动性能。",
+    "forms": [
+      "pneumatico",
+      "pneumatici"
+    ],
+    "exampleQuestionId": 6982
+  },
+  {
+    "term": "poggiatesta",
+    "partOfSpeech": "名词",
+    "translation": "头枕",
+    "note": "支撑头部并在追尾时减轻颈部过度后仰伤害的装置。",
+    "forms": [
+      "poggiatesta"
+    ],
+    "exampleQuestionId": 6065
+  },
+  {
+    "term": "polizia",
+    "partOfSpeech": "名词",
+    "translation": "警察；警方",
+    "note": "负责道路交通管理、执法和事故处置的机关或人员。",
+    "forms": [
+      "polizia"
+    ],
+    "exampleQuestionId": 6301
+  },
+  {
+    "term": "polizza",
+    "partOfSpeech": "名词",
+    "translation": "保险单；保险合同",
+    "note": "载明投保人、保险责任、期限和限额的合同文件。",
+    "forms": [
+      "polizza"
+    ],
+    "exampleQuestionId": 6146
+  },
+  {
+    "term": "ponte",
+    "partOfSpeech": "名词",
+    "translation": "桥梁",
+    "note": "跨越障碍物的道路构造物，可能伴随侧风、变窄或特殊限制。",
+    "forms": [
+      "ponte"
+    ],
+    "exampleQuestionId": 575
+  },
+  {
+    "term": "portata",
+    "partOfSpeech": "名词",
+    "translation": "载质量；承载能力",
+    "note": "车辆允许装载的人或货物的最大质量。",
+    "forms": [
+      "portata"
+    ],
+    "exampleQuestionId": 4676
+  },
+  {
+    "term": "posizione",
+    "partOfSpeech": "名词",
+    "translation": "位置；示廓状态",
+    "note": "可指车辆在道路上的位置，也用于位置灯等固定灯光功能。",
+    "forms": [
+      "posizione",
+      "posizioni"
+    ],
+    "exampleQuestionId": 6155
+  },
+  {
+    "term": "posteggio",
+    "partOfSpeech": "名词",
+    "translation": "停车位；停车场",
+    "note": "供单车或多辆车停放的划定位置或区域。",
+    "forms": [
+      "posteggio"
+    ],
+    "exampleQuestionId": 435
+  },
+  {
+    "term": "posteriore",
+    "partOfSpeech": "形容词",
+    "translation": "后部的；后方的",
+    "note": "指车辆后部、后方位置或后置灯具。",
+    "forms": [
+      "posteriore",
+      "posteriori"
+    ],
+    "exampleQuestionId": 5905
+  },
+  {
+    "term": "potenza",
+    "partOfSpeech": "名词",
+    "translation": "功率；动力",
+    "note": "发动机输出能力，车辆分类和驾驶证范围常以此为条件。",
+    "forms": [
+      "potenza"
+    ],
+    "exampleQuestionId": 4279
+  },
+  {
+    "term": "potere",
+    "partOfSpeech": "动词",
+    "translation": "可以；能够",
+    "note": "表达规则上的许可或现实条件下的可能性。",
+    "forms": [
+      "potere",
+      "può",
+      "possono"
+    ],
+    "exampleQuestionId": 31
+  },
+  {
+    "term": "preavviso",
+    "partOfSpeech": "名词",
+    "translation": "预告；提前警示",
+    "note": "在实际危险、路口或出口之前提供的预先信息。",
+    "forms": [
+      "preavviso"
+    ],
+    "exampleQuestionId": 5495
+  },
+  {
+    "term": "precedenza",
+    "partOfSpeech": "名词",
+    "translation": "优先权；先行权",
+    "note": "在通行规则中表示某一方有先行权，或另一方负有让行义务。",
+    "forms": [
+      "precedenza"
+    ],
+    "exampleQuestionId": 4565
+  },
+  {
+    "term": "precedenza a destra",
+    "partOfSpeech": "固定短语",
+    "translation": "右方来车优先",
+    "note": "无其他信号规定时，通常须给从右侧驶来的车辆让行。",
+    "forms": [
+      "precedenza a destra"
+    ],
+    "exampleQuestionId": 4589
+  },
+  {
+    "term": "prescrizione",
+    "partOfSpeech": "名词",
+    "translation": "交通规定；指令",
+    "note": "标志对道路使用者施加的义务、禁止或限制。",
+    "forms": [
+      "prescrizione",
+      "prescrizioni"
+    ],
+    "exampleQuestionId": 4665
+  },
+  {
+    "term": "presegnalare",
+    "partOfSpeech": "动词",
+    "translation": "提前警示",
+    "note": "在障碍、故障或危险位置之前向来车发出预先警告。",
+    "forms": [
+      "presegnalare"
+    ],
+    "exampleQuestionId": 5560
+  },
+  {
+    "term": "pressione",
+    "partOfSpeech": "名词",
+    "translation": "压力；气压",
+    "note": "题目中常指轮胎气压或制动系统中的压力。",
+    "forms": [
+      "pressione"
+    ],
+    "exampleQuestionId": 5996
+  },
+  {
+    "term": "pressione di gonfiaggio",
+    "partOfSpeech": "固定短语",
+    "translation": "轮胎充气压力",
+    "note": "轮胎内部气压，过高或过低都会影响抓地、磨损和稳定性。",
+    "forms": [
+      "pressione di gonfiaggio"
+    ],
+    "exampleQuestionId": 6917
+  },
+  {
+    "term": "prestare attenzione",
+    "partOfSpeech": "固定短语",
+    "translation": "注意；留意",
+    "note": "把注意力集中在特定危险、人员或道路状况上。",
+    "forms": [
+      "prestare attenzione"
+    ],
+    "exampleQuestionId": 6779
+  },
+  {
+    "term": "prestare soccorso",
+    "partOfSpeech": "固定短语",
+    "translation": "提供救助",
+    "note": "事故相关人员依法应停留并向伤员提供可能且适当的帮助。",
+    "forms": [
+      "prestare soccorso"
+    ],
+    "exampleQuestionId": 6310
+  },
+  {
+    "term": "prima di",
+    "partOfSpeech": "固定短语",
+    "translation": "在……之前",
+    "note": "说明驾驶操作、危险点或期限发生前的时间顺序。",
+    "forms": [
+      "prima di"
+    ],
+    "exampleQuestionId": 4254
+  },
+  {
+    "term": "primo soccorso",
+    "partOfSpeech": "固定短语",
+    "translation": "现场急救；初步救护",
+    "note": "专业人员到达前，为维持伤员生命并防止恶化采取的基本措施。",
+    "forms": [
+      "primo soccorso"
+    ],
+    "exampleQuestionId": 6565
+  },
+  {
+    "term": "procedere",
+    "partOfSpeech": "动词",
+    "translation": "行进；继续行驶",
+    "note": "描述车辆按某方向、速度或方式向前移动。",
+    "forms": [
+      "procedere"
+    ],
+    "exampleQuestionId": 4561
+  },
+  {
+    "term": "proiettore",
+    "partOfSpeech": "名词",
+    "translation": "前照灯；投射灯",
+    "note": "向车辆前方投射光线、用于照明道路的灯具。",
+    "forms": [
+      "proiettore",
+      "proiettori"
+    ],
+    "exampleQuestionId": 5850
+  },
+  {
+    "term": "proprietario",
+    "partOfSpeech": "名词",
+    "translation": "车主；所有人",
+    "note": "依法拥有车辆并承担登记、保险等相应义务的人。",
+    "forms": [
+      "proprietario"
+    ],
+    "exampleQuestionId": 6654
+  },
+  {
+    "term": "proseguire",
+    "partOfSpeech": "动词",
+    "translation": "继续行驶",
+    "note": "保持路线或按规定方向向前行进。",
+    "forms": [
+      "proseguire"
+    ],
+    "exampleQuestionId": 2692
+  },
+  {
+    "term": "proseguire diritto",
+    "partOfSpeech": "固定短语",
+    "translation": "直行",
+    "note": "在路口保持当前方向继续向前行驶。",
+    "forms": [
+      "proseguire diritto"
+    ],
+    "exampleQuestionId": 4693
+  },
+  {
+    "term": "proteggere",
+    "partOfSpeech": "动词",
+    "translation": "保护",
+    "note": "采取措施避免伤员、乘员或其他道路使用者遭受进一步危险。",
+    "forms": [
+      "proteggere"
+    ],
+    "exampleQuestionId": 6133
+  },
+  {
+    "term": "protezione",
+    "partOfSpeech": "名词",
+    "translation": "保护；防护",
+    "note": "降低碰撞、跌落或道路危险对人员造成伤害的措施。",
+    "forms": [
+      "protezione"
+    ],
+    "exampleQuestionId": 6136
+  },
+  {
+    "term": "proveniente",
+    "partOfSpeech": "形容词",
+    "translation": "来自某方向的；驶来的",
+    "note": "说明车辆或其他道路使用者从某条道路或方向接近。",
+    "forms": [
+      "proveniente",
+      "provenienti"
+    ],
+    "exampleQuestionId": 4486
+  },
+  {
+    "term": "prudenza",
+    "partOfSpeech": "名词",
+    "translation": "谨慎；审慎驾驶",
+    "note": "预见危险并以可控速度、适当距离和注意力驾驶的态度。",
+    "forms": [
+      "prudenza"
+    ],
+    "exampleQuestionId": 6404
+  },
+  {
+    "term": "pulizia",
+    "partOfSpeech": "名词",
+    "translation": "清洁",
+    "note": "保持玻璃、灯具、号牌等清晰可见并正常工作的维护行为。",
+    "forms": [
+      "pulizia"
+    ],
+    "exampleQuestionId": 6092
+  },
+  {
+    "term": "punti sulla patente",
+    "partOfSpeech": "固定短语",
+    "translation": "驾驶证记分",
+    "note": "记录在驾驶证上的分值，违法行为可能导致扣减。",
+    "forms": [
+      "punti sulla patente"
+    ],
+    "exampleQuestionId": 6352
+  },
+  {
+    "term": "punto",
+    "partOfSpeech": "名词",
+    "translation": "分；驾驶证记分",
+    "note": "驾驶证记分制度中的分值，也可在其他语境表示地点。",
+    "forms": [
+      "punto",
+      "punti"
+    ],
+    "exampleQuestionId": 6324
+  },
+  {
+    "term": "può essere",
+    "partOfSpeech": "固定短语",
+    "translation": "可以是；可能被",
+    "note": "表示某种分类、状态或处理方式具有可能性。",
+    "forms": [
+      "può essere"
+    ],
+    "exampleQuestionId": 31
+  },
+  {
+    "term": "quadriciclo",
+    "partOfSpeech": "名词",
+    "translation": "四轮轻型机动车",
+    "note": "质量、功率和速度受专门限制的四轮机动车类别。",
+    "forms": [
+      "quadriciclo",
+      "quadricicli"
+    ],
+    "exampleQuestionId": 280
+  },
+  {
+    "term": "raffigurato",
+    "partOfSpeech": "形容词",
+    "translation": "图中所示的",
+    "note": "题干中用于指代图片里展示的标志、车辆或交通场景。",
+    "forms": [
+      "raffigurato",
+      "raffigurata",
+      "raffigurati"
+    ],
+    "exampleQuestionId": 1554
+  },
+  {
+    "term": "raffreddamento",
+    "partOfSpeech": "名词",
+    "translation": "冷却；冷却系统",
+    "note": "把发动机多余热量散出、避免过热的过程和系统。",
+    "forms": [
+      "raffreddamento"
+    ],
+    "exampleQuestionId": 5995
+  },
+  {
+    "term": "rallentare",
+    "partOfSpeech": "动词",
+    "translation": "减速；放慢",
+    "note": "接近危险、路口、行人或视线受阻处时降低车速。",
+    "forms": [
+      "rallentare"
+    ],
+    "exampleQuestionId": 4097
+  },
+  {
+    "term": "rampa",
+    "partOfSpeech": "名词",
+    "translation": "匝道；坡道",
+    "note": "连接不同道路或高度的路段，进入和驶离时须调整速度。",
+    "forms": [
+      "rampa",
+      "rampe"
+    ],
+    "exampleQuestionId": 85
+  },
+  {
+    "term": "reato",
+    "partOfSpeech": "名词",
+    "translation": "犯罪；刑事违法",
+    "note": "严重违法并由刑法规定处罚的行为。",
+    "forms": [
+      "reato"
+    ],
+    "exampleQuestionId": 6682
+  },
+  {
+    "term": "reazione",
+    "partOfSpeech": "名词",
+    "translation": "反应",
+    "note": "驾驶人感知情况后作出操作响应的过程。",
+    "forms": [
+      "reazione"
+    ],
+    "exampleQuestionId": 6535
+  },
+  {
+    "term": "regola",
+    "partOfSpeech": "名词",
+    "translation": "规则",
+    "note": "驾驶人判断通行顺序和操作方式时应遵守的具体准则。",
+    "forms": [
+      "regola",
+      "regole"
+    ],
+    "exampleQuestionId": 4567
+  },
+  {
+    "term": "regolare",
+    "partOfSpeech": "动词",
+    "translation": "调节；使符合条件",
+    "note": "根据道路、交通和能见度调整车速或设备。",
+    "forms": [
+      "regolare"
+    ],
+    "exampleQuestionId": 4022
+  },
+  {
+    "term": "regolare la velocità",
+    "partOfSpeech": "固定短语",
+    "translation": "调整车速",
+    "note": "根据视距、路面、交通和车辆条件选择合适速度。",
+    "forms": [
+      "regolare la velocità"
+    ],
+    "exampleQuestionId": 4022
+  },
+  {
+    "term": "responsabile",
+    "partOfSpeech": "形容词",
+    "translation": "负有责任的；负责的",
+    "note": "表示某人对事故、损害或车辆管理依法承担责任。",
+    "forms": [
+      "responsabile"
+    ],
+    "exampleQuestionId": 6694
+  },
+  {
+    "term": "responsabilità",
+    "partOfSpeech": "名词",
+    "translation": "责任",
+    "note": "驾驶人、车主或其他主体对违法和损害承担的法律后果。",
+    "forms": [
+      "responsabilità"
+    ],
+    "exampleQuestionId": 6710
+  },
+  {
+    "term": "responsabilità civile",
+    "partOfSpeech": "固定短语",
+    "translation": "民事责任",
+    "note": "对车辆使用给第三方造成损害所承担的赔偿责任。",
+    "forms": [
+      "responsabilità civile"
+    ],
+    "exampleQuestionId": 6710
+  },
+  {
+    "term": "responsabilità penale",
+    "partOfSpeech": "固定短语",
+    "translation": "刑事责任",
+    "note": "因构成犯罪的道路行为而承担的法律责任。",
+    "forms": [
+      "responsabilità penale"
+    ],
+    "exampleQuestionId": 6675
+  },
+  {
+    "term": "retromarcia",
+    "partOfSpeech": "名词",
+    "translation": "倒车；倒挡",
+    "note": "车辆向后行驶的操作或相应挡位，只能在必要且安全时使用。",
+    "forms": [
+      "retromarcia"
+    ],
+    "exampleQuestionId": 4587
+  },
+  {
+    "term": "rettilineo",
+    "partOfSpeech": "名词",
+    "translation": "直线路段",
+    "note": "道路走向基本笔直的路段，仍须遵守速度和超车限制。",
+    "forms": [
+      "rettilineo"
+    ],
+    "exampleQuestionId": 912
+  },
+  {
+    "term": "revisione",
+    "partOfSpeech": "名词",
+    "translation": "车辆定期检验；年检",
+    "note": "依法对车辆安全、环保等技术状态进行的周期性检查。",
+    "forms": [
+      "revisione"
+    ],
+    "exampleQuestionId": 266
+  },
+  {
+    "term": "revisione della patente",
+    "partOfSpeech": "固定短语",
+    "translation": "驾驶证复审",
+    "note": "主管机关因记分清零、事故或资格疑问要求驾驶人接受的身体或技术资格复核。",
+    "forms": [
+      "revisione della patente"
+    ],
+    "exampleQuestionId": 6275
+  },
+  {
+    "term": "revoca",
+    "partOfSpeech": "名词",
+    "translation": "吊销；撤销",
+    "note": "驾驶资格被取消，恢复驾驶通常需重新满足法定条件。",
+    "forms": [
+      "revoca"
+    ],
+    "exampleQuestionId": 6301
+  },
+  {
+    "term": "revoca della patente",
+    "partOfSpeech": "固定短语",
+    "translation": "吊销驾驶证",
+    "note": "驾驶资格被正式撤销，不等同于有期限的暂扣。",
+    "forms": [
+      "revoca della patente"
+    ],
+    "exampleQuestionId": 6301
+  },
+  {
+    "term": "ribaltamento",
+    "partOfSpeech": "名词",
+    "translation": "侧翻；翻车",
+    "note": "车辆绕纵向或横向轴倾覆的事故风险。",
+    "forms": [
+      "ribaltamento"
+    ],
+    "exampleQuestionId": 4205
+  },
+  {
+    "term": "ridurre",
+    "partOfSpeech": "动词",
+    "translation": "降低；缩短",
+    "note": "减少车速、风险、污染或制动距离等数值。",
+    "forms": [
+      "ridurre"
+    ],
+    "exampleQuestionId": 6400
+  },
+  {
+    "term": "ridurre l'inquinamento",
+    "partOfSpeech": "固定短语",
+    "translation": "减少污染",
+    "note": "通过正确驾驶和车辆维护降低尾气、油耗及噪声。",
+    "forms": [
+      "ridurre l'inquinamento"
+    ],
+    "exampleQuestionId": 6837
+  },
+  {
+    "term": "ridurre la velocità",
+    "partOfSpeech": "固定短语",
+    "translation": "降低车速",
+    "note": "在危险、低能见度或复杂交通情况下主动减速。",
+    "forms": [
+      "ridurre la velocità"
+    ],
+    "exampleQuestionId": 6400
+  },
+  {
+    "term": "rientrare",
+    "partOfSpeech": "动词",
+    "translation": "返回原车道；重新驶入",
+    "note": "超车完成后安全回到原行驶车道。",
+    "forms": [
+      "rientrare"
+    ],
+    "exampleQuestionId": 5171
+  },
+  {
+    "term": "rifiuti",
+    "partOfSpeech": "名词",
+    "translation": "废弃物；垃圾",
+    "note": "不得从车辆抛撒或遗留在道路和环境中的废物。",
+    "forms": [
+      "rifiuti"
+    ],
+    "exampleQuestionId": 6901
+  },
+  {
+    "term": "riflessi",
+    "partOfSpeech": "名词",
+    "translation": "反应能力；反射",
+    "note": "驾驶人对突发刺激作出快速动作反应的能力。",
+    "forms": [
+      "riflessi"
+    ],
+    "exampleQuestionId": 4233
+  },
+  {
+    "term": "rifornimento",
+    "partOfSpeech": "名词",
+    "translation": "加油；补充燃料",
+    "note": "为车辆油箱补充燃油或其他能源的操作。",
+    "forms": [
+      "rifornimento"
+    ],
+    "exampleQuestionId": 3465
+  },
+  {
+    "term": "rilasciare",
+    "partOfSpeech": "动词",
+    "translation": "签发；发放",
+    "note": "主管机关依法颁发驾驶证或其他文件。",
+    "forms": [
+      "rilasciare"
+    ],
+    "exampleQuestionId": 6732
+  },
+  {
+    "term": "rimorchio",
+    "partOfSpeech": "名词",
+    "translation": "挂车",
+    "note": "自身无动力、设计为由机动车牵引并主要由自身车轮承载的车辆。",
+    "forms": [
+      "rimorchio",
+      "rimorchi"
+    ],
+    "exampleQuestionId": 320
+  },
+  {
+    "term": "rimorchio leggero",
+    "partOfSpeech": "固定短语",
+    "translation": "轻型挂车",
+    "note": "最大允许总质量不超过法定轻型挂车上限的挂车。",
+    "forms": [
+      "rimorchio leggero",
+      "rimorchi leggeri"
+    ],
+    "exampleQuestionId": 317
+  },
+  {
+    "term": "riparazione",
+    "partOfSpeech": "名词",
+    "translation": "修理；维修",
+    "note": "恢复故障或损坏车辆部件正常功能的作业。",
+    "forms": [
+      "riparazione"
+    ],
+    "exampleQuestionId": 3449
+  },
+  {
+    "term": "risarcimento",
+    "partOfSpeech": "名词",
+    "translation": "赔偿；损害赔偿",
+    "note": "事故责任方或保险人对受害人损失进行的经济补偿。",
+    "forms": [
+      "risarcimento"
+    ],
+    "exampleQuestionId": 6699
+  },
+  {
+    "term": "risarcire",
+    "partOfSpeech": "动词",
+    "translation": "赔偿",
+    "note": "对交通事故给第三方造成的损害支付补偿。",
+    "forms": [
+      "risarcire"
+    ],
+    "exampleQuestionId": 6665
+  },
+  {
+    "term": "rischio",
+    "partOfSpeech": "名词",
+    "translation": "风险",
+    "note": "发生事故、伤害或车辆失控的可能性。",
+    "forms": [
+      "rischio",
+      "rischi"
+    ],
+    "exampleQuestionId": 6730
+  },
+  {
+    "term": "rispettare",
+    "partOfSpeech": "动词",
+    "translation": "遵守；尊重",
+    "note": "按交通规则、标志、限速和他人权利行事。",
+    "forms": [
+      "rispettare"
+    ],
+    "exampleQuestionId": 1228
+  },
+  {
+    "term": "ritiro",
+    "partOfSpeech": "名词",
+    "translation": "收缴；暂时扣留",
+    "note": "执法机关现场收走驾驶证或其他文件的措施。",
+    "forms": [
+      "ritiro"
+    ],
+    "exampleQuestionId": 6334
+  },
+  {
+    "term": "ritiro della patente",
+    "partOfSpeech": "固定短语",
+    "translation": "收缴驾驶证",
+    "note": "由执法机关暂时扣留驾驶证，后续处理依违法情形决定。",
+    "forms": [
+      "ritiro della patente"
+    ],
+    "exampleQuestionId": 6334
+  },
+  {
+    "term": "rotaia",
+    "partOfSpeech": "名词",
+    "translation": "钢轨",
+    "note": "构成铁路或有轨电车轨道的金属轨条。",
+    "forms": [
+      "rotaia",
+      "rotaie"
+    ],
+    "exampleQuestionId": 7158
+  },
+  {
+    "term": "rotatoria",
+    "partOfSpeech": "名词",
+    "translation": "环岛；环形交叉口",
+    "note": "车辆绕中央岛按规定方向行驶的交叉口，优先规则由标志确定。",
+    "forms": [
+      "rotatoria"
+    ],
+    "exampleQuestionId": 190
+  },
+  {
+    "term": "rottura",
+    "partOfSpeech": "名词",
+    "translation": "破裂；损坏",
+    "note": "部件断裂或失效，可能立即影响车辆安全。",
+    "forms": [
+      "rottura"
+    ],
+    "exampleQuestionId": 7074
+  },
+  {
+    "term": "rumore",
+    "partOfSpeech": "名词",
+    "translation": "噪声",
+    "note": "车辆发动机、排气或不当鸣笛产生并可能造成污染的声音。",
+    "forms": [
+      "rumore",
+      "rumori"
+    ],
+    "exampleQuestionId": 6879
+  },
+  {
+    "term": "ruota",
+    "partOfSpeech": "名词",
+    "translation": "车轮",
+    "note": "由轮辋、轮胎等组成并承载车辆、实现滚动行驶的部件。",
+    "forms": [
+      "ruota",
+      "ruote"
+    ],
+    "exampleQuestionId": 241
+  },
+  {
+    "term": "ruotino",
+    "partOfSpeech": "名词",
+    "translation": "小尺寸应急备胎",
+    "note": "轮胎故障时临时使用、速度和行驶距离受限制的备用车轮。",
+    "forms": [
+      "ruotino"
+    ],
+    "exampleQuestionId": 655
+  },
+  {
+    "term": "sagoma",
+    "partOfSpeech": "名词",
+    "translation": "车辆外廓；轮廓尺寸",
+    "note": "车辆及载荷在宽、高、长方向形成的外部轮廓。",
+    "forms": [
+      "sagoma"
+    ],
+    "exampleQuestionId": 6484
+  },
+  {
+    "term": "salita",
+    "partOfSpeech": "名词",
+    "translation": "上坡路段",
+    "note": "向上倾斜的道路，狭窄处会影响会车优先顺序和车辆动力。",
+    "forms": [
+      "salita"
+    ],
+    "exampleQuestionId": 4236
+  },
+  {
+    "term": "salute",
+    "partOfSpeech": "名词",
+    "translation": "健康；身体状况",
+    "note": "影响驾驶适合性、警觉和反应能力的身体状态。",
+    "forms": [
+      "salute"
+    ],
+    "exampleQuestionId": 6617
+  },
+  {
+    "term": "salvagente",
+    "partOfSpeech": "名词",
+    "translation": "行人安全岛",
+    "note": "设在行车道中的保护区域，供行人分段横过道路时停留。",
+    "forms": [
+      "salvagente"
+    ],
+    "exampleQuestionId": 189
+  },
+  {
+    "term": "salvagente circolare",
+    "partOfSpeech": "固定短语",
+    "translation": "圆形行人安全岛",
+    "note": "题干中指呈圆形、供行人停留避让的安全岛，不是动词“通行”。",
+    "forms": [
+      "salvagente circolare"
+    ],
+    "exampleQuestionId": 189
+  },
+  {
+    "term": "salvo diversa segnalazione",
+    "partOfSpeech": "固定短语",
+    "translation": "除非另有交通标志指示",
+    "note": "说明一般规则在现场标志给出不同规定时让位于该规定。",
+    "forms": [
+      "salvo diversa segnalazione"
+    ],
+    "exampleQuestionId": 5439
+  },
+  {
+    "term": "sanzione",
+    "partOfSpeech": "名词",
+    "translation": "处罚；制裁",
+    "note": "违反道路规则后依法施加的罚款、扣分或其他不利后果。",
+    "forms": [
+      "sanzione",
+      "sanzioni"
+    ],
+    "exampleQuestionId": 7093
+  },
+  {
+    "term": "sbandamento",
+    "partOfSpeech": "名词",
+    "translation": "侧滑；甩尾",
+    "note": "车辆横向偏离预定轨迹、稳定性丧失的现象。",
+    "forms": [
+      "sbandamento",
+      "sbandamenti"
+    ],
+    "exampleQuestionId": 6414
+  },
+  {
+    "term": "sbocco",
+    "partOfSpeech": "名词",
+    "translation": "出口；汇入口",
+    "note": "道路或通道通向另一道路的开口位置。",
+    "forms": [
+      "sbocco"
+    ],
+    "exampleQuestionId": 5417
+  },
+  {
+    "term": "scarico",
+    "partOfSpeech": "名词",
+    "translation": "排气；排气装置",
+    "note": "将发动机燃烧废气导出车辆的系统或过程。",
+    "forms": [
+      "scarico",
+      "scarichi"
+    ],
+    "exampleQuestionId": 7085
+  },
+  {
+    "term": "scarsa visibilità",
+    "partOfSpeech": "固定短语",
+    "translation": "能见度低；视野不良",
+    "note": "因天气、黑暗或道路形状导致可视距离不足的状态。",
+    "forms": [
+      "scarsa visibilità"
+    ],
+    "exampleQuestionId": 5845
+  },
+  {
+    "term": "scolari",
+    "partOfSpeech": "名词",
+    "translation": "学童；学生",
+    "note": "学校附近可能集体过街的儿童道路使用者。",
+    "forms": [
+      "scolari"
+    ],
+    "exampleQuestionId": 516
+  },
+  {
+    "term": "scuolabus",
+    "partOfSpeech": "名词",
+    "translation": "校车",
+    "note": "专门用于接送学生的客运车辆。",
+    "forms": [
+      "scuolabus"
+    ],
+    "exampleQuestionId": 528
+  },
+  {
+    "term": "sedile",
+    "partOfSpeech": "名词",
+    "translation": "座椅",
+    "note": "供驾驶人或乘客乘坐并固定安全约束装置的部件。",
+    "forms": [
+      "sedile",
+      "sedili"
+    ],
+    "exampleQuestionId": 6008
+  },
+  {
+    "term": "segnalare",
+    "partOfSpeech": "动词",
+    "translation": "发出信号；标示",
+    "note": "用灯光、声音、手势或标志把危险和行动意图告知他人。",
+    "forms": [
+      "segnalare",
+      "segnala"
+    ],
+    "exampleQuestionId": 2489
+  },
+  {
+    "term": "segnalazione",
+    "partOfSpeech": "名词",
+    "translation": "信号；警示；标示",
+    "note": "通过标志、灯光、声音或手势向其他道路使用者传递信息。",
+    "forms": [
+      "segnalazione",
+      "segnalazioni"
+    ],
+    "exampleQuestionId": 5994
+  },
+  {
+    "term": "segnalazione acustica",
+    "partOfSpeech": "固定短语",
+    "translation": "声音信号",
+    "note": "利用喇叭、警报器等声音提醒其他道路使用者。",
+    "forms": [
+      "segnalazione acustica"
+    ],
+    "exampleQuestionId": 197
+  },
+  {
+    "term": "segnalazione luminosa",
+    "partOfSpeech": "固定短语",
+    "translation": "灯光信号",
+    "note": "利用灯光颜色或闪烁方式传达通行、警告等信息。",
+    "forms": [
+      "segnalazione luminosa"
+    ],
+    "exampleQuestionId": 5994
+  },
+  {
+    "term": "segnale",
+    "partOfSpeech": "名词",
+    "translation": "交通标志；信号",
+    "note": "向道路使用者传达危险、规定或指示的标志或信号。",
+    "forms": [
+      "segnale",
+      "segnali"
+    ],
+    "exampleQuestionId": 1118
+  },
+  {
+    "term": "segnale mobile",
+    "partOfSpeech": "固定短语",
+    "translation": "临时可移动标志",
+    "note": "常用于施工或临时交通管理，可根据现场需要移动设置。",
+    "forms": [
+      "segnale mobile"
+    ],
+    "exampleQuestionId": 6145
+  },
+  {
+    "term": "segnale verticale",
+    "partOfSpeech": "固定短语",
+    "translation": "竖立式交通标志",
+    "note": "安装在支柱或其他竖向支撑物上的标牌式交通标志。",
+    "forms": [
+      "segnale verticale"
+    ],
+    "exampleQuestionId": 5152
+  },
+  {
+    "term": "segnaletica",
+    "partOfSpeech": "名词",
+    "translation": "道路交通标志系统",
+    "note": "涵盖垂直标志、路面标线、灯光及其他交通信号的总称。",
+    "forms": [
+      "segnaletica"
+    ],
+    "exampleQuestionId": 357
+  },
+  {
+    "term": "segnaletica orizzontale",
+    "partOfSpeech": "固定短语",
+    "translation": "道路标线",
+    "note": "施划在路面上的线条、箭头、文字及其他标记。",
+    "forms": [
+      "segnaletica orizzontale"
+    ],
+    "exampleQuestionId": 6442
+  },
+  {
+    "term": "seguire",
+    "partOfSpeech": "动词",
+    "translation": "跟随；沿着行驶",
+    "note": "在另一车辆后方行驶或按指定路线前进。",
+    "forms": [
+      "seguire"
+    ],
+    "exampleQuestionId": 4537
+  },
+  {
+    "term": "semaforo",
+    "partOfSpeech": "名词",
+    "translation": "交通信号灯",
+    "note": "以红、黄、绿等灯色调节车辆和行人通行。",
+    "forms": [
+      "semaforo",
+      "semafori"
+    ],
+    "exampleQuestionId": 78
+  },
+  {
+    "term": "semirimorchio",
+    "partOfSpeech": "名词",
+    "translation": "半挂车",
+    "note": "部分重量由牵引车承受、通过连接装置与牵引车结合的挂车。",
+    "forms": [
+      "semirimorchio",
+      "semirimorchi"
+    ],
+    "exampleQuestionId": 322
+  },
+  {
+    "term": "senso di marcia",
+    "partOfSpeech": "固定短语",
+    "translation": "行驶方向",
+    "note": "车辆在道路上实际或规定的前进方向。",
+    "forms": [
+      "senso di marcia"
+    ],
+    "exampleQuestionId": 212
+  },
+  {
+    "term": "senso unico",
+    "partOfSpeech": "固定短语",
+    "translation": "单向通行",
+    "note": "道路交通只允许沿一个方向行驶的制度或路段。",
+    "forms": [
+      "senso unico"
+    ],
+    "exampleQuestionId": 1739
+  },
+  {
+    "term": "serbatoio",
+    "partOfSpeech": "名词",
+    "translation": "油箱；储液罐",
+    "note": "储存燃料或车辆工作液体的容器。",
+    "forms": [
+      "serbatoio"
+    ],
+    "exampleQuestionId": 7129
+  },
+  {
+    "term": "servofreno",
+    "partOfSpeech": "名词",
+    "translation": "制动助力器",
+    "note": "利用真空或其他动力减小驾驶人制动踏板操作力的装置。",
+    "forms": [
+      "servofreno"
+    ],
+    "exampleQuestionId": 6966
+  },
+  {
+    "term": "servosterzo",
+    "partOfSpeech": "名词",
+    "translation": "转向助力器",
+    "note": "辅助驾驶人转动方向盘、减小转向操作力的装置。",
+    "forms": [
+      "servosterzo"
+    ],
+    "exampleQuestionId": 7071
+  },
+  {
+    "term": "shock",
+    "partOfSpeech": "名词",
+    "translation": "休克",
+    "note": "伤员循环功能不足的危急状态，应保暖、安置并等待专业救援。",
+    "forms": [
+      "shock"
+    ],
+    "exampleQuestionId": 6614
+  },
+  {
+    "term": "si deve",
+    "partOfSpeech": "固定短语",
+    "translation": "应当；必须",
+    "note": "无人称义务表达，要求道路使用者采取后续行动。",
+    "forms": [
+      "si deve"
+    ],
+    "exampleQuestionId": 4078
+  },
+  {
+    "term": "si può",
+    "partOfSpeech": "固定短语",
+    "translation": "可以；允许",
+    "note": "无人称许可表达，说明某项操作在条件满足时可做。",
+    "forms": [
+      "si può"
+    ],
+    "exampleQuestionId": 6772
+  },
+  {
+    "term": "sicurezza",
+    "partOfSpeech": "名词",
+    "translation": "安全；安全性",
+    "note": "避免事故并保护道路使用者、乘员和车辆的状态与措施。",
+    "forms": [
+      "sicurezza"
+    ],
+    "exampleQuestionId": 4266
+  },
+  {
+    "term": "silenziatore",
+    "partOfSpeech": "名词",
+    "translation": "消声器",
+    "note": "安装在排气系统中用于降低发动机排气噪声的装置。",
+    "forms": [
+      "silenziatore"
+    ],
+    "exampleQuestionId": 7089
+  },
+  {
+    "term": "simbolo",
+    "partOfSpeech": "名词",
+    "translation": "符号；图案",
+    "note": "标志或附加牌上用来表示车辆类别、危险或规定对象的图形。",
+    "forms": [
+      "simbolo"
+    ],
+    "exampleQuestionId": 5925
+  },
+  {
+    "term": "sinistra",
+    "partOfSpeech": "名词",
+    "translation": "左侧；左方",
+    "note": "以行驶方向为参照的左边，涉及左转、超车和道路位置。",
+    "forms": [
+      "sinistra"
+    ],
+    "exampleQuestionId": 5157
+  },
+  {
+    "term": "sinistro",
+    "partOfSpeech": "名词",
+    "translation": "保险事故；交通事故",
+    "note": "保险和责任语境中指引起损害及索赔的事故，并非表示左侧。",
+    "forms": [
+      "sinistro",
+      "sinistri"
+    ],
+    "exampleQuestionId": 6699
+  },
+  {
+    "term": "slittamento",
+    "partOfSpeech": "名词",
+    "translation": "滑移；打滑",
+    "note": "轮胎相对路面滑动、失去正常滚动附着的状态。",
+    "forms": [
+      "slittamento"
+    ],
+    "exampleQuestionId": 7157
+  },
+  {
+    "term": "smontare",
+    "partOfSpeech": "动词",
+    "translation": "拆卸",
+    "note": "从车辆上取下车轮或其他部件以便检查、更换。",
+    "forms": [
+      "smontare"
+    ],
+    "exampleQuestionId": 6957
+  },
+  {
+    "term": "soccorrere",
+    "partOfSpeech": "动词",
+    "translation": "救助；施救",
+    "note": "向事故伤员提供必要帮助并联系专业救援。",
+    "forms": [
+      "soccorrere"
+    ],
+    "exampleQuestionId": 6557
+  },
+  {
+    "term": "soccorritore",
+    "partOfSpeech": "名词",
+    "translation": "救助者；施救人员",
+    "note": "在事故现场提供保护、报警或急救的人。",
+    "forms": [
+      "soccorritore"
+    ],
+    "exampleQuestionId": 6577
+  },
+  {
+    "term": "soccorso",
+    "partOfSpeech": "名词",
+    "translation": "救助；急救",
+    "note": "事故后保护现场、报警并向伤员提供适当帮助。",
+    "forms": [
+      "soccorso"
+    ],
+    "exampleQuestionId": 159
+  },
+  {
+    "term": "sole",
+    "partOfSpeech": "名词",
+    "translation": "太阳；阳光",
+    "note": "迎面阳光可能造成眩目并降低驾驶人观察能力。",
+    "forms": [
+      "sole"
+    ],
+    "exampleQuestionId": 4017
+  },
+  {
+    "term": "sonnolenza",
+    "partOfSpeech": "名词",
+    "translation": "困倦；嗜睡",
+    "note": "驾驶时清醒度降低、容易短暂入睡的危险状态。",
+    "forms": [
+      "sonnolenza"
+    ],
+    "exampleQuestionId": 6538
+  },
+  {
+    "term": "sorpassare",
+    "partOfSpeech": "动词",
+    "translation": "超越；超车",
+    "note": "从侧方驶过同向行驶的另一道路使用者。",
+    "forms": [
+      "sorpassare"
+    ],
+    "exampleQuestionId": 499
+  },
+  {
+    "term": "sorpassato",
+    "partOfSpeech": "形容词",
+    "translation": "被超越的；被超车的",
+    "note": "指正在被后车超越的车辆或道路使用者。",
+    "forms": [
+      "sorpassato",
+      "sorpassati"
+    ],
+    "exampleQuestionId": 5212
+  },
+  {
+    "term": "sorpasso",
+    "partOfSpeech": "名词",
+    "translation": "超车",
+    "note": "车辆从侧方越过同向前车并继续前进的操作。",
+    "forms": [
+      "sorpasso"
+    ],
+    "exampleQuestionId": 5263
+  },
+  {
+    "term": "sospensione",
+    "partOfSpeech": "名词",
+    "translation": "悬架；悬挂系统",
+    "note": "连接车轮与车身、吸收路面冲击并保持轮胎接地的系统。",
+    "forms": [
+      "sospensione",
+      "sospensioni"
+    ],
+    "exampleQuestionId": 7029
+  },
+  {
+    "term": "sospensione della patente",
+    "partOfSpeech": "固定短语",
+    "translation": "暂扣驾驶证",
+    "note": "在规定期限内禁止持证人使用驾驶证驾驶。",
+    "forms": [
+      "sospensione della patente"
+    ],
+    "exampleQuestionId": 6313
+  },
+  {
+    "term": "sosta",
+    "partOfSpeech": "名词",
+    "translation": "停车；停放",
+    "note": "车辆停止且可持续一段时间的状态，与短暂上下客的临时停车不同。",
+    "forms": [
+      "sosta"
+    ],
+    "exampleQuestionId": 5441
+  },
+  {
+    "term": "sostanze stupefacenti",
+    "partOfSpeech": "固定短语",
+    "translation": "麻醉品；毒品",
+    "note": "会改变意识、判断和反应能力，使用后不得驾驶的物质。",
+    "forms": [
+      "sostanze stupefacenti"
+    ],
+    "exampleQuestionId": 6349
+  },
+  {
+    "term": "sostare",
+    "partOfSpeech": "动词",
+    "translation": "停放车辆；停车",
+    "note": "使车辆处于停车停放状态，必须遵守禁停和位置规则。",
+    "forms": [
+      "sostare"
+    ],
+    "exampleQuestionId": 531
+  },
+  {
+    "term": "sostituire",
+    "partOfSpeech": "动词",
+    "translation": "更换；替换",
+    "note": "把失效、磨损或不合格的部件换下。",
+    "forms": [
+      "sostituire"
+    ],
+    "exampleQuestionId": 6934
+  },
+  {
+    "term": "sostituzione",
+    "partOfSpeech": "名词",
+    "translation": "更换",
+    "note": "把磨损、损坏或失效的车辆部件换成合格部件。",
+    "forms": [
+      "sostituzione"
+    ],
+    "exampleQuestionId": 6949
+  },
+  {
+    "term": "sottopassaggio",
+    "partOfSpeech": "名词",
+    "translation": "地下通道；下穿通道",
+    "note": "道路或通道从另一交通线路下方穿过的构造。",
+    "forms": [
+      "sottopassaggio"
+    ],
+    "exampleQuestionId": 203
+  },
+  {
+    "term": "sovraccarico",
+    "partOfSpeech": "名词",
+    "translation": "超载",
+    "note": "车辆或车轴承受的质量超过法定允许值的状态。",
+    "forms": [
+      "sovraccarico"
+    ],
+    "exampleQuestionId": 7032
+  },
+  {
+    "term": "spargimento",
+    "partOfSpeech": "名词",
+    "translation": "散落；泄漏",
+    "note": "货物、液体或泥土散布到路面并造成危险或污染的情况。",
+    "forms": [
+      "spargimento"
+    ],
+    "exampleQuestionId": 5562
+  },
+  {
+    "term": "spartitraffico",
+    "partOfSpeech": "名词",
+    "translation": "中央分隔带；分流设施",
+    "note": "用于分隔相反或不同方向交通流的道路设施。",
+    "forms": [
+      "spartitraffico"
+    ],
+    "exampleQuestionId": 5525
+  },
+  {
+    "term": "spazio",
+    "partOfSpeech": "名词",
+    "translation": "空间；行驶距离",
+    "note": "题目中常指反应、制动或停车所需的道路长度。",
+    "forms": [
+      "spazio",
+      "spazi"
+    ],
+    "exampleQuestionId": 5182
+  },
+  {
+    "term": "spazio di frenatura",
+    "partOfSpeech": "固定短语",
+    "translation": "制动距离",
+    "note": "从制动开始到车辆完全停止所行驶的距离，不含反应阶段。",
+    "forms": [
+      "spazio di frenatura"
+    ],
+    "exampleQuestionId": 4234
+  },
+  {
+    "term": "spazio totale di arresto",
+    "partOfSpeech": "固定短语",
+    "translation": "停车总距离",
+    "note": "驾驶人发现危险到车辆完全停止的总距离，包含反应与制动阶段。",
+    "forms": [
+      "spazio totale di arresto"
+    ],
+    "exampleQuestionId": 4239
+  },
+  {
+    "term": "specchio retrovisore",
+    "partOfSpeech": "固定短语",
+    "translation": "后视镜",
+    "note": "供驾驶人观察车辆后方和侧后方交通情况的镜面装置。",
+    "forms": [
+      "specchio retrovisore",
+      "specchi retrovisori"
+    ],
+    "exampleQuestionId": 4701
+  },
+  {
+    "term": "spegnere",
+    "partOfSpeech": "动词",
+    "translation": "关闭；熄灭",
+    "note": "关闭发动机、灯光或其他车辆设备。",
+    "forms": [
+      "spegnere"
+    ],
+    "exampleQuestionId": 7095
+  },
+  {
+    "term": "spia",
+    "partOfSpeech": "名词",
+    "translation": "仪表警告灯；指示灯",
+    "note": "仪表板上显示车辆系统状态、故障或功能启用情况的灯。",
+    "forms": [
+      "spia"
+    ],
+    "exampleQuestionId": 5998
+  },
+  {
+    "term": "spostare",
+    "partOfSpeech": "动词",
+    "translation": "移动；挪动车辆或物体",
+    "note": "改变车辆、伤员或障碍物的位置，是否可做须依安全情形判断。",
+    "forms": [
+      "spostare"
+    ],
+    "exampleQuestionId": 356
+  },
+  {
+    "term": "spostarsi",
+    "partOfSpeech": "动词",
+    "translation": "移动；变换位置",
+    "note": "车辆或人员从当前位置移向另一位置。",
+    "forms": [
+      "spostarsi"
+    ],
+    "exampleQuestionId": 4436
+  },
+  {
+    "term": "stabilità",
+    "partOfSpeech": "名词",
+    "translation": "稳定性",
+    "note": "车辆保持预定姿态和轨迹、不发生侧滑或侧翻的能力。",
+    "forms": [
+      "stabilità"
+    ],
+    "exampleQuestionId": 5628
+  },
+  {
+    "term": "stanchezza",
+    "partOfSpeech": "名词",
+    "translation": "疲劳；疲倦",
+    "note": "长时间驾驶或休息不足造成的注意和反应能力下降。",
+    "forms": [
+      "stanchezza"
+    ],
+    "exampleQuestionId": 6541
+  },
+  {
+    "term": "stato di ebbrezza",
+    "partOfSpeech": "固定短语",
+    "translation": "醉酒状态；酒驾状态",
+    "note": "驾驶人受酒精影响并达到法律规定标准的状态。",
+    "forms": [
+      "stato di ebbrezza"
+    ],
+    "exampleQuestionId": 6797
+  },
+  {
+    "term": "stazionamento",
+    "partOfSpeech": "名词",
+    "translation": "停驻；停靠；停车停放",
+    "note": "车辆在道路上保持静止或在专用区域停靠的状态。",
+    "forms": [
+      "stazionamento"
+    ],
+    "exampleQuestionId": 5462
+  },
+  {
+    "term": "sterzo",
+    "partOfSpeech": "名词",
+    "translation": "转向系统",
+    "note": "驾驶人控制车轮方向、改变车辆行驶轨迹的系统。",
+    "forms": [
+      "sterzo"
+    ],
+    "exampleQuestionId": 7062
+  },
+  {
+    "term": "stop",
+    "partOfSpeech": "名词",
+    "translation": "停车让行标志；停止",
+    "note": "要求车辆在停止线前完全停车，确认安全并让行后再通过。",
+    "forms": [
+      "stop"
+    ],
+    "exampleQuestionId": 4581
+  },
+  {
+    "term": "strada",
+    "partOfSpeech": "名词",
+    "translation": "道路；公路",
+    "note": "泛指供道路使用者通行的道路整体，不等同于仅供车辆行驶的行车道。",
+    "forms": [
+      "strada",
+      "strade"
+    ],
+    "exampleQuestionId": 6
+  },
+  {
+    "term": "strada extraurbana",
+    "partOfSpeech": "固定短语",
+    "translation": "城外道路",
+    "note": "位于建成区以外的道路，速度和车辆通行规则与城市道路不同。",
+    "forms": [
+      "strada extraurbana",
+      "strade extraurbane"
+    ],
+    "exampleQuestionId": 1118
+  },
+  {
+    "term": "strada principale",
+    "partOfSpeech": "固定短语",
+    "translation": "主干道；优先道路",
+    "note": "在路口关系或道路分类中承担主要交通流的道路。",
+    "forms": [
+      "strada principale"
+    ],
+    "exampleQuestionId": 2266
+  },
+  {
+    "term": "strada sdrucciolevole",
+    "partOfSpeech": "固定短语",
+    "translation": "湿滑道路；易滑路面",
+    "note": "附着力降低、车辆更容易滑移或侧滑的道路。",
+    "forms": [
+      "strada sdrucciolevole"
+    ],
+    "exampleQuestionId": 6482
+  },
+  {
+    "term": "strada secondaria",
+    "partOfSpeech": "固定短语",
+    "translation": "次要道路；支路",
+    "note": "相对于主干道承担次要交通流，路口优先权仍由规则或标志决定。",
+    "forms": [
+      "strada secondaria",
+      "strade secondarie"
+    ],
+    "exampleQuestionId": 3013
+  },
+  {
+    "term": "strada urbana",
+    "partOfSpeech": "固定短语",
+    "translation": "城市道路",
+    "note": "位于建成区内并受城市道路通行规则约束的道路。",
+    "forms": [
+      "strada urbana",
+      "strade urbane"
+    ],
+    "exampleQuestionId": 4166
+  },
+  {
+    "term": "strettoia",
+    "partOfSpeech": "名词",
+    "translation": "道路变窄处；窄路",
+    "note": "行车道宽度缩减、对向车辆可能无法同时通过的路段。",
+    "forms": [
+      "strettoia"
+    ],
+    "exampleQuestionId": 696
+  },
+  {
+    "term": "striscia",
+    "partOfSpeech": "名词",
+    "translation": "标线；条带",
+    "note": "通常指施划在路面上的纵向或横向交通标线。",
+    "forms": [
+      "striscia",
+      "strisce"
+    ],
+    "exampleQuestionId": 30
+  },
+  {
+    "term": "striscia bianca",
+    "partOfSpeech": "固定短语",
+    "translation": "白色标线",
+    "note": "道路上用白色施划的车道边界、停止线或其他交通标线。",
+    "forms": [
+      "striscia bianca",
+      "strisce bianche"
+    ],
+    "exampleQuestionId": 124
+  },
+  {
+    "term": "striscia discontinua",
+    "partOfSpeech": "固定短语",
+    "translation": "虚线；间断标线",
+    "note": "在安全且规则允许时可以跨越的间断路面标线。",
+    "forms": [
+      "striscia discontinua"
+    ],
+    "exampleQuestionId": 2478
+  },
+  {
+    "term": "striscia trasversale",
+    "partOfSpeech": "固定短语",
+    "translation": "横向标线",
+    "note": "横跨车道施划的停止线、让行线或人行横道组成线。",
+    "forms": [
+      "striscia trasversale"
+    ],
+    "exampleQuestionId": 4583
+  },
+  {
+    "term": "sulle autostrade",
+    "partOfSpeech": "固定短语",
+    "translation": "在高速公路上",
+    "note": "限定某项车辆准入、速度、停车或应急规则适用于高速公路。",
+    "forms": [
+      "sulle autostrade"
+    ],
+    "exampleQuestionId": 4150
+  },
+  {
+    "term": "superare",
+    "partOfSpeech": "动词",
+    "translation": "越过；超过",
+    "note": "可表示跨越标线、通过障碍或超过规定数值，须结合宾语理解。",
+    "forms": [
+      "superare"
+    ],
+    "exampleQuestionId": 5741
+  },
+  {
+    "term": "superiore a",
+    "partOfSpeech": "固定短语",
+    "translation": "高于；大于",
+    "note": "表示数值超过后接的界限。",
+    "forms": [
+      "superiore a"
+    ],
+    "exampleQuestionId": 4078
+  },
+  {
+    "term": "svincolo",
+    "partOfSpeech": "名词",
+    "translation": "互通式立交；出入口匝道系统",
+    "note": "高速或干线道路上供车辆转换道路的立体连接区域。",
+    "forms": [
+      "svincolo",
+      "svincoli"
+    ],
+    "exampleQuestionId": 5527
+  },
+  {
+    "term": "svolta",
+    "partOfSpeech": "名词",
+    "translation": "转弯；转向",
+    "note": "车辆在路口或道路连接处改变前进方向的动作。",
+    "forms": [
+      "svolta"
+    ],
+    "exampleQuestionId": 5920
+  },
+  {
+    "term": "svoltare",
+    "partOfSpeech": "动词",
+    "translation": "转弯；转向",
+    "note": "向左或向右改变车辆行驶方向。",
+    "forms": [
+      "svoltare"
+    ],
+    "exampleQuestionId": 4452
+  },
+  {
+    "term": "tamponamento",
+    "partOfSpeech": "名词",
+    "translation": "追尾碰撞",
+    "note": "后车撞上前车尾部的事故，常与跟车距离不足有关。",
+    "forms": [
+      "tamponamento",
+      "tamponamenti"
+    ],
+    "exampleQuestionId": 6395
+  },
+  {
+    "term": "tara",
+    "partOfSpeech": "名词",
+    "translation": "整备质量；空车质量",
+    "note": "车辆不含可变载荷时按法规计算的自身质量。",
+    "forms": [
+      "tara"
+    ],
+    "exampleQuestionId": 6236
+  },
+  {
+    "term": "targa",
+    "partOfSpeech": "名词",
+    "translation": "车辆号牌；车牌",
+    "note": "用于识别登记车辆的法定号码牌。",
+    "forms": [
+      "targa",
+      "targhe"
+    ],
+    "exampleQuestionId": 312
+  },
+  {
+    "term": "taxi",
+    "partOfSpeech": "名词",
+    "translation": "出租车",
+    "note": "经许可提供按需载客服务的公共运输车辆。",
+    "forms": [
+      "taxi"
+    ],
+    "exampleQuestionId": 446
+  },
+  {
+    "term": "telefono cellulare",
+    "partOfSpeech": "固定短语",
+    "translation": "手机",
+    "note": "驾驶时手持或操作会分散视觉、手部和认知注意的设备。",
+    "forms": [
+      "telefono cellulare"
+    ],
+    "exampleQuestionId": 7138
+  },
+  {
+    "term": "tempo di reazione",
+    "partOfSpeech": "固定短语",
+    "translation": "反应时间",
+    "note": "驾驶人察觉危险到开始采取制动等行动所需的时间。",
+    "forms": [
+      "tempo di reazione"
+    ],
+    "exampleQuestionId": 6478
+  },
+  {
+    "term": "tenere",
+    "partOfSpeech": "动词",
+    "translation": "保持；控制",
+    "note": "在驾驶表达中常指保持方向、距离、速度或注意状态。",
+    "forms": [
+      "tenere"
+    ],
+    "exampleQuestionId": 4078
+  },
+  {
+    "term": "tenere presente",
+    "partOfSpeech": "固定短语",
+    "translation": "牢记；考虑到",
+    "note": "作出驾驶决定时把某项风险或规则纳入考虑。",
+    "forms": [
+      "tenere presente"
+    ],
+    "exampleQuestionId": 472
+  },
+  {
+    "term": "tergicristallo",
+    "partOfSpeech": "名词",
+    "translation": "挡风玻璃雨刮器",
+    "note": "清除挡风玻璃雨水和污物、保持前方视野的装置。",
+    "forms": [
+      "tergicristallo"
+    ],
+    "exampleQuestionId": 6909
+  },
+  {
+    "term": "titolare",
+    "partOfSpeech": "名词",
+    "translation": "持有人；权利人",
+    "note": "指驾驶证、车辆登记或保险合同上登记的法定持有人。",
+    "forms": [
+      "titolare"
+    ],
+    "exampleQuestionId": 6291
+  },
+  {
+    "term": "traiettoria",
+    "partOfSpeech": "名词",
+    "translation": "行驶轨迹",
+    "note": "车辆运动时实际经过的路线，弯道和避让时尤其重要。",
+    "forms": [
+      "traiettoria"
+    ],
+    "exampleQuestionId": 7067
+  },
+  {
+    "term": "trainare",
+    "partOfSpeech": "动词",
+    "translation": "牵引；拖曳",
+    "note": "使用车辆拉动挂车或故障车辆。",
+    "forms": [
+      "trainare"
+    ],
+    "exampleQuestionId": 5625
+  },
+  {
+    "term": "traino",
+    "partOfSpeech": "名词",
+    "translation": "牵引；拖车",
+    "note": "由一辆车拉动另一车辆或挂车的行为和连接状态。",
+    "forms": [
+      "traino"
+    ],
+    "exampleQuestionId": 5706
+  },
+  {
+    "term": "tram",
+    "partOfSpeech": "名词",
+    "translation": "有轨电车",
+    "note": "沿道路轨道运行的公共交通车辆，路口和站点有专门通行规则。",
+    "forms": [
+      "tram"
+    ],
+    "exampleQuestionId": 5185
+  },
+  {
+    "term": "tramonto",
+    "partOfSpeech": "名词",
+    "translation": "日落",
+    "note": "自然光逐渐减弱的时刻，涉及车辆灯光开启要求。",
+    "forms": [
+      "tramonto"
+    ],
+    "exampleQuestionId": 5913
+  },
+  {
+    "term": "transitare",
+    "partOfSpeech": "动词",
+    "translation": "通过；通行",
+    "note": "表示车辆、行人等经过某一道路或区域。",
+    "forms": [
+      "transitare"
+    ],
+    "exampleQuestionId": 162
+  },
+  {
+    "term": "transito",
+    "partOfSpeech": "名词",
+    "translation": "通行；交通流",
+    "note": "表示道路使用者在某路段通过，也常用于准行或禁行标志。",
+    "forms": [
+      "transito"
+    ],
+    "exampleQuestionId": 41
+  },
+  {
+    "term": "trasmissione",
+    "partOfSpeech": "名词",
+    "translation": "传动系统",
+    "note": "把发动机动力传递到驱动车轮的机构总成。",
+    "forms": [
+      "trasmissione"
+    ],
+    "exampleQuestionId": 7114
+  },
+  {
+    "term": "trasporto",
+    "partOfSpeech": "名词",
+    "translation": "运输；运送",
+    "note": "使用车辆运送人员、货物或危险品的活动。",
+    "forms": [
+      "trasporto",
+      "trasporti"
+    ],
+    "exampleQuestionId": 286
+  },
+  {
+    "term": "trauma",
+    "partOfSpeech": "名词",
+    "translation": "创伤；外伤",
+    "note": "碰撞导致的身体损伤，可能涉及头部、胸部或脊柱。",
+    "forms": [
+      "trauma",
+      "traumi"
+    ],
+    "exampleQuestionId": 6613
+  },
+  {
+    "term": "triangolo",
+    "partOfSpeech": "名词",
+    "translation": "三角警告牌",
+    "note": "车辆故障或事故后按规定放置、提醒后方来车的反光警示装置。",
+    "forms": [
+      "triangolo"
+    ],
+    "exampleQuestionId": 6145
+  },
+  {
+    "term": "triciclo",
+    "partOfSpeech": "名词",
+    "translation": "三轮机动车",
+    "note": "具有三个车轮并按功率、排量等标准分类的机动车。",
+    "forms": [
+      "triciclo",
+      "tricicli"
+    ],
+    "exampleQuestionId": 284
+  },
+  {
+    "term": "urto",
+    "partOfSpeech": "名词",
+    "translation": "撞击；冲击",
+    "note": "车辆或人体与其他物体突然接触产生的撞击。",
+    "forms": [
+      "urto",
+      "urti"
+    ],
+    "exampleQuestionId": 6035
+  },
+  {
+    "term": "usare prudenza",
+    "partOfSpeech": "固定短语",
+    "translation": "谨慎行驶",
+    "note": "以适当速度、距离和观察应对可能的道路危险。",
+    "forms": [
+      "usare prudenza"
+    ],
+    "exampleQuestionId": 419
+  },
+  {
+    "term": "uscire",
+    "partOfSpeech": "动词",
+    "translation": "驶出；离开",
+    "note": "车辆离开道路、车流、隧道或停车位置。",
+    "forms": [
+      "uscire"
+    ],
+    "exampleQuestionId": 54
+  },
+  {
+    "term": "uscita",
+    "partOfSpeech": "名词",
+    "translation": "出口；驶出口",
+    "note": "表示驶离道路、隧道、高速公路或其他区域的位置。",
+    "forms": [
+      "uscita"
+    ],
+    "exampleQuestionId": 5270
+  },
+  {
+    "term": "usura",
+    "partOfSpeech": "名词",
+    "translation": "磨损",
+    "note": "轮胎、制动器等部件因使用逐渐损耗的现象。",
+    "forms": [
+      "usura"
+    ],
+    "exampleQuestionId": 4240
+  },
+  {
+    "term": "usurati",
+    "partOfSpeech": "形容词",
+    "translation": "已磨损的",
+    "note": "常描述胎面或制动部件因使用而性能下降。",
+    "forms": [
+      "usurati"
+    ],
+    "exampleQuestionId": 6982
+  },
+  {
+    "term": "validità",
+    "partOfSpeech": "名词",
+    "translation": "有效期；有效性",
+    "note": "表示驾驶证、保险或其他文件在规定期限内具有法律效力。",
+    "forms": [
+      "validità"
+    ],
+    "exampleQuestionId": 6264
+  },
+  {
+    "term": "valutare",
+    "partOfSpeech": "动词",
+    "translation": "评估；判断",
+    "note": "根据速度、距离、视距和伤员状态作出安全判断。",
+    "forms": [
+      "valutare"
+    ],
+    "exampleQuestionId": 6750
+  },
+  {
+    "term": "veicolo",
+    "partOfSpeech": "名词",
+    "translation": "车辆",
+    "note": "道路法规中的广义车辆，包括机动车、挂车及其他规定的运输工具。",
+    "forms": [
+      "veicolo",
+      "veicoli"
+    ],
+    "exampleQuestionId": 241
+  },
+  {
+    "term": "veicolo a motore",
+    "partOfSpeech": "固定短语",
+    "translation": "机动车",
+    "note": "由发动机驱动并按法律规定在道路上行驶的车辆。",
+    "forms": [
+      "veicolo a motore",
+      "veicoli a motore"
+    ],
+    "exampleQuestionId": 285
+  },
+  {
+    "term": "veicolo trainante",
+    "partOfSpeech": "固定短语",
+    "translation": "牵引车辆",
+    "note": "车辆组合中提供牵引力的前方机动车。",
+    "forms": [
+      "veicolo trainante"
+    ],
+    "exampleQuestionId": 5741
+  },
+  {
+    "term": "veicolo trainato",
+    "partOfSpeech": "固定短语",
+    "translation": "被牵引车辆",
+    "note": "由另一车辆牵引、自身不提供组合主要动力的车辆。",
+    "forms": [
+      "veicolo trainato",
+      "veicoli trainati"
+    ],
+    "exampleQuestionId": 5686
+  },
+  {
+    "term": "velocità",
+    "partOfSpeech": "名词",
+    "translation": "速度；车速",
+    "note": "车辆单位时间内行驶的快慢，必须适应限速和实际环境。",
+    "forms": [
+      "velocità"
+    ],
+    "exampleQuestionId": 374
+  },
+  {
+    "term": "velocità eccessiva",
+    "partOfSpeech": "固定短语",
+    "translation": "过高车速",
+    "note": "相对法定限制或实际道路条件过快的速度。",
+    "forms": [
+      "velocità eccessiva"
+    ],
+    "exampleQuestionId": 7180
+  },
+  {
+    "term": "velocità massima",
+    "partOfSpeech": "固定短语",
+    "translation": "最高速度",
+    "note": "车辆或道路在规定条件下不得超过的车速上限。",
+    "forms": [
+      "velocità massima"
+    ],
+    "exampleQuestionId": 114
+  },
+  {
+    "term": "velocità moderata",
+    "partOfSpeech": "固定短语",
+    "translation": "适度低速；谨慎速度",
+    "note": "足以应对可预见危险并能安全控制车辆的较低车速。",
+    "forms": [
+      "velocità moderata"
+    ],
+    "exampleQuestionId": 6428
+  },
+  {
+    "term": "vento",
+    "partOfSpeech": "名词",
+    "translation": "风",
+    "note": "强风会影响车辆方向稳定性，尤其影响高大或轻型车辆。",
+    "forms": [
+      "vento"
+    ],
+    "exampleQuestionId": 4016
+  },
+  {
+    "term": "vento laterale",
+    "partOfSpeech": "固定短语",
+    "translation": "侧风",
+    "note": "从车辆侧面吹来的风，会使车辆偏离原行驶轨迹。",
+    "forms": [
+      "vento laterale"
+    ],
+    "exampleQuestionId": 4016
+  },
+  {
+    "term": "verificare",
+    "partOfSpeech": "动词",
+    "translation": "检查；确认",
+    "note": "通过观察或测试确认车辆、文件或条件符合要求。",
+    "forms": [
+      "verificare"
+    ],
+    "exampleQuestionId": 6909
+  },
+  {
+    "term": "verticale",
+    "partOfSpeech": "形容词",
+    "translation": "竖向的；垂直的",
+    "note": "交通标志语境中多指安装在路旁支架上的竖立式标志。",
+    "forms": [
+      "verticale",
+      "verticali"
+    ],
+    "exampleQuestionId": 2637
+  },
+  {
+    "term": "vetro",
+    "partOfSpeech": "名词",
+    "translation": "车窗玻璃",
+    "note": "车辆透明部件，必须保持清洁且不得妨碍视线。",
+    "forms": [
+      "vetro",
+      "vetri"
+    ],
+    "exampleQuestionId": 6908
+  },
+  {
+    "term": "viaggiare",
+    "partOfSpeech": "动词",
+    "translation": "行驶；旅行",
+    "note": "表示车辆以某种速度、位置或条件在道路上运行。",
+    "forms": [
+      "viaggiare"
+    ],
+    "exampleQuestionId": 4108
+  },
+  {
+    "term": "vietare",
+    "partOfSpeech": "动词",
+    "translation": "禁止",
+    "note": "表示规则或交通标志不允许某类通行或行为。",
+    "forms": [
+      "vietare",
+      "vieta"
+    ],
+    "exampleQuestionId": 1652
+  },
+  {
+    "term": "vietato",
+    "partOfSpeech": "形容词",
+    "translation": "被禁止的；不得",
+    "note": "表示某种通行或行为不被交通规则允许。",
+    "forms": [
+      "vietato",
+      "vietata",
+      "vietati",
+      "vietate"
+    ],
+    "exampleQuestionId": 5434
+  },
+  {
+    "term": "vigile",
+    "partOfSpeech": "名词",
+    "translation": "交通警察；交警",
+    "note": "在道路上以手势或其他方式指挥交通的执勤人员。",
+    "forms": [
+      "vigile",
+      "vigili"
+    ],
+    "exampleQuestionId": 4355
+  },
+  {
+    "term": "visibilità",
+    "partOfSpeech": "名词",
+    "translation": "能见度；视野",
+    "note": "驾驶人能够清楚观察道路、障碍和其他道路使用者的范围。",
+    "forms": [
+      "visibilità"
+    ],
+    "exampleQuestionId": 5242
+  },
+  {
+    "term": "visibilità limitata",
+    "partOfSpeech": "固定短语",
+    "translation": "视野受限",
+    "note": "可观察范围被弯道、坡顶、车辆或环境条件限制。",
+    "forms": [
+      "visibilità limitata"
+    ],
+    "exampleQuestionId": 4042
+  },
+  {
+    "term": "visiera",
+    "partOfSpeech": "名词",
+    "translation": "头盔面罩",
+    "note": "安装在头盔前部、保护眼睛和面部并保持视野的透明部件。",
+    "forms": [
+      "visiera"
+    ],
+    "exampleQuestionId": 6107
+  },
+  {
+    "term": "vista",
+    "partOfSpeech": "名词",
+    "translation": "视力；视觉",
+    "note": "识别道路、信号和危险所必需的感官能力。",
+    "forms": [
+      "vista"
+    ],
+    "exampleQuestionId": 6545
+  },
+  {
+    "term": "vittima",
+    "partOfSpeech": "名词",
+    "translation": "事故受害者",
+    "note": "交通事故中遭受人身伤害或其他损害的人。",
+    "forms": [
+      "vittima",
+      "vittime"
+    ],
+    "exampleQuestionId": 6741
+  },
+  {
+    "term": "volante",
+    "partOfSpeech": "名词",
+    "translation": "方向盘",
+    "note": "驾驶人操纵转向系统的圆形控制部件。",
+    "forms": [
+      "volante"
+    ],
+    "exampleQuestionId": 7076
+  },
+  {
+    "term": "zona",
+    "partOfSpeech": "名词",
+    "translation": "区域；交通管制区",
+    "note": "指实行特定速度、通行、停车或行人规则的范围。",
+    "forms": [
+      "zona",
+      "zone"
+    ],
+    "exampleQuestionId": 141
+  },
+  {
+    "term": "è consentito",
+    "partOfSpeech": "固定短语",
+    "translation": "允许；可以",
+    "note": "明确说明在适用条件下某项行为获准实施。",
+    "forms": [
+      "è consentito"
+    ],
+    "exampleQuestionId": 371
+  },
+  {
+    "term": "è necessario",
+    "partOfSpeech": "固定短语",
+    "translation": "有必要；必须",
+    "note": "说明为安全或符合法规需要采取某项措施。",
+    "forms": [
+      "è necessario"
+    ],
+    "exampleQuestionId": 4701
+  },
+  {
+    "term": "è obbligatorio",
+    "partOfSpeech": "固定短语",
+    "translation": "必须；强制要求",
+    "note": "明确说明法规要求实施某项行为或配备某物。",
+    "forms": [
+      "è obbligatorio"
+    ],
+    "exampleQuestionId": 4022
+  },
+  {
+    "term": "è possibile",
+    "partOfSpeech": "固定短语",
+    "translation": "可以；有可能",
+    "note": "按语境表示行为可实施或某种情况可能发生。",
+    "forms": [
+      "è possibile"
+    ],
+    "exampleQuestionId": 313
+  },
+  {
+    "term": "è vietata la sosta",
+    "partOfSpeech": "固定短语",
+    "translation": "禁止停车",
+    "note": "说明相应地点或条件下不得将车辆停放。",
+    "forms": [
+      "è vietata la sosta"
+    ],
+    "exampleQuestionId": 2547
+  },
+  {
+    "term": "è vietato",
+    "partOfSpeech": "固定短语",
+    "translation": "禁止；不得",
+    "note": "明确说明某种通行或行为不被允许。",
+    "forms": [
+      "è vietato"
+    ],
+    "exampleQuestionId": 5263
+  },
+  {
+    "term": "è vietato il sorpasso",
+    "partOfSpeech": "固定短语",
+    "translation": "禁止超车",
+    "note": "说明相应道路、车辆或条件下不得实施超车。",
+    "forms": [
+      "è vietato il sorpasso"
+    ],
+    "exampleQuestionId": 5263
+  }
+]
