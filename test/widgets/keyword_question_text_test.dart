@@ -269,7 +269,7 @@ void main() {
     expect(find.byType(RichText), findsNothing);
   });
 
-  testWidgets('custom semantics label preserves the keyword tap action',
+  testWidgets('natural semantics reads text once and exposes one keyword tap',
       (tester) async {
     final semanticsHandle = tester.ensureSemantics();
     final service = _FakeLookup((questionId, text) async => [
@@ -280,21 +280,33 @@ void main() {
       KeywordQuestionText(
         questionId: 1,
         text: 'Dare precedenza.',
-        semanticsLabel: '驾考题目',
         service: service,
       ),
     ));
     await tester.pumpAndSettle();
 
-    expect(find.bySemanticsLabel('驾考题目'), findsOneWidget);
     final semanticsRoot =
         tester.binding.pipelineOwner.semanticsOwner!.rootSemanticsNode!;
-    final keywordSemantics = _semanticsNodes(semanticsRoot).singleWhere(
-      (node) => node.getSemanticsData().attributedLabel.string == 'precedenza',
+    final nodes = _semanticsNodes(semanticsRoot).toList(growable: false);
+    final keywordSemantics = nodes.where(
+      (node) {
+        final data = node.getSemanticsData();
+        return data.attributedLabel.string == 'precedenza' &&
+            data.hasAction(SemanticsAction.tap);
+      },
     );
+    final labels = nodes
+        .map((node) => node.getSemanticsData().attributedLabel.string)
+        .where((label) => label.isNotEmpty)
+        .toList(growable: false);
+
+    expect(keywordSemantics, hasLength(1));
+    expect(labels, isNot(contains('驾考题目')));
     expect(
-      keywordSemantics.getSemanticsData().hasAction(SemanticsAction.tap),
-      isTrue,
+      labels
+          .where((label) => const {'Dare ', 'precedenza', '.'}.contains(label))
+          .join(),
+      'Dare precedenza.',
     );
     semanticsHandle.dispose();
   });

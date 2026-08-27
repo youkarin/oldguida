@@ -141,6 +141,52 @@ void main() {
     expect(persistence.storedValue, isTrue);
   });
 
+  test('two failed writes report separately and do not poison a third write',
+      () async {
+    final persistence = _ControlledPersistence(initialValue: true);
+    final settings = KeywordTranslationSettings.forTest(
+      persistence: persistence,
+    );
+    await settings.load();
+
+    final first = settings.setEnabled(false);
+    final firstError = expectLater(
+      first,
+      throwsA(isA<StateError>()
+          .having((error) => error.message, 'message', 'first failed')),
+    );
+    final second = settings.setEnabled(true);
+    final secondError = expectLater(
+      second,
+      throwsA(isA<StateError>()
+          .having((error) => error.message, 'message', 'second failed')),
+    );
+    await _flushMicrotasks();
+
+    persistence.writes[0].fail(StateError('first failed'));
+    await firstError;
+    await _flushMicrotasks();
+    expect(persistence.writes.map((request) => request.value), [false, true]);
+
+    persistence.writes[1].fail(StateError('second failed'));
+    await secondError;
+    expect(settings.enabled.value, isTrue);
+    expect(persistence.storedValue, isTrue);
+
+    final third = settings.setEnabled(false);
+    expect(settings.enabled.value, isFalse);
+    await _flushMicrotasks();
+    expect(
+      persistence.writes.map((request) => request.value),
+      [false, true, false],
+    );
+
+    persistence.writes[2].succeed();
+    await third;
+    expect(settings.enabled.value, isFalse);
+    expect(persistence.storedValue, isFalse);
+  });
+
   test('latest write failure rolls UI back to the last successful write',
       () async {
     final persistence = _ControlledPersistence(initialValue: true);

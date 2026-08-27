@@ -23,7 +23,6 @@ class KeywordQuestionText extends StatefulWidget {
     this.textScaler,
     this.maxLines,
     this.strutStyle,
-    this.semanticsLabel,
     this.service,
     this.settings,
     this.onViewFullEntry,
@@ -41,7 +40,6 @@ class KeywordQuestionText extends StatefulWidget {
   final TextScaler? textScaler;
   final int? maxLines;
   final StrutStyle? strutStyle;
-  final String? semanticsLabel;
   final KeywordLookup? service;
   final KeywordTranslationSettings? settings;
   final ValueChanged<int>? onViewFullEntry;
@@ -224,7 +222,7 @@ class _KeywordQuestionTextState extends State<KeywordQuestionText> {
       spans.add(TextSpan(text: widget.text.substring(cursor)));
     }
 
-    final text = Text.rich(
+    return Text.rich(
       TextSpan(children: spans),
       style: widget.style,
       textAlign: widget.textAlign,
@@ -235,14 +233,6 @@ class _KeywordQuestionTextState extends State<KeywordQuestionText> {
       textScaler: widget.textScaler,
       maxLines: widget.maxLines,
       strutStyle: widget.strutStyle,
-    );
-    final semanticsLabel = widget.semanticsLabel;
-    if (semanticsLabel == null) return text;
-    return Semantics(
-      container: true,
-      explicitChildNodes: true,
-      label: semanticsLabel,
-      child: text,
     );
   }
 }
