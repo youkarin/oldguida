@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
+import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 import '../../database/database_helper.dart';
 import '../../models/question_model.dart';
 
@@ -113,7 +115,9 @@ class _QuestionFlashcardState extends State<QuestionFlashcard> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
-              color: isTrue ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+              color: isTrue
+                  ? Colors.green.withOpacity(0.1)
+                  : Colors.red.withOpacity(0.1),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -130,7 +134,8 @@ class _QuestionFlashcardState extends State<QuestionFlashcard> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
                     color: isTrue ? Colors.green : Colors.red,
                     borderRadius: BorderRadius.circular(12),
@@ -154,39 +159,60 @@ class _QuestionFlashcardState extends State<QuestionFlashcard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 意大利语原文
-                Text(
-                  q.question,
+                KeywordQuestionText(
+                  questionId: q.id,
+                  text: q.question,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF2D3436),
                     height: 1.4,
                   ),
+                  onViewFullEntry: (keywordId) {
+                    if (!context.mounted) return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (_) => DictionaryDetailScreen(
+                          keywordId: keywordId,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                
+
                 const SizedBox(height: 16),
 
                 // 图片 (如果有)
-                if ((q.sectionImage != null && q.sectionImage!.isNotEmpty) || (q.imageUrl != null && q.imageUrl!.isNotEmpty))
+                if ((q.sectionImage != null && q.sectionImage!.isNotEmpty) ||
+                    (q.imageUrl != null && q.imageUrl!.isNotEmpty))
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Center(
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 600, maxHeight: 400),
+                        constraints:
+                            const BoxConstraints(maxWidth: 600, maxHeight: 400),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.asset(
-                            (q.sectionImage != null && q.sectionImage!.isNotEmpty) ? q.sectionImage! : q.imageUrl!,
+                            (q.sectionImage != null &&
+                                    q.sectionImage!.isNotEmpty)
+                                ? q.sectionImage!
+                                : q.imageUrl!,
                             fit: BoxFit.contain,
                             errorBuilder: (context, error, stackTrace) {
-                              String path = (q.sectionImage != null && q.sectionImage!.isNotEmpty) ? q.sectionImage! : q.imageUrl!;
+                              String path = (q.sectionImage != null &&
+                                      q.sectionImage!.isNotEmpty)
+                                  ? q.sectionImage!
+                                  : q.imageUrl!;
                               if (!path.startsWith('assets/')) {
                                 path = 'assets/$path';
                               }
                               return Image.asset(
                                 path,
                                 fit: BoxFit.contain,
-                                errorBuilder: (c, e, s) => const SizedBox.shrink(),
+                                errorBuilder: (c, e, s) =>
+                                    const SizedBox.shrink(),
                               );
                             },
                           ),

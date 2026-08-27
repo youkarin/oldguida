@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
+import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
 import 'package:italian_driving_app/Services/sync_service.dart';
+import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final collapsed = prefs.getBool('collapsedMode') ?? false;
 
     _userId = await AuthService().ensureLocalUser();
-    
+
     if (_userId != null) {
       final favs = await DatabaseHelper.instance.getFavoriteQuestions(_userId!);
       if (mounted) {
@@ -46,10 +48,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           _showTranslation = showTrans;
           _showExplanation = showExpl;
           _collapsedMode = collapsed;
-          
+
           _favoriteQuestions.clear();
           _favoriteQuestions.addAll(favs);
-          
+
           // Initialize expansion states
           for (var item in favs) {
             final key = '${item['section_id']}-${item['question_number']}';
@@ -70,7 +72,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   Future<void> _removeFavorite(int index) async {
     if (_userId == null) return;
-    
+
     final item = _favoriteQuestions[index];
     final sectionId = item['section_id'];
     final questionNum = item['question_number'];
@@ -81,11 +83,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       _favoriteQuestions.removeAt(index);
     });
 
-    final success = await DatabaseHelper.instance.removeFavorite(
-        _userId!, sectionId, questionNum);
+    final success = await DatabaseHelper.instance
+        .removeFavorite(_userId!, sectionId, questionNum);
 
     if (success) {
-      await SyncService.syncFavoriteChange(_userId!, sectionId, questionNum, false);
+      await SyncService.syncFavoriteChange(
+          _userId!, sectionId, questionNum, false);
       if (mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
@@ -154,7 +157,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget _buildFavoriteCard(int index) {
     final item = _favoriteQuestions[index];
     final key = '${item['section_id']}-${item['question_number']}';
-    final questionText = item['question'];
+    final questionText = item['question'] as String;
     final translation = item['translation'] ?? '';
     final explanation = item['explanation'] ?? '';
     final imageUrl = item['image_url'];
@@ -174,9 +177,23 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    '${index + 1}. $questionText',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  child: KeywordQuestionText(
+                    questionId: (item['id'] as num).toInt(),
+                    prefix: '${index + 1}. ',
+                    text: questionText,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w500),
+                    onViewFullEntry: (keywordId) {
+                      if (!context.mounted) return;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (_) => DictionaryDetailScreen(
+                            keywordId: keywordId,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 IconButton(
@@ -190,7 +207,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            
+
             // Image
             if (imageUrl != null && (imageUrl as String).isNotEmpty)
               Padding(
@@ -210,10 +227,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: answer == 1 ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+                color: answer == 1
+                    ? Colors.green.withOpacity(0.1)
+                    : Colors.red.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: answer == 1 ? Colors.green.withOpacity(0.5) : Colors.red.withOpacity(0.5),
+                  color: answer == 1
+                      ? Colors.green.withOpacity(0.5)
+                      : Colors.red.withOpacity(0.5),
                 ),
               ),
               child: Text(
@@ -225,7 +246,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ),
               ),
             ),
-            
+
             // Translation & Explanation
             if (_showTranslation && translation.isNotEmpty) ...[
               const SizedBox(height: 12),
@@ -252,7 +273,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     );
   }
 
-  Widget _buildCollapsible(String title, String content, bool isExpanded, Function(bool) onChanged) {
+  Widget _buildCollapsible(
+      String title, String content, bool isExpanded, Function(bool) onChanged) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade200),
@@ -267,9 +289,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: [
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey, fontSize: 13)),
+                  Text(title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueGrey,
+                          fontSize: 13)),
                   const Spacer(),
-                  Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, size: 20, color: Colors.grey),
+                  Icon(
+                      isExpanded
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
+                      size: 20,
+                      color: Colors.grey),
                 ],
               ),
             ),
@@ -280,7 +311,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
               child: Text(
                 content,
-                style: const TextStyle(color: Colors.black87, height: 1.4, fontSize: 14),
+                style: const TextStyle(
+                    color: Colors.black87, height: 1.4, fontSize: 14),
               ),
             ),
         ],

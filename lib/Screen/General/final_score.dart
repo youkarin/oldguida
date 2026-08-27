@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
+import 'package:italian_driving_app/Services/keyword_repository.dart';
+import 'package:italian_driving_app/Services/keyword_service.dart';
+import 'package:italian_driving_app/Services/keyword_translation_settings.dart';
 import 'package:italian_driving_app/models/question_model.dart';
+import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 
 class FinalScorePage extends StatelessWidget {
   final Duration duration;
@@ -7,6 +12,9 @@ class FinalScorePage extends StatelessWidget {
   final int wrongCount;
   final List<Question> questions;
   final List<int?> userAnswers;
+  final KeywordLookup? keywordService;
+  final KeywordTranslationSettings? keywordSettings;
+  final KeywordRepository? dictionaryRepository;
 
   const FinalScorePage({
     super.key,
@@ -15,6 +23,9 @@ class FinalScorePage extends StatelessWidget {
     required this.wrongCount,
     required this.questions,
     required this.userAnswers,
+    this.keywordService,
+    this.keywordSettings,
+    this.dictionaryRepository,
   });
 
   String _formatDuration(Duration d) {
@@ -48,7 +59,9 @@ class FinalScorePage extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    passed ? Icons.emoji_emotions : Icons.emoji_emotions_outlined,
+                    passed
+                        ? Icons.emoji_emotions
+                        : Icons.emoji_emotions_outlined,
                     color: passed ? Colors.green : Colors.red,
                     size: 48,
                   ),
@@ -64,11 +77,15 @@ class FinalScorePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            Text('用时：${_formatDuration(duration)}', style: const TextStyle(fontSize: 16)),
-            Text('答对：$correctCount 题', style: const TextStyle(color: Colors.green, fontSize: 16)),
-            Text('答错：$wrongCount 题', style: const TextStyle(color: Colors.red, fontSize: 16)),
+            Text('用时：${_formatDuration(duration)}',
+                style: const TextStyle(fontSize: 16)),
+            Text('答对：$correctCount 题',
+                style: const TextStyle(color: Colors.green, fontSize: 16)),
+            Text('答错：$wrongCount 题',
+                style: const TextStyle(color: Colors.red, fontSize: 16)),
             const SizedBox(height: 16),
-            const Text('答题回顾：', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Text('答题回顾：',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const Divider(),
             Expanded(
               child: ListView.builder(
@@ -82,10 +99,11 @@ class FinalScorePage extends StatelessWidget {
                     color: userAnswer == null
                         ? Colors.grey.shade200
                         : isCorrect
-                        ? Colors.green.shade100
-                        : Colors.red.shade100,
+                            ? Colors.green.shade100
+                            : Colors.red.shade100,
                     child: ListTile(
-                      leading: question.imageUrl != null && question.imageUrl!.isNotEmpty
+                      leading: question.imageUrl != null &&
+                              question.imageUrl!.isNotEmpty
                           ? Image.asset(
                               question.imageUrl!,
                               width: 60,
@@ -95,7 +113,25 @@ class FinalScorePage extends StatelessWidget {
                                   const Icon(Icons.image_not_supported),
                             )
                           : const SizedBox(width: 60, height: 60),
-                      title: Text('题目 ${index + 1}: ${question.question}'),
+                      title: KeywordQuestionText(
+                        questionId: question.id,
+                        prefix: '题目 ${index + 1}: ',
+                        text: question.question,
+                        service: keywordService,
+                        settings: keywordSettings,
+                        onViewFullEntry: (keywordId) {
+                          if (!context.mounted) return;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (_) => DictionaryDetailScreen(
+                                keywordId: keywordId,
+                                repository: dictionaryRepository,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

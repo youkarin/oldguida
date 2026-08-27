@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/models/question_model.dart';
+import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
+import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 import 'exam_general.dart';
 
 /// 错题复习页面
@@ -193,7 +195,7 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
   Widget _buildWrongQuestionCard(int index) {
     final item = _wrongQuestions[index];
     final wrongCount = item['wrong_count'] ?? 1;
-    final questionText = item['question'];
+    final questionText = item['question'] as String;
     final translation = item['translation'] ?? '';
     final explanation = item['explanation'] ?? '';
     final imageUrl = item['image_url'];
@@ -211,10 +213,22 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    questionText,
+                  child: KeywordQuestionText(
+                    questionId: (item['id'] as num).toInt(),
+                    text: questionText,
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w500, height: 1.4),
+                    onViewFullEntry: (keywordId) {
+                      if (!context.mounted) return;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (_) => DictionaryDetailScreen(
+                            keywordId: keywordId,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(width: 8),

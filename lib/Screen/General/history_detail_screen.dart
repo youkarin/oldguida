@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
+import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
+import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 
 class HistoryDetailScreen extends StatefulWidget {
   final Map<String, dynamic> historyData;
-  const HistoryDetailScreen({Key? key, required this.historyData}) : super(key: key);
+  const HistoryDetailScreen({Key? key, required this.historyData})
+      : super(key: key);
 
   @override
   State<HistoryDetailScreen> createState() => _HistoryDetailScreenState();
@@ -13,7 +16,7 @@ class HistoryDetailScreen extends StatefulWidget {
 class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
   final List<Map<String, dynamic>> _questions = [];
   bool _isLoading = true;
-  
+
   // Settings
   bool _showTranslation = true;
   bool _showExplanation = true;
@@ -45,16 +48,16 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
         _showTranslation = showTrans;
         _showExplanation = showExpl;
         _collapsedMode = collapsed;
-        
+
         _questions.clear();
         _questions.addAll(data);
-        
+
         // Initialize expansion states based on collapsedMode
         for (int i = 0; i < _questions.length; i++) {
           _translationExpanded[i] = !collapsed;
           _explanationExpanded[i] = !collapsed;
         }
-        
+
         _isLoading = false;
       });
     }
@@ -76,7 +79,8 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     final score = widget.historyData['score'] ?? 0;
     final total = widget.historyData['total_questions'] ?? 0;
     final usedTime = widget.historyData['used_time'] ?? 0;
-    final accuracy = total > 0 ? (score / total * 100).toStringAsFixed(1) : '0.0';
+    final accuracy =
+        total > 0 ? (score / total * 100).toStringAsFixed(1) : '0.0';
     final completedAt = widget.historyData['completed_at'];
     DateTime? date;
     if (completedAt != null) {
@@ -106,7 +110,8 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     );
   }
 
-  Widget _buildSummaryCard(int score, int total, int usedTime, String accuracy, DateTime? date) {
+  Widget _buildSummaryCard(
+      int score, int total, int usedTime, String accuracy, DateTime? date) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -125,9 +130,12 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildSummaryItem(Icons.grade, '$score/$total', '得分', Colors.orange),
-              _buildSummaryItem(Icons.timer, _formatTime(usedTime), '用时', Colors.blue),
-              _buildSummaryItem(Icons.pie_chart, '$accuracy%', '正确率', Colors.green),
+              _buildSummaryItem(
+                  Icons.grade, '$score/$total', '得分', Colors.orange),
+              _buildSummaryItem(
+                  Icons.timer, _formatTime(usedTime), '用时', Colors.blue),
+              _buildSummaryItem(
+                  Icons.pie_chart, '$accuracy%', '正确率', Colors.green),
             ],
           ),
           if (date != null)
@@ -143,7 +151,8 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     );
   }
 
-  Widget _buildSummaryItem(IconData icon, String value, String label, Color color) {
+  Widget _buildSummaryItem(
+      IconData icon, String value, String label, Color color) {
     return Column(
       children: [
         Icon(icon, color: color, size: 28),
@@ -164,7 +173,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     final item = _questions[index];
     final userAns = item['user_answer'];
     final correctAns = item['answer'];
-    final questionText = item['question'];
+    final questionText = item['question'] as String;
     final translation = item['translation'] ?? '';
     final explanation = item['explanation'] ?? '';
     final imageUrl = item['image_url'];
@@ -172,7 +181,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     bool isCorrect = false;
     IconData icon;
     Color color;
-    
+
     if (userAns == null) {
       icon = Icons.help_outline;
       color = Colors.grey;
@@ -204,15 +213,29 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    '${index + 1}. $questionText',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  child: KeywordQuestionText(
+                    questionId: (item['id'] as num).toInt(),
+                    prefix: '${index + 1}. ',
+                    text: questionText,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w500),
+                    onViewFullEntry: (keywordId) {
+                      if (!context.mounted) return;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (_) => DictionaryDetailScreen(
+                            keywordId: keywordId,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            
+
             // Image
             if (imageUrl != null && (imageUrl as String).isNotEmpty)
               Padding(
@@ -242,20 +265,22 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                       '你的: ${_answerText(userAns)}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: userAns == correctAns ? Colors.green : Colors.red,
+                        color:
+                            userAns == correctAns ? Colors.green : Colors.red,
                       ),
                     ),
                   ),
                   Expanded(
                     child: Text(
                       '正确: ${_answerText(correctAns)}',
-                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.green),
                     ),
                   ),
                 ],
               ),
             ),
-            
+
             // Translation & Explanation
             if (_showTranslation && translation.isNotEmpty) ...[
               const SizedBox(height: 12),
@@ -282,7 +307,8 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
     );
   }
 
-  Widget _buildCollapsible(String title, String content, bool isExpanded, Function(bool) onChanged) {
+  Widget _buildCollapsible(
+      String title, String content, bool isExpanded, Function(bool) onChanged) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade200),
@@ -297,9 +323,18 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: [
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey, fontSize: 13)),
+                  Text(title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueGrey,
+                          fontSize: 13)),
                   const Spacer(),
-                  Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, size: 20, color: Colors.grey),
+                  Icon(
+                      isExpanded
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
+                      size: 20,
+                      color: Colors.grey),
                 ],
               ),
             ),
@@ -310,7 +345,8 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
               child: Text(
                 content,
-                style: const TextStyle(color: Colors.black87, height: 1.4, fontSize: 14),
+                style: const TextStyle(
+                    color: Colors.black87, height: 1.4, fontSize: 14),
               ),
             ),
         ],

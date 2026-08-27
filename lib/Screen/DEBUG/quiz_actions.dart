@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
+import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 
 class QuizActionsPage extends StatefulWidget {
   const QuizActionsPage({Key? key}) : super(key: key);
@@ -48,7 +50,8 @@ class _QuizActionsPageState extends State<QuizActionsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => SubsectionPage(chapterId: chId, chapterName: chName),
+                          builder: (_) => SubsectionPage(
+                              chapterId: chId, chapterName: chName),
                         ),
                       );
                     },
@@ -67,7 +70,9 @@ class _QuizActionsPageState extends State<QuizActionsPage> {
 class SubsectionPage extends StatefulWidget {
   final int chapterId;
   final String chapterName;
-  const SubsectionPage({Key? key, required this.chapterId, required this.chapterName}) : super(key: key);
+  const SubsectionPage(
+      {Key? key, required this.chapterId, required this.chapterName})
+      : super(key: key);
 
   @override
   _SubsectionPageState createState() => _SubsectionPageState();
@@ -85,7 +90,8 @@ class _SubsectionPageState extends State<SubsectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("第${widget.chapterId}章 ${widget.chapterName} - 小节")),
+      appBar: AppBar(
+          title: Text("第${widget.chapterId}章 ${widget.chapterName} - 小节")),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _sectionMaps,
         builder: (context, snapshot) {
@@ -133,7 +139,9 @@ class _SubsectionPageState extends State<SubsectionPage> {
 class QuestionPage extends StatefulWidget {
   final int sectionId;
   final String sectionName;
-  const QuestionPage({Key? key, required this.sectionId, required this.sectionName}) : super(key: key);
+  const QuestionPage(
+      {Key? key, required this.sectionId, required this.sectionName})
+      : super(key: key);
 
   @override
   _QuestionPageState createState() => _QuestionPageState();
@@ -146,13 +154,15 @@ class _QuestionPageState extends State<QuestionPage> {
   void initState() {
     super.initState();
     // 用 join 查询带出 section_image
-    _qList = DatabaseHelper.instance.getQuestionsWithSectionImage(widget.sectionId);
+    _qList =
+        DatabaseHelper.instance.getQuestionsWithSectionImage(widget.sectionId);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("小节${widget.sectionId} - ${widget.sectionName}")),
+      appBar:
+          AppBar(title: Text("小节${widget.sectionId} - ${widget.sectionName}")),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _qList,
         builder: (context, snapshot) {
@@ -169,19 +179,36 @@ class _QuestionPageState extends State<QuestionPage> {
             itemCount: list.length,
             itemBuilder: (context, index) {
               final item = list[index];
-              final ok = (item['answer'] is int ? item['answer'] : int.tryParse(item['answer'].toString()) ?? 0) == 1;
+              final ok = (item['answer'] is int
+                      ? item['answer']
+                      : int.tryParse(item['answer'].toString()) ?? 0) ==
+                  1;
               final sectionImg = item['section_image'] as String?;
               return Card(
                 elevation: 2,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "${index + 1}. Q: ${item['question']}",
+                      KeywordQuestionText(
+                        questionId: (item['id'] as num).toInt(),
+                        prefix: "${index + 1}. Q: ",
+                        text: item['question'] as String,
                         style: const TextStyle(fontWeight: FontWeight.bold),
+                        onViewFullEntry: (keywordId) {
+                          if (!context.mounted) return;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (_) => DictionaryDetailScreen(
+                                keywordId: keywordId,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       if (item['translation'] != null) ...[
                         const SizedBox(height: 6),

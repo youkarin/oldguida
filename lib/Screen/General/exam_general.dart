@@ -6,7 +6,9 @@ import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/Services/answer_advance_policy.dart';
 import 'package:italian_driving_app/Services/auth_service.dart';
 import 'package:italian_driving_app/Services/sync_service.dart';
+import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
 import 'package:italian_driving_app/utils/debug_utils.dart';
+import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 import 'final_score.dart';
 
 class ExamGeneral extends StatefulWidget {
@@ -513,14 +515,27 @@ class _ExamGeneralState extends State<ExamGeneral> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Text(
-                            'Q${currentIndex + 1}: ${question.question}',
+                          child: KeywordQuestionText(
+                            questionId: question.id,
+                            prefix: 'Q${currentIndex + 1}: ',
+                            text: question.question,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: Color(0xFF2D3436),
                               height: 1.4,
                             ),
+                            onViewFullEntry: (keywordId) {
+                              if (!context.mounted) return;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (_) => DictionaryDetailScreen(
+                                    keywordId: keywordId,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         IconButton(
