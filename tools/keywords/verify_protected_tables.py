@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import sqlite3
+import sys
 from pathlib import Path
 
 
@@ -38,11 +39,16 @@ def main() -> int:
     parser.add_argument("--out", type=Path, help="write the snapshot as UTF-8 JSON")
     args = parser.parse_args()
 
-    serialized = json.dumps(snapshot(args.database_path), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
-    if args.out is None:
-        print(serialized, end="")
-    else:
-        args.out.write_text(serialized, encoding="utf-8")
+    try:
+        serialized = json.dumps(snapshot(args.database_path), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+        if args.out is None:
+            print(serialized, end="")
+        else:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(serialized, encoding="utf-8")
+    except (OSError, sqlite3.Error) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 1
     return 0
 
 
