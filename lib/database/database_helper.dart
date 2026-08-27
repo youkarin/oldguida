@@ -1,5 +1,6 @@
 import 'dart:io' if (dart.library.html) 'io_stub.dart' as io;
-import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
+import 'package:flutter/foundation.dart'
+    show debugPrint, kIsWeb, visibleForTesting;
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -96,11 +97,77 @@ const String columnHistoryAccuracy = 'accuracy';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
-  static Database? _db;
-  DatabaseHelper._init();
+  Database? _db;
+  Future<Database>? _opening;
+  final Future<Database> Function()? _openDatabaseForTesting;
+  final Future<void> Function(Database)? _syncBundledForTesting;
 
-  Future<Database> get database async {
-    if (_db != null) return _db!;
+  DatabaseHelper._init()
+      : _openDatabaseForTesting = null,
+        _syncBundledForTesting = null;
+
+  @visibleForTesting
+  DatabaseHelper.forTesting({
+    required Future<Database> Function() openDatabase,
+    required Future<void> Function(Database) syncBundled,
+  })  : _openDatabaseForTesting = openDatabase,
+        _syncBundledForTesting = syncBundled;
+
+  Future<Database> get database {
+    final ready = _db;
+    if (ready != null) return Future.value(ready);
+    final inFlight = _opening;
+    if (inFlight != null) return inFlight;
+
+    late final Future<Database> opening;
+    opening = _initializeDatabase().whenComplete(() {
+      if (identical(_opening, opening)) {
+        _opening = null;
+      }
+    });
+    _opening = opening;
+    return opening;
+  }
+
+  Future<Database> _initializeDatabase() async {
+    Database? candidate;
+    try {
+      final openForTesting = _openDatabaseForTesting;
+      if (openForTesting != null) {
+        candidate = await openForTesting();
+      } else {
+        candidate = await _openMainDatabase();
+      }
+      final db = candidate;
+      await _repairUserTables(db);
+
+      try {
+        final syncForTesting = _syncBundledForTesting;
+        if (syncForTesting != null) {
+          await syncForTesting(db);
+        } else {
+          await KeywordDatabase.syncBundledIfNeeded(db);
+        }
+      } catch (error) {
+        debugPrint(
+          'Bundled dictionary sync failed (${error.runtimeType}); '
+          'using existing local data.',
+        );
+      }
+
+      _db = db;
+      return db;
+    } catch (_) {
+      try {
+        await candidate?.close();
+      } catch (_) {
+        // Preserve the initialization error; the candidate is already unusable.
+      }
+      rethrow;
+    }
+  }
+
+  Future<Database> _openMainDatabase() async {
     await initDatabaseFactory();
     String dbPath;
     if (io.Platform.isWindows ||
@@ -131,16 +198,18 @@ class DatabaseHelper {
     }
 
     // 打开数据库，并设置版本和升级逻辑
-    _db = await openDatabase(
+    return openDatabase(
       path,
       version: _dbVersion,
       onConfigure: (db) => db.execute('PRAGMA foreign_keys = ON'),
       onUpgrade: _onUpgrade,
       onCreate: _onCreate,
     );
+  }
 
+  Future<void> _repairUserTables(Database db) async {
     // Ensure users table exists
-    await _db!.execute('''
+    await db.execute('''
       CREATE TABLE IF NOT EXISTS $tableUsers (
         $columnUserId INTEGER PRIMARY KEY AUTOINCREMENT,
         $columnUsername TEXT UNIQUE,
@@ -156,12 +225,12 @@ class DatabaseHelper {
     ''');
 
     // Ensure user table has uuid & vip_days columns
-    await _ensureColumnExists(_db!, tableUsers, columnUserUuid, 'TEXT');
+    await _ensureColumnExists(db, tableUsers, columnUserUuid, 'TEXT');
     await _ensureColumnExists(
-        _db!, tableUsers, columnUserVipDays, 'INTEGER DEFAULT 0');
+        db, tableUsers, columnUserVipDays, 'INTEGER DEFAULT 0');
 
     // Ensure favorites table exists
-    await _db!.execute('''
+    await db.execute('''
       CREATE TABLE IF NOT EXISTS $tableFavorites (
         $columnFavoriteId INTEGER PRIMARY KEY AUTOINCREMENT,
         $columnFavUserId INTEGER,
@@ -175,20 +244,20 @@ class DatabaseHelper {
       )
     ''');
     await _ensureColumnExists(
-        _db!, tableFavorites, columnFavSectionId, 'INTEGER');
+        db, tableFavorites, columnFavSectionId, 'INTEGER');
     await _ensureColumnExists(
-        _db!, tableFavorites, columnFavQuestionNum, 'INTEGER');
+        db, tableFavorites, columnFavQuestionNum, 'INTEGER');
     await _ensureColumnExists(
-        _db!, tableFavorites, columnFavCreatedAt, 'TEXT');
+        db, tableFavorites, columnFavCreatedAt, 'TEXT');
     await _ensureColumnExists(
-        _db!, tableFavorites, columnFavNote, 'TEXT');
+        db, tableFavorites, columnFavNote, 'TEXT');
     await _ensureColumnExists(
-        _db!, tableFavorites, columnFavIsDeleted, 'INTEGER DEFAULT 0');
+        db, tableFavorites, columnFavIsDeleted, 'INTEGER DEFAULT 0');
     await _ensureColumnExists(
-        _db!, tableFavorites, columnFavUpdatedAt, 'TEXT');
+        db, tableFavorites, columnFavUpdatedAt, 'TEXT');
 
     // Ensure wrong_answers table and required columns
-    await _db!.execute('''
+    await db.execute('''
       CREATE TABLE IF NOT EXISTS $tableWrongAnswers (
         $columnWrongId INTEGER PRIMARY KEY AUTOINCREMENT,
         $columnWrongUserId INTEGER,
@@ -204,22 +273,22 @@ class DatabaseHelper {
       )
     ''');
     await _ensureColumnExists(
-        _db!, tableWrongAnswers, columnWrongSectionId, 'INTEGER');
+        db, tableWrongAnswers, columnWrongSectionId, 'INTEGER');
     await _ensureColumnExists(
-        _db!, tableWrongAnswers, columnWrongHistoryId, 'INTEGER');
+        db, tableWrongAnswers, columnWrongHistoryId, 'INTEGER');
     await _ensureColumnExists(
-        _db!, tableWrongAnswers, columnWrongChapterId, 'INTEGER');
+        db, tableWrongAnswers, columnWrongChapterId, 'INTEGER');
     await _ensureColumnExists(
-        _db!, tableWrongAnswers, columnWrongSubsectionId, 'INTEGER DEFAULT 0');
+        db, tableWrongAnswers, columnWrongSubsectionId, 'INTEGER DEFAULT 0');
     await _ensureColumnExists(
-        _db!, tableWrongAnswers, columnWrongIsDeleted, 'INTEGER DEFAULT 0');
+        db, tableWrongAnswers, columnWrongIsDeleted, 'INTEGER DEFAULT 0');
     await _ensureColumnExists(
-        _db!, tableWrongAnswers, columnWrongUpdatedAt, 'TEXT');
+        db, tableWrongAnswers, columnWrongUpdatedAt, 'TEXT');
     await _ensureColumnExists(
-        _db!, tableWrongAnswers, columnWrongCount, 'INTEGER DEFAULT 1');
+        db, tableWrongAnswers, columnWrongCount, 'INTEGER DEFAULT 1');
 
     // History detail tables
-    await _db!.execute('''
+    await db.execute('''
       CREATE TABLE IF NOT EXISTS $tableHistoryQuestions (
         $columnHQId INTEGER PRIMARY KEY AUTOINCREMENT,
         $columnHQHistoryId INTEGER,
@@ -228,7 +297,7 @@ class DatabaseHelper {
         $columnHQUserAnswer INTEGER
       )
     ''');
-    await _db!.execute('''
+    await db.execute('''
       CREATE TABLE IF NOT EXISTS $tableQuizHistory (
         $columnHistoryId INTEGER PRIMARY KEY AUTOINCREMENT,
         $columnHistoryUserId INTEGER,
@@ -241,16 +310,6 @@ class DatabaseHelper {
       )
     ''');
 
-    try {
-      await KeywordDatabase.syncBundledIfNeeded(_db!);
-    } catch (error) {
-      debugPrint(
-        'Bundled dictionary sync failed (${error.runtimeType}); '
-        'using existing local data.',
-      );
-    }
-
-    return _db!;
   }
 
   /// 确保某表存在指定列，不存在则新增
@@ -858,8 +917,19 @@ class DatabaseHelper {
   // ======================================
   //             通用关闭
   // ======================================
-  Future close() async {
-    await _db?.close();
+  Future<void> close() async {
+    Database? database = _db;
+    final opening = _opening;
+    if (database == null && opening != null) {
+      try {
+        database = await opening;
+      } catch (_) {
+        // Initialization already closed its failed candidate.
+      }
+    }
     _db = null;
+    if (database != null && database.isOpen) {
+      await database.close();
+    }
   }
 }

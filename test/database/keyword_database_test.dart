@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/database/keyword_database.dart';
+import 'package:path/path.dart' as path;
 // ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:sqflite/sqflite.dart';
@@ -54,6 +56,7 @@ void main() {
     await target.insert('quiz_history', {'id': 9, 'score': 10});
     await target.insert('quiz', {'id': 42, 'question': 'keep question'});
     await KeywordDatabase.ensureSchema(seed);
+    await _createQuizRows(seed, [42]);
     await seed.insert('keyword_dictionary', _keywordRow(1, 'precedenza'));
     await seed.insert('keyword_forms', _formRow(1, 1, 'precedenza'));
     await seed.insert('keyword_examples', _exampleRow(1, 1, 42));
@@ -128,17 +131,18 @@ void main() {
     }
   });
 
-  test('syncFrom skips missing and malformed seed versions', () async {
+  test('syncFrom rejects missing and malformed seed versions', () async {
     await _installDictionary(target, version: 1, id: 1, term: 'target');
     final targetBefore = await _completeDictionaryState(target);
 
     await KeywordDatabase.ensureSchema(seed);
+    await _createQuizRows(seed, [1]);
     await seed.insert('keyword_dictionary', _keywordRow(2, 'seed'));
     await seed.insert('keyword_forms', _formRow(2, 2, 'seed'));
-    await seed.insert('keyword_examples', _exampleRow(2, 2, 2));
-    expect(
-      await KeywordDatabase.syncFrom(target: target, seed: seed),
-      isFalse,
+    await seed.insert('keyword_examples', _exampleRow(2, 2, 1));
+    await expectLater(
+      KeywordDatabase.syncFrom(target: target, seed: seed),
+      throwsA(isA<StateError>()),
     );
     expect(await _completeDictionaryState(target), targetBefore);
 
@@ -146,9 +150,9 @@ void main() {
       'dictionary_meta',
       {'key': 'version', 'value': 'not-an-integer'},
     );
-    expect(
-      await KeywordDatabase.syncFrom(target: target, seed: seed),
-      isFalse,
+    await expectLater(
+      KeywordDatabase.syncFrom(target: target, seed: seed),
+      throwsA(isA<StateError>()),
     );
     expect(await _completeDictionaryState(target), targetBefore);
   });
@@ -157,6 +161,7 @@ void main() {
       () async {
     await _installDictionary(target, version: 1, id: 1, term: 'target');
     await KeywordDatabase.ensureSchema(seed);
+    await _createQuizRows(seed, [1]);
     await seed.insert('dictionary_meta', {'key': 'version', 'value': '2'});
     final before = await _completeDictionaryState(target);
 
@@ -189,6 +194,7 @@ void main() {
       await _installDictionary(target, version: 1, id: 1, term: 'target');
       await KeywordDatabase.ensureSchema(seed);
       await seed.execute('PRAGMA foreign_keys = OFF');
+      await _createQuizRows(seed, [2]);
       await seed.insert('keyword_dictionary', _keywordRow(2, 'seed'));
       if (orphanTable == 'keyword_forms') {
         await seed.insert('keyword_forms', _formRow(2, 999, 'orphan'));
@@ -206,6 +212,146 @@ void main() {
       );
       expect(await _completeDictionaryState(target), before);
     }
+  });
+
+  test('invalid seed text and scalar types leave a bare target unchanged',
+      () async {
+    final corruptions = <String, Future<void> Function(Database)>{
+      'empty term': (db) => db.update(
+            'keyword_dictionary',
+            {'term': '   '},
+          ),
+      'empty normalized form': (db) => db.update(
+            'keyword_forms',
+            {'normalized_form': ''},
+          ),
+      'string question id': (db) => db.update(
+            'keyword_examples',
+            {'question_id': '10'},
+          ),
+      'string rank': (db) => db.update(
+            'keyword_examples',
+            {'rank': '0'},
+          ),
+      'negative frequency': (db) => db.update(
+            'keyword_dictionary',
+            {'frequency': -1},
+          ),
+      'non-string note': (db) => db.update(
+            'keyword_dictionary',
+            {'note': 7},
+          ),
+    };
+
+    for (final corruption in corruptions.entries) {
+      await _resetRelaxedSeed(seed);
+      await corruption.value(seed);
+      await _expectInvalidSeedLeavesBareTargetUntouched(
+        target: target,
+        seed: seed,
+        reason: corruption.key,
+      );
+    }
+  });
+
+  test('missing owner rows and unknown questions leave target unchanged',
+      () async {
+    final corruptions = <String, Future<void> Function(Database)>{
+      'entry without form': (db) => db.delete('keyword_forms'),
+      'entry without example': (db) => db.delete('keyword_examples'),
+      'orphan form': (db) => db.update(
+            'keyword_forms',
+            {'keyword_id': 999},
+          ),
+      'orphan example': (db) => db.update(
+            'keyword_examples',
+            {'keyword_id': 999},
+          ),
+      'unknown seed question': (db) => db.update(
+            'keyword_examples',
+            {'question_id': 999},
+          ),
+    };
+
+    for (final corruption in corruptions.entries) {
+      await _resetRelaxedSeed(seed);
+      await corruption.value(seed);
+      await _expectInvalidSeedLeavesBareTargetUntouched(
+        target: target,
+        seed: seed,
+        reason: corruption.key,
+      );
+    }
+  });
+
+  test('duplicate ids normalized values and pairs leave target unchanged',
+      () async {
+    final corruptions = <String, Future<void> Function(Database)>{
+      'duplicate entry id': (db) => db.insert(
+            'keyword_dictionary',
+            _keywordRow(1, 'second'),
+          ),
+      'duplicate normalized term': (db) async {
+        await db.insert('keyword_dictionary', {
+          ..._keywordRow(2, 'second'),
+          'normalized_term': 'seed',
+        });
+        await db.insert('keyword_forms', _formRow(2, 2, 'second'));
+        await db.insert('keyword_examples', _exampleRow(2, 2, 20));
+        await db.insert('quiz', {'id': 20});
+      },
+      'duplicate form id': (db) => db.insert(
+            'keyword_forms',
+            _formRow(1, 1, 'other'),
+          ),
+      'duplicate normalized form': (db) => db.insert(
+            'keyword_forms',
+            _formRow(2, 1, 'seed'),
+          ),
+      'duplicate example id': (db) => db.insert(
+            'keyword_examples',
+            _exampleRow(1, 1, 20),
+          ),
+      'duplicate keyword question pair': (db) => db.insert(
+            'keyword_examples',
+            _exampleRow(2, 1, 10),
+          ),
+    };
+
+    for (final corruption in corruptions.entries) {
+      await _resetRelaxedSeed(seed);
+      await corruption.value(seed);
+      await _expectInvalidSeedLeavesBareTargetUntouched(
+        target: target,
+        seed: seed,
+        reason: corruption.key,
+      );
+    }
+  });
+
+  test('missing columns and target quiz misses leave target unchanged',
+      () async {
+    await _createRelaxedSeed(seed, omitEntryColumn: 'translation');
+    await _expectInvalidSeedLeavesBareTargetUntouched(
+      target: target,
+      seed: seed,
+      reason: 'missing translation column',
+    );
+
+    await _resetRelaxedSeed(seed);
+    await target.execute('CREATE TABLE quiz (id INTEGER PRIMARY KEY)');
+    await target.insert('quiz', {'id': 999});
+    final before = await _wholeDatabaseState(target);
+    await expectLater(
+      KeywordDatabase.syncFrom(target: target, seed: seed),
+      throwsA(isA<StateError>()),
+    );
+    expect(
+      await _wholeDatabaseState(target),
+      before,
+      reason: 'target quiz does not contain seed question 10',
+    );
+    expect(await _tableExists(target, 'keyword_dictionary'), isFalse);
   });
 
   test('syncFrom rolls back dictionary meta and user rows on insert failure',
@@ -275,13 +421,43 @@ void main() {
         ),
         631,
       );
-      expect(_temporarySeedPaths(directory), isEmpty);
+      expect(_temporarySeedEntities(directory), isEmpty);
+    });
+  });
+
+  test('syncBundledIfNeeded creates an atomic temporary seed directory',
+      () async {
+    await _withSupportDirectory((directory) async {
+      final entityType = Completer<io.FileSystemEntityType>();
+      final subscription = directory.watch().listen((event) {
+        if (!entityType.isCompleted &&
+            path.equals(path.dirname(event.path), directory.path) &&
+            path.basename(event.path).startsWith('quiz_dictionary_seed_')) {
+          entityType.complete(io.FileSystemEntity.typeSync(event.path));
+        }
+      });
+      try {
+        await KeywordDatabase.syncBundledIfNeeded(target);
+        expect(
+          await entityType.future.timeout(const Duration(seconds: 5)),
+          io.FileSystemEntityType.directory,
+        );
+        expect(_temporarySeedEntities(directory), isEmpty);
+      } finally {
+        await subscription.cancel();
+      }
     });
   });
 
   test('syncBundledIfNeeded cleans its seed when target insertion fails',
       () async {
-    await _installDictionary(target, version: 0, id: 9000, term: 'old');
+    await _installDictionary(
+      target,
+      version: 0,
+      id: 9000,
+      term: 'old',
+      includeQuiz: false,
+    );
     await target.execute('''
       CREATE TRIGGER reject_bundled_forms
       BEFORE INSERT ON keyword_forms
@@ -296,7 +472,7 @@ void main() {
         KeywordDatabase.syncBundledIfNeeded(target),
         throwsA(isA<DatabaseException>()),
       );
-      expect(_temporarySeedPaths(directory), isEmpty);
+      expect(_temporarySeedEntities(directory), isEmpty);
     });
     expect(await _completeDictionaryState(target), before);
   });
@@ -316,7 +492,7 @@ void main() {
 
       expect(await _dictionaryVersion(target), 1);
       expect(await _dictionaryVersion(otherTarget), 1);
-      expect(_temporarySeedPaths(directory), isEmpty);
+      expect(_temporarySeedEntities(directory), isEmpty);
     });
   });
 
@@ -381,7 +557,21 @@ void main() {
       await oldDb.execute(
         'CREATE TABLE quiz (id INTEGER PRIMARY KEY, question TEXT)',
       );
-      await oldDb.insert('quiz', {'id': 6, 'question': 'keep-quiz'});
+      await oldDb.execute('''
+        WITH RECURSIVE ids(id) AS (
+          SELECT 1
+          UNION ALL
+          SELECT id + 1 FROM ids WHERE id < 7193
+        )
+        INSERT INTO quiz(id, question)
+        SELECT id, 'question' FROM ids
+      ''');
+      await oldDb.update(
+        'quiz',
+        {'question': 'keep-quiz'},
+        where: 'id = ?',
+        whereArgs: [6],
+      );
       await oldDb.execute('PRAGMA user_version = 3');
       await oldDb.close();
 
@@ -398,7 +588,15 @@ void main() {
         (await db.query(tableQuizHistory)).single[columnHistoryScore],
         9,
       );
-      expect((await db.query('quiz')).single['question'], 'keep-quiz');
+      expect(
+        (await db.query(
+          'quiz',
+          where: 'id = ?',
+          whereArgs: [6],
+        ))
+            .single['question'],
+        'keep-quiz',
+      );
       await DatabaseHelper.instance.close();
     });
   });
@@ -460,7 +658,13 @@ void main() {
         columnUserId: 1,
         columnUsername: 'keep-user',
       });
-      await _installDictionary(oldDb, version: 0, id: 9000, term: 'old');
+      await _installDictionary(
+        oldDb,
+        version: 0,
+        id: 9000,
+        term: 'old',
+        includeQuiz: false,
+      );
       await oldDb.execute('''
         CREATE TRIGGER reject_bundled_forms
         BEFORE INSERT ON keyword_forms
@@ -489,13 +693,187 @@ void main() {
         expect(messages.single, contains('dictionary sync failed'));
         expect(messages.single, isNot(contains(directory.path)));
         expect(messages.single, isNot(contains('quiz_dictionary_seed_')));
-        expect(_temporarySeedPaths(directory), isEmpty);
+        expect(_temporarySeedEntities(directory), isEmpty);
       } finally {
         debugPrint = originalDebugPrint;
         await DatabaseHelper.instance.close();
       }
     });
   });
+
+  test('DatabaseHelper gates concurrent first opens through one initialization',
+      () async {
+    final candidate = await _openIndependentMemoryDatabase();
+    final releaseOpen = Completer<void>();
+    var openCount = 0;
+    var syncCount = 0;
+    final helper = DatabaseHelper.forTesting(
+      openDatabase: () async {
+        openCount++;
+        await releaseOpen.future;
+        return candidate;
+      },
+      syncBundled: (_) async {
+        syncCount++;
+      },
+    );
+    addTearDown(helper.close);
+
+    final first = helper.database;
+    final second = helper.database;
+    await Future<void>.delayed(Duration.zero);
+    expect(openCount, 1);
+
+    releaseOpen.complete();
+    final databases = await Future.wait([first, second]);
+
+    expect(identical(databases[0], databases[1]), isTrue);
+    expect(identical(databases.first, candidate), isTrue);
+    expect(openCount, 1);
+    expect(syncCount, 1);
+    expect(await _tableExists(candidate, tableUsers), isTrue);
+  });
+
+  test('DatabaseHelper closes a failed candidate and retries initialization',
+      () async {
+    final failedCandidate = await _openIndependentMemoryDatabase();
+    await failedCandidate.execute('CREATE VIEW users AS SELECT 1 AS id');
+    final retryCandidate = await _openIndependentMemoryDatabase();
+    var openCount = 0;
+    final helper = DatabaseHelper.forTesting(
+      openDatabase: () async {
+        openCount++;
+        return openCount == 1 ? failedCandidate : retryCandidate;
+      },
+      syncBundled: (_) async {},
+    );
+    addTearDown(helper.close);
+
+    await expectLater(
+      helper.database,
+      throwsA(isA<DatabaseException>()),
+    );
+    expect(failedCandidate.isOpen, isFalse);
+
+    final database = await helper.database;
+    expect(identical(database, retryCandidate), isTrue);
+    expect(openCount, 2);
+    expect(await _tableExists(database, tableUsers), isTrue);
+  });
+}
+
+Future<Database> _openIndependentMemoryDatabase() =>
+    databaseFactoryFfi.openDatabase(
+      inMemoryDatabasePath,
+      options: OpenDatabaseOptions(singleInstance: false),
+    );
+
+Future<void> _expectInvalidSeedLeavesBareTargetUntouched({
+  required Database target,
+  required Database seed,
+  required String reason,
+}) async {
+  if (!await _tableExists(target, 'user_state')) {
+    await target.execute(
+      'CREATE TABLE user_state (id INTEGER PRIMARY KEY, value TEXT)',
+    );
+    await target.insert('user_state', {'id': 1, 'value': 'keep'});
+    await target.execute('PRAGMA user_version = 3');
+  }
+  final before = await _wholeDatabaseState(target);
+
+  await expectLater(
+    KeywordDatabase.syncFrom(target: target, seed: seed),
+    throwsA(isA<StateError>()),
+    reason: reason,
+  );
+
+  expect(await _wholeDatabaseState(target), before, reason: reason);
+  expect(
+    await _tableExists(target, 'keyword_dictionary'),
+    isFalse,
+    reason: reason,
+  );
+}
+
+Future<Map<String, Object?>> _wholeDatabaseState(Database db) async {
+  final schema = await db.query(
+    'sqlite_master',
+    columns: ['type', 'name', 'tbl_name', 'sql'],
+    where: "name NOT LIKE 'sqlite_%'",
+    orderBy: 'type, name',
+  );
+  final tables = schema
+      .where((row) => row['type'] == 'table')
+      .map((row) => row['name']! as String);
+  return {
+    'schema': schema,
+    'rows': {
+      for (final table in tables)
+        table: await db.query(table, orderBy: 'rowid'),
+    },
+    'user_version': await _userVersion(db),
+    'foreign_keys': await _foreignKeysEnabled(db),
+  };
+}
+
+Future<void> _resetRelaxedSeed(Database db) async {
+  for (final table in [
+    'keyword_examples',
+    'keyword_forms',
+    'keyword_dictionary',
+    'dictionary_meta',
+    'quiz',
+  ]) {
+    await db.execute('DROP TABLE IF EXISTS $table');
+  }
+  await _createRelaxedSeed(db);
+}
+
+Future<void> _createRelaxedSeed(
+  Database db, {
+  String? omitEntryColumn,
+}) async {
+  final entryColumns = [
+    'id',
+    'term',
+    'normalized_term',
+    'part_of_speech',
+    'translation',
+    'note',
+    'frequency',
+    'sort_order',
+  ]..remove(omitEntryColumn);
+  await db.execute(
+    'CREATE TABLE keyword_dictionary (${entryColumns.join(', ')})',
+  );
+  await db.execute(
+    'CREATE TABLE keyword_forms (id, keyword_id, form, normalized_form)',
+  );
+  await db.execute(
+    'CREATE TABLE keyword_examples '
+    '(id, keyword_id, question_id, rank)',
+  );
+  await db.execute('CREATE TABLE dictionary_meta (key, value)');
+  await db.execute('CREATE TABLE quiz (id)');
+
+  final entry = _keywordRow(1, 'seed')..remove(omitEntryColumn);
+  await db.insert('keyword_dictionary', entry);
+  await db.insert('keyword_forms', _formRow(1, 1, 'seed'));
+  await db.insert('keyword_examples', _exampleRow(1, 1, 10));
+  await db.insert('dictionary_meta', {'key': 'version', 'value': '2'});
+  await db.insert('quiz', {'id': 10});
+}
+
+Future<void> _createQuizRows(Database db, Iterable<int> ids) async {
+  await db.execute('CREATE TABLE IF NOT EXISTS quiz (id INTEGER PRIMARY KEY)');
+  for (final id in ids) {
+    await db.insert(
+      'quiz',
+      {'id': id},
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
+  }
 }
 
 Future<void> _withSupportDirectory(
@@ -520,10 +898,9 @@ Future<void> _withSupportDirectory(
 String _mainDatabasePath(io.Directory directory) =>
     '${directory.path}${io.Platform.pathSeparator}quiz.db';
 
-List<String> _temporarySeedPaths(io.Directory directory) => directory
+List<String> _temporarySeedEntities(io.Directory directory) => directory
     .listSync()
-    .whereType<io.File>()
-    .map((file) => file.path)
+    .map((entity) => entity.path)
     .where((path) => path.contains('quiz_dictionary_seed_'))
     .toList();
 
@@ -601,11 +978,15 @@ Future<void> _installDictionary(
   required int version,
   required int id,
   required String term,
+  bool includeQuiz = true,
 }) async {
   await KeywordDatabase.ensureSchema(db);
+  if (includeQuiz) {
+    await _createQuizRows(db, [1]);
+  }
   await db.insert('keyword_dictionary', _keywordRow(id, term));
   await db.insert('keyword_forms', _formRow(id, id, term));
-  await db.insert('keyword_examples', _exampleRow(id, id, id));
+  await db.insert('keyword_examples', _exampleRow(id, id, 1));
   await db.insert(
     'dictionary_meta',
     {'key': 'version', 'value': '$version'},
