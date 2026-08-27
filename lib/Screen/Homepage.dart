@@ -16,6 +16,7 @@ import 'General/settings_screen.dart';
 import 'General/practice_screen.dart';
 import 'General/favorites_screen.dart';
 import 'General/Navigation_Bar/NavigationBar.dart';
+import 'General/dictionary_screen.dart';
 
 // VIP Screens (Now General/Advanced)
 import 'VIP/must_correct_screen.dart';
@@ -25,7 +26,9 @@ import 'VIP/examVIP_screen.dart';
 
 /// 主页面：带底部导航的首页
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.dictionaryScreenBuilder});
+
+  final WidgetBuilder? dictionaryScreenBuilder;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -73,6 +76,11 @@ class _HomePageState extends State<HomePage> {
       ),
       label: '选择练习',
       color: Colors.teal,
+    ),
+    MenuItem(
+      icon: const Icon(Icons.translate),
+      label: '驾考词典',
+      color: Colors.blue,
     ),
   ];
 
@@ -175,7 +183,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('OldGuida', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('OldGuida',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: Container(
@@ -195,7 +204,12 @@ class _HomePageState extends State<HomePage> {
               child: TopBanner(),
             ),
             _buildSectionTitle('通用功能'),
-            _buildGrid(context, generalItems, 3),
+            _buildGrid(
+              context,
+              generalItems,
+              2,
+              wideCrossAxisCount: 4,
+            ),
           ],
         ),
       ),
@@ -256,68 +270,100 @@ class _HomePageState extends State<HomePage> {
   }
 
   // 通用的网格构建
-  Widget _buildGrid(BuildContext context, List<MenuItem> items, int crossAxisCount) {
+  Widget _buildGrid(
+    BuildContext context,
+    List<MenuItem> items,
+    int crossAxisCount, {
+    int? wideCrossAxisCount,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 8),
-      child: GridView.count(
-        crossAxisCount: crossAxisCount,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        childAspectRatio: 0.85,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        padding: EdgeInsets.zero,
-        children: items.map((item) {
-          return Card(
-            margin: const EdgeInsets.all(2),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-            elevation: 4,
-            shadowColor: item.color.withOpacity(0.2),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(18),
-              onTap: () {
-                _navigateToScreen(context, item.label);
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // 圆形渐变图标背景
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [item.color.withOpacity(0.8), item.color.withOpacity(0.5)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: IconTheme.merge(
-                      data: const IconThemeData(color: Colors.white, size: 32),
-                      child: item.icon,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    item.label,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.blueGrey[900],
-                    ),
-                  ),
-                ],
-              ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final resolvedCrossAxisCount =
+              wideCrossAxisCount != null && constraints.maxWidth >= 720
+                  ? wideCrossAxisCount
+                  : crossAxisCount;
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: resolvedCrossAxisCount,
+              mainAxisExtent: 150,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
             ),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return Card(
+                margin: const EdgeInsets.all(2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                elevation: 4,
+                shadowColor: item.color.withOpacity(0.2),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(18),
+                  onTap: () {
+                    _navigateToScreen(context, item.label);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 64,
+                        height: 64,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [
+                              item.color.withOpacity(0.8),
+                              item.color.withOpacity(0.5),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: IconTheme.merge(
+                          data: const IconThemeData(
+                            color: Colors.white,
+                            size: 32,
+                          ),
+                          child: item.icon,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        child: Text(
+                          item.label,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.blueGrey[900],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           );
-        }).toList(),
+        },
       ),
     );
   }
 
   // 统一导航
   void _navigateToScreen(BuildContext context, String screenName) {
-    final screen = _getScreenByName(screenName);
+    final screen = _getScreenByName(context, screenName);
     if (screen != null) {
       Navigator.push(
         context,
@@ -332,7 +378,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // 名称 → 页面映射
-  Widget? _getScreenByName(String screenName) {
+  Widget? _getScreenByName(BuildContext context, String screenName) {
     switch (screenName) {
       // 通用功能
       case '开始做题':
@@ -345,6 +391,9 @@ class _HomePageState extends State<HomePage> {
         return StudyRecordScreen();
       case '选择练习':
         return const PracticeScreen();
+      case '驾考词典':
+        return widget.dictionaryScreenBuilder?.call(context) ??
+            const DictionaryScreen();
       case '收藏夹':
         return const FavoritesScreen();
       case '设置':
@@ -380,7 +429,9 @@ class _HomePageState extends State<HomePage> {
         ),
         content: Text('$screenName 功能正在开发中，敬请期待！'),
         actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('知道了')),
+          TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('知道了')),
         ],
       ),
     );
@@ -388,7 +439,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class MenuItem {
-  final Widget icon;   // 兼容 Image.asset 与 Icon
+  final Widget icon; // 兼容 Image.asset 与 Icon
   final String label;
   final Color color;
   MenuItem({required this.icon, required this.label, required this.color});
