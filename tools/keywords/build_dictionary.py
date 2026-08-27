@@ -140,9 +140,9 @@ def build_dictionary(
         entries = validate_source(source, questions, enforce_size=enforce_size)
         dictionary_rows, form_rows, example_rows = _prepare_rows(entries, questions)
 
-        _ensure_schema(connection)
         connection.execute("BEGIN IMMEDIATE")
         try:
+            _ensure_schema(connection)
             connection.execute("DELETE FROM keyword_examples")
             connection.execute("DELETE FROM keyword_forms")
             connection.execute("DELETE FROM keyword_dictionary")

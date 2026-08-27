@@ -65,6 +65,12 @@ CREATE TABLE dictionary_meta (
 );
 """
 
+DICTIONARY_INDEXES = """
+CREATE INDEX idx_keyword_forms_keyword_id ON keyword_forms(keyword_id);
+CREATE INDEX idx_keyword_examples_keyword_rank ON keyword_examples(keyword_id, rank);
+CREATE INDEX idx_keyword_examples_question_id ON keyword_examples(question_id);
+"""
+
 
 class DictionaryBuildTest(unittest.TestCase):
     def setUp(self):
@@ -199,6 +205,7 @@ class DictionaryBuildTest(unittest.TestCase):
                 "PRAGMA foreign_key_list(keyword_examples)"
             ).fetchall()
             foreign_key_violations = connection.execute("PRAGMA foreign_key_check").fetchall()
+            schema = self.schema_state(connection)
 
         self.assertTrue(
             {"keyword_dictionary", "keyword_forms", "keyword_examples", "dictionary_meta"}
@@ -229,6 +236,93 @@ class DictionaryBuildTest(unittest.TestCase):
         self.assertEqual(examples_foreign_keys[0][2:5], ("keyword_dictionary", "keyword_id", "id"))
         self.assertEqual(foreign_key_violations, [])
 
+        self.assertEqual(
+            schema["keyword_forms"],
+            {
+                "table_info": [
+                    (0, "id", "INTEGER", 0, None, 1),
+                    (1, "keyword_id", "INTEGER", 1, None, 0),
+                    (2, "form", "TEXT", 1, None, 0),
+                    (3, "normalized_form", "TEXT", 1, None, 0),
+                ],
+                "index_list": [
+                    (0, "idx_keyword_forms_keyword_id", 0, "c", 0),
+                    (1, "sqlite_autoindex_keyword_forms_1", 1, "u", 0),
+                ],
+                "index_info": {
+                    "idx_keyword_forms_keyword_id": [(0, 1, "keyword_id")],
+                    "sqlite_autoindex_keyword_forms_1": [(0, 3, "normalized_form")],
+                },
+                "foreign_key_list": [
+                    (
+                        0,
+                        0,
+                        "keyword_dictionary",
+                        "keyword_id",
+                        "id",
+                        "NO ACTION",
+                        "NO ACTION",
+                        "NONE",
+                    )
+                ],
+            },
+        )
+        self.assertEqual(
+            schema["keyword_examples"],
+            {
+                "table_info": [
+                    (0, "id", "INTEGER", 0, None, 1),
+                    (1, "keyword_id", "INTEGER", 1, None, 0),
+                    (2, "question_id", "INTEGER", 1, None, 0),
+                    (3, "rank", "INTEGER", 1, "0", 0),
+                ],
+                "index_list": [
+                    (0, "idx_keyword_examples_question_id", 0, "c", 0),
+                    (1, "idx_keyword_examples_keyword_rank", 0, "c", 0),
+                    (2, "sqlite_autoindex_keyword_examples_1", 1, "u", 0),
+                ],
+                "index_info": {
+                    "idx_keyword_examples_question_id": [(0, 2, "question_id")],
+                    "idx_keyword_examples_keyword_rank": [
+                        (0, 1, "keyword_id"),
+                        (1, 3, "rank"),
+                    ],
+                    "sqlite_autoindex_keyword_examples_1": [
+                        (0, 1, "keyword_id"),
+                        (1, 2, "question_id"),
+                    ],
+                },
+                "foreign_key_list": [
+                    (
+                        0,
+                        0,
+                        "keyword_dictionary",
+                        "keyword_id",
+                        "id",
+                        "NO ACTION",
+                        "NO ACTION",
+                        "NONE",
+                    )
+                ],
+            },
+        )
+        self.assertEqual(
+            schema["dictionary_meta"],
+            {
+                "table_info": [
+                    (0, "key", "TEXT", 0, None, 1),
+                    (1, "value", "TEXT", 1, None, 0),
+                ],
+                "index_list": [
+                    (0, "sqlite_autoindex_dictionary_meta_1", 1, "pk", 0),
+                ],
+                "index_info": {
+                    "sqlite_autoindex_dictionary_meta_1": [(0, 0, "key")],
+                },
+                "foreign_key_list": [],
+            },
+        )
+
     def test_enables_foreign_keys_for_the_import_connection(self):
         with closing(sqlite3.connect(self.db_path)) as connection:
             connection.executescript(DICTIONARY_SCHEMA)
@@ -253,7 +347,7 @@ class DictionaryBuildTest(unittest.TestCase):
 
     def test_rolls_back_every_replaced_value_when_an_insert_fails(self):
         with closing(sqlite3.connect(self.db_path)) as connection:
-            connection.executescript(DICTIONARY_SCHEMA)
+            connection.executescript(DICTIONARY_SCHEMA + DICTIONARY_INDEXES)
             connection.executescript(
                 """
                 INSERT INTO keyword_dictionary
@@ -274,16 +368,56 @@ class DictionaryBuildTest(unittest.TestCase):
                 BEGIN
                   SELECT RAISE(FAIL, 'forced form failure');
                 END;
+                DROP INDEX idx_keyword_examples_question_id;
                 """
             )
         protected_before = snapshot(self.db_path)
         dictionary_before = self.dictionary_state()
+        schema_before = self.read_schema_state()
+        missing_index = "idx_keyword_examples_question_id"
+        self.assertNotIn(
+            missing_index,
+            {row[1] for row in schema_before["keyword_examples"]["index_list"]},
+        )
 
         with self.assertRaisesRegex(sqlite3.IntegrityError, "forced form failure"):
             build_dictionary(self.db_path, self.source_path, version=9, enforce_size=False)
 
         self.assertEqual(snapshot(self.db_path), protected_before)
         self.assertEqual(self.dictionary_state(), dictionary_before)
+        schema_after = self.read_schema_state()
+        self.assertNotIn(
+            missing_index,
+            {row[1] for row in schema_after["keyword_examples"]["index_list"]},
+        )
+        self.assertEqual(schema_after, schema_before)
+
+    def test_repeated_import_is_logically_identical(self):
+        protected_before = snapshot(self.db_path)
+
+        first_result = build_dictionary(
+            self.db_path,
+            self.source_path,
+            version=7,
+            enforce_size=False,
+        )
+        first_state = self.complete_dictionary_state()
+        protected_after_first = snapshot(self.db_path)
+
+        second_result = build_dictionary(
+            self.db_path,
+            self.source_path,
+            version=7,
+            enforce_size=False,
+        )
+        second_state = self.complete_dictionary_state()
+        protected_after_second = snapshot(self.db_path)
+
+        self.assertEqual(first_result, {"entries": 2, "forms": 3, "examples": 2})
+        self.assertEqual(second_result, first_result)
+        self.assertEqual(second_state, first_state)
+        self.assertEqual(protected_after_first, protected_before)
+        self.assertEqual(protected_after_second, protected_before)
 
     def test_rejects_non_positive_or_boolean_version_before_writing(self):
         for invalid_version in (0, -1, True):
@@ -379,6 +513,39 @@ class DictionaryBuildTest(unittest.TestCase):
                 ).fetchall(),
                 "user_version": connection.execute("PRAGMA user_version").fetchone()[0],
             }
+
+    def complete_dictionary_state(self):
+        return {
+            "data": self.dictionary_state(),
+            "schema": self.read_schema_state(),
+        }
+
+    def read_schema_state(self):
+        with closing(sqlite3.connect(self.db_path)) as connection:
+            return self.schema_state(connection)
+
+    @staticmethod
+    def schema_state(connection):
+        result = {}
+        for table in (
+            "keyword_dictionary",
+            "keyword_forms",
+            "keyword_examples",
+            "dictionary_meta",
+        ):
+            index_list = connection.execute(f"PRAGMA index_list({table})").fetchall()
+            result[table] = {
+                "table_info": connection.execute(f"PRAGMA table_info({table})").fetchall(),
+                "index_list": index_list,
+                "index_info": {
+                    row[1]: connection.execute(f"PRAGMA index_info({row[1]})").fetchall()
+                    for row in index_list
+                },
+                "foreign_key_list": connection.execute(
+                    f"PRAGMA foreign_key_list({table})"
+                ).fetchall(),
+            }
+        return result
 
     def run_cli(self, *arguments):
         return subprocess.run(
