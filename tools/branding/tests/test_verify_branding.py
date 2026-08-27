@@ -93,6 +93,25 @@ class BrandingVerifierTest(unittest.TestCase):
         project = project[:settings_end] + "\n" + bundle_line + project[settings_end:]
         project_path.write_text(project, encoding="utf-8")
 
+    def mutate_runner_debug_build_settings(self, mutator):
+        project_path = self.ios_project()
+        project = project_path.read_text(encoding="utf-8")
+        configuration_start = project.index("97C147061CF9000F007C117D /* Debug */ = {")
+        settings_start = project.index("buildSettings = {", configuration_start)
+        settings_body_start = project.index("{", settings_start) + 1
+        settings_body_end = project.index("\n\t\t\t};", settings_body_start)
+        settings_body = project[settings_body_start:settings_body_end]
+        project = project[:settings_body_start] + mutator(settings_body) + project[settings_body_end:]
+        project_path.write_text(project, encoding="utf-8")
+
+    def set_runner_build_reference_attribute(self, attribute, value):
+        scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
+        tree = ElementTree.parse(scheme_path)
+        reference = tree.find("./BuildAction/BuildActionEntries/BuildActionEntry/BuildableReference")
+        self.assertIsNotNone(reference)
+        reference.set(attribute, value)
+        tree.write(scheme_path, encoding="utf-8", xml_declaration=True)
+
     def test_rejects_runner_scheme_node_compensated_by_testable_reference(self):
         scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
         tree = ElementTree.parse(scheme_path)
@@ -264,6 +283,31 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertTrue(any("Runner Debug bundle identifier" in failure for failure in failures))
 
+    def test_rejects_duplicate_direct_pbx_bundle_identifiers(self):
+        self.mutate_runner_debug_build_settings(
+            lambda settings: settings + "\n\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.example.conflicting;"
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("Runner Debug bundle identifier" in failure for failure in failures))
+
+    def test_rejects_bundle_identifier_only_in_nested_pbx_dictionary(self):
+        expected = "PRODUCT_BUNDLE_IDENTIFIER = com.example.italianDrivingApp;"
+        self.mutate_runner_debug_build_settings(
+            lambda settings: settings.replace(
+                expected,
+                "CUSTOM_MAP = {\n\t\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.example.italianDrivingApp;\n\t\t\t\t};",
+                1,
+            )
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("Runner Debug bundle identifier" in failure for failure in failures))
+
     def test_allows_other_target_second_build_action_entry(self):
         self.add_build_action_entry("331C80D4294CF70F00263BE5", "RunnerTests.xctest", "RunnerTests")
 
@@ -274,6 +318,22 @@ class BrandingVerifierTest(unittest.TestCase):
 
     def test_rejects_runner_identifier_with_legacy_name_and_old_buildable_name(self):
         self.add_build_action_entry(RUNNER_BLUEPRINT_ID, "italian_driving_app.app", "LegacyRunner")
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("BuildActionEntry Runner BuildableReference" in failure for failure in failures))
+
+    def test_rejects_unique_runner_scheme_reference_with_wrong_blueprint_name(self):
+        self.set_runner_build_reference_attribute("BlueprintName", "LegacyRunner")
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("BuildActionEntry Runner BuildableReference" in failure for failure in failures))
+
+    def test_rejects_unique_runner_scheme_reference_with_wrong_buildable_name(self):
+        self.set_runner_build_reference_attribute("BuildableName", "italian_driving_app.app")
 
         code, failures = self.run_verifier()
 

@@ -340,6 +340,29 @@ class BrandingVerifier:
             return None
         return object_body[field_match.end() : index - 1]
 
+    def pbx_direct_field_values(self, block: str, field_name: str) -> list[str]:
+        depths: list[int] = []
+        depth = 0
+        in_string = False
+        escaped = False
+        for character in block:
+            depths.append(depth)
+            if in_string:
+                if escaped:
+                    escaped = False
+                elif character == "\\":
+                    escaped = True
+                elif character == '"':
+                    in_string = False
+            elif character == '"':
+                in_string = True
+            elif character == "{":
+                depth += 1
+            elif character == "}":
+                depth -= 1
+        pattern = re.compile(rf"(?m)^[ \t]*{re.escape(field_name)}\s*=\s*([^;]+);[ \t]*$")
+        return [match.group(1) for match in pattern.finditer(block) if depths[match.start()] == 0]
+
     def verify_ios_bundle_identifiers(self) -> None:
         relative_path = "ios/Runner.xcodeproj/project.pbxproj"
         content = self.text(relative_path)
@@ -414,12 +437,14 @@ class BrandingVerifier:
                     "buildSettings",
                     f"{relative_path}: {target_name} {configuration_name} configuration",
                 )
-                bundle_match = None if build_settings is None else re.search(r"(?m)^\s*PRODUCT_BUNDLE_IDENTIFIER = ([^;]+);$", build_settings)
-                actual = None if bundle_match is None else bundle_match.group(1)
+                bundle_values = [] if build_settings is None else self.pbx_direct_field_values(
+                    build_settings,
+                    "PRODUCT_BUNDLE_IDENTIFIER",
+                )
                 self.require(
                     f"{relative_path}: {target_name} {configuration_name} bundle identifier",
-                    actual == expected_targets[target_name],
-                    actual,
+                    bundle_values == [expected_targets[target_name]],
+                    bundle_values,
                 )
         for configuration_id, owners in configuration_owners.items():
             self.require(
