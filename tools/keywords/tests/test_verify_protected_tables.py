@@ -128,6 +128,94 @@ class ProtectedTableSnapshotTest(unittest.TestCase):
         self.assertIn("ERROR:", result.stderr)
         self.assertNotIn("Traceback", result.stderr)
 
+    def test_cli_reports_pass_when_protected_tables_match(self):
+        baseline_path = self.write_baseline(snapshot(self.db_path))
+
+        result = self.run_cli(self.db_path, "--compare", baseline_path)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("PASS: protected tables match", result.stdout)
+        self.assertEqual(result.stderr, "")
+
+    def test_cli_reports_row_count_mismatch_for_the_affected_table(self):
+        baseline = snapshot(self.db_path)
+        baseline["quiz"]["rows"] = 2
+        baseline_path = self.write_baseline(baseline)
+
+        result = self.run_cli(self.db_path, "--compare", baseline_path)
+
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stdout, "")
+        self.assertIn("FAIL: protected tables differ", result.stderr)
+        self.assertIn("quiz: rows expected=2 actual=1", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+
+    def test_cli_reports_hash_mismatch_for_the_affected_table(self):
+        baseline = snapshot(self.db_path)
+        baseline["chapter"]["sha256"] = "0" * 64
+        baseline_path = self.write_baseline(baseline)
+
+        result = self.run_cli(self.db_path, "--compare", baseline_path)
+
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stdout, "")
+        self.assertIn("chapter: sha256 expected=", result.stderr)
+        self.assertIn("actual=", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+
+    def test_cli_reports_friendly_errors_for_missing_or_invalid_baselines(self):
+        invalid_table = snapshot(self.db_path)
+        invalid_table["section"] = {"rows": 1}
+        cases = {
+            "missing": Path(self.temporary_directory.name) / "missing-baseline.json",
+            "invalid-json": self.write_text("invalid.json", "{"),
+            "invalid-schema": self.write_text("invalid-schema.json", "{}"),
+            "invalid-table-schema": self.write_text("invalid-table-schema.json", json.dumps(invalid_table)),
+        }
+
+        for case, baseline_path in cases.items():
+            with self.subTest(case=case):
+                result = self.run_cli(self.db_path, "--compare", baseline_path)
+
+                self.assertEqual(result.returncode, 1)
+                self.assertEqual(result.stdout, "")
+                self.assertIn("ERROR:", result.stderr)
+                self.assertNotIn("Traceback", result.stderr)
+
+    def test_cli_rejects_out_and_compare_together(self):
+        baseline_path = self.write_baseline(snapshot(self.db_path))
+        output_path = Path(self.temporary_directory.name) / "output.json"
+
+        result = self.run_cli(self.db_path, "--out", output_path, "--compare", baseline_path)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("not allowed with argument", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+        self.assertFalse(output_path.exists())
+
+    def run_cli(self, database_path, *arguments):
+        return subprocess.run(
+            [
+                sys.executable,
+                str(SOURCE_ROOT / "tools/keywords/verify_protected_tables.py"),
+                str(database_path),
+                *(str(argument) for argument in arguments),
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+    def write_baseline(self, baseline):
+        path = Path(self.temporary_directory.name) / "baseline.json"
+        path.write_text(json.dumps(baseline), encoding="utf-8")
+        return path
+
+    def write_text(self, name, content):
+        path = Path(self.temporary_directory.name) / name
+        path.write_text(content, encoding="utf-8")
+        return path
+
     def update(self, statement):
         connection = sqlite3.connect(self.db_path)
         try:
