@@ -16,22 +16,6 @@ DISPLAY_NAME = "OldGuida"
 WEB_DESCRIPTION = "意大利驾考学习工具"
 RUNNER_BLUEPRINT_ID = "33CC10EC2044A3C60003C045"
 IOS_BUNDLE_PREFIX = "com.example.italianDrivingApp"
-ALLOWED_THIRD_PARTY_PACKAGES = {
-    "flutter",
-    "flutter_swiper_view",
-    "flutter_test",
-    "http",
-    "package_info_plus",
-    "path",
-    "path_provider",
-    "shared_preferences",
-    "sqflite",
-    "sqflite_common_ffi",
-    "sqflite_common_ffi_web",
-    "supabase_flutter",
-    "url_launcher",
-    "uuid",
-}
 
 
 @dataclass(frozen=True)
@@ -52,9 +36,13 @@ class MetadataParser(HTMLParser):
         super().__init__()
         self.meta: list[dict[str, str]] = []
         self.titles: list[str] = []
+        self.attribute_failures: list[str] = []
         self._in_title = False
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        names = [name.lower() for name, _ in attrs]
+        for name in {name for name in names if names.count(name) > 1}:
+            self.attribute_failures.append(f"duplicate HTML attribute {name!r} on <{tag}>")
         if tag == "meta":
             self.meta.append({key.lower(): value or "" for key, value in attrs})
         elif tag == "title":
@@ -107,8 +95,8 @@ class BrandingVerifier:
         except DuplicateJsonKeyError as error:
             self.failures.append(f"FAIL {relative_path}: duplicate JSON key {error.args[0]!r}")
             return None
-        except json.JSONDecodeError as error:
-            self.failures.append(f"FAIL {relative_path}: invalid JSON ({error.msg})")
+        except (json.JSONDecodeError, ValueError) as error:
+            self.failures.append(f"FAIL {relative_path}: invalid JSON ({error})")
             return None
         if not isinstance(parsed, dict):
             self.failures.append(f"FAIL {relative_path}: top-level JSON value must be an object")
@@ -130,7 +118,7 @@ class BrandingVerifier:
     def xml_root(self, relative_path: str) -> ElementTree.Element | None:
         try:
             return ElementTree.parse(self.root / relative_path).getroot()
-        except (OSError, UnicodeDecodeError, ElementTree.ParseError) as error:
+        except (OSError, UnicodeDecodeError, LookupError, ElementTree.ParseError) as error:
             self.failures.append(f"FAIL {relative_path}: invalid XML ({error})")
             return None
 
@@ -219,18 +207,24 @@ class BrandingVerifier:
             "ProfileAction/BuildableProductRunnable": "./ProfileAction/BuildableProductRunnable/BuildableReference",
         }
         for context, path in references.items():
-            reference = scheme.find(path)
-            actual = None if reference is None else {
-                "BlueprintIdentifier": reference.get("BlueprintIdentifier"),
-                "BlueprintName": reference.get("BlueprintName"),
-                "BuildableName": reference.get("BuildableName"),
-            }
+            references_at_path = scheme.findall(path)
+            runner_references = [
+                reference
+                for reference in references_at_path
+                if reference.get("BlueprintIdentifier") == RUNNER_BLUEPRINT_ID
+                and reference.get("BlueprintName") == "Runner"
+            ]
+            actual = [
+                {
+                    "BlueprintIdentifier": reference.get("BlueprintIdentifier"),
+                    "BlueprintName": reference.get("BlueprintName"),
+                    "BuildableName": reference.get("BuildableName"),
+                }
+                for reference in runner_references
+            ]
             self.require(
                 f"{relative_path}: {context} Runner BuildableReference",
-                reference is not None
-                and reference.get("BlueprintIdentifier") == RUNNER_BLUEPRINT_ID
-                and reference.get("BlueprintName") == "Runner"
-                and reference.get("BuildableName") == "OldGuida.app",
+                len(runner_references) == 1 and runner_references[0].get("BuildableName") == "OldGuida.app",
                 actual,
             )
 
@@ -246,6 +240,8 @@ class BrandingVerifier:
         except (UnicodeDecodeError, ValueError) as error:
             self.failures.append(f"FAIL {relative_path}: invalid HTML metadata ({error})")
             return
+        for failure in parser.attribute_failures:
+            self.failures.append(f"FAIL {relative_path}: {failure}")
         self.require(f"{relative_path}: title structure", not parser._in_title, "unclosed title" if parser._in_title else None)
         for name, expected in (("description", WEB_DESCRIPTION), ("apple-mobile-web-app-title", DISPLAY_NAME)):
             values = [entry.get("content") for entry in parser.meta if entry.get("name") == name]
@@ -326,6 +322,7 @@ class BrandingVerifier:
             "RunnerUITests": f"{IOS_BUNDLE_PREFIX}.RunnerUITests",
         }
         found_targets: set[str] = set()
+        configuration_owners: dict[str, list[str]] = {}
         for object_body in objects.values():
             if "isa = PBXNativeTarget;" not in object_body:
                 continue
@@ -342,10 +339,46 @@ class BrandingVerifier:
             if configuration_list is None:
                 self.failures.append(f"FAIL {relative_path}: {target_name} missing configuration list object")
                 continue
-            configuration_ids = re.findall(r"(?m)^\s*([A-F0-9]+) /\* (Debug|Release|Profile) \*/,$", configuration_list)
-            configurations = {name: object_id for object_id, name in configuration_ids}
+            configuration_ids = re.findall(r"(?m)^\s*([A-F0-9]+)\s*/\* [^\n]*? \*/,\s*$", configuration_list)
+            self.require(
+                f"{relative_path}: {target_name}: configuration IDs",
+                len(configuration_ids) == 3,
+                configuration_ids,
+            )
+            for configuration_id in set(configuration_ids):
+                self.require(
+                    f"{relative_path}: {target_name}: configuration ID {configuration_id} is reused",
+                    configuration_ids.count(configuration_id) == 1,
+                    configuration_ids,
+                )
+                configuration_owners.setdefault(configuration_id, []).append(target_name)
+
+            configurations: list[tuple[str, str, str]] = []
+            for configuration_id in configuration_ids:
+                configuration = objects.get(configuration_id)
+                self.require(
+                    f"{relative_path}: {target_name}: configuration object {configuration_id}",
+                    configuration is not None and "isa = XCBuildConfiguration;" in configuration,
+                    configuration,
+                )
+                if configuration is None:
+                    continue
+                name_match = re.search(r"(?m)^\s*name = ([^;]+);$", configuration)
+                configuration_name = None if name_match is None else name_match.group(1)
+                if configuration_name is not None:
+                    configurations.append((configuration_id, configuration_name, configuration))
             for configuration_name in ("Debug", "Release", "Profile"):
-                configuration = objects.get(configurations.get(configuration_name, ""))
+                matching_configurations = [
+                    configuration
+                    for _, name, configuration in configurations
+                    if name == configuration_name
+                ]
+                self.require(
+                    f"{relative_path}: {target_name} {configuration_name} configuration block name",
+                    len(matching_configurations) == 1,
+                    [name for _, name, _ in configurations],
+                )
+                configuration = matching_configurations[0] if len(matching_configurations) == 1 else None
                 bundle_match = None if configuration is None else re.search(r"(?m)^\s*PRODUCT_BUNDLE_IDENTIFIER = ([^;]+);$", configuration)
                 actual = None if bundle_match is None else bundle_match.group(1)
                 self.require(
@@ -353,38 +386,26 @@ class BrandingVerifier:
                     actual == expected_targets[target_name],
                     actual,
                 )
+        for configuration_id, owners in configuration_owners.items():
+            self.require(
+                f"{relative_path}: configuration ID {configuration_id} target ownership",
+                len(owners) == 1,
+                owners,
+            )
         for target_name in ("Runner", "RunnerTests"):
             self.require(f"{relative_path}: {target_name} target", target_name in found_targets, sorted(found_targets))
 
-    def strip_dart_comments(self, relative_path: str, content: str) -> str | None:
-        result: list[str] = []
+    def dart_tokens(self, relative_path: str, content: str) -> list[tuple[str, str]] | None:
+        tokens: list[tuple[str, str]] = []
         index = 0
-        quote = ""
-        triple = False
-        block_depth = 0
         while index < len(content):
-            if quote:
-                if triple and content.startswith(quote * 3, index):
-                    result.append(quote * 3)
-                    index += 3
-                    quote = ""
-                    triple = False
-                elif not triple and content[index] == quote:
-                    result.append(content[index])
-                    index += 1
-                    quote = ""
-                elif content[index] == "\\" and index + 1 < len(content):
-                    result.extend(content[index : index + 2])
-                    index += 2
-                else:
-                    result.append(content[index])
-                    index += 1
+            if content[index].isspace():
+                index += 1
                 continue
             if content.startswith("//", index):
                 newline = content.find("\n", index)
                 if newline == -1:
                     break
-                result.append("\n")
                 index = newline + 1
                 continue
             if content.startswith("/*", index):
@@ -398,8 +419,6 @@ class BrandingVerifier:
                         block_depth -= 1
                         index += 2
                     else:
-                        if content[index] == "\n":
-                            result.append("\n")
                         index += 1
                 if block_depth:
                     self.failures.append(f"FAIL {relative_path}: unterminated block comment")
@@ -408,35 +427,97 @@ class BrandingVerifier:
             if content[index] in "'\"":
                 quote = content[index]
                 triple = content.startswith(quote * 3, index)
-                width = 3 if triple else 1
-                result.append(content[index : index + width])
-                index += width
+                index += 3 if triple else 1
+                value: list[str] = []
+                while index < len(content):
+                    if triple and content.startswith(quote * 3, index):
+                        index += 3
+                        break
+                    if not triple and content[index] == quote:
+                        index += 1
+                        break
+                    if content[index] == "\\" and index + 1 < len(content):
+                        value.append(content[index + 1])
+                        index += 2
+                        continue
+                    value.append(content[index])
+                    index += 1
+                else:
+                    self.failures.append(f"FAIL {relative_path}: unterminated string literal")
+                    return None
+                tokens.append(("string", "".join(value)))
                 continue
-            result.append(content[index])
+            if content[index].isalpha() or content[index] in "_$":
+                end = index + 1
+                while end < len(content) and (content[end].isalnum() or content[end] in "_$"):
+                    end += 1
+                tokens.append(("identifier", content[index:end]))
+                index = end
+                continue
+            tokens.append(("symbol", content[index]))
             index += 1
-        return "".join(result)
+        return tokens
+
+    def declared_dart_packages(self) -> set[str]:
+        pubspec = self.text("pubspec.yaml")
+        if pubspec is None:
+            return set()
+        packages: set[str] = set()
+        in_dependency_section = False
+        for line in pubspec.splitlines():
+            section_match = re.fullmatch(r"(dependencies|dev_dependencies):\s*", line)
+            if section_match:
+                in_dependency_section = True
+                continue
+            if line and not line[0].isspace():
+                in_dependency_section = False
+            if in_dependency_section:
+                package_match = re.match(r"^\s{2}([A-Za-z0-9_-]+):", line)
+                if package_match:
+                    packages.add(package_match.group(1))
+        return packages
+
+    def dart_import_uris(self, tokens: list[tuple[str, str]]) -> list[str]:
+        uris: list[str] = []
+        index = 0
+        brace_depth = 0
+        while index < len(tokens):
+            kind, value = tokens[index]
+            if kind == "symbol" and value == "{":
+                brace_depth += 1
+            elif kind == "symbol" and value == "}" and brace_depth:
+                brace_depth -= 1
+            elif brace_depth == 0 and kind == "identifier" and value == "import":
+                end = index + 1
+                while end < len(tokens) and tokens[end] != ("symbol", ";"):
+                    if tokens[end][0] == "string":
+                        uris.append(tokens[end][1])
+                    end += 1
+                index = end
+            index += 1
+        return uris
 
     def verify_dart_imports(self) -> None:
+        declared_packages = self.declared_dart_packages()
         for directory in ("lib", "test"):
             for path in sorted((self.root / directory).rglob("*.dart")):
                 relative_path = path.relative_to(self.root).as_posix()
                 content = self.text(relative_path)
                 if content is None:
                     continue
-                uncommented = self.strip_dart_comments(relative_path, content)
-                if uncommented is None:
+                tokens = self.dart_tokens(relative_path, content)
+                if tokens is None:
                     continue
-                for statement in re.finditer(r"(?ms)^\s*import\s+(.*?);", uncommented):
-                    for uri in re.findall(r"['\"]([^'\"]+)['\"]", statement.group(1)):
-                        if not uri.startswith("package:"):
-                            continue
-                        package_name = uri.removeprefix("package:").split("/", 1)[0]
-                        if package_name.casefold() == "oldguida":
-                            self.failures.append(f"FAIL {relative_path}: oldguida package import {uri!r}")
-                        elif package_name == "italian_driving_app" or package_name in ALLOWED_THIRD_PARTY_PACKAGES:
-                            continue
-                        else:
-                            self.failures.append(f"FAIL {relative_path}: unexpected package import {uri!r}")
+                for uri in self.dart_import_uris(tokens):
+                    if not uri.startswith("package:"):
+                        continue
+                    package_name = uri.removeprefix("package:").split("/", 1)[0]
+                    if package_name.casefold() == "oldguida":
+                        self.failures.append(f"FAIL {relative_path}: oldguida package import {uri!r}")
+                    elif package_name == "italian_driving_app" or package_name in declared_packages:
+                        continue
+                    else:
+                        self.failures.append(f"FAIL {relative_path}: unexpected package import {uri!r}")
 
     def verify(self) -> VerificationResult:
         self.verify_visible_names()

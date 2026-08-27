@@ -1,6 +1,8 @@
 import json
 import plistlib
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -47,6 +49,16 @@ class BrandingVerifierTest(unittest.TestCase):
     def run_verifier(self):
         result = verify(self.root)
         return (0 if result.ok else 1), result.failures
+
+    def ios_project(self):
+        return self.root / "ios/Runner.xcodeproj/project.pbxproj"
+
+    def replace_runner_profile_name(self, replacement):
+        project_path = self.ios_project()
+        project = project_path.read_text(encoding="utf-8")
+        start = project.index("249021D4217E4FDB00AE95B9 /* Profile */ = {")
+        name_index = project.index("name = Profile;", start)
+        project_path.write_text(project[:name_index] + replacement + project[name_index + len("name = Profile;") :], encoding="utf-8")
 
     def test_rejects_runner_scheme_node_compensated_by_testable_reference(self):
         scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
@@ -136,6 +148,164 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertTrue(any("web/manifest.json: top-level JSON value must be an object" in failure for failure in failures))
         self.assertTrue(any("ios/Runner/Info.plist: top-level plist value must be a dictionary" in failure for failure in failures))
         self.assertTrue(any("lib/main.dart: unable to read UTF-8 text" in failure for failure in failures))
+
+    def test_returns_friendly_failure_for_unknown_xml_encoding(self):
+        manifest_path = self.root / "android/app/src/main/AndroidManifest.xml"
+        manifest = manifest_path.read_text(encoding="utf-8")
+        manifest_path.write_text(
+            '<?xml version="1.0" encoding="unknown-branding-encoding"?>\n' + manifest,
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("AndroidManifest.xml: invalid XML" in failure for failure in failures))
+
+    def test_returns_friendly_failure_for_json_value_error(self):
+        manifest_path = self.root / "web/manifest.json"
+        manifest_path.write_text('{"value": ' + "1" * 5000 + "}", encoding="utf-8")
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("web/manifest.json: invalid JSON" in failure for failure in failures))
+
+    def test_rejects_duplicate_html_attributes(self):
+        index_path = self.root / "web/index.html"
+        index = index_path.read_text(encoding="utf-8")
+        index_path.write_text(
+            index.replace(
+                'name="description" content="意大利驾考学习工具"',
+                'name="description" content="意大利驾考学习工具" content="意大利驾考学习工具"',
+            ),
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("duplicate HTML attribute 'content'" in failure for failure in failures))
+
+    def test_rejects_reused_pbx_configuration_id(self):
+        project_path = self.ios_project()
+        project = project_path.read_text(encoding="utf-8")
+        project_path.write_text(
+            project.replace(
+                "249021D4217E4FDB00AE95B9 /* Profile */,",
+                "97C147061CF9000F007C117D /* Profile */,",
+                1,
+            ),
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("Runner: configuration ID" in failure for failure in failures))
+
+    def test_rejects_pbx_configuration_with_wrong_block_name(self):
+        self.replace_runner_profile_name("name = Other;")
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("Runner Profile configuration block name" in failure for failure in failures))
+
+    def test_allows_other_target_scheme_reference_at_a_runner_path(self):
+        scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
+        scheme = scheme_path.read_text(encoding="utf-8")
+        marker = '               BlueprintName = "Runner"\n               ReferencedContainer = "container:Runner.xcodeproj">\n            </BuildableReference>'
+        additional = marker + '\n            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="331C80D4294CF70F00263BE5" BuildableName="RunnerTests.xctest" BlueprintName="RunnerTests" ReferencedContainer="container:Runner.xcodeproj">\n            </BuildableReference>'
+        self.assertIn(marker, scheme)
+        scheme_path.write_text(scheme.replace(marker, additional, 1), encoding="utf-8")
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 0)
+        self.assertFalse(failures)
+
+    def test_rejects_duplicate_old_runner_scheme_reference(self):
+        scheme_path = self.root / "macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
+        scheme = scheme_path.read_text(encoding="utf-8")
+        marker = '               BlueprintName = "Runner"\n               ReferencedContainer = "container:Runner.xcodeproj">\n            </BuildableReference>'
+        duplicate = marker + '\n            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="33CC10EC2044A3C60003C045" BuildableName="italian_driving_app.app" BlueprintName="Runner" ReferencedContainer="container:Runner.xcodeproj">\n            </BuildableReference>'
+        self.assertIn(marker, scheme)
+        scheme_path.write_text(scheme.replace(marker, duplicate, 1), encoding="utf-8")
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("BuildActionEntry Runner BuildableReference" in failure for failure in failures))
+
+    def test_ignores_dart_block_comment_import(self):
+        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path.write_text(
+            source_path.read_text(encoding="utf-8") + "\n/* import 'package:oldguida/ignored.dart'; */\n",
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 0)
+        self.assertFalse(failures)
+
+    def test_ignores_dart_triple_quoted_string_import(self):
+        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path.write_text(
+            source_path.read_text(encoding="utf-8") + '\nconst ignoredImport = """\nimport \'package:oldguida/ignored.dart\';\n""";\n',
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 0)
+        self.assertFalse(failures)
+
+    def test_allows_declared_cupertino_icons_dependency(self):
+        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path.write_text(
+            "import 'package:cupertino_icons/cupertino_icons.dart';\n" + source_path.read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 0)
+        self.assertFalse(failures)
+
+    def test_rejects_oldguida_package_with_mixed_case(self):
+        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path.write_text(
+            "import 'package:OlDgUiDa/blocked.dart';\n" + source_path.read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+
+        code, failures = self.run_verifier()
+
+        self.assertEqual(code, 1)
+        self.assertTrue(any("oldguida package import" in failure for failure in failures))
+
+    def test_repeated_verify_calls_do_not_leak_failures(self):
+        first = verify(self.root)
+        second = verify(self.root)
+
+        self.assertTrue(first.ok)
+        self.assertTrue(second.ok)
+        self.assertEqual(first.failures, second.failures)
+
+    def test_cli_reports_success_and_failure_exit_codes(self):
+        command = [sys.executable, str(SOURCE_ROOT / "tools/branding/verify_branding.py"), "--root", str(self.root)]
+        success = subprocess.run(command, capture_output=True, text=True, check=False)
+        self.assertEqual(success.returncode, 0)
+        self.assertIn("PASS: OldGuida branding metadata verified", success.stdout)
+
+        manifest_path = self.root / "web/manifest.json"
+        manifest_path.write_text(manifest_path.read_text(encoding="utf-8").replace('"name": "OldGuida"', '"name": "Wrong"'), encoding="utf-8")
+        failure = subprocess.run(command, capture_output=True, text=True, check=False)
+        self.assertEqual(failure.returncode, 1)
+        self.assertIn("web/manifest.json: name", failure.stdout)
+        self.assertIn("FAIL:", failure.stdout)
 
 
 if __name__ == "__main__":
