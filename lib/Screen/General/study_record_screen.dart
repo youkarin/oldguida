@@ -53,15 +53,14 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
 
   Future<void> _redo(Map<String, dynamic> item) async {
     final historyId = item[columnHistoryId];
-    final data =
-        await DatabaseHelper.instance.getHistoryQuestions(historyId);
+    final data = await DatabaseHelper.instance.getHistoryQuestions(historyId);
     if (data.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('无题目')));
       return;
     }
     final questions = data.map((e) => Question.fromMap(e)).toList();
-    
+
     final prefs = await SharedPreferences.getInstance();
     final showTranslation = prefs.getBool('showTranslation') ?? true;
     final showExplanation = prefs.getBool('showExplanation') ?? true;
@@ -77,6 +76,7 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
           showTranslation: showTranslation,
           showExplanation: showExplanation,
           immediateFeedback: false,
+          stayOnWrongAnswer: false,
           collapsedMode: collapsedMode,
         ),
       ),
@@ -101,18 +101,19 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
                     ? DateTime.tryParse(item[columnHistoryCompletedAt])
                     : null;
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   child: ListTile(
                     leading: Icon(
                       _isPass(item)
                           ? Icons.sentiment_satisfied
                           : Icons.sentiment_dissatisfied,
-                      color:
-                          _isPass(item) ? Colors.green : Colors.red,
+                      color: _isPass(item) ? Colors.green : Colors.red,
                     ),
-                    title: Text(
-                        time != null ? time.toLocal().toString() : '未知时间'),
-                    subtitle: Text('用时 ${item[columnHistoryUsedTime] ?? 0} 秒  错题 $wrong'),
+                    title:
+                        Text(time != null ? time.toLocal().toString() : '未知时间'),
+                    subtitle: Text(
+                        '用时 ${item[columnHistoryUsedTime] ?? 0} 秒  错题 $wrong'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

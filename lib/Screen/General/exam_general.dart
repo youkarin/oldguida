@@ -14,6 +14,7 @@ class ExamGeneral extends StatefulWidget {
   final bool showTranslation;
   final bool showExplanation;
   final bool immediateFeedback;
+  final bool stayOnWrongAnswer;
   final bool collapsedMode;
 
   const ExamGeneral({
@@ -23,6 +24,7 @@ class ExamGeneral extends StatefulWidget {
     required this.showTranslation,
     required this.showExplanation,
     required this.immediateFeedback,
+    required this.stayOnWrongAnswer,
     this.collapsedMode = false,
   });
 
@@ -35,11 +37,11 @@ class _ExamGeneralState extends State<ExamGeneral> {
   List<int?> userAnswers = [];
   List<bool?> answerResults = [];
   late DateTime startTime;
-  Timer? _timer; 
-  int _remainingSeconds = 30 * 60; 
+  Timer? _timer;
+  int _remainingSeconds = 30 * 60;
   int? _userId;
   bool _isFavorite = false;
-  bool _isTimerPaused = false; 
+  bool _isTimerPaused = false;
 
   late bool _showTranslationContent;
   late bool _showExplanationContent;
@@ -70,10 +72,12 @@ class _ExamGeneralState extends State<ExamGeneral> {
     if (_scrollController.hasClients) {
       const double itemWidth = 56.0;
       final double screenWidth = MediaQuery.of(context).size.width;
-      final double targetOffset = (currentIndex * itemWidth) - (screenWidth / 2) + (itemWidth / 2);
-      
-      final double maxScroll = (widget.questions.length * itemWidth) - screenWidth;
-      
+      final double targetOffset =
+          (currentIndex * itemWidth) - (screenWidth / 2) + (itemWidth / 2);
+
+      final double maxScroll =
+          (widget.questions.length * itemWidth) - screenWidth;
+
       double finalOffset = targetOffset;
       if (finalOffset < 0) finalOffset = 0;
       if (maxScroll > 0 && finalOffset > maxScroll) finalOffset = maxScroll;
@@ -114,7 +118,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
 
   void _submitAnswer(bool answer) {
     if (userAnswers[currentIndex] != null && !widget.immediateFeedback) return;
-    
+
     final isCorrect = widget.questions[currentIndex].answer == (answer ? 1 : 0);
     setState(() {
       userAnswers[currentIndex] = answer ? 1 : 0;
@@ -124,9 +128,11 @@ class _ExamGeneralState extends State<ExamGeneral> {
     // 记录点击时的索引，防止快速点击导致的跳题
     final int tappedIndex = currentIndex;
     final delay = widget.immediateFeedback ? 600 : 300;
-    
+
     Future.delayed(Duration(milliseconds: delay), () {
-      if (mounted && currentIndex == tappedIndex && currentIndex < widget.questions.length - 1) {
+      if (mounted &&
+          currentIndex == tappedIndex &&
+          currentIndex < widget.questions.length - 1) {
         _nextQuestion();
       }
     });
@@ -207,8 +213,8 @@ class _ExamGeneralState extends State<ExamGeneral> {
     if (ok) {
       if (mounted) {
         setState(() => _isFavorite = !_isFavorite);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(_isFavorite ? '已收藏' : '已取消收藏')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(_isFavorite ? '已收藏' : '已取消收藏')));
         await SyncService.syncFavoriteChange(
             _userId!, q.sectionId, q.questionNumber, _isFavorite);
       }
@@ -274,7 +280,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
           final isSelected = index == currentIndex;
           final answer = userAnswers[index];
           final result = answerResults[index];
-          
+
           Color borderColor = Colors.grey.shade300;
           Color bgColor = Colors.transparent;
           Color textColor = Colors.black87;
@@ -285,7 +291,9 @@ class _ExamGeneralState extends State<ExamGeneral> {
             textColor = const Color(0xFF1A237E);
           } else if (answer != null) {
             if (widget.immediateFeedback) {
-              bgColor = result == true ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1);
+              bgColor = result == true
+                  ? Colors.green.withOpacity(0.1)
+                  : Colors.red.withOpacity(0.1);
               borderColor = result == true ? Colors.green : Colors.red;
             } else {
               bgColor = Colors.blueGrey.withOpacity(0.1);
@@ -321,7 +329,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
   Widget _buildAnswerButton(bool value, String text, Color color) {
     final selectedAnswer = userAnswers[currentIndex];
     final isSelected = selectedAnswer == (value ? 1 : 0);
-    
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -367,7 +375,8 @@ class _ExamGeneralState extends State<ExamGeneral> {
     final question = widget.questions[currentIndex];
     final answered = userAnswers[currentIndex] != null;
     final result = answerResults[currentIndex];
-    final progress = userAnswers.where((a) => a != null).length / widget.questions.length;
+    final progress =
+        userAnswers.where((a) => a != null).length / widget.questions.length;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
@@ -390,19 +399,23 @@ class _ExamGeneralState extends State<ExamGeneral> {
                 const SizedBox(width: 4),
                 Text(
                   _formatTime(_remainingSeconds),
-                  style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ],
             ),
           ),
           IconButton(
-            icon: Icon(_isTimerPaused ? Icons.play_arrow : Icons.pause_circle_outline),
+            icon: Icon(
+                _isTimerPaused ? Icons.play_arrow : Icons.pause_circle_outline),
             onPressed: _toggleTimer,
             tooltip: _isTimerPaused ? '恢复计时' : '停止计时',
           ),
           TextButton(
             onPressed: _finishExam,
-            child: const Text('交卷', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            child: const Text('交卷',
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
           )
         ],
       ),
@@ -440,20 +453,26 @@ class _ExamGeneralState extends State<ExamGeneral> {
                         padding: const EdgeInsets.all(12),
                         margin: const EdgeInsets.only(bottom: 16),
                         decoration: BoxDecoration(
-                          color: result == true ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+                          color: result == true
+                              ? Colors.green.withOpacity(0.1)
+                              : Colors.red.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
                           children: [
                             Icon(
-                              result == true ? Icons.check_circle : Icons.cancel,
+                              result == true
+                                  ? Icons.check_circle
+                                  : Icons.cancel,
                               color: result == true ? Colors.green : Colors.red,
                             ),
                             const SizedBox(width: 8),
                             Text(
                               result == true ? '正确答案！' : '回答错误',
                               style: TextStyle(
-                                color: result == true ? Colors.green[700] : Colors.red[700],
+                                color: result == true
+                                    ? Colors.green[700]
+                                    : Colors.red[700],
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -476,7 +495,9 @@ class _ExamGeneralState extends State<ExamGeneral> {
                         ),
                         IconButton(
                           icon: Icon(
-                            _isFavorite ? Icons.bookmark : Icons.bookmark_border,
+                            _isFavorite
+                                ? Icons.bookmark
+                                : Icons.bookmark_border,
                             color: const Color(0xFF1A237E),
                           ),
                           onPressed: _toggleFavorite,
@@ -484,10 +505,12 @@ class _ExamGeneralState extends State<ExamGeneral> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    if (question.imageUrl != null && question.imageUrl!.isNotEmpty)
+                    if (question.imageUrl != null &&
+                        question.imageUrl!.isNotEmpty)
                       Center(
                         child: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 600, maxHeight: 400),
+                          constraints: const BoxConstraints(
+                              maxWidth: 600, maxHeight: 400),
                           child: Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             decoration: BoxDecoration(
@@ -505,20 +528,23 @@ class _ExamGeneralState extends State<ExamGeneral> {
                           ),
                         ),
                       ),
-                    if (widget.showTranslation && question.translation.isNotEmpty)
+                    if (widget.showTranslation &&
+                        question.translation.isNotEmpty)
                       _buildCollapsibleSection(
                         title: '翻译 (Translation)',
                         content: question.translation,
                         isExpanded: _showTranslationContent,
-                        onToggle: () => setState(() => _showTranslationContent = !_showTranslationContent),
+                        onToggle: () => setState(() =>
+                            _showTranslationContent = !_showTranslationContent),
                       ),
-                    
-                    if (widget.showExplanation && question.explanation.isNotEmpty)
+                    if (widget.showExplanation &&
+                        question.explanation.isNotEmpty)
                       _buildCollapsibleSection(
                         title: '解析 (Explanation)',
                         content: question.explanation,
                         isExpanded: _showExplanationContent,
-                        onToggle: () => setState(() => _showExplanationContent = !_showExplanationContent),
+                        onToggle: () => setState(() =>
+                            _showExplanationContent = !_showExplanationContent),
                       ),
                   ],
                 ),
@@ -545,7 +571,9 @@ class _ExamGeneralState extends State<ExamGeneral> {
                   label: const Text('上一题'),
                 ),
                 TextButton.icon(
-                  onPressed: currentIndex < widget.questions.length - 1 ? _nextQuestion : null,
+                  onPressed: currentIndex < widget.questions.length - 1
+                      ? _nextQuestion
+                      : null,
                   icon: const Icon(Icons.arrow_forward_ios, size: 16),
                   label: const Text('下一题'),
                 ),
@@ -580,9 +608,15 @@ class _ExamGeneralState extends State<ExamGeneral> {
               padding: const EdgeInsets.all(12),
               child: Row(
                 children: [
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey)),
+                  Text(title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.blueGrey)),
                   const Spacer(),
-                  Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: Colors.blueGrey),
+                  Icon(
+                      isExpanded
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
+                      color: Colors.blueGrey),
                 ],
               ),
             ),
@@ -590,7 +624,8 @@ class _ExamGeneralState extends State<ExamGeneral> {
           if (isExpanded)
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-              child: Text(content, style: const TextStyle(height: 1.5, color: Colors.black87)),
+              child: Text(content,
+                  style: const TextStyle(height: 1.5, color: Colors.black87)),
             ),
         ],
       ),

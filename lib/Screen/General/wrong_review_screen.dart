@@ -55,7 +55,7 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
   Future<void> _loadData() async {
     _userId = await AuthService().ensureLocalUser();
     print('[WrongReviewScreen] userId: $_userId');
-    
+
     if (_userId != null) {
       final questions = widget.historyId != null
           ? await DatabaseHelper.instance
@@ -75,8 +75,8 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
   }
 
   Future<void> _retakeQuiz() async {
-    final questions =
-        _wrongQuestions.map((e) => Question.fromMap(e)).toList()..shuffle();
+    final questions = _wrongQuestions.map((e) => Question.fromMap(e)).toList()
+      ..shuffle();
     if (questions.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('暂无错题')));
@@ -97,6 +97,7 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
           showTranslation: showTranslation,
           showExplanation: showExplanation,
           immediateFeedback: false,
+          stayOnWrongAnswer: false,
           collapsedMode: collapsedMode,
         ),
       ),
@@ -108,7 +109,8 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF0F4F4), // Light grey-green background
       appBar: AppBar(
-        title: const Text('错题复习', style: TextStyle(fontWeight: FontWeight.bold)),
+        title:
+            const Text('错题复习', style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal[300], // Fresh Teal color
         foregroundColor: Colors.white,
         elevation: 0,
@@ -162,14 +164,15 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
                 return _buildWrongQuestionCard(index);
               },
             ),
-      floatingActionButton: widget.historyId == null && _wrongQuestions.isNotEmpty
-          ? FloatingActionButton.extended(
-              onPressed: _retakeQuiz,
-              icon: const Icon(Icons.play_arrow),
-              label: const Text('重新练习'),
-              backgroundColor: Colors.teal[400],
-            )
-          : null,
+      floatingActionButton:
+          widget.historyId == null && _wrongQuestions.isNotEmpty
+              ? FloatingActionButton.extended(
+                  onPressed: _retakeQuiz,
+                  icon: const Icon(Icons.play_arrow),
+                  label: const Text('重新练习'),
+                  backgroundColor: Colors.teal[400],
+                )
+              : null,
     );
   }
 
@@ -180,7 +183,8 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
         children: [
           Icon(Icons.check_circle_outline, size: 80, color: Colors.teal[100]),
           const SizedBox(height: 16),
-          Text('太棒了，目前没有错题！', style: TextStyle(fontSize: 18, color: Colors.teal[700])),
+          Text('太棒了，目前没有错题！',
+              style: TextStyle(fontSize: 18, color: Colors.teal[700])),
         ],
       ),
     );
@@ -209,13 +213,15 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
                 Expanded(
                   child: Text(
                     questionText,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, height: 1.4),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w500, height: 1.4),
                   ),
                 ),
                 const SizedBox(width: 8),
                 // Wrong count badge
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.red[50],
                     borderRadius: BorderRadius.circular(10),
@@ -223,7 +229,10 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
                   ),
                   child: Text(
                     '错误 $wrongCount 次',
-                    style: TextStyle(color: Colors.red[700], fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.red[700],
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -237,7 +246,8 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
                     imageUrl,
                     height: 120,
                     fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                    errorBuilder: (context, error, stackTrace) =>
+                        const SizedBox(),
                   ),
                 ),
               ),
@@ -257,7 +267,8 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
                   onPressed: () => _deleteItem(index),
                   icon: const Icon(Icons.delete_outline, size: 18),
                   label: const Text('移除此题'),
-                  style: TextButton.styleFrom(foregroundColor: Colors.grey[600]),
+                  style:
+                      TextButton.styleFrom(foregroundColor: Colors.grey[600]),
                 ),
               ],
             ),
@@ -271,9 +282,14 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: color.withOpacity(0.7))),
+        Text(label,
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: color.withOpacity(0.7))),
         const SizedBox(height: 2),
-        Text(content, style: TextStyle(fontSize: 14, color: color, height: 1.4)),
+        Text(content,
+            style: TextStyle(fontSize: 14, color: color, height: 1.4)),
       ],
     );
   }
@@ -288,7 +304,8 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
       _wrongQuestions.removeAt(index);
     });
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('已从错题本移除'), duration: Duration(seconds: 1)));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('已从错题本移除'), duration: Duration(seconds: 1)));
     }
   }
 
@@ -299,7 +316,9 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
         title: const Text('确认清空'),
         content: const Text('确定要清空所有错题记录吗？'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('取消')),
+          TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('取消')),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             child: const Text('清空', style: TextStyle(color: Colors.red)),

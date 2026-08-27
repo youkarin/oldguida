@@ -39,23 +39,24 @@ class _PracticeScreenState extends State<PracticeScreen> {
           .showSnackBar(const SnackBar(content: Text('请至少选择一个章节')));
       return;
     }
-    
+
     final List<Map<String, dynamic>> rawQuestions;
     if (widget.isSequential) {
-      rawQuestions = await _db.getQuestionsByChaptersSequential(
-          _selectedChapters.toList());
+      rawQuestions = await _db
+          .getQuestionsByChaptersSequential(_selectedChapters.toList());
     } else {
       rawQuestions = await _db.getQuestionsByChaptersRandom(
           _selectedChapters.toList(), 30);
     }
-    
-    final questions =
-        rawQuestions.map((q) => Question.fromMap(q)).toList();
+
+    final questions = rawQuestions.map((q) => Question.fromMap(q)).toList();
 
     final prefs = await SharedPreferences.getInstance();
     final showTranslation = prefs.getBool('showTranslation') ?? true;
     final showExplanation = prefs.getBool('showExplanation') ?? true;
     final immediateFeedback = prefs.getBool('immediateFeedback') ?? false;
+    final storedStayOnWrongAnswer = prefs.getBool('stayOnWrongAnswer') ?? false;
+    final stayOnWrongAnswer = immediateFeedback && storedStayOnWrongAnswer;
     final collapsedMode = prefs.getBool('collapsedMode') ?? false;
 
     if (!mounted) return;
@@ -68,6 +69,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
           showTranslation: showTranslation,
           showExplanation: showExplanation,
           immediateFeedback: immediateFeedback,
+          stayOnWrongAnswer: stayOnWrongAnswer,
           collapsedMode: collapsedMode,
         ),
       ),
@@ -123,6 +125,3 @@ class _PracticeScreenState extends State<PracticeScreen> {
     );
   }
 }
-
-
-

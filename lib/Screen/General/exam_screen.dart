@@ -19,16 +19,16 @@ class _ExamScreenState extends State<ExamScreen> {
     // 随机抽取题目用于模拟考试
     final rawQuestions = await db.getAllQuestionsRandomWithSectionImage();
 
-    final questions = rawQuestions
-        .take(30)
-        .map((q) => Question.fromMap(q))
-        .toList();
+    final questions =
+        rawQuestions.take(30).map((q) => Question.fromMap(q)).toList();
 
     // 读取全局设置
     final prefs = await SharedPreferences.getInstance();
     final showTranslation = prefs.getBool('showTranslation') ?? true;
     final showExplanation = prefs.getBool('showExplanation') ?? true;
     final immediateFeedback = prefs.getBool('immediateFeedback') ?? false;
+    final storedStayOnWrongAnswer = prefs.getBool('stayOnWrongAnswer') ?? false;
+    final stayOnWrongAnswer = immediateFeedback && storedStayOnWrongAnswer;
     final collapsedMode = prefs.getBool('collapsedMode') ?? false;
 
     if (!mounted) return;
@@ -42,6 +42,7 @@ class _ExamScreenState extends State<ExamScreen> {
           showTranslation: showTranslation,
           showExplanation: showExplanation,
           immediateFeedback: immediateFeedback,
+          stayOnWrongAnswer: stayOnWrongAnswer,
           collapsedMode: collapsedMode,
         ),
       ),
@@ -51,7 +52,8 @@ class _ExamScreenState extends State<ExamScreen> {
   void _openPractice({bool isSequential = false}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => PracticeScreen(isSequential: isSequential)),
+      MaterialPageRoute(
+          builder: (_) => PracticeScreen(isSequential: isSequential)),
     );
   }
 
