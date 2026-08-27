@@ -80,34 +80,38 @@ jobs:
     # 步骤 C: 自动发布
     # =========================================================
 
-    - name: Ensure Release Repo Initialized
+    - name: Record Release Metadata
       run: |
-        # 创建临时目录操作 Release 仓库
-        mkdir -p temp_release_repo
+        git clone --branch main --single-branch \
+          "https://x-access-token:${RELEASE_TOKEN}@github.com/youkarin/Oldguida_release.git" \
+          temp_release_repo
         cd temp_release_repo
-        
-        git init
-        git remote add origin https://youkarin:${{ secrets.RELEASE_TOKEN }}@github.com/youkarin/Oldguida_release.git
-        
-        # 尝试拉取 main 分支
-        if git pull origin main; then
-          echo "✅ Release repository already initialized."
-        else
-          echo "⚠️ Release repository is empty or missing main branch. Initializing..."
-          echo "# Oldguida Release Repository" > README.md
-          
-          git checkout -b main
-          git add README.md
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git commit -m "Initial commit: Initialize repository for releases"
-          
-          # 推送到远程 main
-          git push -u origin main
-        fi
-        
-        cd ..
-        rm -rf temp_release_repo
+
+        jq -n \
+          --arg version "$VERSION_NAME" \
+          --argjson build "$GITHUB_RUN_NUMBER" \
+          --arg source_repository "$GITHUB_REPOSITORY" \
+          --arg source_branch "$GITHUB_REF_NAME" \
+          --arg source_commit "$GITHUB_SHA" \
+          --argjson workflow_run_id "$GITHUB_RUN_ID" \
+          --argjson workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
+          '{
+            version: $version,
+            build: $build,
+            source_repository: $source_repository,
+            source_branch: $source_branch,
+            source_commit: $source_commit,
+            workflow_run_id: $workflow_run_id,
+            workflow_run_attempt: $workflow_run_attempt
+          }' > release.json
+
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git add release.json
+        git commit -m "release: v${VERSION_NAME}+${GITHUB_RUN_NUMBER} (${GITHUB_REF_NAME})"
+        git push origin main
+      env:
+        RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
     # 场景 1: Main 分支 -> 正式版 (同时更新固定标签 'stable')
     - name: Create Official Release

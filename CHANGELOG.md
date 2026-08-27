@@ -4,6 +4,7 @@
 
 ### 修复
 
+- 发布前在 `Oldguida_release/main` 提交结构化版本元数据，使新 Release tag 指向当次构建产生的新提交并正确显示在 Release 列表顶部。
 - 修正 Android Release 发布策略：由版本化正式发布接管 `Latest`，固定 `stable` 仅作为下载入口，并将版本化预览发布正确标记为 prerelease。
 - 将 Android Gradle Plugin 从8.9.1升级至8.11.1，并将 Kotlin Gradle Plugin 从2.1.0升级至2.2.20，以满足 Flutter 3.47.1 的最低构建依赖要求。
 - 将 Android Gradle Wrapper 从8.12升级至8.14，解决当前 Flutter stable 的最低 Gradle 版本校验失败。
