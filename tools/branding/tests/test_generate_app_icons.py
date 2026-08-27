@@ -92,6 +92,25 @@ class AppIconGeneratorTest(unittest.TestCase):
         self.assertGreaterEqual(min(y for _, y in occupied), 102)
         self.assertLessEqual(max(y for _, y in occupied), 409)
 
+    def test_adaptive_foregrounds_stay_inside_the_66_of_108_safe_zone(self):
+        generate(self.root)
+        densities = {"mdpi": 108, "hdpi": 162, "xhdpi": 216, "xxhdpi": 324, "xxxhdpi": 432}
+
+        for density, size in densities.items():
+            with self.subTest(density=density), Image.open(
+                self.root / f"android/app/src/main/res/mipmap-{density}/ic_launcher_foreground.png"
+            ) as image:
+                bounding_box = image.getchannel("A").getbbox()
+
+            safe_side = size * 66 // 108
+            inset = (size - safe_side) // 2
+            self.assertIsNotNone(bounding_box)
+            left, top, right, bottom = bounding_box
+            self.assertGreaterEqual(left, inset)
+            self.assertGreaterEqual(top, inset)
+            self.assertLessEqual(right, size - inset)
+            self.assertLessEqual(bottom, size - inset)
+
     def test_windows_ico_contains_all_required_resolutions(self):
         generate(self.root)
         ico_path = self.root / "windows/runner/resources/app_icon.ico"

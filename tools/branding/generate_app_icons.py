@@ -118,6 +118,16 @@ def draw_maskable(size: int) -> Image.Image:
     return base.convert("RGB")
 
 
+def draw_adaptive_foreground(size: int) -> Image.Image:
+    """Draw a transparent Android foreground within its 60 percent safe zone."""
+    base = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    glyph_size = int(size * 0.60)
+    glyph = draw_foreground(glyph_size)
+    offset = (size - glyph_size) // 2
+    base.alpha_composite(glyph, (offset, offset))
+    return base
+
+
 def save_png(image: Image.Image, path: Path) -> None:
     """Write a PNG, creating the destination directory as needed."""
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -141,7 +151,7 @@ def generate(root: Path) -> list[Path]:
 
     for density, size in ANDROID_FOREGROUND.items():
         path = root / f"android/app/src/main/res/mipmap-{density}/ic_launcher_foreground.png"
-        save_png(draw_foreground(size), path)
+        save_png(draw_adaptive_foreground(size), path)
         written.append(path)
 
     ios_directory = root / "ios/Runner/Assets.xcassets/AppIcon.appiconset"
