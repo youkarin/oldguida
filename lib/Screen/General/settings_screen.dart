@@ -40,6 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   /// Loads persisted settings. Defaults are provided for first-time runs.
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
     setState(() {
       _showTranslation = prefs.getBool('showTranslation') ?? true;
       _showExplanation = prefs.getBool('showExplanation') ?? true;
