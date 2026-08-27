@@ -23,6 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _showTranslation = true;
   bool _showExplanation = true;
   bool _immediateFeedback = false;
+  bool _stayOnWrongAnswer = false;
   bool _debugMode = false;
   bool _collapsedMode = false;
   bool _experiencePreview = false;
@@ -43,6 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _showTranslation = prefs.getBool('showTranslation') ?? true;
       _showExplanation = prefs.getBool('showExplanation') ?? true;
       _immediateFeedback = prefs.getBool('immediateFeedback') ?? false;
+      _stayOnWrongAnswer = prefs.getBool('stayOnWrongAnswer') ?? false;
       _debugMode = prefs.getBool('debugMode') ?? false;
       _collapsedMode = prefs.getBool('collapsedMode') ?? false;
       _experiencePreview = prefs.getBool('experiencePreview') ?? false;
@@ -82,6 +84,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _immediateFeedback = value;
     });
+  }
+
+  Future<void> _updateStayOnWrongAnswer(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('stayOnWrongAnswer', value);
+    if (!mounted) return;
+    setState(() => _stayOnWrongAnswer = value);
   }
 
   /// Updates the "debug" preference and persists it.
@@ -323,6 +332,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             value: _immediateFeedback,
             onChanged: _updateImmediateFeedback,
           ),
+          if (_immediateFeedback)
+            SwitchListTile(
+              title: const Text('错题自动停留'),
+              subtitle: const Text('答错后停留在当前题，手动点击下一题继续'),
+              value: _stayOnWrongAnswer,
+              onChanged: _updateStayOnWrongAnswer,
+            ),
           SwitchListTile(
             title: const Text('Debug 模式'),
             value: _debugMode,
