@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:italian_driving_app/Services/keyword_service.dart';
 import 'package:italian_driving_app/Services/keyword_translation_settings.dart';
@@ -230,6 +231,74 @@ void main() {
     expect(_annotatedSpans(_rootSpan(tester)), isEmpty);
   });
 
+  testWidgets('pending lookup completion after dispose publishes no result',
+      (tester) async {
+    final completer = Completer<List<KeywordMatch>>();
+    final service = _FakeLookup((questionId, text) => completer.future);
+    final createdRecognizers = <TapGestureRecognizer>[];
+    void allocationListener(ObjectEvent event) {
+      if (event is ObjectCreated && event.object is TapGestureRecognizer) {
+        createdRecognizers.add(event.object as TapGestureRecognizer);
+      }
+    }
+
+    FlutterMemoryAllocations.instance.addListener(allocationListener);
+    addTearDown(
+      () =>
+          FlutterMemoryAllocations.instance.removeListener(allocationListener),
+    );
+
+    await tester.pumpWidget(_app(
+      KeywordQuestionText(
+        questionId: 1,
+        text: 'Dare precedenza.',
+        service: service,
+      ),
+    ));
+    await tester.pump();
+    await tester.pumpWidget(const SizedBox.shrink());
+    createdRecognizers.clear();
+
+    completer.complete([
+      _match(_precedenza, 'Dare precedenza.', 'precedenza'),
+    ]);
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    expect(createdRecognizers, isEmpty);
+    expect(find.byType(RichText), findsNothing);
+  });
+
+  testWidgets('custom semantics label preserves the keyword tap action',
+      (tester) async {
+    final semanticsHandle = tester.ensureSemantics();
+    final service = _FakeLookup((questionId, text) async => [
+          _match(_precedenza, text, 'precedenza'),
+        ]);
+
+    await tester.pumpWidget(_app(
+      KeywordQuestionText(
+        questionId: 1,
+        text: 'Dare precedenza.',
+        semanticsLabel: '驾考题目',
+        service: service,
+      ),
+    ));
+    await tester.pumpAndSettle();
+
+    expect(find.bySemanticsLabel('驾考题目'), findsOneWidget);
+    final semanticsRoot =
+        tester.binding.pipelineOwner.semanticsOwner!.rootSemanticsNode!;
+    final keywordSemantics = _semanticsNodes(semanticsRoot).singleWhere(
+      (node) => node.getSemanticsData().attributedLabel.string == 'precedenza',
+    );
+    expect(
+      keywordSemantics.getSemanticsData().hasAction(SemanticsAction.tap),
+      isTrue,
+    );
+    semanticsHandle.dispose();
+  });
+
   testWidgets('tap opens the sheet and only full-entry action returns an id',
       (tester) async {
     final service = _FakeLookup((questionId, text) async => [
@@ -247,9 +316,7 @@ void main() {
     ));
     await tester.pumpAndSettle();
 
-    final recognizer = _annotatedSpans(_rootSpan(tester)).single.recognizer!
-        as TapGestureRecognizer;
-    recognizer.onTap!();
+    await _tapTextRange(tester, 'Dare precedenza.', 'precedenza');
     await tester.pumpAndSettle();
 
     expect(viewedIds, isEmpty);
@@ -288,6 +355,60 @@ void main() {
 
     expect(await result, _precedenza.id);
   });
+
+  testWidgets('definition sheet works on a small keyboard viewport',
+      (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    tester.view.viewInsets = const FakeViewPadding(bottom: 280);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetViewInsets);
+
+    Future<int?>? result;
+    await tester.pumpWidget(
+      MaterialApp(
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: const TextScaler.linear(1.8),
+          ),
+          child: child!,
+        ),
+        home: Scaffold(
+          body: Builder(
+            builder: (context) => FilledButton(
+              onPressed: () {
+                result = showKeywordDefinitionSheet(
+                  context,
+                  _precedenza,
+                  matchedForm: 'dare la precedenza',
+                );
+              },
+              child: const Text('open small'),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('open small'));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(find.byType(SafeArea), findsWidgets);
+    expect(find.byType(SingleChildScrollView), findsOneWidget);
+
+    final fullEntryButton = find.widgetWithText(FilledButton, '查看完整词条');
+    await tester.scrollUntilVisible(
+      fullEntryButton,
+      120,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.tap(fullEntryButton);
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    expect(await result, _precedenza.id);
+  });
 }
 
 Widget _app(Widget child) => MaterialApp(
@@ -318,6 +439,34 @@ String _plainText(TextSpan span) {
     if (child is TextSpan) buffer.write(_plainText(child));
   }
   return buffer.toString();
+}
+
+Iterable<SemanticsNode> _semanticsNodes(SemanticsNode root) sync* {
+  yield root;
+  final children = <SemanticsNode>[];
+  root.visitChildren((child) {
+    children.add(child);
+    return true;
+  });
+  for (final child in children) {
+    yield* _semanticsNodes(child);
+  }
+}
+
+Future<void> _tapTextRange(
+  WidgetTester tester,
+  String fullText,
+  String target,
+) async {
+  final renderParagraph =
+      tester.renderObject<RenderParagraph>(find.byType(RichText));
+  final start = fullText.indexOf(target);
+  final boxes = renderParagraph.getBoxesForSelection(
+    TextSelection(baseOffset: start, extentOffset: start + target.length),
+  );
+  expect(boxes, isNotEmpty);
+  final localCenter = boxes.first.toRect().center;
+  await tester.tapAt(renderParagraph.localToGlobal(localCenter));
 }
 
 KeywordMatch _match(Keyword keyword, String text, String matchedText) {

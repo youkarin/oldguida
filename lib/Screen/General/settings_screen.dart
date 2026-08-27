@@ -105,6 +105,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() => _stayOnWrongAnswer = value);
   }
 
+  Future<void> _updateKeywordTranslation(bool value) async {
+    try {
+      await _keywordTranslationSettings.setEnabled(value);
+    } catch (_) {
+      // The settings notifier has already restored the persisted value.
+    }
+  }
+
   /// Updates the "debug" preference and persists it.
   Future<void> _updateDebugMode(bool value) async {
     final prefs = await SharedPreferences.getInstance();
@@ -350,7 +358,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               subtitle: const Text('在意大利语题目中划线显示可点击词条'),
               value: enabled,
               onChanged: (value) {
-                unawaited(_keywordTranslationSettings.setEnabled(value));
+                unawaited(_updateKeywordTranslation(value));
               },
             ),
           ),

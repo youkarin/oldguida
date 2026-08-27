@@ -224,7 +224,7 @@ class _KeywordQuestionTextState extends State<KeywordQuestionText> {
       spans.add(TextSpan(text: widget.text.substring(cursor)));
     }
 
-    return Text.rich(
+    final text = Text.rich(
       TextSpan(children: spans),
       style: widget.style,
       textAlign: widget.textAlign,
@@ -235,7 +235,14 @@ class _KeywordQuestionTextState extends State<KeywordQuestionText> {
       textScaler: widget.textScaler,
       maxLines: widget.maxLines,
       strutStyle: widget.strutStyle,
-      semanticsLabel: widget.semanticsLabel,
+    );
+    final semanticsLabel = widget.semanticsLabel;
+    if (semanticsLabel == null) return text;
+    return Semantics(
+      container: true,
+      explicitChildNodes: true,
+      label: semanticsLabel,
+      child: text,
     );
   }
 }
