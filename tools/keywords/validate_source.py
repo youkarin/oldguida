@@ -6,6 +6,7 @@ import re
 import sqlite3
 import sys
 import unicodedata
+from collections import Counter
 from collections.abc import Mapping
 from pathlib import Path
 
@@ -18,7 +19,17 @@ REQUIRED_FIELDS = {
     "forms",
     "exampleQuestionId",
 }
-ALLOWED_PARTS_OF_SPEECH = {"名词", "动词", "形容词", "副词", "固定短语"}
+ALLOWED_PARTS_OF_SPEECH = {
+    "名词",
+    "动词",
+    "形容词",
+    "副词",
+    "固定短语",
+    "名词/形容词",
+    "动词/形容词",
+    "形容词/名词",
+    "无人称动词",
+}
 PLACEHOLDER_FRAGMENTS = {
     "todo",
     "placeholder",
@@ -28,8 +39,89 @@ PLACEHOLDER_FRAGMENTS = {
     "常见术语",
 }
 CHINESE_RE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
-ITALIAN_LETTER_RE = re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿ]")
+ITALIAN_LETTERS = "A-Za-zÀÈÉÌÒÓÙàèéìòóù"
+ITALIAN_TERM_RE = re.compile(
+    rf"[{ITALIAN_LETTERS}]+(?:[ '][{ITALIAN_LETTERS}]+)*\Z"
+)
+ITALIAN_WORD_CHARACTER_RE = re.compile(rf"[0-9{ITALIAN_LETTERS}]")
+ITALIAN_TOKEN_RE = re.compile(rf"[{ITALIAN_LETTERS}]+")
 APOSTROPHE_TRANSLATION = str.maketrans({"’": "'", "‘": "'", "`": "'", "´": "'"})
+ALLOWED_SHORT_FORMS = frozenset({"kw"})
+FUNCTION_TOKENS = frozenset(
+    {
+        "a",
+        "ai",
+        "al",
+        "alla",
+        "alle",
+        "allo",
+        "con",
+        "da",
+        "dai",
+        "dal",
+        "dalla",
+        "dalle",
+        "dallo",
+        "de",
+        "dei",
+        "del",
+        "della",
+        "delle",
+        "dello",
+        "di",
+        "e",
+        "ed",
+        "gli",
+        "i",
+        "il",
+        "in",
+        "la",
+        "le",
+        "lo",
+        "non",
+        "per",
+        "su",
+        "sui",
+        "sul",
+        "sulla",
+        "sulle",
+        "sullo",
+        "un",
+        "una",
+        "uno",
+    }
+)
+SIMPLE_INFLECTION_SUFFIXES = frozenset({"a", "e", "i", "o"})
+ORTHOGRAPHIC_INFLECTION_PAIRS = frozenset(
+    {
+        frozenset({"a", "he"}),
+        frozenset({"a", "hi"}),
+        frozenset({"o", "he"}),
+        frozenset({"o", "hi"}),
+        frozenset({"ia", "e"}),
+        frozenset({"io", "i"}),
+    }
+)
+SHORT_INFLECTION_PAIRS = frozenset(
+    {
+        frozenset({"area", "aree"}),
+        frozenset({"fine", "fini"}),
+        frozenset({"luce", "luci"}),
+        frozenset({"olio", "olii"}),
+        frozenset({"urto", "urti"}),
+        frozenset({"zona", "zone"}),
+    }
+)
+IRREGULAR_FORMS = {
+    "consentire": frozenset({"consente", "consentono"}),
+    "dovere": frozenset({"deve", "devono"}),
+    "imporre": frozenset({"impone"}),
+    "indicare": frozenset({"indica", "indicano"}),
+    "potere": frozenset({"può", "possono"}),
+    "segnalare": frozenset({"segnala"}),
+    "vietare": frozenset({"vieta"}),
+    "non può": frozenset({"non possono"}),
+}
 
 
 class ValidationError(ValueError):
@@ -42,8 +134,14 @@ def normalize_text(value: str) -> str:
     return " ".join(normalized.casefold().split())
 
 
-def _is_italian_letter(value: str) -> bool:
-    return bool(value and ITALIAN_LETTER_RE.fullmatch(value))
+def normalize_surface(value: str) -> str:
+    """Normalize source typography while preserving intentional display case."""
+    normalized = unicodedata.normalize("NFC", value).translate(APOSTROPHE_TRANSLATION)
+    return " ".join(normalized.split())
+
+
+def _is_word_character(value: str) -> bool:
+    return bool(value and ITALIAN_WORD_CHARACTER_RE.fullmatch(value))
 
 
 def has_italian_boundaries(text: str, form: str) -> bool:
@@ -56,8 +154,8 @@ def has_italian_boundaries(text: str, form: str) -> bool:
     start = normalized_text.find(normalized_form)
     while start >= 0:
         end = start + len(normalized_form)
-        left_is_partial = start > 0 and _is_italian_letter(normalized_text[start - 1])
-        right_is_partial = end < len(normalized_text) and _is_italian_letter(normalized_text[end])
+        left_is_partial = start > 0 and _is_word_character(normalized_text[start - 1])
+        right_is_partial = end < len(normalized_text) and _is_word_character(normalized_text[end])
         if not left_is_partial and not right_is_partial:
             return True
         start = normalized_text.find(normalized_form, start + 1)
@@ -82,6 +180,62 @@ def _reject_placeholders(value: str, field: str, term: str) -> None:
     normalized = normalize_text(value)
     if any(fragment in normalized for fragment in PLACEHOLDER_FRAGMENTS):
         raise ValidationError(f"placeholder {field} is forbidden: {term}")
+
+
+def _validate_italian_surface(value: str, field: str) -> None:
+    normalized = normalize_text(value)
+    if value != normalize_surface(value):
+        raise ValidationError(f"{field} must be normalized Italian: {value}")
+    if not ITALIAN_TERM_RE.fullmatch(value):
+        raise ValidationError(f"invalid Italian term grammar for {field}: {value}")
+    compact_length = sum(len(token) for token in ITALIAN_TOKEN_RE.findall(value))
+    if compact_length < 3 and normalized not in ALLOWED_SHORT_FORMS:
+        raise ValidationError(f"invalid Italian term grammar for {field}: {value}")
+
+
+def _tokens(value: str) -> list[str]:
+    return ITALIAN_TOKEN_RE.findall(normalize_text(value))
+
+
+def _has_inflectional_overlap(left: str, right: str) -> bool:
+    if left == right:
+        return left not in FUNCTION_TOKENS and len(left) >= 3
+    if frozenset({left, right}) in SHORT_INFLECTION_PAIRS:
+        return True
+    for stem_length in range(min(len(left), len(right)) - 1, 3, -1):
+        if left[:stem_length] != right[:stem_length]:
+            continue
+        left_suffix = left[stem_length:]
+        right_suffix = right[stem_length:]
+        suffix_pair = frozenset({left_suffix, right_suffix})
+        if (
+            left_suffix in SIMPLE_INFLECTION_SUFFIXES
+            and right_suffix in SIMPLE_INFLECTION_SUFFIXES
+        ):
+            return True
+        if suffix_pair == frozenset({"io", "i"}):
+            return True
+        if (
+            suffix_pair in ORTHOGRAPHIC_INFLECTION_PAIRS
+            and left[:stem_length].endswith(("c", "g"))
+        ):
+            return True
+    return False
+
+
+def forms_are_related(term: str, form: str) -> bool:
+    """Conservatively accept inflectional, phrase, and audited irregular variants."""
+    normalized_term = normalize_text(term)
+    normalized_form = normalize_text(form)
+    if normalized_term == normalized_form:
+        return True
+    if normalized_form in IRREGULAR_FORMS.get(normalized_term, frozenset()):
+        return True
+    return any(
+        _has_inflectional_overlap(term_token, form_token)
+        for term_token in _tokens(normalized_term)
+        for form_token in _tokens(normalized_form)
+    )
 
 
 def validate_source(
@@ -118,12 +272,9 @@ def validate_source(
         note = _require_string(entry, "note", entry_number)
         normalized_term = normalize_text(term)
 
-        if term != normalized_term:
-            raise ValidationError(f"term must be normalized lowercase Italian: {term}")
-        if not ITALIAN_LETTER_RE.search(term):
-            raise ValidationError(f"term must contain Italian letters: {term}")
         if normalized_term in seen_terms:
             raise ValidationError(f"duplicate normalized term: {normalized_term}")
+        _validate_italian_surface(term, "term")
         if part_of_speech not in ALLOWED_PARTS_OF_SPEECH:
             raise ValidationError(f"invalid partOfSpeech for {term}: {part_of_speech}")
         _require_chinese(part_of_speech, "partOfSpeech", term)
@@ -139,10 +290,10 @@ def validate_source(
         local_forms: set[str] = set()
         for form_number, form_value in enumerate(forms_value, start=1):
             if type(form_value) is not str or not form_value.strip():
-                raise ValidationError(f"forms item {form_number} must be a non-empty string: {term}")
+                raise ValidationError(
+                    f"forms item {form_number} must be a non-empty string: {term}"
+                )
             normalized_form = normalize_text(form_value)
-            if not ITALIAN_LETTER_RE.search(normalized_form):
-                raise ValidationError(f"form must contain Italian letters: {form_value}")
             if normalized_form in local_forms:
                 raise ValidationError(f"duplicate normalized form: {normalized_form}")
             if normalized_form in seen_forms:
@@ -150,13 +301,15 @@ def validate_source(
                     f"duplicate normalized form: {normalized_form} "
                     f"({seen_forms[normalized_form]} and {term})"
                 )
-            if form_value != normalized_form:
-                raise ValidationError(f"form must be normalized lowercase Italian: {form_value}")
+            _validate_italian_surface(form_value, "form")
             local_forms.add(normalized_form)
             normalized_forms.append(normalized_form)
 
         if normalized_term not in local_forms:
             raise ValidationError(f"canonical term missing from forms: {normalized_term}")
+        for form_value in forms_value:
+            if not forms_are_related(term, form_value):
+                raise ValidationError(f"unrelated form for {term}: {form_value}")
 
         example_id = entry["exampleQuestionId"]
         if type(example_id) is not int:
@@ -189,14 +342,41 @@ def read_quiz_rows(database_path: Path) -> dict[int, str]:
         connection.close()
 
 
-def validation_summary(entries: list[dict[str, object]]) -> dict[str, int]:
+def validation_summary(
+    entries: list[dict[str, object]],
+    quiz_rows: Mapping[int, str],
+) -> dict[str, int]:
+    terms = [
+        normalize_text(entry["term"])
+        for entry in entries
+        if type(entry.get("term")) is str and entry["term"].strip()
+    ]
+    forms = [
+        normalize_text(form)
+        for entry in entries
+        if type(entry.get("forms")) is list
+        for form in entry["forms"]
+        if type(form) is str and form.strip()
+    ]
+    empty_definitions = sum(
+        any(
+            type(entry.get(field)) is not str or not entry[field].strip()
+            for field in ("translation", "note")
+        )
+        for entry in entries
+    )
+    invalid_example_ids = sum(
+        type(entry.get("exampleQuestionId")) is not int
+        or entry["exampleQuestionId"] not in quiz_rows
+        for entry in entries
+    )
     return {
-        "duplicateForms": 0,
-        "duplicateTerms": 0,
-        "emptyDefinitions": 0,
+        "duplicateForms": sum(count - 1 for count in Counter(forms).values() if count > 1),
+        "duplicateTerms": sum(count - 1 for count in Counter(terms).values() if count > 1),
+        "emptyDefinitions": empty_definitions,
         "entries": len(entries),
-        "forms": sum(len(entry["forms"]) for entry in entries),
-        "invalidExampleIds": 0,
+        "forms": len(forms),
+        "invalidExampleIds": invalid_example_ids,
     }
 
 
@@ -214,7 +394,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print(json.dumps(validation_summary(entries), ensure_ascii=False, sort_keys=True))
+    print(json.dumps(validation_summary(entries, quiz_rows), ensure_ascii=False, sort_keys=True))
     return 0
 
 
