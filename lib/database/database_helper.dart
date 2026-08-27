@@ -1,14 +1,15 @@
 import 'dart:io' if (dart.library.html) 'io_stub.dart' as io;
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'database_factory.dart';
+import 'keyword_database.dart';
 
 // ========== 基础常量 ==========
 const String _dbFileName = 'quiz.db';
-const int _dbVersion = 3;
+const int _dbVersion = 4;
 
 // ---------- quiz 表及相关 ----------
 const String tableQuiz = 'quiz';
@@ -120,9 +121,12 @@ class DatabaseHelper {
         final bytes = data.buffer.asUint8List(
             data.offsetInBytes, data.lengthInBytes);
         await io.File(path).writeAsBytes(bytes, flush: true);
-        print("数据库已从 assets 成功复制。");
-      } catch (e) {
-        print("从 assets 复制数据库时出错: $e");
+        debugPrint('Asset database copied.');
+      } catch (error) {
+        debugPrint(
+          'Asset database copy failed (${error.runtimeType}); '
+          'opening the local database normally.',
+        );
       }
     }
 
@@ -130,6 +134,7 @@ class DatabaseHelper {
     _db = await openDatabase(
       path,
       version: _dbVersion,
+      onConfigure: (db) => db.execute('PRAGMA foreign_keys = ON'),
       onUpgrade: _onUpgrade,
       onCreate: _onCreate,
     );
@@ -236,6 +241,15 @@ class DatabaseHelper {
       )
     ''');
 
+    try {
+      await KeywordDatabase.syncBundledIfNeeded(_db!);
+    } catch (error) {
+      debugPrint(
+        'Bundled dictionary sync failed (${error.runtimeType}); '
+        'using existing local data.',
+      );
+    }
+
     return _db!;
   }
 
@@ -252,7 +266,7 @@ class DatabaseHelper {
 
   // ----------- 数据库新建逻辑 -----------
   Future<void> _onCreate(Database db, int version) async {
-    // 建表语句建议你用 Python/DB Browser 预建好，Dart 侧一般只做拷贝，不做建表，故此处省略
+    await KeywordDatabase.ensureSchema(db);
   }
 
   // ----------- 数据库升级逻辑 -----------
@@ -270,6 +284,9 @@ class DatabaseHelper {
           UNIQUE($columnFavUserId, $columnFavSectionId, $columnFavQuestionNum)
         )
       ''');
+    }
+    if (oldVersion < 4) {
+      await KeywordDatabase.ensureSchema(db);
     }
   }
 
