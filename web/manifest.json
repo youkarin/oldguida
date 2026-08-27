@@ -1,6 +1,6 @@
 {
-    "name": "italian_driving_app",
-    "short_name": "italian_driving_app",
+    "name": "OldGuida",
+    "short_name": "OldGuida",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

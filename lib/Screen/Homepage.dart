@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Italian Driving App', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('OldGuida', style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: Container(
