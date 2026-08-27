@@ -197,6 +197,54 @@ class DatabaseHelper {
     );
   });
 
+  const fakeMethodDeclarations = <String, String>{
+    'line comment':
+        r'''// Future<List<Map<String, dynamic>>> getFavoriteQuestions(int userId) async { return db.rawQuery("SELECT q.* FROM quiz q"); }''',
+    'block comment':
+        r'''/* Future<List<Map<String, dynamic>>> getFavoriteQuestions(int userId) async { return db.rawQuery("SELECT q.* FROM quiz q"); } */''',
+    'ordinary string':
+        r'''final fake = "Future<List<Map<String, dynamic>>> getFavoriteQuestions(int userId) async { SELECT q.* FROM quiz q }";''',
+    'triple-quoted string':
+        r"""final fake = '''Future<List<Map<String, dynamic>>> getFavoriteQuestions(int userId) async { SELECT q.* FROM quiz q }''';""",
+  };
+  for (final fake in fakeMethodDeclarations.entries) {
+    test('query audit ignores a fake signature in a ${fake.key}', () {
+      final mutatedSource = '''
+class DatabaseHelper {
+  ${fake.value}
+
+  Future<List<Map<String, dynamic>>> getFavoriteQuestions(int userId) async {
+    return db.rawQuery("SELECT q.question FROM quiz q");
+  }
+
+  Future<List<Map<String, dynamic>>> getWrongAnswerQuestions(int userId) async {
+    return db.rawQuery("SELECT q.* FROM quiz q");
+  }
+}
+''';
+
+      final codeMask = _dartCodeMask(mutatedSource);
+      expect(codeMask.length, mutatedSource.length);
+      expect(
+        RegExp(r'\r\n|\r|\n').allMatches(codeMask).map((match) => match.start),
+        RegExp(r'\r\n|\r|\n')
+            .allMatches(mutatedSource)
+            .map((match) => match.start),
+      );
+      final favoriteBody =
+          _dartMethodBody(mutatedSource, 'getFavoriteQuestions');
+      expect(favoriteBody, contains('SELECT q.question'));
+      expect(favoriteBody, isNot(contains('SELECT q.*')));
+      expect(_queryProjectsQuizId(favoriteBody), isFalse);
+      expect(
+        _queryProjectsQuizId(
+          _dartMethodBody(mutatedSource, 'getWrongAnswerQuestions'),
+        ),
+        isTrue,
+      );
+    });
+  }
+
   test('production screens contain no remaining raw Italian Text renderer', () {
     final offenders = <String>[];
     for (final entity in Directory('lib/Screen').listSync(recursive: true)) {
@@ -339,23 +387,24 @@ int _lineNumber(String source, int offset) =>
     '\n'.allMatches(source.substring(0, offset)).length + 1;
 
 String _dartMethodBody(String source, String methodName) {
+  final codeMask = _dartCodeMask(source);
   final signature = RegExp(
     'Future\\s*<\\s*List\\s*<\\s*Map\\s*<\\s*String\\s*,\\s*dynamic\\s*>\\s*>\\s*>\\s*'
     '${RegExp.escape(methodName)}\\s*\\(',
-  ).firstMatch(source);
+  ).firstMatch(codeMask);
   if (signature == null) {
     throw StateError('Method signature not found: $methodName');
   }
 
   final parametersOpen = signature.end - 1;
   final parametersClose = _matchingDelimiter(
-    source,
+    codeMask,
     parametersOpen,
     '('.codeUnitAt(0),
     ')'.codeUnitAt(0),
   );
   final bodyOpen = _nextCodeUnit(
-    source,
+    codeMask,
     parametersClose + 1,
     '{'.codeUnitAt(0),
   );
@@ -369,6 +418,26 @@ String _dartMethodBody(String source, String methodName) {
     '}'.codeUnitAt(0),
   );
   return source.substring(bodyOpen + 1, bodyClose);
+}
+
+String _dartCodeMask(String source) {
+  final codeUnits = source.codeUnits.toList(growable: false);
+  var index = 0;
+  while (index < source.length) {
+    final skipped = _skipCommentOrString(source, index);
+    if (skipped == null) {
+      index++;
+      continue;
+    }
+    for (var masked = index; masked < skipped; masked++) {
+      final codeUnit = codeUnits[masked];
+      if (codeUnit != 0x0A && codeUnit != 0x0D) {
+        codeUnits[masked] = 0x20;
+      }
+    }
+    index = skipped;
+  }
+  return String.fromCharCodes(codeUnits);
 }
 
 bool _queryProjectsQuizId(String methodBody) {
