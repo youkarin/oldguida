@@ -222,6 +222,7 @@ void main() {
         prefix: 'Q2: ',
         text: 'Il veicolo rallenta.',
         service: errorService,
+        lookupErrorLogger: (_) {},
       ),
     ));
     await tester.pump();
@@ -229,6 +230,44 @@ void main() {
     expect(tester.takeException(), isNull);
     expect(_plainText(_rootSpan(tester)), 'Q2: Il veicolo rallenta.');
     expect(_annotatedSpans(_rootSpan(tester)), isEmpty);
+  });
+
+  testWidgets('lookup failure logs a sanitized type and stack once per load',
+      (tester) async {
+    const secret = 'private-database-location';
+    final logs = <String>[];
+    final service = _FakeLookup(
+      (questionId, text) => Future.error(
+        StateError(secret),
+        StackTrace.current,
+      ),
+    );
+
+    Widget subject({String prefix = 'Q1: '}) => _app(
+          KeywordQuestionText(
+            questionId: 1,
+            prefix: prefix,
+            text: 'Dare precedenza.',
+            service: service,
+            lookupErrorLogger: logs.add,
+          ),
+        );
+
+    await tester.pumpWidget(subject());
+    await tester.pump();
+    await tester.pump();
+
+    expect(logs, hasLength(1));
+    expect(logs.single, contains('StateError'));
+    expect(logs.single, contains('#0'));
+    expect(logs.single, isNot(contains(secret)));
+    expect(_plainText(_rootSpan(tester)), 'Q1: Dare precedenza.');
+    expect(_annotatedSpans(_rootSpan(tester)), isEmpty);
+
+    await tester.pumpWidget(subject(prefix: 'Question 1: '));
+    await tester.pump();
+    expect(service.matchCalls, 1);
+    expect(logs, hasLength(1));
   });
 
   testWidgets('pending lookup completion after dispose publishes no result',

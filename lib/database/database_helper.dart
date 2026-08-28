@@ -183,26 +183,31 @@ class DatabaseHelper {
     final path = join(dbPath, _dbFileName);
 
     if (kIsWeb) {
-      try {
-        final installed = await BundledDatabaseInstaller.installIfMissing(
-          factory: databaseFactory,
-          path: path,
-          loadBytes: () async {
-            final data = await rootBundle.load('assets/db/$_dbFileName');
-            return data.buffer.asUint8List(
-              data.offsetInBytes,
-              data.lengthInBytes,
+      final installed = await BundledDatabaseInstaller.installIfMissing(
+        factory: databaseFactory,
+        path: path,
+        loadBytes: () async {
+          final data = await rootBundle.load('assets/db/$_dbFileName');
+          return data.buffer.asUint8List(
+            data.offsetInBytes,
+            data.lengthInBytes,
+          );
+        },
+        validateDatabase: (installedPath) async {
+          Database? bundled;
+          try {
+            bundled = await databaseFactory.openDatabase(
+              installedPath,
+              options: OpenDatabaseOptions(singleInstance: false),
             );
-          },
-          runExclusive: runWithDatabaseInstallLock,
-        );
-        if (installed) debugPrint('Asset database copied.');
-      } catch (error) {
-        debugPrint(
-          'Asset database copy failed (${error.runtimeType}); '
-          'opening the local database normally.',
-        );
-      }
+            await KeywordDatabase.validateBundledDatabase(bundled);
+          } finally {
+            await bundled?.close();
+          }
+        },
+        runExclusive: runWithDatabaseInstallLock,
+      );
+      if (installed) debugPrint('Asset database copied.');
     } else if (!await databaseExists(path)) {
       try {
         await io.Directory(dirname(path)).create(recursive: true);

@@ -1,4 +1,5 @@
 import 'dart:io' if (dart.library.html) 'io_stub.dart' as io;
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show rootBundle;
@@ -6,6 +7,9 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart'
     show getApplicationSupportDirectory;
 import 'package:sqflite/sqflite.dart';
+
+import 'bundled_database_installer.dart';
+import 'database_install_lock.dart';
 
 abstract final class KeywordDatabase {
   static const int bundledVersion = 1;
@@ -63,6 +67,51 @@ abstract final class KeywordDatabase {
     );
   }
 
+  static Future<void> validateBundledDatabase(Database db) async {
+    final quickCheck = await db.rawQuery('PRAGMA quick_check');
+    if (quickCheck.length != 1 || quickCheck.single.values.single != 'ok') {
+      throw StateError('Bundled database failed SQLite quick_check');
+    }
+    if ((await db.rawQuery('PRAGMA foreign_key_check')).isNotEmpty) {
+      throw StateError('Bundled database has foreign key violations');
+    }
+    await _requireColumns(db, const {
+      'quiz': {
+        'id',
+        'question',
+        'answer',
+        'section_id',
+        'translation',
+        'explanation',
+        'question_number',
+      },
+      'chapter': {'id', 'chapter_id', 'name', 'image_path'},
+      'section': {'id', 'section_id', 'chapter_id', 'name', 'image_path'},
+    });
+    for (final expected in const {
+      'quiz': 7193,
+      'chapter': 25,
+      'section': 925,
+    }.entries) {
+      final count = Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(*) FROM ${expected.key}'),
+      );
+      if (count != expected.value) {
+        throw StateError(
+          'Bundled database protected table ${expected.key} has $count rows; '
+          'expected ${expected.value}',
+        );
+      }
+    }
+    if (await _strictSeedVersion(db) != bundledVersion) {
+      throw StateError('Bundled dictionary version is unexpected');
+    }
+    final dictionary = await _validatedSeedRows(db, db);
+    if (dictionary.entries.length != 631) {
+      throw StateError('Bundled dictionary entry count is unexpected');
+    }
+  }
+
   static Future<bool> syncFrom({
     required Database target,
     required Database seed,
@@ -107,8 +156,24 @@ abstract final class KeywordDatabase {
   }
 
   static Future<void> syncBundledIfNeeded(Database target) async {
-    if (kIsWeb) return;
     if (await _version(target) >= bundledVersion) return;
+
+    if (kIsWeb) {
+      await syncBundledWithFactoryIfNeeded(
+        target: target,
+        factory: databaseFactory,
+        seedPath: '${target.path}.dictionary_seed',
+        loadBytes: () async {
+          final data = await rootBundle.load('assets/db/quiz.db');
+          return data.buffer.asUint8List(
+            data.offsetInBytes,
+            data.lengthInBytes,
+          );
+        },
+        runExclusive: runWithDatabaseInstallLock,
+      );
+      return;
+    }
 
     final directory = await getApplicationSupportDirectory();
     final supportDirectory = io.Directory(directory.path);
@@ -143,6 +208,43 @@ abstract final class KeywordDatabase {
         }
       }
     }
+  }
+
+  static Future<bool> syncBundledWithFactoryIfNeeded({
+    required Database target,
+    required DatabaseFactory factory,
+    required String seedPath,
+    required Future<Uint8List> Function() loadBytes,
+    required ExclusiveLockRunner runExclusive,
+  }) {
+    return runExclusive<bool>(
+      BundledDatabaseInstaller.lockName(target.path),
+      () async {
+        if (await _version(target) >= bundledVersion) return false;
+
+        Database? seed;
+        try {
+          if (await factory.databaseExists(seedPath)) {
+            await factory.deleteDatabase(seedPath);
+          }
+          final bytes = await loadBytes();
+          await factory.writeDatabaseBytes(seedPath, bytes);
+          seed = await factory.openDatabase(
+            seedPath,
+            options: OpenDatabaseOptions(singleInstance: false),
+          );
+          return await syncFrom(target: target, seed: seed);
+        } finally {
+          try {
+            await seed?.close();
+          } finally {
+            if (await factory.databaseExists(seedPath)) {
+              await factory.deleteDatabase(seedPath);
+            }
+          }
+        }
+      },
+    );
   }
 
   static Future<

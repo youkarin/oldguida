@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/database/keyword_database.dart';
 import 'package:path/path.dart' as path;
-// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -423,6 +423,101 @@ void main() {
       );
       expect(_temporarySeedEntities(directory), isEmpty);
     });
+  });
+
+  test('web-style bundled sync upgrades an existing v3 empty dictionary',
+      () async {
+    final directory = await io.Directory.systemTemp.createTemp(
+      'oldguida_web_dictionary_sync_test_',
+    );
+    final targetPath = path.join(directory.path, 'quiz.db');
+    final seedPath = path.join(directory.path, 'quiz_dictionary_seed.db');
+    Database? existing;
+    try {
+      final data = await rootBundle.load('assets/db/quiz.db');
+      final bundledBytes = data.buffer.asUint8List(
+        data.offsetInBytes,
+        data.lengthInBytes,
+      );
+      await databaseFactoryFfi.writeDatabaseBytes(targetPath, bundledBytes);
+      existing = await _openFileDatabase(targetPath);
+      await existing.delete('keyword_examples');
+      await existing.delete('keyword_forms');
+      await existing.delete('keyword_dictionary');
+      await existing.delete('dictionary_meta');
+      await existing.execute(
+        'CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT NOT NULL)',
+      );
+      await existing.insert('users', {'id': 7, 'name': 'keep-user'});
+      await existing.execute('PRAGMA user_version = 3');
+      final lockNames = <String>[];
+
+      await KeywordDatabase.syncBundledWithFactoryIfNeeded(
+        target: existing,
+        factory: databaseFactoryFfi,
+        seedPath: seedPath,
+        loadBytes: () async => bundledBytes,
+        runExclusive: <T>(name, action) {
+          lockNames.add(name);
+          return action();
+        },
+      );
+
+      expect(await _userVersion(existing), 3);
+      expect(await _dictionaryVersion(existing), 1);
+      expect(
+        Sqflite.firstIntValue(
+          await existing.rawQuery('SELECT COUNT(*) FROM keyword_dictionary'),
+        ),
+        631,
+      );
+      expect(await existing.query('users'), [
+        {'id': 7, 'name': 'keep-user'},
+      ]);
+      expect(lockNames, hasLength(1));
+      expect(lockNames.single, contains(targetPath));
+      expect(await databaseFactoryFfi.databaseExists(seedPath), isFalse);
+    } finally {
+      await existing?.close();
+      if (await directory.exists()) {
+        await directory.delete(recursive: true);
+      }
+    }
+  });
+
+  test('bundled validation rejects protected quiz count drift', () async {
+    final directory = await io.Directory.systemTemp.createTemp(
+      'oldguida_bundled_validation_test_',
+    );
+    final databasePath = path.join(directory.path, 'quiz.db');
+    Database? database;
+    try {
+      final data = await rootBundle.load('assets/db/quiz.db');
+      await databaseFactoryFfi.writeDatabaseBytes(
+        databasePath,
+        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+      );
+      database = await _openFileDatabase(databasePath);
+      await database.insert('quiz', {
+        'id': 999999,
+        'question': 'unexpected protected row',
+        'answer': 1,
+        'section_id': 1,
+        'translation': '',
+        'explanation': '',
+        'question_number': 999999,
+      });
+
+      await expectLater(
+        KeywordDatabase.validateBundledDatabase(database),
+        throwsA(isA<StateError>()),
+      );
+    } finally {
+      await database?.close();
+      if (await directory.exists()) {
+        await directory.delete(recursive: true);
+      }
+    }
   });
 
   test('syncBundledIfNeeded creates an atomic temporary seed directory',

@@ -8,14 +8,18 @@ typedef ExclusiveLockRunner = Future<T> Function<T>(
 );
 
 abstract final class BundledDatabaseInstaller {
+  static String lockName(String path) =>
+      'oldguida:bundled-database-install:$path';
+
   static Future<bool> installIfMissing({
     required DatabaseFactory factory,
     required String path,
     required Future<Uint8List> Function() loadBytes,
+    required Future<void> Function(String path) validateDatabase,
     required ExclusiveLockRunner runExclusive,
   }) {
     return runExclusive<bool>(
-      'oldguida:bundled-database-install:$path',
+      lockName(path),
       () async {
         if (await factory.databaseExists(path)) return false;
 
@@ -24,6 +28,7 @@ abstract final class BundledDatabaseInstaller {
 
         try {
           await factory.writeDatabaseBytes(path, bytes);
+          await validateDatabase(path);
         } catch (error, stackTrace) {
           try {
             await factory.deleteDatabase(path);

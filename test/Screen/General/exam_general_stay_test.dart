@@ -118,6 +118,28 @@ void main() {
     expect(find.textContaining('Q2:'), findsOneWidget);
   });
 
+  testWidgets('manual navigation cancels a pending correct-answer advance',
+      (tester) async {
+    await pumpExam(
+      tester,
+      immediateFeedback: true,
+      stayOnWrongAnswer: true,
+    );
+
+    await tester.tap(find.text('Vero'));
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text('下一题'));
+    await tester.pump();
+    expect(find.textContaining('Q2:'), findsOneWidget);
+
+    await tester.tap(find.text('1'));
+    await tester.pump();
+    expect(find.textContaining('Q1:'), findsOneWidget);
+
+    await tester.pump(const Duration(milliseconds: 301));
+    expect(find.textContaining('Q1:'), findsOneWidget);
+  });
+
   testWidgets('changing a correct answer to wrong cancels the pending advance',
       (tester) async {
     await pumpExam(

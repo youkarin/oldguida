@@ -26,6 +26,7 @@ class KeywordQuestionText extends StatefulWidget {
     this.service,
     this.settings,
     this.onViewFullEntry,
+    this.lookupErrorLogger,
   });
 
   final int questionId;
@@ -43,6 +44,7 @@ class KeywordQuestionText extends StatefulWidget {
   final KeywordLookup? service;
   final KeywordTranslationSettings? settings;
   final ValueChanged<int>? onViewFullEntry;
+  final ValueChanged<String>? lookupErrorLogger;
 
   @override
   State<KeywordQuestionText> createState() => _KeywordQuestionTextState();
@@ -114,7 +116,15 @@ class _KeywordQuestionTextState extends State<KeywordQuestionText> {
         return;
       }
       _installAnnotations(_validMatches(matches, text));
-    } catch (_) {
+    } catch (error, stackTrace) {
+      final message =
+          'Keyword lookup failed (${error.runtimeType}).\n$stackTrace';
+      final logger = widget.lookupErrorLogger;
+      if (logger != null) {
+        logger(message);
+      } else {
+        debugPrint(message);
+      }
       // Dictionary failures deliberately preserve the ordinary question text.
     }
   }

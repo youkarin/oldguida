@@ -43,6 +43,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
   List<bool?> answerResults = [];
   late DateTime startTime;
   Timer? _timer;
+  Timer? _autoAdvanceTimer;
   int _remainingSeconds = 30 * 60;
   int? _userId;
   bool _isFavorite = false;
@@ -68,6 +69,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
   @override
   void dispose() {
     _timer?.cancel();
+    _cancelPendingAutoAdvance();
     _scrollController.dispose();
     _contentScrollController.dispose();
     super.dispose();
@@ -130,6 +132,8 @@ class _ExamGeneralState extends State<ExamGeneral> {
       return;
     }
 
+    _cancelPendingAutoAdvance();
+
     final isCorrect = widget.questions[currentIndex].answer == (answer ? 1 : 0);
     setState(() {
       userAnswers[currentIndex] = answer ? 1 : 0;
@@ -148,7 +152,8 @@ class _ExamGeneralState extends State<ExamGeneral> {
     final tappedIndex = currentIndex;
     final delay = widget.immediateFeedback ? 600 : 300;
 
-    Future.delayed(Duration(milliseconds: delay), () {
+    _autoAdvanceTimer = Timer(Duration(milliseconds: delay), () {
+      _autoAdvanceTimer = null;
       if (!mounted) return;
       if (currentIndex != tappedIndex ||
           currentIndex >= widget.questions.length - 1) {
@@ -189,6 +194,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
   }
 
   void _nextQuestion() {
+    _cancelPendingAutoAdvance();
     if (!mounted) return;
     if (currentIndex < widget.questions.length - 1) {
       setState(() {
@@ -204,6 +210,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
   }
 
   void _prevQuestion() {
+    _cancelPendingAutoAdvance();
     if (currentIndex > 0) {
       setState(() {
         currentIndex--;
@@ -218,6 +225,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
   }
 
   void _goToQuestion(int index) {
+    _cancelPendingAutoAdvance();
     setState(() {
       currentIndex = index;
     });
@@ -227,6 +235,11 @@ class _ExamGeneralState extends State<ExamGeneral> {
     if (_contentScrollController.hasClients) {
       _contentScrollController.jumpTo(0);
     }
+  }
+
+  void _cancelPendingAutoAdvance() {
+    _autoAdvanceTimer?.cancel();
+    _autoAdvanceTimer = null;
   }
 
   Future<void> _toggleFavorite() async {
@@ -255,6 +268,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
 
   Future<void> _finishExam() async {
     _timer?.cancel();
+    _cancelPendingAutoAdvance();
     final endTime = DateTime.now();
     final duration = endTime.difference(startTime);
     final correctCount = answerResults.where((r) => r == true).length;

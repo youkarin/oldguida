@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:italian_driving_app/database/bundled_database_installer.dart';
+import 'package:italian_driving_app/database/keyword_database.dart';
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -37,6 +38,7 @@ void main() {
       factory: databaseFactoryFfi,
       path: databasePath,
       loadBytes: _loadBundledQuizBytes,
+      validateDatabase: _validateBundledDatabase,
       runExclusive: _runImmediately,
     );
 
@@ -73,6 +75,7 @@ void main() {
       factory: databaseFactoryFfi,
       path: databasePath,
       loadBytes: _loadBundledQuizBytes,
+      validateDatabase: _validateBundledDatabase,
       runExclusive: _runImmediately,
     );
 
@@ -104,6 +107,7 @@ void main() {
         await competingDatabase.close();
         return _loadBundledQuizBytes();
       },
+      validateDatabase: _validateBundledDatabase,
       runExclusive: _runImmediately,
     );
 
@@ -136,6 +140,7 @@ void main() {
       factory: databaseFactoryFfi,
       path: databasePath,
       loadBytes: loadBytes,
+      validateDatabase: _validateBundledDatabase,
       runExclusive: lock.run,
     );
     await firstLoadStarted.future;
@@ -143,6 +148,7 @@ void main() {
       factory: databaseFactoryFfi,
       path: databasePath,
       loadBytes: loadBytes,
+      validateDatabase: _validateBundledDatabase,
       runExclusive: lock.run,
     );
     await Future<void>.delayed(Duration.zero);
@@ -172,6 +178,7 @@ void main() {
         factory: factory,
         path: databasePath,
         loadBytes: _loadBundledQuizBytes,
+        validateDatabase: _validateBundledDatabase,
         runExclusive: _runImmediately,
       ),
       throwsA(same(writeError)),
@@ -182,6 +189,7 @@ void main() {
       factory: factory,
       path: databasePath,
       loadBytes: _loadBundledQuizBytes,
+      validateDatabase: _validateBundledDatabase,
       runExclusive: _runImmediately,
     );
 
@@ -205,11 +213,60 @@ void main() {
         factory: factory,
         path: databasePath,
         loadBytes: _loadBundledQuizBytes,
+        validateDatabase: _validateBundledDatabase,
         runExclusive: _runImmediately,
       ),
       throwsA(same(writeError)),
     );
     expect(factory.deleteAttempts, 1);
+  });
+
+  test('asset load failure propagates without creating the target', () async {
+    final databasePath = path.join(temporaryDirectory.path, 'quiz.db');
+    final loadError = StateError('bundled asset load failed');
+    var validationCalls = 0;
+
+    await expectLater(
+      BundledDatabaseInstaller.installIfMissing(
+        factory: databaseFactoryFfi,
+        path: databasePath,
+        loadBytes: () => Future<Uint8List>.error(loadError),
+        validateDatabase: (_) async {
+          validationCalls++;
+        },
+        runExclusive: _runImmediately,
+      ),
+      throwsA(same(loadError)),
+    );
+
+    expect(validationCalls, 0);
+    expect(await databaseFactoryFfi.databaseExists(databasePath), isFalse);
+  });
+
+  test('validation failure propagates and deletes the installed target',
+      () async {
+    final databasePath = path.join(temporaryDirectory.path, 'quiz.db');
+    final validationError = StateError('bundled validation failed');
+
+    await expectLater(
+      BundledDatabaseInstaller.installIfMissing(
+        factory: databaseFactoryFfi,
+        path: databasePath,
+        loadBytes: _loadBundledQuizBytes,
+        validateDatabase: (installedPath) async {
+          expect(installedPath, databasePath);
+          expect(
+            await databaseFactoryFfi.databaseExists(installedPath),
+            isTrue,
+          );
+          throw validationError;
+        },
+        runExclusive: _runImmediately,
+      ),
+      throwsA(same(validationError)),
+    );
+
+    expect(await databaseFactoryFfi.databaseExists(databasePath), isFalse);
   });
 }
 
@@ -286,6 +343,15 @@ Future<T> _runImmediately<T>(
 Future<Uint8List> _loadBundledQuizBytes() async {
   final data = await rootBundle.load('assets/db/quiz.db');
   return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+}
+
+Future<void> _validateBundledDatabase(String databasePath) async {
+  final database = await _openDatabase(databasePath);
+  try {
+    await KeywordDatabase.validateBundledDatabase(database);
+  } finally {
+    await database.close();
+  }
 }
 
 Future<Database> _openDatabase(String databasePath) =>
