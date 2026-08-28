@@ -7,6 +7,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'bundled_database_installer.dart';
 import 'database_factory.dart';
+import 'database_install_lock.dart';
 import 'keyword_database.dart';
 
 // ========== 基础常量 ==========
@@ -193,6 +194,7 @@ class DatabaseHelper {
               data.lengthInBytes,
             );
           },
+          runExclusive: runWithDatabaseInstallLock,
         );
         if (installed) debugPrint('Asset database copied.');
       } catch (error) {

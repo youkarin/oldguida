@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,6 +37,7 @@ void main() {
       factory: databaseFactoryFfi,
       path: databasePath,
       loadBytes: _loadBundledQuizBytes,
+      runExclusive: _runImmediately,
     );
 
     expect(installed, isTrue);
@@ -72,6 +73,7 @@ void main() {
       factory: databaseFactoryFfi,
       path: databasePath,
       loadBytes: _loadBundledQuizBytes,
+      runExclusive: _runImmediately,
     );
 
     expect(installed, isFalse);
@@ -83,7 +85,203 @@ void main() {
     expect(await _tableExists(reopened, 'quiz'), isFalse);
     expect(await _tableExists(reopened, 'keyword_dictionary'), isFalse);
   });
+
+  test('target created while bundled bytes load is not overwritten', () async {
+    final databasePath = path.join(temporaryDirectory.path, 'quiz.db');
+
+    final installed = await BundledDatabaseInstaller.installIfMissing(
+      factory: databaseFactoryFfi,
+      path: databasePath,
+      loadBytes: () async {
+        final competingDatabase = await _openDatabase(databasePath);
+        await competingDatabase.execute(
+          'CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT NOT NULL)',
+        );
+        await competingDatabase.insert(
+          'users',
+          {'id': 11, 'name': 'race-winner'},
+        );
+        await competingDatabase.close();
+        return _loadBundledQuizBytes();
+      },
+      runExclusive: _runImmediately,
+    );
+
+    expect(installed, isFalse);
+    final reopened = await _openDatabase(databasePath);
+    addTearDown(reopened.close);
+    expect(await reopened.query('users'), [
+      {'id': 11, 'name': 'race-winner'},
+    ]);
+    expect(await _tableExists(reopened, 'quiz'), isFalse);
+  });
+
+  test('concurrent installers serialize and only one writes', () async {
+    final databasePath = path.join(temporaryDirectory.path, 'quiz.db');
+    final lock = _SerialExclusiveLock();
+    final firstLoadStarted = Completer<void>();
+    final releaseFirstLoad = Completer<void>();
+    var loadCount = 0;
+
+    Future<Uint8List> loadBytes() async {
+      loadCount++;
+      if (loadCount == 1) {
+        firstLoadStarted.complete();
+        await releaseFirstLoad.future;
+      }
+      return _loadBundledQuizBytes();
+    }
+
+    final first = BundledDatabaseInstaller.installIfMissing(
+      factory: databaseFactoryFfi,
+      path: databasePath,
+      loadBytes: loadBytes,
+      runExclusive: lock.run,
+    );
+    await firstLoadStarted.future;
+    final second = BundledDatabaseInstaller.installIfMissing(
+      factory: databaseFactoryFfi,
+      path: databasePath,
+      loadBytes: loadBytes,
+      runExclusive: lock.run,
+    );
+    await Future<void>.delayed(Duration.zero);
+    releaseFirstLoad.complete();
+
+    final results = await Future.wait([first, second]);
+    expect(results, [isTrue, isFalse]);
+    expect(loadCount, 1);
+    expect(lock.names, hasLength(2));
+    expect(lock.names.toSet(), hasLength(1));
+    expect(lock.names, everyElement(contains(databasePath)));
+    final database = await _openDatabase(databasePath);
+    addTearDown(database.close);
+    expect(await _count(database, 'quiz'), 7193);
+  });
+
+  test('partial write is deleted and a later install can retry', () async {
+    final databasePath = path.join(temporaryDirectory.path, 'quiz.db');
+    final writeError = StateError('partial bundled database write');
+    final factory = _PartialWriteFactory(
+      delegate: databaseFactoryFfi,
+      writeError: writeError,
+    );
+
+    await expectLater(
+      BundledDatabaseInstaller.installIfMissing(
+        factory: factory,
+        path: databasePath,
+        loadBytes: _loadBundledQuizBytes,
+        runExclusive: _runImmediately,
+      ),
+      throwsA(same(writeError)),
+    );
+    expect(await databaseFactoryFfi.databaseExists(databasePath), isFalse);
+
+    final installed = await BundledDatabaseInstaller.installIfMissing(
+      factory: factory,
+      path: databasePath,
+      loadBytes: _loadBundledQuizBytes,
+      runExclusive: _runImmediately,
+    );
+
+    expect(installed, isTrue);
+    final database = await _openDatabase(databasePath);
+    addTearDown(database.close);
+    expect(await _count(database, 'quiz'), 7193);
+  });
+
+  test('cleanup failure does not replace the original write error', () async {
+    final databasePath = path.join(temporaryDirectory.path, 'quiz.db');
+    final writeError = StateError('primary write failure');
+    final factory = _PartialWriteFactory(
+      delegate: databaseFactoryFfi,
+      writeError: writeError,
+      deleteError: StateError('cleanup failure'),
+    );
+
+    await expectLater(
+      BundledDatabaseInstaller.installIfMissing(
+        factory: factory,
+        path: databasePath,
+        loadBytes: _loadBundledQuizBytes,
+        runExclusive: _runImmediately,
+      ),
+      throwsA(same(writeError)),
+    );
+    expect(factory.deleteAttempts, 1);
+  });
 }
+
+class _SerialExclusiveLock {
+  final names = <String>[];
+  final _tails = <String, Future<void>>{};
+
+  Future<T> run<T>(String name, Future<T> Function() action) {
+    names.add(name);
+    final previous = _tails[name] ?? Future<void>.value();
+    final release = Completer<void>();
+    _tails[name] = release.future;
+
+    return () async {
+      await previous;
+      try {
+        return await action();
+      } finally {
+        release.complete();
+      }
+    }();
+  }
+}
+
+class _PartialWriteFactory implements DatabaseFactory {
+  _PartialWriteFactory({
+    required this.delegate,
+    required this.writeError,
+    this.deleteError,
+  });
+
+  final DatabaseFactory delegate;
+  final Object writeError;
+  final Object? deleteError;
+  var failNextWrite = true;
+  var deleteAttempts = 0;
+
+  @override
+  Future<bool> databaseExists(String path) => delegate.databaseExists(path);
+
+  @override
+  Future<void> writeDatabaseBytes(String path, Uint8List bytes) async {
+    if (!failNextWrite) {
+      await delegate.writeDatabaseBytes(path, bytes);
+      return;
+    }
+
+    failNextWrite = false;
+    await delegate.writeDatabaseBytes(
+      path,
+      Uint8List.sublistView(bytes, 0, 128),
+    );
+    throw writeError;
+  }
+
+  @override
+  Future<void> deleteDatabase(String path) async {
+    deleteAttempts++;
+    final error = deleteError;
+    if (error != null) throw error;
+    await delegate.deleteDatabase(path);
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+Future<T> _runImmediately<T>(
+  String name,
+  Future<T> Function() action,
+) =>
+    action();
 
 Future<Uint8List> _loadBundledQuizBytes() async {
   final data = await rootBundle.load('assets/db/quiz.db');
