@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'bundled_database_installer.dart';
 import 'database_factory.dart';
 import 'keyword_database.dart';
 
@@ -180,8 +181,27 @@ class DatabaseHelper {
     }
     final path = join(dbPath, _dbFileName);
 
-    // 如果数据库文件不存在，从 assets 复制（非 Web 环境）
-    if (!kIsWeb && !await databaseExists(path)) {
+    if (kIsWeb) {
+      try {
+        final installed = await BundledDatabaseInstaller.installIfMissing(
+          factory: databaseFactory,
+          path: path,
+          loadBytes: () async {
+            final data = await rootBundle.load('assets/db/$_dbFileName');
+            return data.buffer.asUint8List(
+              data.offsetInBytes,
+              data.lengthInBytes,
+            );
+          },
+        );
+        if (installed) debugPrint('Asset database copied.');
+      } catch (error) {
+        debugPrint(
+          'Asset database copy failed (${error.runtimeType}); '
+          'opening the local database normally.',
+        );
+      }
+    } else if (!await databaseExists(path)) {
       try {
         await io.Directory(dirname(path)).create(recursive: true);
         final data = await rootBundle.load('assets/db/$_dbFileName');
