@@ -38,9 +38,13 @@ class LocalOnlyContractTest(unittest.TestCase):
                        'FavoritesScreen', 'WrongReviewScreen', 'StudyRecordScreen',
                        'DictionaryScreen', 'SettingsScreen'):
             self.assertIn(screen, home)
-        self.assertIn('UpdateService.checkUpdate(context)', home)
-        self.assertIn('TopBanner()', home)
-        self.assertIn('新闻内容正在开发中', home)
+        self.assertNotIn('UpdateService.checkUpdate(context)', home)
+        self.assertNotIn('TopBanner()', home)
+        self.assertNotIn('新闻内容正在开发中', home)
+        self.assertIn("label: '理论学习'", home)
+        self.assertNotIn("label: 'Debug 模式'", (ROOT / 'lib/Screen/General/settings_screen.dart').read_text())
+        self.assertFalse((ROOT / 'lib/Services/update_service.dart').exists())
+        self.assertFalse((ROOT / 'lib/Banner/Banner.dart').exists())
         self.assertTrue((ROOT / 'lib/Screen/General/exam_general.dart').exists())
 
     def test_every_owner_entry_uses_same_local_service(self):

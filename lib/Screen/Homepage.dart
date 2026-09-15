@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 
 // Services
 
-import 'package:italian_driving_app/Services/update_service.dart';
-
-// Banner 轮播组件
-import '../Banner/Banner.dart';
 
 // General Screens
 import 'General/question_bank_screen.dart';
@@ -34,12 +30,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // 延迟一秒检查更新，避免刚进入页面时弹窗冲突
-    Future.delayed(const Duration(seconds: 1), () {
-      if (mounted) {
-        UpdateService.checkUpdate(context);
-      }
-    });
+
   }
 
   // ✅ 通用功能
@@ -61,6 +52,11 @@ class _HomePageState extends State<HomePage> {
       ),
       label: '全题库',
       color: Colors.pink,
+    ),
+    MenuItem(
+      icon: const Icon(Icons.menu_book),
+      label: '理论学习',
+      color: Colors.deepPurple,
     ),
     MenuItem(
       icon: Image.asset(
@@ -116,7 +112,6 @@ class _HomePageState extends State<HomePage> {
     final pages = [
       _buildHomeContent(),
       _buildRecordContent(),
-      _buildNewsContent(),
       const SettingsScreen(),
     ];
 
@@ -136,7 +131,7 @@ class _HomePageState extends State<HomePage> {
     setState(() => _selectedIndex = index);
   }
 
-  // 首页内容：Banner + 通用功能
+  // 首页内容：通用功能
   Widget _buildHomeContent() {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -158,11 +153,6 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.only(top: kToolbarHeight + 8, bottom: 0),
           children: [
-            _buildSectionTitle('推荐内容'),
-            SizedBox(
-              height: 200,
-              child: TopBanner(),
-            ),
             _buildSectionTitle('通用功能'),
             _buildGrid(
               context,
@@ -200,18 +190,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // 新闻占位页面
-  Widget _buildNewsContent() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('新闻'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text('新闻内容正在开发中'),
-      ),
-    );
-  }
 
   // 构建章节标题
   Widget _buildSectionTitle(String title) {
@@ -344,6 +322,7 @@ class _HomePageState extends State<HomePage> {
       case '开始做题':
         return const ExamScreen();
       case '全题库':
+      case '理论学习':
         return QuestionBankScreen();
       case '错题复习':
         return WrongReviewScreen();

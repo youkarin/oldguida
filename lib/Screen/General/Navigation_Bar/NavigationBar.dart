@@ -22,7 +22,6 @@ class AppNavigationBar extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
         BottomNavigationBarItem(icon: Icon(Icons.assessment), label: '记录'),
-        BottomNavigationBarItem(icon: Icon(Icons.article), label: '新闻'),
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: '设置'),
       ],
     );
