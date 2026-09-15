@@ -1,0 +1,165 @@
+name: Build macOS (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    # GitHub's standard macos-15 image is Apple Silicon, not macos-15-intel.
+    runs-on: macos-15
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    env:
+      FLUTTER_VERSION: '3.47.1'
+      FLUTTER_REVISION: '6655482ec06e547f90abf8ae7590466f4415978d'
+      FLUTTER_ARCHIVE_SHA256: '38c9ffe0af4a71e4600f4fda310f0e895757550926128e28aa57782ea97538fa'
+      CI: 'true'
+    steps:
+      - name: Check out the selected remote revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Install the pinned official Flutter SDK on the runner only
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = arm64
+          sdk_zip="$RUNNER_TEMP/flutter-sdk.zip"
+          curl --fail --location --retry 3 \
+            "https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_${FLUTTER_VERSION}-stable.zip" \
+            --output "$sdk_zip"
+          printf '%s  %s\n' "$FLUTTER_ARCHIVE_SHA256" "$sdk_zip" | shasum -a 256 -c -
+          ditto -x -k "$sdk_zip" "$RUNNER_TEMP/oldguida-sdk"
+          rm "$sdk_zip"
+          export PATH="$RUNNER_TEMP/oldguida-sdk/flutter/bin:$PATH"
+          printf '%s\n' "$RUNNER_TEMP/oldguida-sdk/flutter/bin" >> "$GITHUB_PATH"
+          test "$(git -C "$RUNNER_TEMP/oldguida-sdk/flutter" rev-parse HEAD)" = "$FLUTTER_REVISION"
+          flutter config --no-analytics --enable-macos-desktop --enable-macos-arm64-only
+          flutter --version --machine > "$RUNNER_TEMP/flutter-version.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          v = json.loads((Path(os.environ['RUNNER_TEMP']) / 'flutter-version.json').read_text())
+          assert v['frameworkVersion'] == os.environ['FLUTTER_VERSION'], v
+          assert v['frameworkRevision'] == os.environ['FLUTTER_REVISION'], v
+          assert v['channel'] == 'stable', v
+          PY
+
+      - name: Resolve real dependencies and run Flutter tests
+        run: |
+          set -euo pipefail
+          flutter pub get
+          test -s pubspec.lock
+          flutter test --no-pub
+
+      - name: Build the macOS ARM64 Release app
+        run: |
+          set -euo pipefail
+          # The pinned SDK's enable-macos-arm64-only flag passes ARCHS=arm64.
+          # The project uses CODE_SIGN_IDENTITY="-" (ad-hoc), with no Apple account.
+          flutter build macos --release --no-pub
+
+      - name: Validate, package and checksum the app
+        run: |
+          set -euo pipefail
+          app="build/macos/Build/Products/Release/OldGuida.app"
+          test -d "$app"
+          plutil -lint "$app/Contents/Info.plist"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundlePackageType' "$app/Contents/Info.plist")" = APPL
+          executable="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleExecutable' "$app/Contents/Info.plist")"
+          test -n "$executable"
+          test -x "$app/Contents/MacOS/$executable"
+          test "$(lipo -archs "$app/Contents/MacOS/$executable")" = arm64
+          mkdir -p dist
+          # Verify the build's existing ad-hoc signature; do not import credentials or re-sign.
+          codesign --verify --deep --strict --verbose=2 "$app"
+          codesign -d --verbose=4 "$app" > dist/signature.txt 2>&1
+          codesign -d --entitlements :- "$app" > dist/entitlements.plist
+          flutter --version --machine > dist/flutter-version.json
+          xcodebuild -version > dist/xcode-version.txt
+          sw_vers > dist/macos-version.txt
+          python3 - <<'PY'
+          import json, os, plistlib, subprocess
+          from pathlib import Path
+          app = Path('build/macos/Build/Products/Release/OldGuida.app')
+          info = plistlib.loads((app / 'Contents/Info.plist').read_bytes())
+          entitlements = plistlib.loads(Path('dist/entitlements.plist').read_bytes())
+          assert entitlements['com.apple.security.app-sandbox'] is True
+          assert entitlements['com.apple.security.network.client'] is True
+          signature = Path('dist/signature.txt').read_text()
+          assert 'Signature=adhoc' in signature, signature
+          assert 'Authority=' not in signature, signature
+          architectures = {}
+          for path in sorted(app.rglob('*')):
+              if not path.is_file() or path.is_symlink():
+                  continue
+              kind = subprocess.check_output(['file', '-b', str(path)], text=True)
+              if 'Mach-O' in kind:
+                  archs = subprocess.check_output(['lipo', '-archs', str(path)], text=True).strip().split()
+                  assert 'arm64' in archs, (str(path), archs)
+                  architectures[str(path.relative_to(app))] = archs
+          assert architectures, 'No Mach-O binaries found'
+          assert any('sqlite' in path.lower() for path in architectures), 'Missing native SQLite binary'
+          metadata = {
+              'repository': os.environ['GITHUB_REPOSITORY'],
+              'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              'ref': os.environ['GITHUB_REF'],
+              'run_id': os.environ['GITHUB_RUN_ID'],
+              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'runner_label': 'macos-15',
+              'runner_architecture': subprocess.check_output(['uname', '-m'], text=True).strip(),
+              'runner_image': os.environ.get('ImageVersion'),
+              'flutter': json.loads(Path('dist/flutter-version.json').read_text()),
+              'flutter_archive_sha256': os.environ['FLUTTER_ARCHIVE_SHA256'],
+              'bundle_version': info['CFBundleShortVersionString'],
+              'bundle_build': info['CFBundleVersion'],
+              'minimum_macos': info['LSMinimumSystemVersion'],
+              'binary_architectures': architectures,
+              'signing': 'ad-hoc; no Developer ID; not notarized',
+              'tests': 'flutter test --no-pub passed before build',
+          }
+          Path('dist/build-metadata.json').write_text(json.dumps(metadata, indent=2) + '\n')
+          PY
+          cp pubspec.lock dist/pubspec.lock
+          cp LICENSE dist/LICENSE
+          ditto -c -k --sequesterRsrc --keepParent "$app" dist/OldGuida-macos-arm64.zip
+          unzip -t dist/OldGuida-macos-arm64.zip
+          # Check the restored bundle, including executable permissions and signature.
+          ditto -x -k dist/OldGuida-macos-arm64.zip "$RUNNER_TEMP/oldguida-unpacked"
+          test -x "$RUNNER_TEMP/oldguida-unpacked/OldGuida.app/Contents/MacOS/$executable"
+          codesign --verify --deep --strict "$RUNNER_TEMP/oldguida-unpacked/OldGuida.app"
+          cd dist
+          for required in OldGuida-macos-arm64.zip pubspec.lock build-metadata.json LICENSE \
+            flutter-version.json xcode-version.txt macos-version.txt signature.txt entitlements.plist; do
+            test -s "$required"
+          done
+          shasum -a 256 OldGuida-macos-arm64.zip pubspec.lock build-metadata.json LICENSE \
+            flutter-version.json xcode-version.txt macos-version.txt signature.txt entitlements.plist > SHA256SUMS
+          shasum -a 256 -c SHA256SUMS
+
+      - name: Upload the verified package and build evidence
+        id: upload
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: OldGuida-macos-arm64-${{ github.run_id }}-${{ github.run_attempt }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+          overwrite: false
+          include-hidden-files: false
+
+      - name: Require an uploaded artifact
+        env:
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
+        run: |
+          set -euo pipefail
+          test -n "$ARTIFACT_ID"
+          test -n "$ARTIFACT_DIGEST"
+          printf 'Artifact ID: %s\nArtifact SHA-256: %s\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST" >> "$GITHUB_STEP_SUMMARY"

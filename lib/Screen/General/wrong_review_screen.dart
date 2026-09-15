@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/models/question_model.dart';
 import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
-import 'package:italian_driving_app/Services/auth_service.dart';
+import 'package:italian_driving_app/Services/local_study_data.dart';
 import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 import 'exam_general.dart';
 
@@ -19,6 +19,8 @@ class WrongReviewScreen extends StatefulWidget {
 class _WrongReviewScreenState extends State<WrongReviewScreen> {
   final List<Map<String, dynamic>> _wrongQuestions = [];
   int? _userId;
+  bool _isLoading = true;
+  String? _loadError;
   String _sortType = 'time'; // 'time', 'chapter', 'count'
 
   @override
@@ -55,24 +57,37 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
   }
 
   Future<void> _loadData() async {
-    _userId = await AuthService().ensureLocalUser();
-    print('[WrongReviewScreen] userId: $_userId');
-
-    if (_userId != null) {
+    if (!mounted) return;
+    setState(() {
+      _isLoading = true;
+      _loadError = null;
+    });
+    try {
+      _userId = await LocalStudyData.instance.ensureOwner();
+      if (!mounted) return;
+      if (_userId == null) {
+        setState(() => _loadError = LocalStudyData.unavailableMessage);
+        return;
+      }
       final questions = widget.historyId != null
           ? await DatabaseHelper.instance
               .getWrongAnswersByHistory(widget.historyId!)
           : await DatabaseHelper.instance.getWrongAnswerQuestions(_userId!);
+      if (!mounted) return;
       setState(() {
         _wrongQuestions
           ..clear()
           ..addAll(questions);
-        _applySort();
       });
-    } else {
+      _applySort();
+    } catch (e) {
+      if (!mounted) return;
       setState(() {
-        _wrongQuestions.clear();
+        _userId = null;
+        _loadError = '本地学习数据读取失败，原记录未删除。请重试。';
       });
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -117,7 +132,7 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
-          if (_wrongQuestions.isNotEmpty) ...[
+          if (!_isLoading && _loadError == null && _wrongQuestions.isNotEmpty) ...[
             PopupMenuButton<String>(
               icon: const Icon(Icons.sort),
               tooltip: '排序',
@@ -157,7 +172,19 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
           ],
         ],
       ),
-      body: _wrongQuestions.isEmpty
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _loadError != null
+              ? Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(_loadError!),
+                      TextButton(onPressed: _loadData, child: const Text('重试')),
+                    ],
+                  ),
+                )
+          : _wrongQuestions.isEmpty
           ? _buildEmptyState()
           : ListView.builder(
               padding: const EdgeInsets.all(12),
@@ -167,7 +194,8 @@ class _WrongReviewScreenState extends State<WrongReviewScreen> {
               },
             ),
       floatingActionButton:
-          widget.historyId == null && _wrongQuestions.isNotEmpty
+          !_isLoading && _loadError == null &&
+                  widget.historyId == null && _wrongQuestions.isNotEmpty
               ? FloatingActionButton.extended(
                   onPressed: _retakeQuiz,
                   icon: const Icon(Icons.play_arrow),

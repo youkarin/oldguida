@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Services
-import 'package:italian_driving_app/database/database_helper.dart';
+
 import 'package:italian_driving_app/Services/update_service.dart';
 
 // Banner 轮播组件
@@ -17,12 +17,6 @@ import 'General/practice_screen.dart';
 import 'General/favorites_screen.dart';
 import 'General/Navigation_Bar/NavigationBar.dart';
 import 'General/dictionary_screen.dart';
-
-// VIP Screens (Now General/Advanced)
-import 'VIP/must_correct_screen.dart';
-import 'VIP/must_wrong_screen.dart';
-import 'VIP/difficult_screen.dart';
-import 'VIP/examVIP_screen.dart';
 
 /// 主页面：带底部导航的首页
 class HomePage extends StatefulWidget {
@@ -84,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
-  // 🌟 记录/高级功能 (原 VIP 功能)
+  // 本地学习记录
   final List<MenuItem> recordItems = [
     MenuItem(
       icon: Image.asset(
@@ -104,24 +98,7 @@ class _HomePageState extends State<HomePage> {
       label: '收藏夹',
       color: Colors.amber,
     ),
-    MenuItem(
-      icon: Image.asset(
-        'assets/images/icons/check-circle.png',
-        width: 32,
-        height: 32,
-      ),
-      label: '单词必对题',
-      color: Colors.green,
-    ),
-    MenuItem(
-      icon: Image.asset(
-        'assets/images/icons/cross-circle.png',
-        width: 32,
-        height: 32,
-      ),
-      label: '单词必错题',
-      color: Colors.red,
-    ),
+
     MenuItem(
       icon: Image.asset(
         'assets/images/icons/guide-book.png',
@@ -131,24 +108,7 @@ class _HomePageState extends State<HomePage> {
       label: '错题复习',
       color: Colors.redAccent,
     ),
-    MenuItem(
-      icon: Image.asset(
-        'assets/images/icons/not-found-magnifying-glass.png',
-        width: 32,
-        height: 32,
-      ),
-      label: '易错题',
-      color: Colors.red,
-    ),
-    MenuItem(
-      icon: Image.asset(
-        'assets/images/icons/test.png',
-        width: 32,
-        height: 32,
-      ),
-      label: 'EXAM',
-      color: Colors.blueAccent,
-    ),
+
   ];
 
   @override
@@ -216,11 +176,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // 记录页面内容 (原 VIP)
+  // 记录页面内容
   Widget _buildRecordContent() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('记录与进阶'),
+        title: const Text('学习记录'),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -398,16 +358,6 @@ class _HomePageState extends State<HomePage> {
         return const FavoritesScreen();
       case '设置':
         return const SettingsScreen();
-
-      // 原 VIP 功能 (现已开放)
-      case '单词必对题':
-        return MustCorrectScreen();
-      case '单词必错题':
-        return MustWrongScreen();
-      case '易错题':
-        return DifficultScreen();
-      case 'EXAM':
-        return ExamVIPScreen();
 
       default:
         return null;

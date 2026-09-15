@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
-import 'package:italian_driving_app/Services/auth_service.dart';
-import 'package:italian_driving_app/Services/sync_service.dart';
+import 'package:italian_driving_app/Services/local_study_data.dart';
 import 'package:italian_driving_app/widgets/keyword_question_text.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -17,6 +16,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   final List<Map<String, dynamic>> _favoriteQuestions = [];
   int? _userId;
   bool _isLoading = true;
+  String? _loadError;
 
   // Settings
   bool _showTranslation = true;
@@ -34,39 +34,45 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   }
 
   Future<void> _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    final showTrans = prefs.getBool('showTranslation') ?? true;
-    final showExpl = prefs.getBool('showExplanation') ?? true;
-    final collapsed = prefs.getBool('collapsedMode') ?? false;
-
-    _userId = await AuthService().ensureLocalUser();
-
-    if (_userId != null) {
+    if (!mounted) return;
+    setState(() {
+      _isLoading = true;
+      _loadError = null;
+    });
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final showTrans = prefs.getBool('showTranslation') ?? true;
+      final showExpl = prefs.getBool('showExplanation') ?? true;
+      final collapsed = prefs.getBool('collapsedMode') ?? false;
+      _userId = await LocalStudyData.instance.ensureOwner();
+      if (!mounted) return;
+      if (_userId == null) {
+        setState(() => _loadError = LocalStudyData.unavailableMessage);
+        return;
+      }
       final favs = await DatabaseHelper.instance.getFavoriteQuestions(_userId!);
-      if (mounted) {
-        setState(() {
-          _showTranslation = showTrans;
-          _showExplanation = showExpl;
-          _collapsedMode = collapsed;
-
-          _favoriteQuestions.clear();
-          _favoriteQuestions.addAll(favs);
-
-          // Initialize expansion states
-          for (var item in favs) {
-            final key = '${item['section_id']}-${item['question_number']}';
-            _translationExpanded[key] = !collapsed;
-            _explanationExpanded[key] = !collapsed;
-          }
-          _isLoading = false;
-        });
-      }
-    } else {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+      if (!mounted) return;
+      setState(() {
+        _showTranslation = showTrans;
+        _showExplanation = showExpl;
+        _collapsedMode = collapsed;
+        _favoriteQuestions
+          ..clear()
+          ..addAll(favs);
+        for (var item in favs) {
+          final key = '${item['section_id']}-${item['question_number']}';
+          _translationExpanded[key] = !collapsed;
+          _explanationExpanded[key] = !collapsed;
+        }
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _userId = null;
+        _loadError = '本地学习数据读取失败，原记录未删除。请重试。';
+      });
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -87,8 +93,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         .removeFavorite(_userId!, sectionId, questionNum);
 
     if (success) {
-      await SyncService.syncFavoriteChange(
-          _userId!, sectionId, questionNum, false);
+
       if (mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
@@ -121,6 +126,16 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
+          : _loadError != null
+              ? Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(_loadError!),
+                      TextButton(onPressed: _loadData, child: const Text('重试')),
+                    ],
+                  ),
+                )
           : _favoriteQuestions.isEmpty
               ? _buildEmptyState()
               : ListView.builder(

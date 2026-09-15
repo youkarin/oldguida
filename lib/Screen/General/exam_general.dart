@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:italian_driving_app/models/question_model.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/Services/answer_advance_policy.dart';
-import 'package:italian_driving_app/Services/auth_service.dart';
-import 'package:italian_driving_app/Services/sync_service.dart';
+import 'package:italian_driving_app/Services/local_study_data.dart';
 import 'package:italian_driving_app/Screen/General/dictionary_detail_screen.dart';
 import 'package:italian_driving_app/utils/debug_utils.dart';
 import 'package:italian_driving_app/widgets/keyword_question_text.dart';
@@ -48,6 +47,7 @@ class _ExamGeneralState extends State<ExamGeneral> {
   int? _userId;
   bool _isFavorite = false;
   bool _isTimerPaused = false;
+  bool _isFinishing = false;
 
   late bool _showTranslationContent;
   late bool _showExplanationContent;
@@ -175,9 +175,28 @@ class _ExamGeneralState extends State<ExamGeneral> {
   }
 
   Future<void> _loadUser() async {
-    _userId =
-        await (widget.loadUser?.call() ?? AuthService().ensureLocalUser());
-    _updateFavoriteStatus();
+    try {
+      _userId =
+          await (widget.loadUser?.call() ?? LocalStudyData.instance.ensureOwner());
+      if (!mounted) return;
+      if (_userId == null && widget.loadUser == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text(LocalStudyData.unavailableMessage)),
+        );
+      }
+      await _updateFavoriteStatus();
+    } catch (e) {
+      if (!mounted) return;
+      // Disable owner-dependent writes; retry the same resolver, never a guest.
+      _userId = null;
+      setState(() => _isFavorite = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('本地学习数据读取失败，原记录未删除。请重试；当前无法保存收藏。'),
+          action: SnackBarAction(label: '重试', onPressed: _loadUser),
+        ),
+      );
+    }
   }
 
   Future<void> _updateFavoriteStatus() async {
@@ -260,24 +279,30 @@ class _ExamGeneralState extends State<ExamGeneral> {
         setState(() => _isFavorite = !_isFavorite);
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(_isFavorite ? '已收藏' : '已取消收藏')));
-        await SyncService.syncFavoriteChange(
-            _userId!, q.sectionId, q.questionNumber, _isFavorite);
+
       }
     }
   }
 
   Future<void> _finishExam() async {
+    if (_isFinishing) return;
+    _isFinishing = true;
     _timer?.cancel();
     _cancelPendingAutoAdvance();
     final endTime = DateTime.now();
     final duration = endTime.difference(startTime);
     final correctCount = answerResults.where((r) => r == true).length;
     final wrongCount = answerResults.where((r) => r != true).length;
+    bool saved = false;
+    String unsavedReason = LocalStudyData.unavailableMessage;
 
     try {
+      // Resolve again if initialization was still pending at submission time.
+      _userId ??= await (widget.loadUser?.call() ??
+          LocalStudyData.instance.ensureOwner());
       if (_userId != null) {
         final questionMaps = widget.questions.map((q) => q.toMap()).toList();
-        final historyId = await DatabaseHelper.instance.saveQuizAttempt(
+        await DatabaseHelper.instance.saveQuizAttempt(
           _userId!,
           questionMaps,
           userAnswers,
@@ -285,15 +310,33 @@ class _ExamGeneralState extends State<ExamGeneral> {
           isRandom: widget.isRandom,
           usedTime: duration.inSeconds,
         );
-        await DatabaseHelper.instance.trimQuizHistory(_userId!, 50);
-        await SyncService.syncQuizAttempt(historyId);
-        unawaited(SyncService.syncAll());
+        saved = true;
       }
     } catch (e) {
       debugPrint('Failed to save quiz data: $e');
+      unsavedReason = '本地存储发生错误，本次成绩和错题未能保存。原记录未删除。';
     }
 
     if (!mounted) return;
+    if (!saved) {
+      // Acknowledge before replacing the route so the warning cannot disappear
+      // behind the results page. Do not retry a write or choose another owner.
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (dialogContext) => AlertDialog(
+          title: const Text('本次成绩未保存'),
+          content: Text('$unsavedReason\n仍可查看本次成绩，但不会出现在学习记录中。'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: const Text('仅查看本次成绩'),
+            ),
+          ],
+        ),
+      );
+      if (!mounted) return;
+    }
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(

@@ -39,7 +39,7 @@ const String sectionChapterId = 'chapter_id';
 const String sectionName = 'name';
 const String sectionImagePath = 'image_path';
 
-// ---------- 用户表 ----------
+// ---------- 旧用户表：仅保留本地归属和原有 schema 兼容，不再提供账号功能 ----------
 const String tableUsers = 'users';
 const String columnUserId = 'id';
 const String columnUsername = 'username';
@@ -357,20 +357,8 @@ class DatabaseHelper {
 
   // ----------- 数据库升级逻辑 -----------
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion < 3) {
-      await db.execute('DROP TABLE IF EXISTS $tableFavorites');
-      await db.execute('''
-        CREATE TABLE $tableFavorites (
-          $columnFavoriteId INTEGER PRIMARY KEY AUTOINCREMENT,
-          $columnFavUserId INTEGER,
-          $columnFavSectionId INTEGER,
-          $columnFavQuestionNum INTEGER,
-          $columnFavCreatedAt TEXT,
-          $columnFavNote TEXT,
-          UNIQUE($columnFavUserId, $columnFavSectionId, $columnFavQuestionNum)
-        )
-      ''');
-    }
+    // Legacy study tables are repaired additively after opening. Never drop
+    // favorites during an upgrade: old ownership/mapping may need review.
     if (oldVersion < 4) {
       await KeywordDatabase.ensureSchema(db);
     }
@@ -453,70 +441,6 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getAllQuestionsRandom() async {
     final db = await database;
     return db.rawQuery('SELECT * FROM $tableQuiz ORDER BY RANDOM()');
-  }
-
-  // ======================================
-  //             用户管理
-  // ======================================
-  Future<int> addUser(String username, String passwordHash,
-      {String? email,
-      String? avatarUrl,
-      String? settings,
-      String? uuid,
-      int vipDays = 0}) async {
-    final db = await database;
-    return db.insert(tableUsers, {
-      columnUsername: username,
-      columnPasswordHash: passwordHash,
-      columnUserEmail: email,
-      columnUserAvatarUrl: avatarUrl,
-      columnUserSettings: settings,
-      columnUserUuid: uuid,
-      columnUserVipDays: vipDays,
-    });
-  }
-
-  Future<Map<String, dynamic>?> getUser(String username) async {
-    final db = await database;
-    final maps = await db.query(
-      tableUsers,
-      where: '$columnUsername = ?',
-      whereArgs: [username],
-    );
-    if (maps.isNotEmpty) {
-      return maps.first;
-    }
-    return null;
-  }
-
-  Future<void> updateUserLastLoginAt(int userId) async {
-    final db = await database;
-    await db.update(
-      tableUsers,
-      {columnUserLastLoginAt: DateTime.now().toIso8601String()},
-      where: '$columnUserId = ?',
-      whereArgs: [userId],
-    );
-  }
-
-  Future<void> updateUserSettings(int userId, String settings) async {
-    final db = await database;
-    await db.update(
-      tableUsers,
-      {columnUserSettings: settings},
-      where: '$columnUserId = ?',
-      whereArgs: [userId],
-    );
-  }
-
-  Future<void> updateVipDays(int userId, int days) async {
-    final db = await database;
-    await db.update(
-      tableUsers,
-      {columnUserVipDays: days},
-      where: '$columnUserId = ?',
-      whereArgs: [userId],
-    );
   }
 
   // ======================================
@@ -819,29 +743,6 @@ class DatabaseHelper {
   // ======================================
   //             做题历史
   // ======================================
-  Future<int> addQuizHistory(int userId, int score, int totalQuestions,
-      {int? usedTime,
-      String? mode,
-      double? accuracy,
-      DateTime? completedAt,
-      int? id}) async {
-    final db = await database;
-    final data = {
-      columnHistoryUserId: userId,
-      columnHistoryScore: score,
-      columnHistoryTotalQuestions: totalQuestions,
-      columnHistoryCompletedAt:
-          (completedAt ?? DateTime.now()).toIso8601String(),
-      columnHistoryUsedTime: usedTime,
-      columnHistoryMode: mode,
-      columnHistoryAccuracy: accuracy,
-    };
-    if (id != null) {
-      data[columnHistoryId] = id;
-    }
-    return db.insert(tableQuizHistory, data,
-        conflictAlgorithm: ConflictAlgorithm.replace);
-  }
 
   Future<List<Map<String, dynamic>>> getQuizHistory(int userId) async {
     final db = await database;
@@ -859,37 +760,6 @@ class DatabaseHelper {
         where: '$columnHistoryId = ?', whereArgs: [historyId], limit: 1);
     if (res.isNotEmpty) return res.first;
     return null;
-  }
-
-  Future<List<Map<String, dynamic>>> getFavoritesRaw(int userId) async {
-    final db = await database;
-    return db.query(tableFavorites,
-        where: '$columnFavUserId = ?', whereArgs: [userId]);
-  }
-
-  Future<List<Map<String, dynamic>>> getWrongAnswersRaw(int userId) async {
-    final db = await database;
-    return db.query(tableWrongAnswers,
-        where: '$columnWrongUserId = ?', whereArgs: [userId]);
-  }
-
-  Future<void> trimQuizHistory(int userId, int limit) async {
-    final db = await database;
-    await db.delete(tableQuizHistory,
-        where:
-            '$columnHistoryId NOT IN (SELECT $columnHistoryId FROM $tableQuizHistory WHERE $columnHistoryUserId = ? ORDER BY $columnHistoryCompletedAt DESC LIMIT ?)',
-        whereArgs: [userId, limit]);
-  }
-
-  Future<void> addHistoryQuestion(int historyId, int sectionId, int questionNum,
-      int? userAnswer) async {
-    final db = await database;
-    await db.insert(tableHistoryQuestions, {
-      columnHQHistoryId: historyId,
-      columnHQSectionId: sectionId,
-      columnHQQuestionNum: questionNum,
-      columnHQUserAnswer: userAnswer,
-    });
   }
 
   Future<List<Map<String, dynamic>>> getHistoryQuestions(int historyId) async {
@@ -929,16 +799,6 @@ class DatabaseHelper {
     LEFT JOIN $tableSection s ON q.$quizSectionId = s.$sectionSectionId
     ORDER BY RANDOM()
   ''');
-  }
-
-
-  // ======================================
-  //             通用操作
-  // ======================================
-  Future<int> delete(String table,
-      {String? where, List<Object?>? whereArgs}) async {
-    final db = await database;
-    return db.delete(table, where: where, whereArgs: whereArgs);
   }
 
   // ======================================

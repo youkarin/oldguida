@@ -277,8 +277,6 @@ class BrandingVerifier:
 
         http_overrides = self.text("lib/utils/http_overrides_io.dart")
         self.require_pattern("lib/utils/http_overrides_io.dart: HTTP user-agent", http_overrides, r"^\s*client\.userAgent\s*=\s*'italian_driving_app';$")
-        sanitizing_client = self.text("lib/utils/sanitizing_client_io.dart")
-        self.require_pattern("lib/utils/sanitizing_client_io.dart: HTTP user-agent", sanitizing_client, r"^\s*request\.headers\[HttpHeaders\.userAgentHeader\]\s*=\s*'italian_driving_app';$")
         self.verify_dart_imports()
 
     def pbx_objects(self, content: str) -> dict[str, str]:

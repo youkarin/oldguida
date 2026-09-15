@@ -169,7 +169,7 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertTrue(any("web/index.html: meta description" in failure for failure in failures))
 
     def test_rejects_comment_compensated_and_case_variant_dart_package_import(self):
-        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path = self.root / "lib/Services/local_study_data.dart"
         source = source_path.read_text(encoding="utf-8")
         source_path.write_text(
             source.replace(
@@ -341,7 +341,7 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertTrue(any("BuildActionEntry Runner BuildableReference" in failure for failure in failures))
 
     def test_ignores_dart_block_comment_import(self):
-        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path = self.root / "lib/Services/local_study_data.dart"
         source_path.write_text(
             source_path.read_text(encoding="utf-8") + "\n/* import 'package:oldguida/ignored.dart'; */\n",
             encoding="utf-8",
@@ -353,7 +353,7 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertFalse(failures)
 
     def test_ignores_dart_triple_quoted_string_import(self):
-        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path = self.root / "lib/Services/local_study_data.dart"
         source_path.write_text(
             source_path.read_text(encoding="utf-8") + '\nconst ignoredImport = """\nimport \'package:oldguida/ignored.dart\';\n""";\n',
             encoding="utf-8",
@@ -365,11 +365,11 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertFalse(failures)
 
     def test_ignores_dart_raw_triple_quoted_string_import(self):
-        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path = self.root / "lib/Services/local_study_data.dart"
         raw_source = 'const ignoredRawImport = r"""\\nimport \'package:oldguida/ignored.dart\';\\n""";\n'
         source_path.write_text(source_path.read_text(encoding="utf-8") + "\n" + raw_source, encoding="utf-8")
 
-        tokens = BrandingVerifier(self.root).dart_tokens("lib/Services/auth_service.dart", raw_source)
+        tokens = BrandingVerifier(self.root).dart_tokens("lib/Services/local_study_data.dart", raw_source)
         self.assertIn(("string", "\\nimport 'package:oldguida/ignored.dart';\\n", True), tokens)
 
         code, failures = self.run_verifier()
@@ -378,7 +378,7 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertFalse(failures)
 
     def test_allows_declared_cupertino_icons_dependency(self):
-        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path = self.root / "lib/Services/local_study_data.dart"
         source_path.write_text(
             "import 'package:cupertino_icons/cupertino_icons.dart';\n" + source_path.read_text(encoding="utf-8"),
             encoding="utf-8",
@@ -395,7 +395,7 @@ class BrandingVerifierTest(unittest.TestCase):
             pubspec_path.read_text(encoding="utf-8").replace("  cupertino_icons:", '  "cupertino_icons":'),
             encoding="utf-8",
         )
-        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path = self.root / "lib/Services/local_study_data.dart"
         source_path.write_text(
             "import 'package:cupertino_icons/cupertino_icons.dart';\n" + source_path.read_text(encoding="utf-8"),
             encoding="utf-8",
@@ -407,7 +407,7 @@ class BrandingVerifierTest(unittest.TestCase):
         self.assertFalse(failures)
 
     def test_rejects_oldguida_package_with_mixed_case(self):
-        source_path = self.root / "lib/Services/auth_service.dart"
+        source_path = self.root / "lib/Services/local_study_data.dart"
         source_path.write_text(
             "import 'package:OlDgUiDa/blocked.dart';\n" + source_path.read_text(encoding="utf-8"),
             encoding="utf-8",
@@ -417,6 +417,25 @@ class BrandingVerifierTest(unittest.TestCase):
 
         self.assertEqual(code, 1)
         self.assertTrue(any("oldguida package import" in failure for failure in failures))
+
+    def test_preserves_live_http_user_agent_without_orphan_clients(self):
+        for name in ('sanitizing_client_io.dart', 'sanitizing_client_stub.dart'):
+            (self.root / 'lib/utils' / name).unlink(missing_ok=True)
+
+        code, failures = self.run_verifier()
+        self.assertEqual(code, 0, failures)
+
+        source_path = self.root / 'lib/utils/http_overrides_io.dart'
+        source = source_path.read_text(encoding='utf-8')
+        expected = "client.userAgent = 'italian_driving_app';"
+        self.assertIn(expected, source)
+        source_path.write_text(source.replace(expected, "client.userAgent = 'OldGuida';"),
+                               encoding='utf-8')
+
+        code, failures = self.run_verifier()
+        self.assertEqual(code, 1)
+        self.assertTrue(any('http_overrides_io.dart: HTTP user-agent' in failure
+                            for failure in failures))
 
     def test_repeated_verify_calls_do_not_leak_failures(self):
         first_success = verify(self.root)

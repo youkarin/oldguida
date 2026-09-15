@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:italian_driving_app/database/database_helper.dart';
 import 'package:italian_driving_app/models/question_model.dart';
-import 'package:italian_driving_app/Services/auth_service.dart';
+import 'package:italian_driving_app/Services/local_study_data.dart';
 import 'exam_general.dart';
 import 'history_detail_screen.dart';
 
@@ -16,6 +16,8 @@ class StudyRecordScreen extends StatefulWidget {
 class _StudyRecordScreenState extends State<StudyRecordScreen> {
   List<Map<String, dynamic>> _history = [];
   int? _userId;
+  bool _isLoading = true;
+  String? _loadError;
 
   @override
   void initState() {
@@ -24,16 +26,30 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
   }
 
   Future<void> _load() async {
-    _userId = await AuthService().ensureLocalUser();
-    if (_userId == null) {
-      print('[StudyRecordScreen] failed to ensure local user');
-      return;
-    }
-    print('[StudyRecordScreen] userId: $_userId');
-    final hist = await DatabaseHelper.instance.getQuizHistory(_userId!);
+    if (!mounted) return;
     setState(() {
-      _history = hist;
+      _isLoading = true;
+      _loadError = null;
     });
+    try {
+      _userId = await LocalStudyData.instance.ensureOwner();
+      if (!mounted) return;
+      if (_userId == null) {
+        setState(() => _loadError = LocalStudyData.unavailableMessage);
+        return;
+      }
+      final hist = await DatabaseHelper.instance.getQuizHistory(_userId!);
+      if (!mounted) return;
+      setState(() => _history = hist);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _userId = null;
+        _loadError = '本地学习数据读取失败，原记录未删除。请重试。';
+      });
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   bool _isPass(Map<String, dynamic> item) {
@@ -89,7 +105,19 @@ class _StudyRecordScreenState extends State<StudyRecordScreen> {
       appBar: AppBar(
         title: const Text('学习记录'),
       ),
-      body: _history.isEmpty
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _loadError != null
+              ? Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(_loadError!),
+                      TextButton(onPressed: _load, child: const Text('重试')),
+                    ],
+                  ),
+                )
+          : _history.isEmpty
           ? const Center(child: Text('暂无历史'))
           : ListView.builder(
               itemCount: _history.length,

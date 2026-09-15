@@ -21,7 +21,6 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.5.0 <4.0.0'
 
-
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -38,16 +37,16 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.20
   web: ^1.1.1
   path: ^1.8.3
-  supabase_flutter: ^2.5.6
+
   http: ^1.2.2
   #Banner轮播组件
   flutter_swiper_view: ^1.1.8
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  # For User Authentication
+  # Local study preferences
   shared_preferences: ^2.0.15
-  uuid: ^4.3.3
+
   path_provider: ^2.1.5
   package_info_plus: ^9.0.0
   url_launcher: ^6.2.4

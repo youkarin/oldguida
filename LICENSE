@@ -1,21 +1,52 @@
-MIT License
+OldGuida 免费使用与禁止销售、收费运营许可
+版本 1.0（自定义源码可见许可，非 MIT，非 OSI 开源许可证）
 
-Copyright (c) 2025 soybean paste
+Copyright (c) 2025 youkarin
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. 适用范围
+本许可适用于随附本许可发布且由 youkarin 拥有授权权利的 OldGuida
+代码、文档，以及原创词典、翻译、解析和整理成果中的原创部分
+（以下称“许可材料”）。不因整理或翻译而主张外部原题或素材的权利。
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. 允许的行为
+遵守本许可时，你可以免费使用许可材料进行学习、运行、研究、复制、
+修改，并免费分享原版或修改版的源码及构建产物。使用者属于企业或
+其他组织本身并不构成禁止条件，仍须遵守以下收费限制。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. 禁止销售和收费运营
+未经 youkarin 另行书面授权，不得：
+(a) 出售、出租、付费授权许可材料或其修改版、复制件、构建产物；
+(b) 收取下载费、激活费、订阅费、会员费或其他费用，以提供上述材料
+    或使用其功能的权利，包括通过网站、应用、API 或托管服务收费运营；
+(c) 将上述材料或功能作为收费产品、服务、课程或套餐的一部分提供，
+    即使其价格没有单独列出；
+(d) 通过改名、包装、修改、转售或其他方式规避本条限制。
+本条不限制与提供许可材料及其功能无关的活动，也不将仅有企业身份
+等同于销售或收费运营。超出本许可的用途须另行取得书面授权。
+
+4. 署名、修改与分发
+分享许可材料或修改版时，必须保留本版权声明、完整许可及已有的
+第三方声明。修改版应明确标注已修改，且不得暗示获得原作者背书。
+你不得就所含许可材料授予与本许可冲突的销售或收费运营权利；分发
+修改版时，应明确其中许可材料继续受本许可约束。
+
+5. 第三方材料
+第三方依赖、网络图片、外部原始题目及其他不由 youkarin 拥有授权权利
+的材料不受本许可授权，适用各自的许可证或权利人授权。网络公开可见
+不等于允许复制或分发。使用和分发前应核实其来源及授权；本条不能
+替代第三方授权，也不保证仓库中每项素材已完成权利审查。
+
+6. 历史授权
+本许可仅适用于按本许可发布的材料，不追溯撤销任何此前依 MIT 等
+许可证合法取得的授权，也不改变第三方材料既有的许可条件。
+
+7. 免责与责任限制
+在适用法律允许的最大范围内，许可材料按“现状”提供，不附带任何
+明示或默示保证，包括适销性、特定用途适用性及不侵权保证。作者或
+版权持有人不对因使用、无法使用或分发许可材料引起的索赔、损害或
+其他责任承担责任。法律不允许排除的责任不受本条排除。
+
+8. 终止与其他授权
+违反本许可时，本许可授予违规方的权利终止；恢复使用须取得权利人
+许可。需要销售、收费运营或其他额外权利，请向 youkarin 申请单独
+书面授权。未明确授予的权利予以保留。
