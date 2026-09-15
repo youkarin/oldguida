@@ -696,7 +696,7 @@ void main() {
     });
   });
 
-  test('DatabaseHelper keeps the old v2 favorites migration semantics',
+  test('DatabaseHelper preserves v2 favorites during migration',
       () async {
     await _withSupportDirectory((directory) async {
       await DatabaseHelper.instance.close();
@@ -724,7 +724,10 @@ void main() {
       final db = await DatabaseHelper.instance.database;
 
       expect(await _userVersion(db), 4);
-      expect(await db.query(tableFavorites), isEmpty);
+      expect(
+        (await db.query(tableFavorites)).single[columnFavNote],
+        'legacy-favorite',
+      );
       expect((await db.query(tableUsers)).single[columnUsername], 'keep-user');
       expect(
         (await db.query(tableQuizHistory)).single[columnHistoryScore],
